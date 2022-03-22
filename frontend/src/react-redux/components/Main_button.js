@@ -14,7 +14,7 @@ export function Main_button (props) {
               marginLeft: props.marginleft,
               marginRight: props.marginright}} 
 
-      onPress={props.onPress}>
+      onPress={props.onpress}>
       
       <Text style={styles.text}>{props.text}</Text>
     </Pressable>
