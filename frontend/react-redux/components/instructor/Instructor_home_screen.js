@@ -12,14 +12,14 @@ import {
   Pressable,
 } from 'react-native';
 
-import { Logout_button } from './Logout_button';
-import { Main_button } from './Main_button';
+import { Logout_button } from '../buttons/Logout_button';
+import { Main_button } from '../buttons/Main_button';
 
 const Instructor_home_screen = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('./assets/background.png')}
+        source={require('../assets/background.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '99%' }}>
         <Logout_button onpress="" />

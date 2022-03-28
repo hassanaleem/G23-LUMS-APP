@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pressable } from 'react-native';
 
-import {Logout_button} from  "./Logout_button";
-import {Main_button} from  "./Main_button";
+import {Logout_button} from  "../buttons/Logout_button";
+import {Main_button} from  "../buttons/Main_button";
 
 const Admin_home_screen = () => {
   return (
