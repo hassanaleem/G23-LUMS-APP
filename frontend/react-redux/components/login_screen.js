@@ -84,6 +84,7 @@ export const Login_screen = ({navigation}) => {
           onChangeText={(text) => setPassword(text)}
           value = {password}
           style={styles.userpassword}
+          secureTextEntry={true}
           placeholder="Enter Password"
         />
         {allowed && isLoggedIn && isStudent ? navigation.navigate('student') : null} 
