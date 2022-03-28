@@ -14,7 +14,7 @@ import {
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 
-const Student_home_screen = () => {
+export const Student_home_screen = (navigation) => {
   return (
     <View style={styles.container}>
       <Pressable
@@ -76,4 +76,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Student_home_screen;

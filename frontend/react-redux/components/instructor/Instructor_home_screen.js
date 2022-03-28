@@ -15,7 +15,7 @@ import {
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 
-const Instructor_home_screen = () => {
+export const Instructor_home_screen = (navigation) => {
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -71,4 +71,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Instructor_home_screen;

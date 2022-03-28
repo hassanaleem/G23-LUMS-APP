@@ -2,58 +2,57 @@ import React from 'react';
 import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios'
-import {Main_button} from  "./Main_button";
+import {Main_button} from  "./buttons/Main_button";
 import { login, logout, loginFailed} from '../actions/loginAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-export const Login_screen = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+export const Login_screen = ({navigation}) => {
   const dispatch = useDispatch()
 
-    const [userName, setUserName] = useState("")
-    const [password, setPassword] = useState("")
-    // const [data, setData] = useState({})
-    const [fetched, setFetched] = useState(false)
-    const [datum, setDatum] = useState([])
+  const [isStudent, setIsStudent] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [isInstructor, setIsInstructor] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userName, setUserName] = useState("")
+  const [password, setPassword] = useState("")
 
-    const validate = () => {
-    let data = useSelector((state) => state.loginReducer)
-    console.log("data", data)
-    // setData(data)
-  
+  const validate = () => {
+  let data = useSelector((state) => state.loginReducer)
+  let type = data.user.Type
+  if (type === "student" && isLoggedIn == false)
+    {
+     setIsLoggedIn(true)
+     setIsStudent(true)
+    }
+
+  if (type === "instructor" && isLoggedIn == false)
+  {
+    setIsLoggedIn(true)
+    setIsInstructor(true)
+
+  }
+  if (type === "admin" && isLoggedIn == false)
+  {
+    setIsLoggedIn(true)
+    setIsAdmin(true)
+  }
   }
   
+
   const  onPress = () => 
   {
-        // if (fetched == false)
-    
-      // let data = await axios.get(`http://10.130.39.207:8000/login?id=${userName}&password=${password}`).then(res => res.data.replace(/&quot;/g, '"')).then(data => {
-      // console.log(userName, password)
-      // // setData(data) 
-      // setFetched(true)
-      // setUserName("")
-      // setPassword("")
-      // return data
-      // }
-      // )
-      // .then((data)=>validate(data))
-      if (fetched == false)
-      {
-      dispatch(login("23100199", "abc"))
-      }
-      // useDispatch(login())
-      setFetched(true)
-    
+      dispatch(login(userName, password))
+      setUserName("")
+      setPassword("")
 
   }
   validate()
-
    
-
   return (
-    
       <View style={styles.container}>
+
         <Text style={styles.topheading}>
           Login Account
           {/* {data} */}
@@ -85,7 +84,9 @@ export const Login_screen = () => {
           style={styles.userpassword}
           placeholder="Enter Password"
         />
-        
+        {isLoggedIn && isStudent ? navigation.navigate('student') : null} 
+        {isLoggedIn && isInstructor ? navigation.navigate('instructor') : null} 
+        {isLoggedIn && isAdmin ? navigation.navigate('admin') : null} 
 
         <Main_button text="Log in" onpress= {onPress} horizontal_padding={127} margintop={40}/>
 

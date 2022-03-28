@@ -4,7 +4,7 @@ import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pr
 import {Logout_button} from  "../buttons/Logout_button";
 import {Main_button} from  "../buttons/Main_button";
 
-const Admin_home_screen = () => {
+export const Admin_home_screen = (navigation) => {
   return (
     
       <View style={styles.container}>
@@ -76,4 +76,3 @@ const styles = StyleSheet.create({
 
 });
 
-export default Admin_home_screen;
