@@ -11,8 +11,8 @@ import {
   Pressable,
 } from 'react-native';
 
-import { Logout_button } from './Logout_button';
-import { Main_button } from './Main_button';
+import { Logout_button } from '../buttons/Logout_button';
+import { Main_button } from '../buttons/Main_button';
 
 const Student_home_screen = () => {
   return (
