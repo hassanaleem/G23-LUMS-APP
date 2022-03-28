@@ -9,20 +9,26 @@ from django.views.decorators.csrf import csrf_exempt
 
 # # Create your views here.
 def login(request):
-    db =database.connect_db()
-    print("request", request.method)
-
     if request.method == 'GET':
-        name = db.child("Data").get().val()
-        x = render(request, 'login.html', {'data': json.dumps(name)})
-        print(x)
-        return x
 
-    elif request.method == "POST":
-        data = {"name": "Abdullah"}
-        results = db.child("Data").child("3").set(data)
-        print("results", results)
-        return render(request, 'login.html')
+        db =database.connect_db()
+        req = list(request.GET.items())
+        print(req)
+        id = req[0][1]
+        password = req[1][1]
+
+        name = (db.child("Data").child(id).get().val())
+
+        ofPass = name["Pass"]
+        dic = {}
+        if ofPass == password:
+            dic["Name"] = name["Name"]
+            dic["Type"] = name["type"]
+
+        
+
+        return render(request, 'login.html', {'data': json.dumps(dic)})
+
 
 
 

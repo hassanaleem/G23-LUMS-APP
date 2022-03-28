@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const Dashboard = () => {
   const [domain, setDomain] = useState(
-    "http://10.130.159.171:8000/api/testback/"
+    "http://10.130.39.207:8000/login?id=23100199&password=abc"
   );
   const [data, setData] = useState([]);
   const [fetched, setFetched] = useState(false);
@@ -22,20 +22,14 @@ export const Dashboard = () => {
   }
   if (fetched == false) {
     getData();
-    getData();
-    getData();
   }
-  // console.log(data);
   return (
     <View style={styles.container}>
       {
         <View>
           {fetched ? (
             <View>
-              <Text>{data[0].name}</Text>
-              <Text>{data[0].email}</Text>
-              <Text>{data[0].age}</Text>
-              <Text>{data[0].date}</Text>
+              <Text>{data}</Text>
             </View>
           ) : (
             <Text>Loading...</Text>
