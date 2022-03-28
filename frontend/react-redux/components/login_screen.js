@@ -6,9 +6,11 @@ import {Main_button} from  "./buttons/Main_button";
 import { login, logout, loginFailed} from '../actions/loginAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 export const Login_screen = ({navigation}) => {
+
   const dispatch = useDispatch()
 
   const [isStudent, setIsStudent] = useState(false)
@@ -17,6 +19,7 @@ export const Login_screen = ({navigation}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
+  let allowed =  useSelector((state) => state.loginReducer).allowed
 
   const validate = () => {
   let data = useSelector((state) => state.loginReducer)
@@ -55,7 +58,6 @@ export const Login_screen = ({navigation}) => {
 
         <Text style={styles.topheading}>
           Login Account
-          {/* {data} */}
         </Text>
         
         <Image
@@ -84,9 +86,9 @@ export const Login_screen = ({navigation}) => {
           style={styles.userpassword}
           placeholder="Enter Password"
         />
-        {isLoggedIn && isStudent ? navigation.navigate('student') : null} 
-        {isLoggedIn && isInstructor ? navigation.navigate('instructor') : null} 
-        {isLoggedIn && isAdmin ? navigation.navigate('admin') : null} 
+        {allowed && isLoggedIn && isStudent ? navigation.navigate('student') : null} 
+        {allowed && isLoggedIn && isInstructor ? navigation.navigate('instructor') : null} 
+        {allowed && isLoggedIn && isAdmin ? navigation.navigate('admin') : null} 
 
         <Main_button text="Log in" onpress= {onPress} horizontal_padding={127} margintop={40}/>
 

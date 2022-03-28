@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pressable } from 'react-native';
+import {logout} from '../../actions/loginAction';
+import { useDispatch } from 'react-redux';
 
 export function Logout_button (props) {
+  const [loggedOut , setLoggedOut] = React.useState(false);
+  const dispatch = useDispatch()
+  const navigation = props.nav
   return (
     <Pressable 
       style={{alignItems: 'center',
@@ -14,9 +19,14 @@ export function Logout_button (props) {
               marginTop: 40,
               marginRight:15,}} 
 
-      onPress={props.onpress}>
+      onPress={() => {
+        dispatch(logout());
+        Alert.alert('Logout Successful');
+        setLoggedOut(true);
+      }}>
       
       <Text style={styles.text}>Log out</Text>
+      {loggedOut ? navigation.navigate('Home'): null}
     </Pressable>
   );
 }

@@ -15,14 +15,14 @@ import {
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 
-export const Instructor_home_screen = (navigation) => {
+export const Instructor_home_screen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/background.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '99%' }}>
-        <Logout_button onpress="" />
+        <Logout_button nav = {navigation}/>
 
         <Text style={styles.topheading1}>Welcome</Text>
 

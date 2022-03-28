@@ -14,10 +14,10 @@ import {
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 
-export const Student_home_screen = (navigation) => {
+export const Student_home_screen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Pressable
+      {/* <Pressable
         style={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -29,9 +29,10 @@ export const Student_home_screen = (navigation) => {
           marginTop: 40,
           marginRight: 15,
         }}
-        onPress="">
+        >
         <Text style={styles.logout_text}>Log out</Text>
-      </Pressable>
+      </Pressable> */}
+      <Logout_button nav = {navigation}/>
 
       <Text style={styles.topheading1}>Welcome</Text>
 

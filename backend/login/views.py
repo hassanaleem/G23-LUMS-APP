@@ -13,14 +13,18 @@ def login(request):
 
         db =database.connect_db()
         req = list(request.GET.items())
-        id = req[0][1]
-        password = req[1][1]
-        name = (db.child("Data").child(id).get().val())
-        ofPass = name["Pass"]
-        dic = {}
-        if ofPass == password:
-            dic["Name"] = name["Name"]
-            dic["Type"] = name["type"]
+        try:
+            id = req[0][1]
+            password = req[1][1]
+            name = (db.child("Data").child(id).get().val())
+            ofPass = name["Password"]
+            dic = {}
+            if ofPass == password:
+                dic["Name"] = name["Name"]
+                dic["Type"] = name["Type"]
+                dic["Id"] = id
+        except:
+            pass
 
         
 

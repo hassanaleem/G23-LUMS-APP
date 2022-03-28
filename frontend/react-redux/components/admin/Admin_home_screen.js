@@ -4,12 +4,12 @@ import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pr
 import {Logout_button} from  "../buttons/Logout_button";
 import {Main_button} from  "../buttons/Main_button";
 
-export const Admin_home_screen = (navigation) => {
+export const Admin_home_screen = ({navigation}) => {
   return (
     
       <View style={styles.container}>
         
-        <Pressable 
+        {/* <Pressable 
           style={{alignItems: 'center',
                   justifyContent: 'center',
                   paddingVertical: 5,
@@ -23,7 +23,9 @@ export const Admin_home_screen = (navigation) => {
           onPress="">
           
           <Text style={styles.logout_text}>Log out</Text>
-        </Pressable>
+        </Pressable> */}
+
+        <Logout_button nav = {navigation}/>
 
         <Text style={styles.topheading1}>
           Welcome
