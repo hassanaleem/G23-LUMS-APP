@@ -14,3 +14,4 @@ def connect_db():
   firebase = pyrebase.initialize_app(firebaseConfig)
   authe = firebase.auth()
   return firebase.database()
+
