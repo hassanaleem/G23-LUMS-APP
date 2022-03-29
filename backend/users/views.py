@@ -22,7 +22,7 @@ def users(request):
         db = database.connect_db()
         req = list(request.GET.items())
         id = req[0][1]
-        name = (db.child("Data").child(id).get().val())
+        name = (db.child("Data").child("Users").child(id).get().val())
         dic = {}
         dic["Name"] = name["Name"]
         dic["Type"] = name["type"]
