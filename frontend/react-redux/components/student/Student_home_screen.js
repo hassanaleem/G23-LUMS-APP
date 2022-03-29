@@ -11,32 +11,48 @@ import {
   Pressable,
 } from 'react-native';
 
-import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
+import { logout } from '../../actions/loginAction';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 
 export const Student_home_screen = ({navigation}) => {
+  const [loggedOut , setLoggedOut] = useState(false);
+  let name = useSelector((state) => state.loginReducer).user.Name
+
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
-      {/* <Pressable
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          paddingVertical: 5,
-          paddingHorizontal: 20,
-          borderRadius: 30,
-          backgroundColor: '#79c4f2',
-          marginLeft: 250,
-          marginTop: 40,
-          marginRight: 15,
-        }}
-        >
+      <Pressable
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        backgroundColor: '#79c4f2',
+        marginLeft: 250,
+        marginTop: 40,
+        marginRight: 15,
+      }}
+
+      onPress={() => {
+        dispatch(logout());
+        Alert.alert('Logout Successful');
+        setLoggedOut(true);
+      }}
+      >
+        {loggedOut ? navigation.navigate('Home'): null}
+
         <Text style={styles.logout_text}>Log out</Text>
-      </Pressable> */}
-      <Logout_button nav = {navigation}/>
+      </Pressable>
 
       <Text style={styles.topheading1}>Welcome</Text>
 
-      <Text style={styles.topheading2}>Student_Name</Text>
+      <Text style={styles.topheading2}>{name}</Text>
 
       <Main_button text="View Deadlines" onpress="" horizontal_padding={62} margintop={30} />
       <Main_button text="Academic Progress" onpress="" horizontal_padding={42} margintop={15} />

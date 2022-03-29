@@ -24,10 +24,6 @@ export default function App() {
         <Stack.Screen name="admin" component={Admin_home_screen}/>
       </Stack.Navigator>
     </NavigationContainer>
-
-
-      {/* <Dashboard /> */}
-      {/* <Adduser /> */}
     </Provider>
   );
 }

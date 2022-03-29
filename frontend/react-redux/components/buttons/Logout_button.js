@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pressable } from 'react-native';
 import {logout} from '../../actions/loginAction';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 export function Logout_button (props) {
-  const [loggedOut , setLoggedOut] = React.useState(false);
+  const [loggedOut , setLoggedOut] = useState(false);
   const dispatch = useDispatch()
   const navigation = props.nav
   return (

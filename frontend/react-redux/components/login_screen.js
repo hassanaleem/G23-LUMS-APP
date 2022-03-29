@@ -6,8 +6,12 @@ import {Main_button} from  "./buttons/Main_button";
 import { login, logout, loginFailed} from '../actions/loginAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+const { createHash } = require("crypto");
 
+function hash(data)
+{
+    return createHash("sha256").update(data).digest("hex")
+}
 
 export const Login_screen = ({navigation}) => {
 
@@ -19,6 +23,7 @@ export const Login_screen = ({navigation}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordText, setPasswordText] = useState("")
   let allowed =  useSelector((state) => state.loginReducer).allowed
 
   const validate = () => {
@@ -49,6 +54,7 @@ export const Login_screen = ({navigation}) => {
       dispatch(login(userName, password))
       setUserName("")
       setPassword("")
+      setPasswordText("")
 
   }
   validate()
@@ -81,8 +87,11 @@ export const Login_screen = ({navigation}) => {
         </Text>
 
         <TextInput
-          onChangeText={(text) => setPassword(text)}
-          value = {password}
+          onChangeText={(text) => {
+            setPassword(hash(text))
+            setPasswordText(text)
+          }}
+          value = {passwordText}
           style={styles.userpassword}
           secureTextEntry={true}
           placeholder="Enter Password"

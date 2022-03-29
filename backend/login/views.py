@@ -26,9 +26,6 @@ def login(request):
         except:
             pass
 
-
-        
-
         return render(request, 'login.html', {'data': json.dumps(dic)})
 
 

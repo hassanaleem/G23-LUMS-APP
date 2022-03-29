@@ -14,8 +14,11 @@ import {
 
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
+import { useSelector } from 'react-redux';
 
 export const Instructor_home_screen = ({navigation}) => {
+  let name = useSelector((state) => state.loginReducer).user.Name
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -26,7 +29,7 @@ export const Instructor_home_screen = ({navigation}) => {
 
         <Text style={styles.topheading1}>Welcome</Text>
 
-        <Text style={styles.topheading2}>Instructor_Name</Text>
+        <Text style={styles.topheading2}>{name}</Text>
 
         <Main_button
           text="Add New Deadline"

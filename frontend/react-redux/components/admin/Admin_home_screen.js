@@ -3,13 +3,18 @@ import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert, Pr
 
 import {Logout_button} from  "../buttons/Logout_button";
 import {Main_button} from  "../buttons/Main_button";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../actions/loginAction';
 
 export const Admin_home_screen = ({navigation}) => {
+  const [loggedOut , setLoggedOut] = useState(false);
+  const dispatch = useDispatch()
   return (
     
       <View style={styles.container}>
         
-        {/* <Pressable 
+        <Pressable 
           style={{alignItems: 'center',
                   justifyContent: 'center',
                   paddingVertical: 5,
@@ -20,12 +25,16 @@ export const Admin_home_screen = ({navigation}) => {
                   marginTop: 40,
                   marginRight:15,}} 
 
-          onPress="">
+                  onPress={() => {
+                    dispatch(logout());
+                    Alert.alert('Logout Successful');
+                    setLoggedOut(true);
+                  }}
+                  >
+                  {loggedOut ? navigation.navigate('Home'): null}
           
           <Text style={styles.logout_text}>Log out</Text>
-        </Pressable> */}
-
-        <Logout_button nav = {navigation}/>
+        </Pressable>
 
         <Text style={styles.topheading1}>
           Welcome
