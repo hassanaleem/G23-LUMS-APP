@@ -16,7 +16,7 @@ def login(request):
         try:
             id = data["user"]
             password = data["password"]
-            name = (db.child("Data").child(id).get().val())
+            name = (db.child("Data").child("Users").child(id).get().val())
             ofPass = name["Password"]
             dic = {}
             if ofPass == password:

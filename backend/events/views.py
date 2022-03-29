@@ -11,7 +11,7 @@ def events(request):
     db =database.connect_db()
 
     if request.method == "GET":
-        data = db.child("Events").get().val()
+        data = db.child("Data").child("Events").get().val()
 
         data = data[1:]
         return render(request, 'events.html', {'events': json.dumps(data)})
@@ -20,7 +20,7 @@ def events(request):
         data = json.loads(request.body.decode('utf-8'))
         oldData = db.child("Events").get().val()
         index = len(oldData)
-        db.child("Events").child(index).set(data)
+        db.child("Data").child("Events").child(index).set(data)
 
         return render(request, 'events.html')
 
