@@ -15,7 +15,7 @@ export const Addfood = (data) => {
 };
 
 export const GetRestaurant = () => {
-  const request = "http://" + address + "/fooditems?&restaurants";
+  const request = address + "/fooditems?&restaurants";
   return (dispatch) => {
     axios.get(request).then((response) => {
       console.log(response.data);

@@ -51,13 +51,6 @@ export const Login_screen = ({ navigation }) => {
     }
   };
 
-  // const onPress = () => {
-  //   dispatch(login(userName, password));
-  //   setUserName("");
-  //   setPassword("");
-  // };
-  // validate();
-
   const onPress = () => {
     dispatch(login(userName, password));
     setUserName("");

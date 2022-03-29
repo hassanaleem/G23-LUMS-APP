@@ -41,14 +41,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'login',
     'testback',
-<<<<<<< HEAD
     'events',
-=======
     'users',
     'fooditems',
     'deadlines',
     'coursegrades',
->>>>>>> Jawad
 ]
 
 MIDDLEWARE = [
