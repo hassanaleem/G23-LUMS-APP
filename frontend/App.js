@@ -15,17 +15,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-<<<<<<< HEAD
-      <Stack.Navigator initialRouteName="Home"  screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={Login_screen}/>
-        <Stack.Screen name="student" component={Student_home_screen}/>
-        <Stack.Screen name="instructor" component={Instructor_home_screen}/>
-        <Stack.Screen name="admin" component={Admin_home_screen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-=======
         <Stack.Navigator
-          initialRouteName="addfooditem"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -39,7 +30,6 @@ export default function App() {
 
       {/* <Dashboard /> */}
       {/* <Adduser /> */}
->>>>>>> Jawad
     </Provider>
   );
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import { address } from "./server";
 
 export const addUser = (userData) => {
-  const postRequest = "http://" + address + "/users";
+  const postRequest = address + "/users";
   console.log(postRequest);
   return (dispatch) => {
     axios

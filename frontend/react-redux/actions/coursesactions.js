@@ -3,7 +3,7 @@ import axios from "axios";
 import { address } from "./server";
 
 export const getGrade = (id) => {
-  const request = "http://" + address + "/grades?" + `id=${id}`;
+  const request = address + "/grades?" + `id=${id}`;
   return (dispatch) => {
     axios.get(request).then((response) => {
       dispatch({

@@ -1,32 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert } from 'react-native';
-import { useState } from 'react';
-import axios from 'axios'
-import {Main_button} from  "./buttons/Main_button";
-import { login, logout, loginFailed} from '../actions/loginAction';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-const { createHash } = require("crypto");
-
-function hash(data)
-{
-    return createHash("sha256").update(data).digest("hex")
-}
-
-export const Login_screen = ({navigation}) => {
-
-  const dispatch = useDispatch()
-
-  const [isStudent, setIsStudent] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [isInstructor, setIsInstructor] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userName, setUserName] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordText, setPasswordText] = useState("")
-  let allowed =  useSelector((state) => state.loginReducer).allowed
-=======
 import React from "react";
 import {
   View,
@@ -44,7 +15,11 @@ import { Main_button } from "./buttons/Main_button";
 import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+const { createHash } = require("crypto");
+
+function hash(data) {
+  return createHash("sha256").update(data).digest("hex");
+}
 
 export const Login_screen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -55,8 +30,8 @@ export const Login_screen = ({ navigation }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordText, setPasswordText] = useState("");
   let allowed = useSelector((state) => state.loginReducer).allowed;
->>>>>>> Jawad
 
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
@@ -76,26 +51,21 @@ export const Login_screen = ({ navigation }) => {
     }
   };
 
+  // const onPress = () => {
+  //   dispatch(login(userName, password));
+  //   setUserName("");
+  //   setPassword("");
+  // };
+  // validate();
+
   const onPress = () => {
     dispatch(login(userName, password));
     setUserName("");
     setPassword("");
+    setPasswordText("");
   };
   validate();
 
-<<<<<<< HEAD
-  const  onPress = () => 
-  {
-      dispatch(login(userName, password))
-      setUserName("")
-      setPassword("")
-      setPasswordText("")
-
-  }
-  validate()
-   
-=======
->>>>>>> Jawad
   return (
     <View style={styles.container}>
       <Text style={styles.topheading}>Login Account</Text>
@@ -118,25 +88,14 @@ export const Login_screen = ({ navigation }) => {
 
       <Text style={styles.password_text}>Password</Text>
 
-<<<<<<< HEAD
-        <TextInput
-          onChangeText={(text) => {
-            setPassword(hash(text))
-            setPasswordText(text)
-          }}
-          value = {passwordText}
-          style={styles.userpassword}
-          secureTextEntry={true}
-          placeholder="Enter Password"
-        />
-        {allowed && isLoggedIn && isStudent ? navigation.navigate('student') : null} 
-        {allowed && isLoggedIn && isInstructor ? navigation.navigate('instructor') : null} 
-        {allowed && isLoggedIn && isAdmin ? navigation.navigate('admin') : null} 
-=======
       <TextInput
-        onChangeText={(text) => setPassword(text)}
-        value={password}
+        onChangeText={(text) => {
+          setPassword(hash(text));
+          setPasswordText(text);
+        }}
+        value={passwordText}
         style={styles.userpassword}
+        secureTextEntry={true}
         placeholder="Enter Password"
       />
       {allowed && isLoggedIn && isStudent
@@ -146,7 +105,6 @@ export const Login_screen = ({ navigation }) => {
         ? navigation.navigate("instructor")
         : null}
       {allowed && isLoggedIn && isAdmin ? navigation.navigate("admin") : null}
->>>>>>> Jawad
 
       <Main_button
         text="Log in"

@@ -3,7 +3,7 @@ import axios from "axios";
 import { address } from "./server";
 
 export const Addfood = (data) => {
-  const request = "http://" + address + "/fooditems";
+  const request = address + "/fooditems";
   return (dispatch) => {
     axios.post(request, data).then((response) => {
       dispatch({
