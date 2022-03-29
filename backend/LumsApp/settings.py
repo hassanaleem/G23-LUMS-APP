@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'login',
     'testback',
     'users',
-    'fooditems'
+    'fooditems',
+    'deadlines',
+    'coursegrades',
 ]
 
 MIDDLEWARE = [

@@ -6,6 +6,9 @@ urlpatterns = [
     path('', include('login.urls')),
     path('', include('users.urls')),
     path('', include('fooditems.urls')),
+    path('' , include('deadlines.urls')),
+    path('' , include('coursegrades.urls')),
+    
     # path('', include('testback.urls')),
 
 ]
