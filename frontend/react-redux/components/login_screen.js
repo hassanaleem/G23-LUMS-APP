@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { View, Text, Image, Button, ScrollView, TextInput, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
@@ -25,30 +26,64 @@ export const Login_screen = ({navigation}) => {
   const [password, setPassword] = useState("")
   const [passwordText, setPasswordText] = useState("")
   let allowed =  useSelector((state) => state.loginReducer).allowed
+=======
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  ScrollView,
+  TextInput,
+  StyleSheet,
+  Alert,
+} from "react-native";
+import { useState } from "react";
+import axios from "axios";
+import { Main_button } from "./buttons/Main_button";
+import { login, logout, loginFailed } from "../actions/loginAction";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
+export const Login_screen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const [isStudent, setIsStudent] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isInstructor, setIsInstructor] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  let allowed = useSelector((state) => state.loginReducer).allowed;
+>>>>>>> Jawad
 
   const validate = () => {
-  let data = useSelector((state) => state.loginReducer)
-  let type = data.user.Type
-  if (type === "student" && isLoggedIn == false)
-    {
-     setIsLoggedIn(true)
-     setIsStudent(true)
+    let data = useSelector((state) => state.loginReducer);
+    let type = data.user.Type;
+    if (type === "student" && isLoggedIn == false) {
+      setIsLoggedIn(true);
+      setIsStudent(true);
     }
 
-  if (type === "instructor" && isLoggedIn == false)
-  {
-    setIsLoggedIn(true)
-    setIsInstructor(true)
+    if (type === "instructor" && isLoggedIn == false) {
+      setIsLoggedIn(true);
+      setIsInstructor(true);
+    }
+    if (type === "admin" && isLoggedIn == false) {
+      setIsLoggedIn(true);
+      setIsAdmin(true);
+    }
+  };
 
-  }
-  if (type === "admin" && isLoggedIn == false)
-  {
-    setIsLoggedIn(true)
-    setIsAdmin(true)
-  }
-  }
-  
+  const onPress = () => {
+    dispatch(login(userName, password));
+    setUserName("");
+    setPassword("");
+  };
+  validate();
 
+<<<<<<< HEAD
   const  onPress = () => 
   {
       dispatch(login(userName, password))
@@ -59,33 +94,31 @@ export const Login_screen = ({navigation}) => {
   }
   validate()
    
+=======
+>>>>>>> Jawad
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <Text style={styles.topheading}>Login Account</Text>
 
-        <Text style={styles.topheading}>
-          Login Account
-        </Text>
-        
-        <Image
-          style={{height: 180, width: 180, marginTop:50, marginBottom:40}}
-          source={require('./assets/LOGO.png')}
-        />
+      <Image
+        style={{ height: 180, width: 180, marginTop: 50, marginBottom: 40 }}
+        source={require("./assets/LOGO.png")}
+      />
 
-        <Text style={styles.id_text}>
-          User ID
-        </Text>
+      <Text style={styles.id_text}>User ID</Text>
 
-        <TextInput 
-          onChangeText={(text) => {setUserName(text)}}
-          value={userName}
-          style={styles.userid}
-          placeholder="Enter User ID"
-        />
+      <TextInput
+        onChangeText={(text) => {
+          setUserName(text);
+        }}
+        value={userName}
+        style={styles.userid}
+        placeholder="Enter User ID"
+      />
 
-        <Text style={styles.password_text}>
-          Password 
-        </Text>
+      <Text style={styles.password_text}>Password</Text>
 
+<<<<<<< HEAD
         <TextInput
           onChangeText={(text) => {
             setPassword(hash(text))
@@ -99,25 +132,43 @@ export const Login_screen = ({navigation}) => {
         {allowed && isLoggedIn && isStudent ? navigation.navigate('student') : null} 
         {allowed && isLoggedIn && isInstructor ? navigation.navigate('instructor') : null} 
         {allowed && isLoggedIn && isAdmin ? navigation.navigate('admin') : null} 
+=======
+      <TextInput
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        style={styles.userpassword}
+        placeholder="Enter Password"
+      />
+      {allowed && isLoggedIn && isStudent
+        ? navigation.navigate("student")
+        : null}
+      {allowed && isLoggedIn && isInstructor
+        ? navigation.navigate("instructor")
+        : null}
+      {allowed && isLoggedIn && isAdmin ? navigation.navigate("admin") : null}
+>>>>>>> Jawad
 
-        <Main_button text="Log in" onpress= {onPress} horizontal_padding={127} margintop={40}/>
-
-      </View>
+      <Main_button
+        text="Log in"
+        onPress={onPress}
+        horizontal_padding={127}
+        margintop={40}
+      />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   topheading: {
     marginTop: 50,
     marginRight: 200,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 
   id_text: {
@@ -126,15 +177,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "sans-serif-thin",
   },
-  
+
   userid: {
     height: 40,
     width: 300,
     marginTop: 5,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
@@ -150,13 +201,11 @@ const styles = StyleSheet.create({
     height: 40,
     width: 300,
     marginTop: 5,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
-
 });
-
