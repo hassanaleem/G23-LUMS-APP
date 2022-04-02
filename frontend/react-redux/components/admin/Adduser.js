@@ -17,26 +17,32 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { addUser } from "../../actions/useractions";
 import { useDispatch } from "react-redux";
-const { createHash } = require("crypto");
+import * as Crypto from "expo-crypto";
+
 export const Adduser = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState("");
   const [type, setType] = useState("");
-  function hash(data) {
-    return createHash("sha256").update(data).digest("hex");
-  }
+
+  const digest = async (data) => {
+    const hash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      data
+    );
+    setPassword(hash);
+  };
+
   const add = () => {
-    // console.log("HEre");
-    // console.log(username, password, userId, type);
     if (username === "" || password === "" || userId === "" || type === "") {
       Alert.alert("Please fill all the fields");
     } else {
-      // console.log("Pressed");
+      digest(password);
+      console.log(password);
       let data = {
         Name: username,
-        Password: hash(password),
+        Password: password,
         id: userId,
         Type: type,
       };

@@ -15,11 +15,7 @@ import { Main_button } from "./buttons/Main_button";
 import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-const { createHash } = require("crypto");
-
-function hash(data) {
-  return createHash("sha256").update(data).digest("hex");
-}
+import * as Crypto from "expo-crypto";
 
 export const Login_screen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -32,6 +28,14 @@ export const Login_screen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [passwordText, setPasswordText] = useState("");
   let allowed = useSelector((state) => state.loginReducer).allowed;
+
+  const hash = async (data) => {
+    const hash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      data
+    );
+    setPassword(hash);
+  };
 
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
@@ -83,7 +87,7 @@ export const Login_screen = ({ navigation }) => {
 
       <TextInput
         onChangeText={(text) => {
-          setPassword(hash(text));
+          hash(text);
           setPasswordText(text);
         }}
         value={passwordText}
