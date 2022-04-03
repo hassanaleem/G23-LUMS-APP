@@ -14,4 +14,8 @@ def connect_db():
   firebase = pyrebase.initialize_app(firebaseConfig)
   authe = firebase.auth()
   return firebase.database()
-
+# db = connect_db()
+# #remove 23100321 from data
+# db.child("Data").child("Users").child("23100321").remove()
+# data = db.child("Data").child("Users").child("23100321").get().val()
+# print(data)

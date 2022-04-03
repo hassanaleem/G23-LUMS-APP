@@ -15,44 +15,63 @@ import {
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
-import { addUser } from "../../actions/useractions";
-import { useDispatch } from "react-redux";
+import { addUser, findUser, clearState } from "../../actions/useractions";
+import { useDispatch, useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
-
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 export const Adduser = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState("");
   const [type, setType] = useState("");
-
+  const [pwdHash, setPwdHash] = useState("");
+  const [data, setData] = useState({});
   const digest = async (data) => {
     const hash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
       data
     );
-    setPassword(hash);
+    setPwdHash(hash);
   };
-
+  const validate = (find, query, data) => {
+    if (query == true && find == true) {
+      Alert.alert("User already exists");
+      dispatch(clearState());
+      // check if data is empty
+    } else if (query == true && find == false && isEmpty(data) != true) {
+      dispatch(addUser(data));
+      setData({});
+      Alert.alert("User added");
+      dispatch(clearState());
+    }
+  };
+  let userState = useSelector((state) => state.usersReducer);
+  let find = userState.find;
+  let query = userState.queryRun;
   const add = () => {
     if (username === "" || password === "" || userId === "" || type === "") {
       Alert.alert("Please fill all the fields");
     } else {
-      digest(password);
-      console.log(password);
-      let data = {
-        Name: username,
-        Password: password,
-        id: userId,
-        Type: type,
-      };
-      dispatch(addUser(data));
-      setUsername("");
-      setPassword("");
-      setUserId("");
-      setType("");
+      dispatch(findUser(userId));
     }
+    let data = {
+      Name: username,
+      Password: pwdHash,
+      id: userId,
+      Type: type,
+    };
+    setData(data);
+    setUsername("");
+    setPassword("");
+    setUserId("");
+    setType("");
+    setPwdHash("");
   };
+  validate(find, query, data);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -93,7 +112,10 @@ export const Adduser = () => {
         <TextInput
           style={styles.userid}
           placeholder="Enter Password"
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text) => {
+            digest(text);
+            setPassword(text);
+          }}
           value={password}
         />
 

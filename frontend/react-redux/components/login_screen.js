@@ -40,18 +40,22 @@ export const Login_screen = ({ navigation }) => {
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
     let type = data.user.Type;
-    if (type === "student" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsStudent(true);
-    }
+    // convert type to upper case
+    if (type != undefined) {
+      type = type.toUpperCase();
+      if (type === "STUDENT" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsStudent(true);
+      }
 
-    if (type === "instructor" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsInstructor(true);
-    }
-    if (type === "admin" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsAdmin(true);
+      if (type === "INSTRUCTOR" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsInstructor(true);
+      }
+      if (type === "ADMIN" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsAdmin(true);
+      }
     }
   };
 
