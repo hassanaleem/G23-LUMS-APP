@@ -11,18 +11,34 @@ import {
   ImageBackground,
   Pressable,
 } from 'react-native';
+import { useState } from "react";
+import { Logout_button } from  "../buttons/Logout_button";
+import { Main_button } from "../buttons/Main_button";
+import { useDispatch } from "react-redux";
+import { postEvents } from "../../actions/eventsAction";
 
-import { Logout_button } from '../buttons/Logout_button';
-import { Main_button } from '../buttons/Main_button';
+export const Addevent = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [name, setname] = useState("");
+  const [date, setdate] = useState("");
+  const [time, settime] = useState("");
+  const [type, settype] = useState("");
 
-export const Addevent = () => {
+  const onPress = () => {
+    dispatch(postEvents(name, date, time, type));
+    setname("");
+    setdate("");
+    settime("");
+    settype("");
+
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/background.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '99%' }}>
-        <Logout_button onpress="" />
+        <Logout_button nav={navigation} />
 
         <Text
           style={{
@@ -41,23 +57,39 @@ export const Addevent = () => {
 
         <Text style={styles.id_text}>Event Name</Text>
 
-        <TextInput style={styles.userid} placeholder="Enter Event Name" />
+        <TextInput onChangeText={(text) => {
+          setname(text);
+        }}
+          value={name}
+          style={styles.userid} placeholder="Enter Event Name" />
 
         <Text style={styles.id_text}>Event Date</Text>
 
-        <TextInput style={styles.userid} placeholder="Enter date in format: dd/mm/yyyy" />
+        <TextInput onChangeText={(text) => {
+          setdate(text);
+        }}
+          value={date}
+          style={styles.userid} placeholder="Enter date in format: dd/mm/yyyy" />
 
         <Text style={styles.id_text}>Event Timings</Text>
 
-        <TextInput style={styles.userid} placeholder="Enter time in format: hh/mm-hh/mm" />
+        <TextInput onChangeText={(text) => {
+          settime(text);
+        }}
+          value={time}
+          style={styles.userid} placeholder="Enter time in format: hh/mm-hh/mm" />
 
         <Text style={styles.id_text}>Event Type</Text>
 
-        <TextInput style={styles.userid} placeholder="Enter type(ie..,talk,concert)" />
+        <TextInput onChangeText={(text) => {
+          settype(text);
+        }}
+          value={type}
+          style={styles.userid} placeholder="Enter type(ie..,talk,concert)" />
 
         <Main_button
           text="Add Event"
-          onpress=""
+          onPress={onPress}
           horizontal_padding={30}
           margintop={90}
           marginleft={47}
@@ -66,7 +98,9 @@ export const Addevent = () => {
 
         <Main_button
           text="Go Back"
-          onpress=""
+          onpress={() => {
+            console.log("YEAH");
+          }}
           horizontal_padding={50}
           margintop={15}
           marginleft={47}

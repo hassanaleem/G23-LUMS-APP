@@ -2,6 +2,7 @@ import axios from "axios";
 import {address} from "./server"
 
 export const postEvents = (name, date, time, type) =>  {
+    
     const config = {
         headers: {
           "Content-Type": "application/json",

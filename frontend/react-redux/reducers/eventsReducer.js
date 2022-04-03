@@ -16,6 +16,7 @@ const eventsReducer = (state = initialData, action) => {
             }
             
         case "POST_EVENT":
+            
             return {
                 ...state,
                 message: "Success",
