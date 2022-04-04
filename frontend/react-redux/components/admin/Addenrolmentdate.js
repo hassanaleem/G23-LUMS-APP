@@ -12,31 +12,46 @@ import {
   Pressable,
 } from 'react-native';
 
-import { Logout_button } from './logout_button';
-import { Main_button } from './Main_button';
+import { useState } from "react";
+import { Logout_button } from  "../buttons/Logout_button";
+import { Main_button } from "../buttons/Main_button";
+import { useDispatch } from "react-redux";
+import { postEvents } from "../../actions/eventsAction";
+//import { useSelector } from "react-redux";
 
-export const Addenrolmentdate = () => {
+export const Addenrolmentdate = ({ navigation }) => {
+
+
+  const dispatch = useDispatch();
+  const [enrolmentdate, setenrolmentdate] = useState("");
+  const [enrolmenttime, setenrolmenttime] = useState("");
+
+  const onPress = () => {
+    dispatch(postEvents("Enrolment", enrolmentdate, enrolmenttime, "Enrolment"));
+    setenrolmentdate("");
+    setenrolmenttime("");
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('./assets/background.png')}
+        source={require("../assets/background.png")}
         resizeMode="cover"
         style={{ width: '100%', height: '99%' }}>
-        <Logout_button onpress="" />
+        <Logout_button nav = {navigation}/>
 
         <Text
           style={{
             position: 'absolute',
-            top: 25,
+            top: 45,
             left: 10,
             marginLeft: 25,
-            fontSize: 40,
+            fontSize: 23,
             fontWeight: 'bold',
             fontFamily: 'sans-serif-thin',
           }}>
-          Add 
+          Add Enrolment Date
         </Text>
-        <Text
+        {/* /* <Text
           style={{
             position: 'absolute',
             top: 65,
@@ -47,9 +62,9 @@ export const Addenrolmentdate = () => {
             fontFamily: 'sans-serif-thin',
           }}>
           Enrolment
-        </Text>
+        </Text> */} 
 
-        <Text
+        {/* <Text
           style={{
             position: 'absolute',
             top: 105,
@@ -60,36 +75,45 @@ export const Addenrolmentdate = () => {
             fontFamily: 'sans-serif-thin',
           }}>
           Date
-        </Text>
+        </Text> */}
 
         <Text style={styles.topline}>All fields are required</Text>
 
         <Text style={styles.id_text}>Enrolment Date</Text>
 
-        <TextInput
+        <TextInput onChangeText={(text) => {
+          setenrolmentdate(text);
+        }}
+          value={enrolmentdate}
           style={styles.userid}
           placeholder="Enter date in format: dd/mm/yyyy"
         />
 
-        <Text style={styles.id_text}>Enrolment Date</Text>
+        <Text style={styles.id_text}>Enrolment Time</Text>
 
-        <TextInput
+        <TextInput onChangeText={(text) => {
+          setenrolmenttime(text);
+        }}
+          value={enrolmenttime}
           style={styles.userid}
           placeholder="Enter time in format: hour/minute"
         />
 
         <Main_button
+
           text="Add Enrolment Date"
-          onpress=""
+          onPress={onPress}
           horizontal_padding={30}
-          margintop={180}
+          margintop={90}
           marginleft={47}
           marginright={47}
         />
 
         <Main_button
           text="Go Back"
-          onpress=""
+          onpress= {() => {
+            console.log("YEAH");
+          }}
           horizontal_padding={50}
           margintop={15}
           marginleft={47}
@@ -113,13 +137,13 @@ const styles = StyleSheet.create({
     fontFamily: 'sans-serif-thin',
   },
   topline: {
-    marginTop: 90,
+    marginTop: 10,
     marginLeft: 35,
     fontSize: 15,
     fontFamily: 'sans-serif-thin',
   },
   userid: {
-    marginLeft: 30,
+    marginLeft: 35,
     height: 40,
     width: 300,
     marginTop: 10,
