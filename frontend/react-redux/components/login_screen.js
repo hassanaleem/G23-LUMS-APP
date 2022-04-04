@@ -15,11 +15,7 @@ import { Main_button } from "./buttons/Main_button";
 import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-const { createHash } = require("crypto");
-
-function hash(data) {
-  return createHash("sha256").update(data).digest("hex");
-}
+import * as Crypto from "expo-crypto";
 
 export const Login_screen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -33,21 +29,33 @@ export const Login_screen = ({ navigation }) => {
   const [passwordText, setPasswordText] = useState("");
   let allowed = useSelector((state) => state.loginReducer).allowed;
 
+  const hash = async (data) => {
+    const hash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      data
+    );
+    setPassword(hash);
+  };
+
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
     let type = data.user.Type;
-    if (type === "student" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsStudent(true);
-    }
+    // convert type to upper case
+    if (type != undefined) {
+      type = type.toUpperCase();
+      if (type === "STUDENT" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsStudent(true);
+      }
 
-    if (type === "instructor" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsInstructor(true);
-    }
-    if (type === "admin" && isLoggedIn == false) {
-      setIsLoggedIn(true);
-      setIsAdmin(true);
+      if (type === "INSTRUCTOR" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsInstructor(true);
+      }
+      if (type === "ADMIN" && isLoggedIn == false) {
+        setIsLoggedIn(true);
+        setIsAdmin(true);
+      }
     }
   };
 
@@ -83,7 +91,7 @@ export const Login_screen = ({ navigation }) => {
 
       <TextInput
         onChangeText={(text) => {
-          setPassword(hash(text));
+          hash(text);
           setPasswordText(text);
         }}
         value={passwordText}

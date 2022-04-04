@@ -1,35 +1,38 @@
 const initialData = {
-  allowed: false,
+  find: false,
   user: {},
+  queryRun: false,
 };
 
-const loginReducer = (state = initialData, action) => {
+const usersReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
-    case "SIGN_IN":
+    case "FIND_USER":
       const newdata = data.replace(/&quot;/g, '"');
       const finalData = JSON.parse(newdata);
-      console.log(finalData);
       return {
         ...state,
+        find: true,
+        queryRun: true,
         user: finalData,
-        allowed: true,
       };
-
-    case "SIGN_OUT":
+    case "FIND_USER_FAILED":
       return {
         ...state,
+        find: false,
+        queryRun: true,
         user: {},
-        allowed: false,
       };
-    case "SIGN_IN_FAILED":
+    case "CLEAR_STATE":
       return {
+        ...state,
+        find: false,
+        queryRun: false,
         user: {},
-        allowed: false,
       };
     default:
       return state;
   }
 };
 
-export default loginReducer;
+export default usersReducer;

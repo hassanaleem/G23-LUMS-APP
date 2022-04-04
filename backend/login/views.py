@@ -19,13 +19,15 @@ def login(request):
             name = (db.child("Data").child("Users").child(id).get().val())
             ofPass = name["Password"]
             dic = {}
+            # print(ofPass,password)
             if ofPass == password:
+                print("HERE")
                 dic["Name"] = name["Name"]
                 dic["Type"] = name["Type"]
                 dic["Id"] = id
         except:
             pass
-
+        # print(dic)
         return render(request, 'login.html', {'data': json.dumps(dic)})
 
 
