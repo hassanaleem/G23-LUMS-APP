@@ -11,6 +11,8 @@ import { Admin_home_screen } from "./react-redux/components/admin/Admin_home_scr
 import { Addfooditem } from "./react-redux/components/admin/Addfooditem";
 import { Addenrolmentdate } from "./react-redux/components/admin/Addenrolmentdate";
 import { Addevent } from "./react-redux/components/admin/Addevent";
+import { Edit_deadline } from "./react-redux/components/instructor/Edit_deadline";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,7 +20,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Addevent"
+          initialRouteName="EditDeadline"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -29,6 +31,7 @@ export default function App() {
           <Stack.Screen name="addfooditem" component={Addfooditem} />
           <Stack.Screen name="Addenrolment" component={Addenrolmentdate} />
           <Stack.Screen name="Addevent" component={Addevent} />
+          <Stack.Screen name="EditDeadline" component={Edit_deadline} />
         </Stack.Navigator>
       </NavigationContainer>
 

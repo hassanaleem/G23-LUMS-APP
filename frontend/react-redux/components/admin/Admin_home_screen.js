@@ -75,7 +75,7 @@ export const Admin_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="Add Event"
-        onpress=""
+        onPress={() => navigation.navigate("Addevent")}
         horizontal_padding={86}
         margintop={10}
       />
