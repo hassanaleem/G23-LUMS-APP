@@ -18,7 +18,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Addfood, GetRestaurant } from "../../actions/foodactions";
 
-export const Addfooditem = () => {
+export const Addfooditem = ({ navigation }) => {
   const [restaurant, setRestaurant] = useState("");
   const [foodItem, setFooditem] = useState("");
   const [price, setPrice] = useState("");
@@ -30,15 +30,15 @@ export const Addfooditem = () => {
     dispatch(GetRestaurant());
     setGetFirstRestaurant(true);
   }
-  let getState = useSelector((state) => state.foodItemReducer.restaurant);
+  let getState = useSelector((state) => state.fooditemReducer.restaurant);
   const add = () => {
     if (restaurant == "" || foodItem == "" || price == "") {
       Alert.alert("Please fill all the fields");
     } else {
       dispatch(GetRestaurant());
-      setRestaurantList(getState.restaurants);
+      setRestaurantList(getState.restaurant);
       // get the list of restaurants
-      console.log(restaurantList);
+      //console.log(restaurantList);
       if (restaurantList.includes(restaurant)) {
         let data = {
           restaurant: restaurant,
@@ -64,7 +64,7 @@ export const Addfooditem = () => {
         resizeMode="cover"
         style={{ width: "100%", height: "99%" }}
       >
-        <Logout_button onpress="" />
+        <Logout_button nav = {navigation} />
 
         <Text
           style={{
@@ -76,9 +76,11 @@ export const Addfooditem = () => {
             fontWeight: "bold",
             fontFamily: "sans-serif-thin",
           }}
+          
         >
           Add Food
         </Text>
+        
         <Text
           style={{
             position: "absolute",
@@ -140,7 +142,7 @@ export const Addfooditem = () => {
         <Main_button
           text="Go Back"
           onPress={() => {
-            console.log("YEAH");
+            navigation.navigate("admin");
           }}
           horizontal_padding={50}
           margintop={15}

@@ -18,10 +18,11 @@ import { useState } from "react";
 import { addUser, findUser, clearState } from "../../actions/useractions";
 import { useDispatch, useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
+import { NavigationContainer } from "@react-navigation/native";
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
-export const Adduser = () => {
+export const Adduser = ({navigation}) => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -79,7 +80,7 @@ export const Adduser = () => {
         resizeMode="cover"
         style={{ width: "100%", height: "99%" }}
       >
-        <Logout_button onpress="" />
+        <Logout_button nav = {navigation}/>
 
         <Text style={styles.add_user}>Add User</Text>
 
@@ -138,9 +139,9 @@ export const Adduser = () => {
         />
 
         <Main_button
-          text="Edit User"
+          text="Go Back"
           onPress={() => {
-            console.log("Edit");
+            navigation.navigate("admin");
           }}
           horizontal_padding={50}
           margintop={15}

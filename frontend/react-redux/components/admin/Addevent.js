@@ -12,12 +12,12 @@ import {
   Pressable,
 } from 'react-native';
 import { useState } from "react";
-import { Logout_button } from  "../buttons/Logout_button";
+import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
 import { postEvents } from "../../actions/eventsAction";
 
-export const Addevent = ({navigation}) => {
+export const Addevent = ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [date, setdate] = useState("");
@@ -95,11 +95,10 @@ export const Addevent = ({navigation}) => {
           marginleft={47}
           marginright={47}
         />
-
         <Main_button
           text="Go Back"
-          onpress={() => {
-            console.log("YEAH");
+          onPress={() => {
+            navigation.navigate("admin");
           }}
           horizontal_padding={50}
           margintop={15}

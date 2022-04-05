@@ -69,19 +69,19 @@ export const Admin_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="Add Enrolment Date"
-        onpress=""
+        onPress={() => navigation.navigate("Addenrolment")}
         horizontal_padding={41}
         margintop={10}
       />
       <Main_button
         text="Add Event"
-        onpress=""
+        onPress={() => navigation.navigate("Addevent")}
         horizontal_padding={86}
         margintop={10}
       />
       <Main_button
         text="Add Food Item"
-        onpress=""
+        onPress={() => navigation.navigate("addfooditem")}
         horizontal_padding={65}
         margintop={10}
       />

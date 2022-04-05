@@ -111,8 +111,8 @@ export const Addenrolmentdate = ({ navigation }) => {
 
         <Main_button
           text="Go Back"
-          onpress= {() => {
-            console.log("YEAH");
+          onPress= {() => {
+            navigation.navigate("admin");
           }}
           horizontal_padding={50}
           margintop={15}
