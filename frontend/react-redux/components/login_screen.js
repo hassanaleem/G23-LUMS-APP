@@ -119,12 +119,14 @@ export const Login_screen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white"
   },
 
   topheading: {
-    marginTop: 50,
+    marginTop: 0,
     marginRight: 200,
     fontSize: 20,
     fontWeight: "bold",
