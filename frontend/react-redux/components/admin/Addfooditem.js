@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Addfood, GetRestaurant } from "../../actions/foodactions";
 
 export const Addfooditem = () => {
+  
   const [restaurant, setRestaurant] = useState("");
   const [foodItem, setFooditem] = useState("");
   const [price, setPrice] = useState("");
@@ -26,10 +27,12 @@ export const Addfooditem = () => {
   const [getFirstRestaurant, setGetFirstRestaurant] = useState(false);
   const dispatch = useDispatch();
   // make a function to get state
+  
   if (getFirstRestaurant == false) {
     dispatch(GetRestaurant());
     setGetFirstRestaurant(true);
   }
+  
   let getState = useSelector((state) => state.foodItemReducer.restaurant);
   const add = () => {
     if (restaurant == "" || foodItem == "" || price == "") {
@@ -62,7 +65,7 @@ export const Addfooditem = () => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "99%" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <Logout_button onpress="" />
 
@@ -139,9 +142,7 @@ export const Addfooditem = () => {
 
         <Main_button
           text="Go Back"
-          onPress={() => {
-            console.log("YEAH");
-          }}
+          onPress={() => navigation.navigate("admin")}
           horizontal_padding={50}
           margintop={15}
           marginleft={47}

@@ -11,6 +11,11 @@ import { Admin_home_screen } from "./react-redux/components/admin/Admin_home_scr
 import { Addfooditem } from "./react-redux/components/admin/Addfooditem";
 import { Addenrolmentdate } from "./react-redux/components/admin/Addenrolmentdate";
 import { Addevent } from "./react-redux/components/admin/Addevent";
+import { Update_course_timings } from "./react-redux/components/admin/Update_course_timings";
+import { Update_food_prices } from "./react-redux/components/admin/Update_food_prices";
+import { Update_user_info } from "./react-redux/components/admin/Update_user_info";
+import { Add_grade } from "./react-redux/components/admin/Add_grade";
+import { Add_course } from "./react-redux/components/admin/Add_course";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,7 +23,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Addevent"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -29,6 +34,12 @@ export default function App() {
           <Stack.Screen name="addfooditem" component={Addfooditem} />
           <Stack.Screen name="Addenrolment" component={Addenrolmentdate} />
           <Stack.Screen name="Addevent" component={Addevent} />
+          <Stack.Screen name="AddCourse" component={Add_course} />
+          <Stack.Screen name="AddGrade" component={Add_grade} />
+          <Stack.Screen name="UpdateFoodPrice" component={Update_food_prices} />
+          <Stack.Screen name="UpdateCourseTimings" component={Update_course_timings} />
+          <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
+
         </Stack.Navigator>
       </NavigationContainer>
 
