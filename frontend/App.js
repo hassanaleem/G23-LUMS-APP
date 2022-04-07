@@ -23,7 +23,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="UpdateUserInfo"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -37,9 +37,11 @@ export default function App() {
           <Stack.Screen name="AddCourse" component={Add_course} />
           <Stack.Screen name="AddGrade" component={Add_grade} />
           <Stack.Screen name="UpdateFoodPrice" component={Update_food_prices} />
-          <Stack.Screen name="UpdateCourseTimings" component={Update_course_timings} />
+          <Stack.Screen
+            name="UpdateCourseTimings"
+            component={Update_course_timings}
+          />
           <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
-
         </Stack.Navigator>
       </NavigationContainer>
 
