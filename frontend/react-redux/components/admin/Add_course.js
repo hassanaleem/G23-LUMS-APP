@@ -15,6 +15,7 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
+import { addCourse } from '../../actions/coursesactions';
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -24,12 +25,40 @@ const {width, height} = Dimensions.get("screen");
 
 export const Add_course = ({navigation}) => {
 
+  const dispatch = useDispatch()
   const [courseCode, setcourseCode] = useState("");
   const [courseName, setcourseName] = useState("");
   const [courseTimings, setcourseTimings] = useState("");
   const [courseDay, setcourseDay] = useState("");
   const [courseInstructorID, setcourseInstructorID] = useState("");
-  
+  const [creditHours, setCreditHours] = useState("");
+
+  function call()
+  {
+    if (courseCode == "" || courseName == "" || courseTimings == "" || courseDay == "" || courseInstructorID == "" || creditHours == "")
+    {
+      Alert.alert("Oops, You missed a field");
+
+    }
+    else{
+    dispatch(addCourse(courseCode, courseName, courseTimings, courseDay, courseInstructorID, creditHours))
+    setcourseCode("")
+    setcourseName("")
+    setcourseTimings("")
+    setcourseDay("")
+    setcourseInstructorID("")
+    setCreditHours("")
+    }
+  }
+  let check = useSelector((state) => state.courseReducer).message;
+  if(check.length)
+  {
+    if (check === "Success")
+      Alert.alert("Course Added Successfully");
+    if (check === "Failure")
+      Alert.alert("Course Addition Failed");
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -66,7 +95,7 @@ export const Add_course = ({navigation}) => {
 
         <TextInput
           style={styles.input_fields2}
-          placeholder="Enter course code"
+          placeholder="Enter course name"
           onChangeText={(text) => {
             setcourseName(text);
           }}
@@ -106,9 +135,20 @@ export const Add_course = ({navigation}) => {
           value={courseInstructorID}
         />
 
+        <Text style={styles.id_text5}>Credit Hours</Text>
+
+        <TextInput
+          style={styles.input_fields5}
+          placeholder="Enter Credit Hours"
+          onChangeText={(text) => {
+            setCreditHours(text);
+          }}
+          value={creditHours}
+        />
+
         <Main_button
           text="Add Course"
-          onpress=""
+          onPress={call}
           horizontal_padding={0}
           margintop={height/15}
           marginleft={width/6}

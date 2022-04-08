@@ -12,5 +12,7 @@ def courses(request):
         data = request.body.decode("utf-8")
         data = json.loads(data) 	
         course_id = data['course_id']
-        db.child("Data").child("Courses").child(course_id).set(data)
-        return render(request, 'courses.html')
+        if(len(course_id)):
+            data.pop('course_id')
+            db.child("Data").child("Courses").child(course_id).set(data)
+            return render(request, 'courses.html')

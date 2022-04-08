@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'fooditems',
     'deadlines',
     'coursegrades',
+    'courses',
 ]
 
 MIDDLEWARE = [
