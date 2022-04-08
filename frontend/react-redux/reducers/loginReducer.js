@@ -9,7 +9,6 @@ const loginReducer = (state = initialData, action) => {
     case "SIGN_IN":
       const newdata = data.replace(/&quot;/g, '"');
       const finalData = JSON.parse(newdata);
-      console.log(finalData);
       return {
         ...state,
         user: finalData,

@@ -15,23 +15,23 @@ import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
-import { postEvents } from "../../actions/eventsAction";
+import { addDeadline } from "../../actions/deadlineactions";
 
-export const Addevent = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const [name, setname] = useState("");
-  const [date, setdate] = useState("");
-  const [time, settime] = useState("");
-  const [type, settype] = useState("");
+export const Add_Deadlines = ({ navigation }) => {
+  // const dispatch = useDispatch();
+  // const [name, setname] = useState("");
+  // const [date, setdate] = useState("");
+  // const [time, settime] = useState("");
+  // const [type, settype] = useState("");
 
-  const onPress = () => {
-    dispatch(postEvents(name, date, time, type));
-    setname("");
-    setdate("");
-    settime("");
-    settype("");
+  // const onPress = () => {
+  //   dispatch(postEvents(name, date, time, type));
+  //   setname("");
+  //   setdate("");
+  //   settime("");
+  //   settype("");
 
-  };
+  // };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -43,53 +43,60 @@ export const Addevent = ({ navigation }) => {
         <Text
           style={{
             position: 'absolute',
-            top: 30,
+            top: 32,
             left: 10,
             marginLeft: 25,
             fontSize: 35,
             fontWeight: 'bold',
             fontFamily: 'sans-serif-thin',
           }}>
-          Add Event
+          Add Deadline
         </Text>
 
         <Text style={styles.topline}>All fields are required</Text>
 
-        <Text style={styles.id_text}>Event Name</Text>
+        <Text style={styles.id_text}>Course Code</Text>
 
-        <TextInput onChangeText={(text) => {
-          setname(text);
-        }}
-          value={name}
-          style={styles.userid} placeholder="Enter Event Name" />
+        <TextInput
+          style={styles.userid} placeholder="Enter Course Code" />
 
-        <Text style={styles.id_text}>Event Date</Text>
 
-        <TextInput onChangeText={(text) => {
-          setdate(text);
-        }}
-          value={date}
-          style={styles.userid} placeholder="Enter date in format: dd/mm/yyyy" />
 
-        <Text style={styles.id_text}>Event Timings</Text>
+        <Text style={styles.id_text}>Deadline Title</Text>
 
-        <TextInput onChangeText={(text) => {
+        <TextInput
+          style={styles.userid} placeholder="Enter Deadline Title" />
+
+
+        <Text style={styles.id_text}>Deadline Time</Text>
+
+
+        <TextInput
+          style={styles.userid} placeholder="Enter Deadline Time" />
+
+
+        <Text style={styles.id_text}>Deadline Date</Text>
+
+
+        <TextInput
+          style={styles.userid} placeholder="Enter Deadline Date" />
+
+
+
+        {/* <TextInput onChangeText={(text) => {
           settime(text);
         }}
           value={time}
-          style={styles.userid} placeholder="Enter time in format: hh/mm-hh/mm" />
+          style={styles.userid} placeholder="Enter time in format: hh/mm-hh/mm" /> */}
 
-        <Text style={styles.id_text}>Event Type</Text>
 
-        <TextInput onChangeText={(text) => {
-          settype(text);
-        }}
-          value={type}
-          style={styles.userid} placeholder="Enter type(ie..,talk,concert)" />
+
+
 
         <Main_button
           text="Add Event"
-          onPress={onPress}
+          // onPress={onPress}
+          onPress=""
           horizontal_padding={30}
           margintop={90}
           marginleft={65}
@@ -97,7 +104,7 @@ export const Addevent = ({ navigation }) => {
         />
         <Main_button
           text="Go Back"
-          onPress={() => navigation.navigate("admin")}
+          onPress={() => navigation.navigate("instructor")}
           horizontal_padding={50}
           margintop={15}
           marginleft={65}
