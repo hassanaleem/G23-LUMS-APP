@@ -21,9 +21,30 @@ export const addUser = (userData) => {
       });
   };
 };
+export const updateUser = (userData) => {
+  const postRequest = address + "/users";
+  console.log(postRequest);
+  return (dispatch) => {
+    axios
+      .put(postRequest, userData)
+      .then((response) => {
+        dispatch({
+          type: "UPDATE_USER",
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "UPDATE_USER_FAILED",
+          payload: "Failed",
+        });
+      });
+  };
+};
 
 export const findUser = (userId) => {
   const postRequest = address + "/users?id=" + userId;
+  console.log(postRequest);
   return async (dispatch) => {
     await axios
       .get(postRequest)

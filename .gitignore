@@ -154,7 +154,7 @@ cython_debug/
 #.idea/
 
 node_modules
-
+.expo
 ### VisualStudioCode ###
 **/.vscode/
 .vscode/*
