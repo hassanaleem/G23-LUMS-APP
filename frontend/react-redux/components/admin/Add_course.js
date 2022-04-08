@@ -38,7 +38,6 @@ export const Add_course = ({navigation}) => {
     if (courseCode == "" || courseName == "" || courseTimings == "" || courseDay == "" || courseInstructorID == "" || creditHours == "")
     {
       Alert.alert("Oops, You missed a field");
-
     }
     else{
     dispatch(addCourse(courseCode, courseName, courseTimings, courseDay, courseInstructorID, creditHours))
