@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import countReducer from "./countReducer";
 import loginReducer from "./loginReducer";
 import eventsReducer from "./eventsReducer";
-import foodItemReducer from "./foodItemReducer";
+import foodItemReducer from "./fooditemReducer";
 import usersReducer from "./usersReducer";
 export default combineReducers({
   countReducer,
