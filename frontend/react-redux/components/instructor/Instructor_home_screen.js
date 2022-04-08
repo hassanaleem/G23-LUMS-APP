@@ -10,11 +10,14 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from 'react-native';
 
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { useSelector } from 'react-redux';
+
+const {width, height} = Dimensions.get("screen");
 
 export const Instructor_home_screen = ({navigation}) => {
   let name = useSelector((state) => state.loginReducer).user.Name
@@ -25,6 +28,7 @@ export const Instructor_home_screen = ({navigation}) => {
         source={require('../assets/background.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '99%' }}>
+          
         <Logout_button nav = {navigation}/>
 
         <Text style={styles.topheading1}>Welcome</Text>
@@ -34,19 +38,19 @@ export const Instructor_home_screen = ({navigation}) => {
         <Main_button
           text="Add New Deadline"
           onPress={() => navigation.navigate("AddDeadlines")}
-          horizontal_padding={30}
-          margintop={75}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height/7}
+          marginleft={width/7}
+          marginright={width/7}
         />
 
         <Main_button
           text="Edit Deadlines"
-          onPress={() => navigation.navigate("SearchDeadlines")}
-          horizontal_padding={50}
-          margintop={30}
-          marginleft={47}
-          marginright={47}
+        onPress={() => navigation.navigate("SearchDeadlines")}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
         />
       </ImageBackground>
     </View>

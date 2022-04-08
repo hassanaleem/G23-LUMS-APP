@@ -10,10 +10,12 @@ import {
   Alert,
   Pressable,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { logout } from "../../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+const {width, height} = Dimensions.get("screen");
 
 export function Logout_button(props) {
   const [loggedOut, setLoggedOut] = useState(false);
@@ -25,12 +27,12 @@ export function Logout_button(props) {
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
         borderRadius: 30,
         backgroundColor: "#79c4f2",
-        marginLeft: 295,
-        marginTop: 40,
-        marginRight: 25,
+        marginTop: height/24,
+        marginLeft: width/1.5,
+        marginRight: width/12,
       }}
       onPress={() => {
         dispatch(logout());
