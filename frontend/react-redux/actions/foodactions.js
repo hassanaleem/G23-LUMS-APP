@@ -18,9 +18,20 @@ export const GetRestaurant = () => {
   const request = address + "/fooditems?&restaurants";
   return (dispatch) => {
     axios.get(request).then((response) => {
-      console.log(response.data);
       dispatch({
         type: "GET_RESTAURANT",
+        payload: response.data,
+      });
+    });
+  };
+};
+
+export const getAllFoodItems = () => {
+  const request = address + "/fooditems?&allData";
+  return (dispatch) => {
+    axios.get(request).then((response) => {
+      dispatch({
+        type: "GET_ALL_FOOD_ITEMS",
         payload: response.data,
       });
     });

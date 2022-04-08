@@ -74,7 +74,7 @@ export const Student_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="GPA Calculator"
-        onPress=""
+        onPress={() => navigation.navigate("GpaCalculator")}
         horizontal_padding={62}
         margintop={15}
       />

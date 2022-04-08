@@ -16,6 +16,7 @@ import { Update_food_prices } from "./react-redux/components/admin/Update_food_p
 import { Update_user_info } from "./react-redux/components/admin/Update_user_info";
 import { Add_grade } from "./react-redux/components/admin/Add_grade";
 import { Add_course } from "./react-redux/components/admin/Add_course";
+import { Gpa_calculator } from "./react-redux/components/student/Gpa_calculator";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
             component={Update_course_timings}
           />
           <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
+          <Stack.Screen name="GpaCalculator" component={Gpa_calculator} />
         </Stack.Navigator>
       </NavigationContainer>
 
