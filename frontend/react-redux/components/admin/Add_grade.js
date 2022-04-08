@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from 'react-native';
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -19,6 +20,8 @@ import { Search_bar } from '../searchBar/Search_bar';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
+const {width, height} = Dimensions.get("screen");
 
 export const Add_grade = ({navigation}) => {
 
@@ -38,10 +41,10 @@ export const Add_grade = ({navigation}) => {
           <Text
           style={{
             position: 'absolute',
-            top: 35,
-            marginLeft: 25,
             fontSize: 27,
             fontWeight: 'bold',
+            marginTop: height/24,
+            marginLeft: width/12,
           }}>
           Add Grade
         </Text>
@@ -53,6 +56,10 @@ export const Add_grade = ({navigation}) => {
         <TextInput
           style={styles.input_fields1}
           placeholder="Enter student roll number"
+          onChangeText={(text) => {
+            setstudentRollNumber(text);
+          }}
+          value={studentRollNumber}
         />
 
         <Text style={styles.id_text2}>Course Code</Text>
@@ -60,13 +67,21 @@ export const Add_grade = ({navigation}) => {
         <TextInput
           style={styles.input_fields2}
           placeholder="Enter course code"
+          onChangeText={(text) => {
+            setcourseCode(text);
+          }}
+          value={courseCode}
         />
 
         <Text style={styles.id_text3}>Grade</Text>
 
         <TextInput
           style={styles.input_fields3}
-          placeholder="Enter grade (i.e., A+, A, B) "
+          placeholder="Enter grade (i.e., A+, A, B)"
+          onChangeText={(text) => {
+            setgrade(text);
+          }}
+          value={grade}
         />
 
         <Text style={styles.id_text4}>Course Unit</Text>
@@ -74,24 +89,28 @@ export const Add_grade = ({navigation}) => {
         <TextInput
           style={styles.input_fields4}
           placeholder="Enter course unit (i.e., 1, 2, 3, 4)"
+          onChangeText={(text) => {
+            setcourseUnit(text);
+          }}
+          value={courseUnit}
         />
 
         <Main_button
           text="Add Grade"
           onpress=""
           horizontal_padding={0}
-          margintop={50}
-          marginleft={65}
-          marginright={65}
+          margintop={height/6.2}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
           horizontal_padding={0}
-          margintop={15}
-          marginleft={65}
-          marginright={65}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
@@ -105,95 +124,95 @@ const styles = StyleSheet.create({
   },
 
 id_text0: {
-    marginTop: 20,
-    marginLeft: 35,
-    fontSize: 15,
-    fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
-  },
+  marginTop: height/40,
+  marginLeft: width/11,
+  fontSize: 15,
+  fontWeight: '600',
+  fontFamily: 'sans-serif-thin',
+},
 
   id_text1: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/110,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
 
   id_text2: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
 
   id_text3: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
 
   id_text4: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
 
   input_fields1: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
+    width: width / 1.2,
+    marginTop: 3,
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   input_fields2: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
+    width: width / 1.2,
+    marginTop: 3,
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   input_fields3: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
+    width: width / 1.2,
+    marginTop: 3,
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   input_fields4: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
+    width: width / 1.2,
+    marginTop: 3,
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
 });

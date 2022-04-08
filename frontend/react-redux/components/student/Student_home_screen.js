@@ -7,17 +7,22 @@ import {
   ScrollView,
   TextInput,
   StyleSheet,
+  ImageBackground,
   Alert,
   Pressable,
   Touchable,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 
 import { Main_button } from "../buttons/Main_button";
 import { logout } from "../../actions/loginAction";
+
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
+const {width, height} = Dimensions.get("screen");
 
 export const Student_home_screen = ({ navigation }) => {
   const [loggedOut, setLoggedOut] = useState(false);
@@ -27,6 +32,10 @@ export const Student_home_screen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ImageBackground
+        source={require('../assets/whiteBackground.png')}
+        resizeMode="cover"
+        style={{ width: '100%', height: '100%' }}>
       <TouchableOpacity
         style={{
           alignItems: "center",
@@ -35,9 +44,9 @@ export const Student_home_screen = ({ navigation }) => {
           paddingHorizontal: 20,
           borderRadius: 30,
           backgroundColor: "#79c4f2",
-          marginLeft: 250,
+          marginLeft: 270,
           marginTop: 40,
-          marginRight: 15,
+          marginRight: 20,
         }}
         onPress={() => {
           dispatch(logout());
@@ -57,45 +66,60 @@ export const Student_home_screen = ({ navigation }) => {
       <Main_button
         text="View Deadlines"
         onPress=""
-        horizontal_padding={62}
-        margintop={30}
+        horizontal_padding={0}
+        margintop={height/30}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Academic Progress"
         onPress=""
-        horizontal_padding={42}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Discussion Forum"
         onPress=""
-        horizontal_padding={49}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="GPA Calculator"
         onPress=""
-        horizontal_padding={62}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="View Events"
         onPress=""
-        horizontal_padding={77}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="All Resturents Menu"
         onPress=""
-        horizontal_padding={39}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Enroll Course"
         onPress=""
-        horizontal_padding={71}
-        margintop={15}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
+      </ImageBackground>
     </View>
   );
 };
@@ -110,12 +134,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 30,
     fontWeight: "bold",
+    alignSelf: "center"
   },
 
   topheading2: {
     marginTop: 0,
     fontSize: 30,
     fontWeight: "bold",
+    alignSelf: "center"
   },
 
   logout_text: {
