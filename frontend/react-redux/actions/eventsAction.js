@@ -33,15 +33,15 @@ export const postEvents = (name, date, time, type) => {
 };
 
 export const getEvents = () => {
+  console.log("IN GET EVENTS");
+  const request = address + "/events";
+  console.log(request);
   return (dispatch) => {
-    axios
-      .get(`${address}/events`)
-      .then((resp) => {
-        dispatch({
-          type: "GET_EVENTS",
-          payload: resp.data,
-        });
-      })
-      .catch((err) => {});
+    axios.get(request).then((response) => {
+      dispatch({
+        type: "GET_EVENTS",
+        payload: response.data,
+      });
+    });
   };
 };
