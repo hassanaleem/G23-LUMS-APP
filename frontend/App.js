@@ -13,14 +13,16 @@ import { Addenrolmentdate } from "./react-redux/components/admin/Addenrolmentdat
 import { Addevent } from "./react-redux/components/admin/Addevent";
 import { Edit_deadline } from "./react-redux/components/instructor/Edit_deadline";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="EditDeadline"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
