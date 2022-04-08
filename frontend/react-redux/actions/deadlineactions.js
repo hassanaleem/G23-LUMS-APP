@@ -25,3 +25,14 @@ export const addDeadline = (data) => {
     });
   };
 };
+
+export const updateDeadline = (data) => {
+  return (dispatch) => {
+    axios.put(request, data).then((response) => {
+      dispatch({
+        type: "UPDATE_DEADLINE",
+        payload: response.data,
+      });
+    });
+  };
+}

@@ -11,6 +11,7 @@ import { Admin_home_screen } from "./react-redux/components/admin/Admin_home_scr
 import { Addfooditem } from "./react-redux/components/admin/Addfooditem";
 import { Addenrolmentdate } from "./react-redux/components/admin/Addenrolmentdate";
 import { Addevent } from "./react-redux/components/admin/Addevent";
+import { Edit_deadline } from "./react-redux/components/instructor/Edit_deadline";
 import { Update_course_timings } from "./react-redux/components/admin/Update_course_timings";
 import { Update_food_prices } from "./react-redux/components/admin/Update_food_prices";
 import { Update_user_info } from "./react-redux/components/admin/Update_user_info";
@@ -19,6 +20,7 @@ import { Add_course } from "./react-redux/components/admin/Add_course";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -34,6 +36,7 @@ export default function App() {
           <Stack.Screen name="addfooditem" component={Addfooditem} />
           <Stack.Screen name="Addenrolment" component={Addenrolmentdate} />
           <Stack.Screen name="Addevent" component={Addevent} />
+          <Stack.Screen name="EditDeadline" component={Edit_deadline} />
           <Stack.Screen name="AddCourse" component={Add_course} />
           <Stack.Screen name="AddGrade" component={Add_grade} />
           <Stack.Screen name="UpdateFoodPrice" component={Update_food_prices} />

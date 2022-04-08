@@ -154,7 +154,7 @@ cython_debug/
 #.idea/
 
 node_modules
-
+.expo
 ### VisualStudioCode ###
 **/.vscode/
 .vscode/*
@@ -265,4 +265,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+server
 # End of https://www.gitignore.io/api/django

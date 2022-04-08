@@ -21,7 +21,7 @@ def deadlines(request):
             dic["Instructor Id"] = data["Instructor_Id"]
         except:
             pass
-        return render(request, 'login.html', {'data': json.dumps(dic)})
+        return render(request, 'deadline.html', {'data': json.dumps(dic)})
     elif request.method == 'POST':
         db = database.connect_db()
         data = request.body.decode("utf-8")
@@ -31,3 +31,18 @@ def deadlines(request):
         ide = len(id) 
         db.child("Data").child("Deadlines").child(ide).set(data)
         return render(request, 'deadlines.html')
+
+    elif request.method == 'PUT':
+        db = database.connect_db()
+        data = request.body.decode("utf-8")
+        data = json.loads(data)
+
+        existingData = db.child("Data").child("Deadlines").get().val()
+        length = len(existingData)
+
+        for i in range(length):
+            # DOUBLE CHECK THIS AFTER FRONTEND CODE COMES
+            if existingData[i]["Course_ID"] == data["Course_ID"] and existingData[i]["Deadline_Title"] == data["Deadline_Title"]:
+                db.child("Data").child("Deadlines").child(i+1).set(data)
+                return render(request, 'deadlines.html')
+
