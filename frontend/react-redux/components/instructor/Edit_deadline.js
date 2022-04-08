@@ -17,9 +17,14 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateDeadline } from "../../actions/deadlineactions";
+import { useFonts } from 'expo-font';
 
 
 export const Edit_deadline = ({ navigation }) => {
+
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
 
   const dispatch = useDispatch()
   const [time, setTime] = useState("");
@@ -30,7 +35,10 @@ export const Edit_deadline = ({ navigation }) => {
     setTime("")
   }
 
- 
+  if (!loaded)
+  {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -94,23 +102,19 @@ const styles = StyleSheet.create({
     marginTop: 35,
     marginLeft: 20,
     fontSize: 30,
-    fontWeight: 'bold',
   },
 
   text: {
     marginTop: 10,
     marginLeft: 50,
     fontSize: 18,
-    fontWeight: "bold"
   },
 
   box: {
     height: 40,
     width: 300,
     marginTop: 5,
-    marginLeft: 40,
-    borderColor: "gray",
-    borderWidth: 1,
+    marginLeft: 50,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
@@ -121,8 +125,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginLeft: 45,
     fontSize: 12,
-    fontFamily: 'sans-serif-thin',
-    fontWeight: 'bold',
+    fontFamily: 'Outfit',
   }
 
 });
