@@ -12,23 +12,36 @@ def deadlines(request):
         req = list(request.GET.items())
         try:
             id = req[0][1]
-            data = (db.child("Data").child("Deadlines").child(id).get().val())
-            dic = {}
-            dic["Course ID"] = data["Course_ID"]
-            dic["Deadline Title"] = data["Deadline_Title"]
-            dic["Deadline Date"] = data["Deadline_Date"]
-            dic["Deadline Time"] = data["Deadline_Time"]
-            dic["Instructor Id"] = data["Instructor_Id"]
+            # print(id)
+            if (id == 'all'):
+                data = db.child("Data").child("Deadlines").get().val()
+                return render(request, 'deadlines.html', {'data': json.dumps(data)})
+            else:
+                data = (db.child("Data").child("Deadlines").child(id).get().val())
+                dic = {}
+                dic["Course ID"] = data["Course_ID"]
+                dic["Deadline Title"] = data["Deadline_Title"]
+                dic["Deadline Date"] = data["Deadline_Date"]
+                dic["Deadline Time"] = data["Deadline_Time"]
+                dic["Instructor Id"] = data["Instructor_Id"]
+                # print(dic)
+                return render(request, 'deadlines.html', {'data': json.dumps(dic)})
+
         except:
             pass
-        return render(request, 'deadline.html', {'data': json.dumps(dic)})
+        return render(request, 'deadlines.html', {'data': json.dumps(dic)})
     elif request.method == 'POST':
         db = database.connect_db()
         data = request.body.decode("utf-8")
         data = json.loads(data) 	
         # get last id from db
-        id = db.child("Data").child("Deadlines").get().val()
-        ide = len(id) 
+        ide = 0
+        try:
+            id = db.child("Data").child("Deadlines").get().val()
+            ide = len(id) 
+        except:
+            pass
+        # print("HERE", data, ide)
         db.child("Data").child("Deadlines").child(ide).set(data)
         return render(request, 'deadlines.html')
 

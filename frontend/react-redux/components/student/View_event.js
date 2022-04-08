@@ -15,11 +15,10 @@ import { Main_button } from "../buttons/Main_button";
 import { getEvents } from "../../actions/eventsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import { GetRestaurant } from "../../actions/foodactions";
 export const View_event = ({ navigation }) => {
-  const dispatch = useDispatch(); // this call the action and the action send the GET or POST request on the backend
+  const dispatch = useDispatch();
   dispatch(getEvents);
-
   // let data = useSelector((state) => state.eventsReducer);
   // console.log(data, "Called");
 
