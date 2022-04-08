@@ -25,6 +25,7 @@ def fooditems(request):
         id = id[0]
         if (id == "restaurants"):
             data = db.child("Data").child("foodItems").get().val()
+            print(data)
             # get restaurant from data
             restaurants = []
             for i in data:
@@ -34,3 +35,7 @@ def fooditems(request):
                 "restaurants": restaurants
             }
             return render(request, 'fooditems.html', {'data': json.dumps(dic)})
+        elif (id == "allData"):
+            data = db.child("Data").child("foodItems").get().val()
+            return render(request, 'fooditems.html', {'data': json.dumps(data)})
+        

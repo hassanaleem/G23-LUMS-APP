@@ -56,13 +56,13 @@ export const Student_home_screen = ({ navigation }) => {
 
       <Main_button
         text="View Deadlines"
-        onPress=""
+        onPress= {() => navigation.navigate("Student_deadlines")}
         horizontal_padding={62}
         margintop={30}
       />
       <Main_button
         text="Academic Progress"
-        onPress=""
+        onPress= {() => navigation.navigate("Academic_progress")}
         horizontal_padding={42}
         margintop={15}
       />
@@ -74,13 +74,13 @@ export const Student_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="GPA Calculator"
-        onPress=""
+        onPress={() => navigation.navigate("GpaCalculator")}
         horizontal_padding={62}
         margintop={15}
       />
       <Main_button
         text="View Events"
-        onPress=""
+        onPress= {() => navigation.navigate("ViewEvent")}
         horizontal_padding={77}
         margintop={15}
       />

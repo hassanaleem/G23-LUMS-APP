@@ -26,3 +26,15 @@ export const GetRestaurant = () => {
     });
   };
 };
+
+export const getAllFoodItems = () => {
+  const request = address + "/fooditems?&allData";
+  return (dispatch) => {
+    axios.get(request).then((response) => {
+      dispatch({
+        type: "GET_ALL_FOOD_ITEMS",
+        payload: response.data,
+      });
+    });
+  };
+};

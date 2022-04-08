@@ -8,7 +8,7 @@ import { getEvents } from "../../actions/eventsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-export const ViewEvent = () => {
+export const View_event = ({navigation}) => {
   const dispatch = useDispatch(); // this call the action and the action send the GET or POST request on the backend
   const get = () =>{
     dispatch(getEvents)
@@ -89,7 +89,7 @@ export const ViewEvent = () => {
         </ScrollView>
                   <Main_button
           text="Go Back"
-          onpress=""
+          onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
           margintop={260}
           marginleft={85}

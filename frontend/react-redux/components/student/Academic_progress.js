@@ -4,10 +4,10 @@ import { ImageBackground, StyleSheet, Text, View ,Button,Alert,TouchableOpacity,
 const image = { uri: "https://reactjs.org/logo-og.png" };
 
 
-const App = () => {
+export const Academic_progress = () => {
   const gpa = 4.0
     return(
-    <ImageBackground source={require('./assets/background.png')} resizeMode="contain" style={styles.image}>
+    <ImageBackground source={require('../assets/background.png')} resizeMode="contain" style={styles.image}>
     <View style = {{position : 'absolute', top : 40,flexDirection: 'row'}}>
       <Text style = {{fontSize : 20}}> Acamedic {"\n"} Progress</Text>
     </View>
@@ -109,5 +109,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   }
 });
-
-export default App;
