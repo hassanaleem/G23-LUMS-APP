@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 def events(request):
 	db =database.connect_db()
 	if request.method == "GET":
+		print("HERE")
 		data = db.child("Data").child("Events").get().val()
 		data = data[1:]
 		return render(request, 'events.html', {'events': json.dumps(data)})

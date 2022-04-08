@@ -37,17 +37,17 @@ export const Instructor_home_screen = ({navigation}) => {
 
         <Main_button
           text="Add New Deadline"
-          onpress=""
+          onPress={() => navigation.navigate("AddDeadlines")}
           horizontal_padding={0}
-        margintop={height/7}
-        marginleft={width/7}
-        marginright={width/7}
+          margintop={height/7}
+          marginleft={width/7}
+          marginright={width/7}
         />
 
         <Main_button
           text="Edit Deadlines"
-          onpress=""
-          horizontal_padding={0}
+        onPress={() => navigation.navigate("SearchDeadlines")}
+        horizontal_padding={0}
         margintop={height/50}
         marginleft={width/7}
         marginright={width/7}

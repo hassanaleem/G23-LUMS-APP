@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -13,32 +13,40 @@ import {
   Dimensions,
 } from 'react-native';
 
+
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { Search_bar } from '../searchBar/Search_bar';
+import { Search_bar } from "../searchBar/Search_bar";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { getAllFoodItems } from "../../actions/foodactions";
+
 
 const {width, height} = Dimensions.get("screen");
 
-export const Update_food_prices = ({navigation}) => {
+export const Update_food_prices = ({ navigation }) => {
+  const dispatch = useDispatch();
 
   const [isEditable, setisEditable] = useState(false);
   const [restaurantName, setrestaurantName] = useState("");
   const [foodItemName, setfoodItemName] = useState("");
   const [price, setprice] = useState("");
-  
+  const [searchQuery, setsearchQuery] = useState("");
+  // dispatch(getAllFoodItems());
+  // let data = useSelector((state) => state.fooditemReducer.data);
+  let data = ["Zakir", "Subway", "Chop chop", "frooti"];
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../assets/background.png')}
+        source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: '100%', height: '100%' }}>
-          <Logout_button onpress="" />
-          
-          <Text
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Logout_button onpress="" />
+
+        <Text
           style={{
             position: 'absolute',
             fontSize: 27,
@@ -60,7 +68,17 @@ export const Update_food_prices = ({navigation}) => {
           Prices
         </Text>
 
-        <Search_bar bar_text = "Search format:  Restaurant Name, Food Name" font_size = {10}/>
+        <Search_bar
+          bar_text="Search format:  Restaurant Name, Food Name"
+          font_size={10}
+          onChangeText={(text) => {
+            setsearchQuery(text);
+          }}
+          value={searchQuery}
+          onPress={() => {
+            console.log(searchQuery);
+          }}
+        />
 
         <Text style={styles.id_text1}>Restaurant Name</Text>
 
@@ -68,8 +86,8 @@ export const Update_food_prices = ({navigation}) => {
           style={[
             styles.input_fields1,
             {
-              backgroundColor: isEditable ? '#eceded' : '#C8C8C8'
-            }
+              backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
+            },
           ]}
           placeholder={isEditable ? "Res. name from DB" : "Input Disabled [search for food]"}
           editable = {isEditable}
@@ -81,13 +99,12 @@ export const Update_food_prices = ({navigation}) => {
 
         <Text style={styles.id_text2}>Food Item Name</Text>
 
-
         <TextInput
           style={[
             styles.input_fields2,
             {
-              backgroundColor: isEditable ? '#eceded' : '#C8C8C8'
-            }
+              backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
+            },
           ]}
           placeholder={isEditable ? "Food name from DB" : "Input Disabled [search for food]"}
           editable = {isEditable}
@@ -103,8 +120,8 @@ export const Update_food_prices = ({navigation}) => {
           style={[
             styles.input_fields3,
             {
-              backgroundColor: isEditable ? '#eceded' : '#C8C8C8'
-            }
+              backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
+            },
           ]}
           placeholder={isEditable ? "Price from DB" : "Input Disabled [search for food]"}
           editable = {isEditable}
@@ -138,32 +155,32 @@ export const Update_food_prices = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   id_text1: {
     marginTop: height/6,
     marginLeft: width/10,
     fontSize: 15,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
   },
 
   id_text2: {
     marginTop: height/50,
     marginLeft: width/10,
     fontSize: 15,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
   },
 
   id_text3: {
     marginTop: height/50,
     marginLeft: width/10,
     fontSize: 15,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
   },
 
   input_fields1: {
@@ -173,7 +190,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center"
@@ -186,7 +203,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center"
@@ -199,7 +216,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center"
