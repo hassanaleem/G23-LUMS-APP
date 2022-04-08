@@ -33,7 +33,7 @@ export const Instructor_home_screen = ({navigation}) => {
 
         <Main_button
           text="Add New Deadline"
-          onpress=""
+          onPress={() => navigation.navigate("AddDeadlines")}
           horizontal_padding={30}
           margintop={75}
           marginleft={47}
@@ -42,7 +42,7 @@ export const Instructor_home_screen = ({navigation}) => {
 
         <Main_button
           text="Edit Deadlines"
-          onpress=""
+          onPress={() => navigation.navigate("SearchDeadlines")}
           horizontal_padding={50}
           margintop={30}
           marginleft={47}
