@@ -26,11 +26,13 @@ export const Addfooditem = ({ navigation }) => {
   const [getFirstRestaurant, setGetFirstRestaurant] = useState(false);
   const dispatch = useDispatch();
   // make a function to get state
+  
   if (getFirstRestaurant == false) {
     dispatch(GetRestaurant());
     setGetFirstRestaurant(true);
   }
-  let getState = useSelector((state) => state.fooditemReducer.restaurant);
+
+  let getState = useSelector((state) => state.foodItemReducer.restaurant);
   const add = () => {
     if (restaurant == "" || foodItem == "" || price == "") {
       Alert.alert("Please fill all the fields");
@@ -62,7 +64,7 @@ export const Addfooditem = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "99%" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <Logout_button nav = {navigation} />
 
@@ -141,9 +143,7 @@ export const Addfooditem = ({ navigation }) => {
 
         <Main_button
           text="Go Back"
-          onPress={() => {
-            navigation.navigate("admin");
-          }}
+          onPress={() => navigation.navigate("admin")}
           horizontal_padding={50}
           margintop={15}
           marginleft={47}

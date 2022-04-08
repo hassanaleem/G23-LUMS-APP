@@ -30,9 +30,9 @@ export const Admin_home_screen = ({ navigation }) => {
           paddingHorizontal: 20,
           borderRadius: 30,
           backgroundColor: "#79c4f2",
-          marginLeft: 250,
+          marginLeft: 295,
           marginTop: 40,
-          marginRight: 15,
+          marginRight: 25,
         }}
         onPress={() => {
           dispatch(logout());
@@ -57,13 +57,13 @@ export const Admin_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="Update User Info"
-        onpress=""
+        onPress={() => navigation.navigate("UpdateUserInfo")}
         horizontal_padding={55}
         margintop={10}
       />
       <Main_button
         text="Add Grades"
-        onpress=""
+        onPress={() => navigation.navigate("AddGrade")}
         horizontal_padding={80}
         margintop={10}
       />
@@ -87,19 +87,19 @@ export const Admin_home_screen = ({ navigation }) => {
       />
       <Main_button
         text="Update Food Price"
-        onpress=""
+        onPress={() => navigation.navigate("UpdateFoodPrice")}
         horizontal_padding={48}
         margintop={10}
       />
       <Main_button
         text="Add Course"
-        onpress=""
+        onPress={() => navigation.navigate("AddCourse")}
         horizontal_padding={78}
         margintop={10}
       />
       <Main_button
         text="Update Course Timing"
-        onpress=""
+        onPress={() => navigation.navigate("UpdateCourseTimings")}
         horizontal_padding={29}
         margintop={10}
       />

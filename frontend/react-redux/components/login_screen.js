@@ -16,8 +16,19 @@ import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
+import { useFonts } from 'expo-font';
+
+function font() 
+{
+
+}
 
 export const Login_screen = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require('./assets/fonts/static/Outfit-Regular.ttf'),
+  }); 
+  
+  
   const dispatch = useDispatch();
 
   const [isStudent, setIsStudent] = useState(false);
@@ -66,6 +77,10 @@ export const Login_screen = ({ navigation }) => {
     setPasswordText("");
   };
   validate();
+
+  if (!loaded){
+    return null
+  }
 
   return (
     <View style={styles.container}>
@@ -119,12 +134,14 @@ export const Login_screen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white"
   },
 
   topheading: {
-    marginTop: 50,
+    marginTop: 0,
     marginRight: 200,
     fontSize: 20,
     fontWeight: "bold",
@@ -134,7 +151,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginRight: 226,
     fontSize: 18,
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   userid: {
@@ -153,7 +170,7 @@ const styles = StyleSheet.create({
     marginTop: 7,
     marginRight: 200,
     fontSize: 18,
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   userpassword: {

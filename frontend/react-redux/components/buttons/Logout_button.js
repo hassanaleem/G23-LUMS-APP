@@ -28,9 +28,9 @@ export function Logout_button(props) {
         paddingHorizontal: 10,
         borderRadius: 30,
         backgroundColor: "#79c4f2",
-        marginLeft: 250,
+        marginLeft: 295,
         marginTop: 40,
-        marginRight: 15,
+        marginRight: 25,
       }}
       onPress={() => {
         dispatch(logout());

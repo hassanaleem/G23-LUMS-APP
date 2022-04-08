@@ -36,7 +36,7 @@ export const Addenrolmentdate = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: '100%', height: '99%' }}>
+        style={{ width: '100%', height: '100%' }}>
         <Logout_button nav = {navigation}/>
 
         <Text
@@ -111,9 +111,7 @@ export const Addenrolmentdate = ({ navigation }) => {
 
         <Main_button
           text="Go Back"
-          onPress= {() => {
-            navigation.navigate("admin");
-          }}
+          onPress={() => navigation.navigate("admin")}
           horizontal_padding={50}
           margintop={15}
           marginleft={47}

@@ -52,6 +52,7 @@ export const Adduser = ({navigation}) => {
   let userState = useSelector((state) => state.usersReducer);
   let find = userState.find;
   let query = userState.queryRun;
+  
   const add = () => {
     if (username === "" || password === "" || userId === "" || type === "") {
       Alert.alert("Please fill all the fields");
@@ -78,7 +79,7 @@ export const Adduser = ({navigation}) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "99%" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <Logout_button nav = {navigation}/>
 
@@ -134,19 +135,17 @@ export const Adduser = ({navigation}) => {
           onPress={add}
           horizontal_padding={30}
           margintop={90}
-          marginleft={47}
-          marginright={47}
+          marginleft={65}
+          marginright={65}
         />
 
         <Main_button
           text="Go Back"
-          onPress={() => {
-            navigation.navigate("admin");
-          }}
+          onPress={() => navigation.navigate("admin")}
           horizontal_padding={50}
           margintop={15}
-          marginleft={47}
-          marginright={47}
+          marginleft={65}
+          marginright={65}
         />
       </ImageBackground>
     </View>
