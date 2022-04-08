@@ -17,6 +17,7 @@ import { Update_food_prices } from "./react-redux/components/admin/Update_food_p
 import { Update_user_info } from "./react-redux/components/admin/Update_user_info";
 import { Add_grade } from "./react-redux/components/admin/Add_grade";
 import { Add_course } from "./react-redux/components/admin/Add_course";
+import { Enroll_course } from "./react-redux/components/student/Enroll_course";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="admin"
+          initialRouteName="EnrollCourse"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -40,6 +41,7 @@ export default function App() {
           <Stack.Screen name="AddCourse" component={Add_course} />
           <Stack.Screen name="AddGrade" component={Add_grade} />
           <Stack.Screen name="UpdateFoodPrice" component={Update_food_prices} />
+          <Stack.Screen name="EnrollCourse" component={Enroll_course} />
           <Stack.Screen
             name="UpdateCourseTimings"
             component={Update_course_timings}

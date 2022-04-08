@@ -36,9 +36,10 @@ export const Update_food_prices = ({navigation}) => {
         source={require('../assets/background.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '100%' }}>
-          <Logout_button onpress="" />
+        
+        <Logout_button onpress="" />
           
-          <Text
+        <Text
           style={{
             position: 'absolute',
             fontSize: 27,
