@@ -12,6 +12,8 @@ import { Addfooditem } from "./react-redux/components/admin/Addfooditem";
 import { Addenrolmentdate } from "./react-redux/components/admin/Addenrolmentdate";
 import { Addevent } from "./react-redux/components/admin/Addevent";
 import { Edit_deadline } from "./react-redux/components/instructor/Edit_deadline";
+import { Search_Deadlines } from "./react-redux/components/instructor/Search_Deadlines";
+import { Add_Deadlines } from "./react-redux/components/instructor/Add_Deadlines";
 import { Update_course_timings } from "./react-redux/components/admin/Update_course_timings";
 import { Update_food_prices } from "./react-redux/components/admin/Update_food_prices";
 import { Update_user_info } from "./react-redux/components/admin/Update_user_info";
@@ -25,7 +27,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="instructor"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -40,6 +42,10 @@ export default function App() {
           <Stack.Screen name="AddCourse" component={Add_course} />
           <Stack.Screen name="AddGrade" component={Add_grade} />
           <Stack.Screen name="UpdateFoodPrice" component={Update_food_prices} />
+          <Stack.Screen name="SearchDeadlines" component={Search_Deadlines} />
+          <Stack.Screen name="AddDeadlines" component={Add_Deadlines} />
+          
+
           <Stack.Screen
             name="UpdateCourseTimings"
             component={Update_course_timings}
