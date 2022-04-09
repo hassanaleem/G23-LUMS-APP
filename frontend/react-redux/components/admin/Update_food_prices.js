@@ -11,8 +11,7 @@ import {
   ImageBackground,
   Pressable,
   Dimensions,
-} from 'react-native';
-
+} from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
@@ -23,8 +22,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getAllFoodItems } from "../../actions/foodactions";
 
-
-const {width, height} = Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 
 export const Update_food_prices = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -48,23 +46,25 @@ export const Update_food_prices = ({ navigation }) => {
 
         <Text
           style={{
-            position: 'absolute',
+            position: "absolute",
             fontSize: 27,
-            fontWeight: 'bold',
-            marginTop: height/24,
-            marginLeft: width/12,
-          }}>
+            fontWeight: "bold",
+            marginTop: height / 24,
+            marginLeft: width / 12,
+          }}
+        >
           Update Food
         </Text>
 
         <Text
           style={{
-            position: 'absolute',
+            position: "absolute",
             fontSize: 27,
-            fontWeight: 'bold',
-            marginTop: height/13,
-            marginLeft: width/12,
-          }}>
+            fontWeight: "bold",
+            marginTop: height / 13,
+            marginLeft: width / 12,
+          }}
+        >
           Prices
         </Text>
 
@@ -89,8 +89,12 @@ export const Update_food_prices = ({ navigation }) => {
               backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
             },
           ]}
-          placeholder={isEditable ? "Res. name from DB" : "Input Disabled [search for food]"}
-          editable = {isEditable}
+          placeholder={
+            isEditable
+              ? "Res. name from DB"
+              : "Input Disabled [search for food]"
+          }
+          editable={isEditable}
           onChangeText={(text) => {
             setrestaurantName(text);
           }}
@@ -106,8 +110,12 @@ export const Update_food_prices = ({ navigation }) => {
               backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
             },
           ]}
-          placeholder={isEditable ? "Food name from DB" : "Input Disabled [search for food]"}
-          editable = {isEditable}
+          placeholder={
+            isEditable
+              ? "Food name from DB"
+              : "Input Disabled [search for food]"
+          }
+          editable={isEditable}
           onChangeText={(text) => {
             setfoodItemName(text);
           }}
@@ -123,8 +131,10 @@ export const Update_food_prices = ({ navigation }) => {
               backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
             },
           ]}
-          placeholder={isEditable ? "Price from DB" : "Input Disabled [search for food]"}
-          editable = {isEditable}
+          placeholder={
+            isEditable ? "Price from DB" : "Input Disabled [search for food]"
+          }
+          editable={isEditable}
           onChangeText={(text) => {
             setprice(text);
           }}
@@ -135,18 +145,18 @@ export const Update_food_prices = ({ navigation }) => {
           text="Update Price"
           onpress=""
           horizontal_padding={0}
-          margintop={height/7}
-          marginleft={width/6}
-          marginright={width/6}
+          margintop={height / 7}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
           horizontal_padding={0}
-          margintop={height/50}
-          marginleft={width/6}
-          marginright={width/6}
+          margintop={height / 50}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </ImageBackground>
     </View>
@@ -160,24 +170,24 @@ const styles = StyleSheet.create({
   },
 
   id_text1: {
-    marginTop: height/6,
-    marginLeft: width/10,
+    marginTop: height / 6,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text2: {
-    marginTop: height/50,
-    marginLeft: width/10,
+    marginTop: height / 50,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text3: {
-    marginTop: height/50,
-    marginLeft: width/10,
+    marginTop: height / 50,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
@@ -187,38 +197,38 @@ const styles = StyleSheet.create({
     height: 40,
     width: width / 1.2,
     marginTop: 3,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   input_fields2: {
     height: 40,
     width: width / 1.2,
     marginTop: 3,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   input_fields3: {
     height: 40,
     width: width / 1.2,
     marginTop: 3,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 });
