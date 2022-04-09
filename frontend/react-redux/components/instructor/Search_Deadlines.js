@@ -34,18 +34,6 @@ export const Search_Deadlines = ({ navigation }) => {
     }
   }
 
-  // function renderElement() {
-  //   if (message == "Fetched" && deadlines.length != 0) {
-  //     for (let i = 0; i < deadlines.length; i++)
-
-  //       return <Pressable style={{ left: 5 }} onPress={() => { }}>
-  //         <Text style={{ left: 5 }}> Deadline 1 {'\n'} </Text>
-  //       </Pressable>;
-  //   }
-  // }
-
-
-
   let message = useSelector((state) => state.deadlineReducer).message
   let deadlines = useSelector((state) => state.deadlineReducer).data
 
@@ -54,19 +42,14 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Fetched" && deadlines.length != 0) {
     for (let i = 0; i < deadlines.length; i++) {
-      //console.log(deadlines)
+      console.log(deadlines)
       items.push(deadlines[i]["Deadline_Title"])
-
     }
-
-
-
   }
 
   let itemList = items.map((item, index) => {
-    //console.log(items)
     return <li key={index}>
-      <Pressable style={{ left: 5 }} onPress={() => { }}>
+      <Pressable style={{ left: 5 }} onPress={() => navigation.navigate("EditDeadline")}>
         <Text style={{ left: 5 }}> {item} </Text>
       </Pressable>
       
