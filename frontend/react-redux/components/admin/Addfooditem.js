@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -17,6 +18,8 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Addfood, GetRestaurant } from "../../actions/foodactions";
+
+const {width, height} = Dimensions.get("screen");
 
 export const Addfooditem = ({ navigation }) => {
   const [restaurant, setRestaurant] = useState("");
@@ -71,38 +74,22 @@ export const Addfooditem = ({ navigation }) => {
         <Text
           style={{
             position: "absolute",
-            top: 25,
-            left: 10,
-            marginLeft: 25,
-            fontSize: 40,
-            fontWeight: "bold",
-            fontFamily: "sans-serif-thin",
-          }}
-          
-        >
-          Add Food
+            fontSize: 27,
+            fontWeight: 'bold',
+            marginTop: height/24,
+            marginLeft: width/12,
+          }}>
+          Add Food Item
         </Text>
         
-        <Text
-          style={{
-            position: "absolute",
-            top: 65,
-            left: 10,
-            marginLeft: 25,
-            fontSize: 40,
-            fontWeight: "bold",
-            fontFamily: "sans-serif-thin",
-          }}
-        >
-          Item
-        </Text>
+        <Text style={styles.id_text0}>All fields are required</Text>
+      
+        <Text style={styles.id_text1}>Restaurant Name</Text>
 
-        <Text style={styles.topline}>All fields are required</Text>
-
-        <Text style={styles.id_text}>Restaurant Name</Text>
+      
 
         <TextInput
-          style={styles.userid}
+           style={styles.input_fields1}
           placeholder="Enter Restaurant Name"
           value={restaurant}
           onChangeText={(text) => {
@@ -110,10 +97,10 @@ export const Addfooditem = ({ navigation }) => {
           }}
         />
 
-        <Text style={styles.id_text}>Food Item Name</Text>
+        <Text style={styles.id_text2}>Food Item Name</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields2}
           placeholder="Enter Food Item Name"
           value={foodItem}
           onChangeText={(text) => {
@@ -121,10 +108,10 @@ export const Addfooditem = ({ navigation }) => {
           }}
         />
 
-        <Text style={styles.id_text}>Price</Text>
+        <Text style={styles.id_text3}>Price</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields3}
           placeholder="Enter Price in Rupees (ie.,450,390)"
           value={price}
           onChangeText={(text) => {
@@ -135,19 +122,19 @@ export const Addfooditem = ({ navigation }) => {
         <Main_button
           text="Add Food Item"
           onPress={add}
-          horizontal_padding={30}
-          margintop={140}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height/15}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
-          horizontal_padding={50}
-          margintop={15}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
@@ -159,29 +146,94 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  id_text: {
-    marginTop: 10,
-    marginLeft: 35,
+  
+  id_text0: {
+    marginTop: height/40,
+    marginLeft: width/11,
     fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontWeight: '600',
+    fontFamily: 'sans-serif-thin',
   },
-  topline: {
-    marginTop: 50,
-    marginLeft: 35,
+
+  id_text1: {
+    marginTop: height/110,
+    marginLeft: width/10,
     fontSize: 15,
-    fontFamily: "sans-serif-thin",
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
   },
-  userid: {
-    marginLeft: 30,
+
+  id_text2: {
+    marginTop: height/50,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
+  },
+
+  id_text3: {
+    marginTop: height/50,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
+  },
+
+  
+
+
+  input_fields1: {
     height: 40,
-    width: 300,
-    marginTop: 10,
-    borderColor: "gray",
-    borderWidth: 1,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
+
+  input_fields2: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: '#eceded',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center"
+  },
+
+  input_fields3: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: '#eceded',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center"
+  },
+
+  input_fields4: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: '#eceded',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center"
+  },
+
+  
+ 
 });
