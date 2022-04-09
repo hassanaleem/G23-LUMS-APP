@@ -102,22 +102,14 @@ export const Search_Deadlines = ({ navigation }) => {
           </Pressable>
           <Pressable style={{ left: 5 }} onPress={() => { }}>
             <Text style={{ left: 5 }}> Deadline 2 {'\n'} </Text>
-          </Pressable> <Pressable style={{ left: 5 }} onPress={() => { }}>
+          </Pressable>
+          <Pressable style={{ left: 5 }} onPress={() => { }}>
             <Text style={{ left: 5 }}> Deadline 3 {'\n'} </Text>
-          </Pressable> <Pressable style={{ left: 5 }} onPress={() => { }}>
+          </Pressable>
+          <Pressable style={{ left: 5 }} onPress={() => { }}>
             <Text style={{ left: 5 }}> Deadline 4 {'\n'} </Text>
-          </Pressable> <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 5 {'\n'} </Text>
           </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 6 {'\n'} </Text>
-          </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 7 {'\n'} </Text>
-          </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 8 {'\n'} </Text>
-          </Pressable>
+
 
 
 
