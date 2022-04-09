@@ -16,10 +16,12 @@ import {
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { Search_bar } from '../searchBar/Search_bar';
+import { addGrade } from '../../actions/courseGradeActions';
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 
 const {width, height} = Dimensions.get("screen");
 
@@ -28,8 +30,32 @@ export const Add_grade = ({navigation}) => {
   const [studentRollNumber, setstudentRollNumber] = useState("");
   const [courseCode, setcourseCode] = useState("");
   const [grade, setgrade] = useState("");
-  const [courseUnit, setcourseUnit] = useState("");
-  
+
+  const dispatch = useDispatch();
+  function call()
+  {
+    if(studentRollNumber == "" || courseCode == "" || grade == "")
+    {
+      Alert.alert("Oops, You missed a field");
+    }
+    else
+    {
+    dispatch(addGrade(courseCode, grade, studentRollNumber));
+    setcourseCode("");
+    setgrade("");
+    setstudentRollNumber("");
+    }
+  }
+
+  let check = useSelector((state) => state.courseGradeReducer).message;
+  if(check.length)
+  {
+    if (check === "Success")
+      Alert.alert("Grade Added Successfully");
+    if (check === "Failure")
+      Alert.alert("Grade Addition Failed");
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -84,20 +110,9 @@ export const Add_grade = ({navigation}) => {
           value={grade}
         />
 
-        <Text style={styles.id_text4}>Course Unit</Text>
-
-        <TextInput
-          style={styles.input_fields4}
-          placeholder="Enter course unit (i.e., 1, 2, 3, 4)"
-          onChangeText={(text) => {
-            setcourseUnit(text);
-          }}
-          value={courseUnit}
-        />
-
         <Main_button
           text="Add Grade"
-          onpress=""
+          onPress={call}
           horizontal_padding={0}
           margintop={height/6.2}
           marginleft={width/6}
