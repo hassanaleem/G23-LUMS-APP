@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -19,6 +20,8 @@ import { Search_bar } from "../searchBar/Search_bar";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
+const {width, height} = Dimensions.get("screen");
 
 import { findUser } from "../../actions/useractions";
 import { clearState } from "../../actions/useractions";
@@ -87,14 +90,13 @@ export const Update_user_info = ({ navigation }) => {
 
         <Text
           style={{
-            position: "absolute",
-            top: 35,
-            marginLeft: 25,
+            position: 'absolute',
             fontSize: 27,
-            fontWeight: "bold",
-          }}
-        >
-          Update User info
+            fontWeight: 'bold',
+            marginTop: height/24,
+            marginLeft: width/12,
+          }}>
+        Update User info
         </Text>
 
         <Search_bar
@@ -170,18 +172,18 @@ export const Update_user_info = ({ navigation }) => {
           text="Update info"
           onPress={update}
           horizontal_padding={0}
-          margintop={40}
-          marginleft={65}
-          marginright={65}
+          margintop={height/7}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
           horizontal_padding={0}
-          margintop={15}
-          marginleft={65}
-          marginright={65}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
@@ -195,65 +197,65 @@ const styles = StyleSheet.create({
   },
 
   id_text1: {
-    marginTop: 130,
-    marginLeft: 35,
+    marginTop: height/6,
+    marginLeft: width/10,
     fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
   },
 
   id_text2: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
   },
 
   id_text3: {
-    marginTop: 10,
-    marginLeft: 35,
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
   },
 
   input_fields1: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
-    borderColor: "gray",
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   input_fields2: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
-    borderColor: "gray",
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   input_fields3: {
-    marginLeft: 30,
     height: 40,
-    width: 300,
-    marginTop: 5,
-    borderColor: "gray",
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
     borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 });

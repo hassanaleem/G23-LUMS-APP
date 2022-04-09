@@ -9,11 +9,14 @@ import {
   Alert,
   Pressable,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
+const {width, height} = Dimensions.get("screen");
 
 export function Search_bar(props) {
   const [text, setText] = useState("");
@@ -23,12 +26,10 @@ export function Search_bar(props) {
         style={{
           position: "absolute",
           fontSize: props.font_size,
-          marginLeft: 30,
+          alignSelf: "center",
           height: 40,
-          width: 300,
+          width: width / 1.2,
           marginTop: 65,
-          borderColor: "gray",
-          borderWidth: 0,
           borderRadius: 5,
           backgroundColor: "#eceded",
           paddingVertical: 10,
@@ -48,13 +49,12 @@ export function Search_bar(props) {
           alignItems: "center",
           justifyContent: "center",
           paddingVertical: 8,
-          paddingHorizontal: 15,
+          paddingHorizontal: width/13,
           borderBottomRightRadius: 5,
           borderTopRightRadius: 5,
           backgroundColor: "#79c4f2",
-          marginLeft: 255,
           marginTop: 65,
-          marginRight: 15,
+          marginLeft: width/1.55,
         }}
         onPress={props.onPress}
       >

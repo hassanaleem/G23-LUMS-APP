@@ -10,12 +10,15 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions
 } from 'react-native';
 import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
 import { postEvents } from "../../actions/eventsAction";
+
+const {width, height} = Dimensions.get("screen");
 
 export const Addevent = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -43,25 +46,23 @@ export const Addevent = ({ navigation }) => {
         <Text
           style={{
             position: 'absolute',
-            top: 30,
-            left: 10,
-            marginLeft: 25,
-            fontSize: 35,
+            fontSize: 27,
             fontWeight: 'bold',
-            fontFamily: 'sans-serif-thin',
+            marginTop: height/24,
+            marginLeft: width/12,
           }}>
           Add Event
         </Text>
 
         <Text style={styles.topline}>All fields are required</Text>
 
-        <Text style={styles.id_text}>Event Name</Text>
+        <Text style={styles.id_text0}>Event Name</Text>
 
         <TextInput onChangeText={(text) => {
           setname(text);
         }}
           value={name}
-          style={styles.userid} placeholder="Enter Event Name" />
+          style={styles.input_fields} placeholder="Enter Event Name" />
 
         <Text style={styles.id_text}>Event Date</Text>
 
@@ -69,7 +70,7 @@ export const Addevent = ({ navigation }) => {
           setdate(text);
         }}
           value={date}
-          style={styles.userid} placeholder="Enter date in format: dd/mm/yyyy" />
+          style={styles.input_fields} placeholder="Enter date in format: dd/mm/yyyy" />
 
         <Text style={styles.id_text}>Event Timings</Text>
 
@@ -77,7 +78,7 @@ export const Addevent = ({ navigation }) => {
           settime(text);
         }}
           value={time}
-          style={styles.userid} placeholder="Enter time in format: hh/mm-hh/mm" />
+          style={styles.input_fields} placeholder="Enter time in format: hh/mm-hh/mm" />
 
         <Text style={styles.id_text}>Event Type</Text>
 
@@ -85,23 +86,23 @@ export const Addevent = ({ navigation }) => {
           settype(text);
         }}
           value={type}
-          style={styles.userid} placeholder="Enter type(ie..,talk,concert)" />
+          style={styles.input_fields} placeholder="Enter type(ie..,talk,concert)" />
 
         <Main_button
           text="Add Event"
           onPress={onPress}
-          horizontal_padding={30}
-          margintop={90}
-          marginleft={65}
-          marginright={65}
+          horizontal_padding={0}
+          margintop={height/6.2}
+          marginleft={width/6}
+          marginright={width/6}
         />
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
-          horizontal_padding={50}
-          margintop={15}
-          marginleft={65}
-          marginright={65}
+          horizontal_padding={0}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
@@ -113,30 +114,42 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  id_text: {
-    marginTop: 10,
-    marginLeft: 35,
+  
+  topline: {
+    marginTop: height/40,
+    marginLeft: width/11,
+    fontSize: 15,
+    fontWeight: '600',
+    fontFamily: 'sans-serif-thin',
+  },
+
+  id_text0: {
+    marginTop: height/110,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
-  topline: {
-    marginTop: 15,
-    marginLeft: 35,
+
+  id_text: {
+    marginTop: height/50,
+    marginLeft: width/10,
     fontSize: 15,
+    fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
   },
-  userid: {
-    marginLeft: 30,
+
+  input_fields: {
     height: 40,
-    width: 300,
-    marginTop: 10,
+    width: width / 1.2,
+    marginTop: 3,
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 });
 

@@ -7,21 +7,32 @@ import {
   ScrollView,
   TextInput,
   StyleSheet,
+  ImageBackground,
   Alert,
   Pressable,
+  Dimensions,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import { logout } from "../../actions/loginAction";
 import { Adduser } from "./Adduser";
+
+const {width, height} = Dimensions.get("screen");
+
 export const Admin_home_screen = ({ navigation }) => {
   const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
   return (
     <View style={styles.container}>
+      <ImageBackground
+        source={require('../assets/whiteBackground.png')}
+        resizeMode="cover"
+        style={{ width: '100%', height: '100%' }}>
       <Pressable
         style={{
           alignItems: "center",
@@ -30,9 +41,9 @@ export const Admin_home_screen = ({ navigation }) => {
           paddingHorizontal: 20,
           borderRadius: 30,
           backgroundColor: "#79c4f2",
-          marginLeft: 295,
+          marginLeft: 270,
           marginTop: 40,
-          marginRight: 25,
+          marginRight: 20,
         }}
         onPress={() => {
           dispatch(logout());
@@ -52,57 +63,76 @@ export const Admin_home_screen = ({ navigation }) => {
       <Main_button
         text="Add User"
         onPress={() => navigation.navigate("adduser")}
-        horizontal_padding={90}
-        margintop={20}
+        horizontal_padding={0}
+        margintop={height/30}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Update User Info"
         onPress={() => navigation.navigate("UpdateUserInfo")}
-        horizontal_padding={55}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Add Grades"
         onPress={() => navigation.navigate("AddGrade")}
-        horizontal_padding={80}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Add Enrolment Date"
         onPress={() => navigation.navigate("Addenrolment")}
-        horizontal_padding={41}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Add Event"
         onPress={() => navigation.navigate("Addevent")}
-        horizontal_padding={86}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Add Food Item"
         onPress={() => navigation.navigate("addfooditem")}
-        horizontal_padding={65}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Update Food Price"
         onPress={() => navigation.navigate("UpdateFoodPrice")}
-        horizontal_padding={48}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Add Course"
         onPress={() => navigation.navigate("AddCourse")}
-        horizontal_padding={78}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
       <Main_button
         text="Update Course Timing"
         onPress={() => navigation.navigate("UpdateCourseTimings")}
-        horizontal_padding={29}
-        margintop={10}
+        horizontal_padding={0}
+        margintop={height/50}
+        marginleft={width/7}
+        marginright={width/7}
       />
+      </ImageBackground>
     </View>
   );
 };
@@ -117,12 +147,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 30,
     fontWeight: "bold",
+    alignSelf: "center"
   },
 
   topheading2: {
     marginTop: 0,
     fontSize: 30,
     fontWeight: "bold",
+    alignSelf: "center"
   },
 
   logout_text: {

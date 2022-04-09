@@ -10,7 +10,10 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from "react-native";
+
+const {width, height} = Dimensions.get("screen");
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
@@ -90,7 +93,7 @@ export const Adduser = ({navigation}) => {
         <Text style={styles.id_text}>User Name</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields}
           placeholder="Enter User Name"
           onChangeText={(text) => {
             setUsername(text);
@@ -98,10 +101,10 @@ export const Adduser = ({navigation}) => {
           value={username}
         />
 
-        <Text style={styles.id_text}>User ID</Text>
+        <Text style={styles.id_text0}>User ID</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields}
           placeholder="Enter User ID"
           onChangeText={(text) => {
             setUserId(text);
@@ -112,7 +115,7 @@ export const Adduser = ({navigation}) => {
         <Text style={styles.id_text}>Create Password</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields}
           placeholder="Enter Password"
           onChangeText={(text) => {
             digest(text);
@@ -124,7 +127,7 @@ export const Adduser = ({navigation}) => {
         <Text style={styles.id_text}>User Type</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields}
           placeholder="Student/Instructor"
           onChangeText={(text) => setType(text)}
           value={type}
@@ -133,19 +136,19 @@ export const Adduser = ({navigation}) => {
         <Main_button
           text="Add User"
           onPress={add}
-          horizontal_padding={30}
-          margintop={90}
-          marginleft={65}
-          marginright={65}
+          horizontal_padding={0}
+          margintop={height/6.2}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
-          horizontal_padding={50}
-          margintop={15}
-          marginleft={65}
-          marginright={65}
+          horizontal_padding={0}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
@@ -157,38 +160,49 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  
   add_user: {
-    position: "absolute",
-    top: 30,
-    left: 10,
-    marginLeft: 25,
-    fontSize: 35,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    position: 'absolute',
+    fontSize: 27,
+    fontWeight: 'bold',
+    marginTop: height/24,
+    marginLeft: width/12,
   },
-  id_text: {
-    marginTop: 10,
-    marginLeft: 35,
-    fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
-  },
+
   topline: {
-    marginTop: 15,
-    marginLeft: 35,
+    marginTop: height/40,
+    marginLeft: width/11,
     fontSize: 15,
-    fontFamily: "sans-serif-thin",
+    fontWeight: '600',
+    fontFamily: 'sans-serif-thin',
   },
-  userid: {
-    marginLeft: 30,
+
+  id_text0: {
+    marginTop: height/110,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
+  },
+
+  id_text: {
+    marginTop: height/50,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
+  },
+  
+  input_fields: {
     height: 40,
-    width: 300,
-    marginTop: 10,
-    borderColor: "gray",
-    borderWidth: 1,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 });
