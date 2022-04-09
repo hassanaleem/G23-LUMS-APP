@@ -24,6 +24,7 @@ import { Gpa_calculator } from "./react-redux/components/student/Gpa_calculator"
 import { Deadlines } from "././react-redux/components/student/Deadlines";
 import { Academic_progress } from "./react-redux/components/student/Academic_progress";
 import { View_event } from "./react-redux/components/student/View_event";
+import { Menu } from "./react-redux/components/student/Student_view_menu";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Student_deadlines"
+          initialRouteName="Student_view_menu"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -50,10 +51,8 @@ export default function App() {
           <Stack.Screen name="SearchDeadlines" component={Search_Deadlines} />
           <Stack.Screen name="AddDeadlines" component={Add_Deadlines} />
           <Stack.Screen name="Student_deadlines" component={Deadlines} />
-          <Stack.Screen
-            name="UpdateCourseTimings"
-            component={Update_course_timings}
-          />
+          <Stack.Screen name="Student_view_menu" component={Menu} />
+          <Stack.Screen name="UpdateCourseTimings"component={Update_course_timings}/>
           <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
           <Stack.Screen name="GpaCalculator" component={Gpa_calculator} />
           <Stack.Screen
