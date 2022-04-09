@@ -8,6 +8,7 @@ import {
   Alert,
   Pressable,
   ScrollView,
+  Dimensions,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -15,13 +16,34 @@ import { Main_button } from "../buttons/Main_button";
 import { getEvents } from "../../actions/eventsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+const { width, height } = Dimensions.get("screen");
 
 export const View_event = ({ navigation }) => {
-  const dispatch = useDispatch(); // this call the action and the action send the GET or POST request on the backend
-  dispatch(getEvents);
-
-  // let data = useSelector((state) => state.eventsReducer);
-  // console.log(data, "Called");
+  const dispatch = useDispatch();
+  const [events, setEvents] = useState([]);
+  const [fetched, setFetched] = useState(false);
+  const [stored, setStored] = useState(false);
+  const [Enrollment, setEnrollment] = useState([]);
+  if (fetched === false) {
+    dispatch(getEvents());
+    setFetched(true);
+  }
+  let data = useSelector((state) => state.eventsReducer.data);
+  if (data.length > 0 && stored === false) {
+    let enrollment_list = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name === "Enrolment") {
+        enrollment_list.push(data[i]);
+      }
+    }
+    let new_events = data.filter((event) => event.name !== "Enrolment");
+    if (new_events.length > 0) {
+      setEvents(new_events);
+      setEnrollment(enrollment_list);
+      setStored(true);
+    }
+  }
 
   return (
     <ImageBackground
@@ -37,65 +59,32 @@ export const View_event = ({ navigation }) => {
           <Text> Enrollment </Text>
         </View>
         <ScrollView style={styles.rectangle}>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
-          <Text style={{ left: 5 }}> Date : Time {"\n"} </Text>
+          {Enrollment.map((event, index) => (
+            <View key={index}>
+              {console.log(event.date)}
+              <Text style={styles.textstyle}>
+                {event.date} : {event.time}
+              </Text>
+            </View>
+          ))}
         </ScrollView>
         <View style={styles.subheading2}>
           <Text> Events </Text>
         </View>
         <ScrollView style={styles.rectangle2}>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
-          <Text style={{ left: 5 }}> Event Name / Date / Type {"\n"} </Text>
+          {events.map((event, index) => (
+            <View key={index}>
+              <Text style={styles.textstyle}>
+                {event.name} /{event.date} / {event.time} / {event.type}
+              </Text>
+            </View>
+          ))}
         </ScrollView>
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={606}
+          margintop={height / 1.5}
           marginleft={50}
           marginright={47}
         />
@@ -120,52 +109,55 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: 40,
-    left: 33,
+    top: height / 30,
+    left: width / 12.2,
     fontSize: 30,
     lineHeight: 37.8,
     fontWeight: "bold",
   },
   subheading1: {
-    width: 118,
-    height: 30,
+    width: width / 3.38,
+    height: height / 13.33,
     position: "absolute",
-    top: 146,
+    top: height / 8,
     left: 38,
     fontSize: 24,
     lineHeight: 30.24,
   },
   subheading2: {
-    width: 118,
-    height: 30,
+    width: width / 3.38,
+    height: height / 13.33,
     position: "absolute",
-    top: 310,
+    top: height / 2.5,
     left: 38,
     fontSize: 24,
     lineHeight: 30.24,
   },
-  logoutbuttonview: {
-    position: "absolute",
-    top: 50,
-    right: 10,
-  },
+
   rectangle: {
     position: "absolute",
-    width: 328,
-    height: 110,
-    top: 184,
+    width: width / 1.219,
+    height: height / 5.05,
+    top: height / 6,
     left: 38,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
   },
   rectangle2: {
     position: "absolute",
-    width: 328,
-    height: 240,
-    top: 347,
+    width: width / 1.219,
+    height: height / 3.8,
+    top: height / 2.3,
     left: 38,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
+  },
+  textstyle: {
+    position: "relative",
+    top: height / 150,
+    left: width / 30,
+    fontSize: 14,
+    lineHeight: 21,
   },
   logoutbutton: {
     backgroundColor: "#87CEFA",
