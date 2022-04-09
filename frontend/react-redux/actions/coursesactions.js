@@ -14,31 +14,6 @@ export const getGrade = (id) => {
   };
 };
 
-export const addGrade = (courseId, name, timings, instructorId, creditHours ) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  // Request body
-  const body = JSON.stringify({
-    courseId,
-    name,
-    timings,
-    instructorId,
-    creditHours,
-  });
-  return (dispatch) => {
-    axios.post(`${address}/courses`, body, config).then((response) => {
-    dispatch({
-        type: "ADD_COURSE",
-        payload: response.data,
-      });
-    });
-  };
-
-}
-
 export const addCourse = (course_id, name, timings, day,  instructorId, creditHours) => {
   const config = {
     headers: {
