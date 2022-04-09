@@ -149,7 +149,7 @@ export const Add_course = ({navigation}) => {
           text="Add Course"
           onPress={call}
           horizontal_padding={0}
-          margintop={height/15}
+          margintop={height/45}
           marginleft={width/6}
           marginright={width/6}
         />
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
 
 id_text0: {
-    marginTop: height/40,
+    marginTop: height/50,
     marginLeft: width/11,
     fontSize: 15,
     fontWeight: '600',
@@ -182,7 +182,7 @@ id_text0: {
   },
 
   id_text1: {
-    marginTop: height/110,
+    marginTop: height/120,
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
@@ -190,7 +190,7 @@ id_text0: {
   },
 
   id_text2: {
-    marginTop: height/50,
+    marginTop: height/90,
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
@@ -198,7 +198,7 @@ id_text0: {
   },
 
   id_text3: {
-    marginTop: height/50,
+    marginTop: height/90,
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
@@ -206,7 +206,7 @@ id_text0: {
   },
 
   id_text4: {
-    marginTop: height/50,
+    marginTop: height/90,
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
@@ -214,7 +214,7 @@ id_text0: {
   },
 
   id_text5: {
-    marginTop: height/50,
+    marginTop: height/90,
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
