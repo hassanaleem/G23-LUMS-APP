@@ -6,6 +6,7 @@ import foodItemReducer from "./fooditemReducer";
 import usersReducer from "./usersReducer";
 import deadlineReducer from "./deadlineReducer";
 import courseReducer from "./courseReducer";
+import courseGradeReducer from "./courseGradeReducer";
 export default combineReducers({
   countReducer,
   loginReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   usersReducer,
   deadlineReducer,
   courseReducer,
+  courseGradeReducer,
 });

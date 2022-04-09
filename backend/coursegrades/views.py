@@ -55,3 +55,24 @@ def coursegrades(request):
             pass
         return render(request, 'coursegrades.html')
 
+
+    if request.method == "PUT":
+        db = database.connect_db()
+        data = json.loads(request.body.decode('utf-8'))
+        courseID = data["Course_ID"]
+        grade = data["Grade"]
+        studentID = data["Student_ID"]
+        key = courseID + studentID
+        if(len(key) == 0):
+            return
+
+        try:
+            fetchedData = db.child("Data").child("CourseGrades").child(key).get().val()
+            fetchedData["Grade"] = grade
+            db.child("Data").child("CourseGrades").child(key).set(fetchedData)
+            return render(request, 'coursegrades.html')
+        except:
+            pass
+
+
+        

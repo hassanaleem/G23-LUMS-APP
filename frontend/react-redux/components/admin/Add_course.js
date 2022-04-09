@@ -160,9 +160,9 @@ export const Add_course = ({ navigation }) => {
           text="Add Course"
           onPress={call}
           horizontal_padding={0}
-          margintop={height / 15}
-          marginleft={width / 6}
-          marginright={width / 6}
+          margintop={height/45}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
@@ -184,49 +184,49 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  id_text0: {
-    marginTop: height / 40,
-    marginLeft: width / 11,
+id_text0: {
+    marginTop: height/50,
+    marginLeft: width/11,
     fontSize: 15,
     fontWeight: "600",
     fontFamily: "sans-serif-thin",
   },
 
   id_text1: {
-    marginTop: height / 110,
-    marginLeft: width / 10,
+    marginTop: height/120,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text2: {
-    marginTop: height / 50,
-    marginLeft: width / 10,
+    marginTop: height/90,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text3: {
-    marginTop: height / 50,
-    marginLeft: width / 10,
+    marginTop: height/90,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text4: {
-    marginTop: height / 50,
-    marginLeft: width / 10,
+    marginTop: height/90,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
   },
 
   id_text5: {
-    marginTop: height / 50,
-    marginLeft: width / 10,
+    marginTop: height/90,
+    marginLeft: width/10,
     fontSize: 15,
     fontWeight: "bold",
     fontFamily: "sans-serif-thin",
