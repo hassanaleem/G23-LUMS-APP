@@ -11,25 +11,43 @@ def deadlines(request):
         db =database.connect_db()
         req = list(request.GET.items())
         try:
-            id = req[0][1]
-            # print(id)
-            if (id == 'all'):
+            if req[0][0] == 'type':
+                courseid = req[1][1]
+                instructorid = req[2][1]
                 data = db.child("Data").child("Deadlines").get().val()
-                return render(request, 'deadlines.html', {'data': json.dumps(data)})
+                arr = list()
+                flag = False
+                for d in data:
+                    if d['Course_ID'] == courseid and d['Instructor_Id'] == instructorid:
+                        arr.append(d)
+                    if d['Course_ID'] == courseid and d['Instructor_Id'] != instructorid:
+                        flag = True
+                        
+                if(flag == False):
+                    return render(request, 'deadlines.html', {'data': json.dumps(arr)})
+
+                if flag == True:
+                    return
+
             else:
-                data = (db.child("Data").child("Deadlines").child(id).get().val())
-                dic = {}
-                dic["Course ID"] = data["Course_ID"]
-                dic["Deadline Title"] = data["Deadline_Title"]
-                dic["Deadline Date"] = data["Deadline_Date"]
-                dic["Deadline Time"] = data["Deadline_Time"]
-                dic["Instructor Id"] = data["Instructor_Id"]
-                # print(dic)
-                return render(request, 'deadlines.html', {'data': json.dumps(dic)})
+                id = req[0][1]
+                if (id == 'all'):
+                    data = db.child("Data").child("Deadlines").get().val()
+                    return render(request, 'deadlines.html', {'data': json.dumps(data)})
+                else:
+                    data = (db.child("Data").child("Deadlines").child(id).get().val())
+                    dic = {}
+                    dic["Course ID"] = data["Course_ID"]
+                    dic["Deadline Title"] = data["Deadline_Title"]
+                    dic["Deadline Date"] = data["Deadline_Date"]
+                    dic["Deadline Time"] = data["Deadline_Time"]
+                    dic["Instructor Id"] = data["Instructor_Id"]
+                    # print(dic)
+                    return render(request, 'deadlines.html', {'data': json.dumps(dic)})
 
         except:
+            print("except main a rha hai")
             pass
-        return render(request, 'deadlines.html', {'data': json.dumps(dic)})
     elif request.method == 'POST':
         db = database.connect_db()
         data = request.body.decode("utf-8")

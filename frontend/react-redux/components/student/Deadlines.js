@@ -1,6 +1,8 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,Dimensions} from "react-native";
 
+import { Logout_button } from "../buttons/Logout_button";
+import { Main_button } from "../buttons/Main_button";
 
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';

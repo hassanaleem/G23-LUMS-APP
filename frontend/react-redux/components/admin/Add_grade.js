@@ -114,7 +114,7 @@ export const Add_grade = ({navigation}) => {
           text="Add Grade"
           onPress={call}
           horizontal_padding={0}
-          margintop={height/6.2}
+          margintop={height/4}
           marginleft={width/6}
           marginright={width/6}
         />
