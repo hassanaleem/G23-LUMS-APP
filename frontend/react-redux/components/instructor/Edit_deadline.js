@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -18,6 +19,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateDeadline } from "../../actions/deadlineactions";
 import { useFonts } from 'expo-font';
+
+const {width, height} = Dimensions.get("screen");
 
 
 export const Edit_deadline = ({ navigation }) => {
@@ -51,7 +54,7 @@ export const Edit_deadline = ({ navigation }) => {
 
       <Text style={styles.topline}>All fields are required</Text>
 
-      <Text style={styles.text}>Deadline Time</Text>
+      <Text style={styles.textfirst}>Deadline Time</Text>
       <TextInput 
       style = {styles.box}
       placeholder="Enter time in format: hour/minute"
@@ -70,19 +73,19 @@ export const Edit_deadline = ({ navigation }) => {
       <Main_button
           text="Edit Deadline"
           onPress={onPress}
-          horizontal_padding={30}
-          margintop={200}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height/3.5}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => {navigation.navigate("instructor")}}
-          horizontal_padding={50}
-          margintop={15}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
 
@@ -98,33 +101,47 @@ const styles = StyleSheet.create({
   },
 
   topHeading: {
-    position: "absolute",
-    marginTop: 35,
-    marginLeft: 20,
-    fontSize: 30,
+      position: 'absolute',
+      fontSize: 27,
+      fontWeight: 'bold',
+      marginTop: height/24,
+      marginLeft: width/12,
   },
 
+  textfirst: 
+  {
+    marginTop: height/120,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'Outfit',
+  },
   text: {
-    marginTop: 10,
-    marginLeft: 50,
-    fontSize: 18,
+    marginTop: height/90,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontFamily: 'Outfit',
   },
 
   box: {
     height: 40,
-    width: 300,
-    marginTop: 5,
-    marginLeft: 50,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: 'gray',
+    borderWidth: 0,
     borderRadius: 20,
-    backgroundColor: "#eceded",
+    backgroundColor: '#eceded',
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center"
   },
 
   topline: {
-    marginTop: 50,
-    marginLeft: 45,
-    fontSize: 12,
+    marginTop: height/20,
+    marginLeft: width/11,
+    fontSize: 15,
+    fontWeight: '600',
     fontFamily: 'Outfit',
   }
 
