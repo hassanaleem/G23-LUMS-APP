@@ -14,7 +14,13 @@ export const getGrade = (id) => {
   };
 };
 
-export const addGrade = (courseId, name, timings, instructorId, creditHours ) => {
+export const addGrade = (
+  courseId,
+  name,
+  timings,
+  instructorId,
+  creditHours
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -30,16 +36,22 @@ export const addGrade = (courseId, name, timings, instructorId, creditHours ) =>
   });
   return (dispatch) => {
     axios.post(`${address}/courses`, body, config).then((response) => {
-    dispatch({
+      dispatch({
         type: "ADD_COURSE",
         payload: response.data,
       });
     });
   };
+};
 
-}
-
-export const addCourse = (course_id, name, timings, day,  instructorId, creditHours) => {
+export const addCourse = (
+  course_id,
+  name,
+  timings,
+  day,
+  instructorId,
+  creditHours
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -71,6 +83,80 @@ export const addCourse = (course_id, name, timings, day,  instructorId, creditHo
   };
 };
 
+export const getCourse = (courseCode) => {
+  const request = address + "/courses?" + `courseCode=${courseCode}`;
+  return (dispatch) => {
+    axios
+      .get(request)
+      .then((response) => {
+        dispatch({
+          type: "GET_COURSE",
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "GET_COURSE_FAILED",
+          payload: "Failed",
+        });
+      });
+  };
+};
 
+export const clearState = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_STATE",
+    });
+  };
+};
 
+export const enrollCourse = (courseId, studentId) => {
+  const request = address + "/coursegrades";
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({
+    courseId,
+    studentId,
+  });
+  return (dispatch) => {
+    axios
+      .post(request, body, config)
+      .then((response) => {
+        dispatch({
+          type: "ENROLL_COURSE",
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "ENROLL_COURSE_FAILED",
+          payload: "Failed",
+        });
+      });
+  };
+};
 
+export const getEnrollments = (id) => {
+  const request = address + "/coursegrades?" + `id=${id}`;
+  console.log(request);
+  return (dispatch) => {
+    axios
+      .get(request)
+      .then((response) => {
+        dispatch({
+          type: "GET_ENROLLMENTS",
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "GET_ENROLLMENTS_FAILED",
+          payload: "Failed",
+        });
+      });
+  };
+};
