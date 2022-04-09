@@ -17,6 +17,14 @@ const foodItemReducer = (state = initialData, action) => {
         ...state,
         restaurant: data,
       };
+    case "GET_ALL_FOOD_ITEMS":
+      const newdata1 = data.replace(/&quot;/g, '"');
+      const finalData1 = JSON.parse(newdata1);
+      return {
+        ...state,
+        data: finalData1,
+      };
+
     default:
       return state;
   }

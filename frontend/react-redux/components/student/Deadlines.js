@@ -2,14 +2,14 @@ import React from "react";
 import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,} from "react-native";
 
 
-import { Logout_button } from './buttons/Logout_button';
-import { Main_button } from './buttons/Main_button';
+import { Logout_button } from '../buttons/Logout_button';
+import { Main_button } from '../buttons/Main_button';
 
-const App = () => {
+export const Deadlines = ({navigation}) => {
     return(
-    <ImageBackground source={require('./assets/background.png')} resizeMode="contain" 
+    <ImageBackground source={require('../assets/background.png')} resizeMode="contain" 
     style={{ width: '100%', height: '99%' }}>
-    <Logout_button/>
+    <Logout_button nav={navigation}/>
     <View style = {{position : 'absolute', top : 35,flexDirection: 'row'}}>
       <Text style = {{fontSize : 30,fontWeight : 'bold'}}> Deadlines</Text>
     </View>
@@ -108,5 +108,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   }
 });
-
-export default App;

@@ -1,153 +1,175 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,} from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  Pressable,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 
-
-import { Logout_button } from '../buttons/Logout_button';
-import { Main_button } from '../buttons/Main_button';
+import { Logout_button } from "../buttons/Logout_button";
+import { Main_button } from "../buttons/Main_button";
 import { getEvents } from "../../actions/eventsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+const { width, height } = Dimensions.get("screen");
 
-export const ViewEvent = () => {
-  const dispatch = useDispatch(); // this call the action and the action send the GET or POST request on the backend
-  const get = () =>{
-    dispatch(getEvents)
-
+export const View_event = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [events, setEvents] = useState([]);
+  const [fetched, setFetched] = useState(false);
+  const [stored, setStored] = useState(false);
+  const [Enrollment, setEnrollment] = useState([]);
+  if (fetched === false) {
+    dispatch(getEvents());
+    setFetched(true);
   }
-  get()
-  let data = useSelector((state) => state.eventsReducer);
-  // console.log(data,"Called")
+  let data = useSelector((state) => state.eventsReducer.data);
+  if (data.length > 0 && stored === false) {
+    let enrollment_list = [];
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name === "Enrolment") {
+        enrollment_list.push(data[i]);
+      }
+    }
+    let new_events = data.filter((event) => event.name !== "Enrolment");
+    if (new_events.length > 0) {
+      setEvents(new_events);
+      setEnrollment(enrollment_list);
+      setStored(true);
+    }
+  }
 
   return (
-    
-    <ImageBackground source={require('../assets/background.png')} resizeMode="contain" 
-    style={{ width: '100%', height: '99%' }}>
-    <Logout_button/>
-    <Text style = {styles.event}> Events </Text>
+    <ImageBackground
+      source={require("../assets/background.png")}
+      resizeMode="cover"
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <Logout_button nav={navigation} />
+        <Text style={styles.topheading}> Events </Text>
 
-      <View style = {{position : 'absolute', marginTop : 80, left : 7}}> 
-      <Text> Enrollment </Text>
-      </View>
-      <View style = {{position : 'absolute',top : 125 , left : 10}}>
-
-        <ScrollView style = {styles.rectange}>
-        <Text style = {{left : 5}}> Date : Time {"\n"} </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
-        <Text style = {{left : 5}}> Date : Time {"\n"}  </Text>
+        <View style={styles.subheading1}>
+          <Text> Enrollment </Text>
+        </View>
+        <ScrollView style={styles.rectangle}>
+          {Enrollment.map((event, index) => (
+            <View key={index}>
+              {console.log(event.date)}
+              <Text style={styles.textstyle}>
+                {event.date} : {event.time}
+              </Text>
+            </View>
+          ))}
         </ScrollView>
-      </View>
-      <View style =  {{position : "absolute", left: 10,top : 220}}>
-        <Text > Events </Text>
-      </View>
-      <View style = {{position : 'absolute',top : 250 , left : 10}}>
-        <ScrollView style = {styles.rectange2}>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}   </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
-        <Text style = {{left : 5}}> Event Name / Date / Type {"\n"}  </Text>
+        <View style={styles.subheading2}>
+          <Text> Events </Text>
+        </View>
+        <ScrollView style={styles.rectangle2}>
+          {events.map((event, index) => (
+            <View key={index}>
+              <Text style={styles.textstyle}>
+                {event.name} /{event.date} / {event.time} / {event.type}
+              </Text>
+            </View>
+          ))}
         </ScrollView>
-                  <Main_button
+        <Main_button
           text="Go Back"
-          onpress=""
+          onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={260}
-          marginleft={85}
+          margintop={height / 1.5}
+          marginleft={50}
           marginright={47}
         />
       </View>
-
-
     </ImageBackground>
-
-
-    )};
+  );
+};
 
 const styles = StyleSheet.create({
-  container : {
-    flex : 1,
-    backgroundColor : '#fff',
-    top : 120,
-    paddingTop : 40,
-    paddingHorizontal:20
+  backgroundImage: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+  },
+  container: {
+    flex: 1,
+    height: "100%",
   },
 
-
-  logoutbuttonview : {
-    position : "absolute",
-    top : 50,
-    right : 10
+  topheading: {
+    position: "absolute",
+    top: height / 30,
+    left: width / 12.2,
+    fontSize: 30,
+    lineHeight: 37.8,
+    fontWeight: "bold",
   },
-  rectange :{
-
-    height: 70,
-    width: 340,
-    backgroundColor: '#D3D3D3',
-    position: 'absolute', 
-    zIndex: 99,
-    borderRadius : 5
+  subheading1: {
+    width: width / 3.38,
+    height: height / 13.33,
+    position: "absolute",
+    top: height / 8,
+    left: 38,
+    fontSize: 24,
+    lineHeight: 30.24,
   },
-    rectange2 :{
+  subheading2: {
+    width: width / 3.38,
+    height: height / 13.33,
+    position: "absolute",
+    top: height / 2.5,
+    left: 38,
+    fontSize: 24,
+    lineHeight: 30.24,
+  },
 
-    height: 250,
-    width: 340,
-    backgroundColor: '#D3D3D3',
-    position: 'absolute', 
-    zIndex: 99,
-    borderRadius : 5
+  rectangle: {
+    position: "absolute",
+    width: width / 1.219,
+    height: height / 5.05,
+    top: height / 6,
+    left: 38,
+    borderRadius: 7,
+    backgroundColor: "#EDEDED",
+  },
+  rectangle2: {
+    position: "absolute",
+    width: width / 1.219,
+    height: height / 3.8,
+    top: height / 2.3,
+    left: 38,
+    borderRadius: 7,
+    backgroundColor: "#EDEDED",
+  },
+  textstyle: {
+    position: "relative",
+    top: height / 150,
+    left: width / 30,
+    fontSize: 14,
+    lineHeight: 21,
   },
   logoutbutton: {
-    backgroundColor : '#87CEFA',
-    padding : 5,
-    borderRadius : 180
+    backgroundColor: "#87CEFA",
+    padding: 5,
+    borderRadius: 180,
   },
   event: {
     color: "black",
-    position : "absolute",
-    left : 2,
-    marginTop : 33,
+    position: "absolute",
+    left: 2,
+    marginTop: 33,
     fontSize: 30,
     fontWeight: "bold",
-  }
+  },
 });
-

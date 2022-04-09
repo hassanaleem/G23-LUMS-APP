@@ -6,6 +6,7 @@ export const getDeadline = (id) => {
   const request = address + "/deadlines?" + `id=${id}`;
   return (dispatch) => {
     axios.get(request).then((response) => {
+      console.log(response.data);
       dispatch({
         type: "GET_DEADLINE",
         payload: response.data,
@@ -15,7 +16,7 @@ export const getDeadline = (id) => {
 };
 
 export const addDeadline = (data) => {
-  const request = "http://" + address + "/deadlines";
+  const request = address + "/deadlines";
   return (dispatch) => {
     axios.post(request, data).then((response) => {
       dispatch({
@@ -35,4 +36,4 @@ export const updateDeadline = (data) => {
       });
     });
   };
-}
+};

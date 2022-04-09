@@ -13,6 +13,7 @@ def users(request):
         data = json.loads(data) 	
         id = data["id"]
         data.pop("id")
+        print(data,id)
         db.child("Data").child("Users").child(id).set(data)
         return render(request, 'users.html')
     if request.method == "GET":
