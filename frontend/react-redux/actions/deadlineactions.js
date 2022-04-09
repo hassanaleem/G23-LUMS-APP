@@ -37,3 +37,23 @@ export const updateDeadline = (data) => {
     });
   };
 };
+
+export const SearchDeadlines = (courseID, instructorID) => {
+  const request = address + "/deadlines?" + `type=2` + `&courseID=${courseID}` + `&instructorID=${instructorID}`;
+  return (dispatch) => {
+    axios
+      .get(request)
+      .then((resp) => {
+        dispatch({
+          type: "SEARCH_DEADLINE",
+          payload: resp.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "SEARCH_DEADLINE_FAIL",
+          payload: "Failed",
+        });
+      });
+  };
+};
