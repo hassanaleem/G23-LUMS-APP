@@ -197,18 +197,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDEDED",
     // marginTop: 10,
   },
-  gradesDropdown2: {
-    position: "absolute",
-    width: 144,
-    height: 37,
-    top: 168,
-    left: 216,
-    fontSize: 24,
-    borderRadius: 7,
-    textAlign: "center",
-    backgroundColor: "#EDEDED",
-    marginTop: 55,
-  },
 
   moreButton: {
     alignItems: "center",
