@@ -66,7 +66,7 @@ export const Academic_progress = () => {
             text="Go Back"
             onPress={() => navigation.navigate("student")}
             horizontal_padding={50}
-            margintop={height / 2}
+            margintop={height / 1.2}
             marginleft={50}
             marginright={47}
           />
