@@ -16,15 +16,16 @@ import {
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateDeadline } from "../../actions/deadlineactions";
 import { useFonts } from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 
-export const Edit_deadline = ({ navigation }) => {
+export const Edit_deadline = ({ route, navigation }) => {
 
+  let data = JSON.parse(route.params.data)
   const [loaded] = useFonts({
     Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
   }); 
@@ -33,11 +34,22 @@ export const Edit_deadline = ({ navigation }) => {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   function onPress() {
-    // dispatch(updateDeadline({time, date, course_id, instructor_id, title}))
+    dispatch(updateDeadline(time, date, data.Course_ID, data.Instructor_Id, data.Deadline_Title, data.Deadline_Time, data.Deadline_Date))
     setDate("")
     setTime("")
   }
 
+  let message = useSelector((state) => state.deadlineReducer).message
+
+  if (message == "Success Update")
+  {
+    Alert.alert("Successfully Updated")
+  }
+
+  if (message == "Failed Update")
+  {
+    Alert.alert("Failed to Update")
+  }
   if (!loaded)
   {
     return null;
@@ -74,7 +86,7 @@ export const Edit_deadline = ({ navigation }) => {
           text="Edit Deadline"
           onPress={onPress}
           horizontal_padding={0}
-          margintop={height/3.5}
+          margintop={height/3.3}
           marginleft={width/6}
           marginright={width/6}
         />
