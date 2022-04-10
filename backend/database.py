@@ -14,8 +14,27 @@ def connect_db():
   firebase = pyrebase.initialize_app(firebaseConfig)
   authe = firebase.auth()
   return firebase.database()
+
+# # delete all elements of coursegrade
 # db = connect_db()
-# #remove 23100321 from data
-# db.child("Data").child("Users").child("23100321").remove()
-# data = db.child("Data").child("Users").child("23100321").get().val()
-# print(data)
+# data = db.child("Data").child("Notifications").get()
+# for d in data.each():
+#   try:
+#     x = d.val()
+#     x.append("newUpdate")
+#     db.child("Data").child("Notifications").child(d.key()).set(x)
+#   except:
+#     x = ["newUpdate"]
+#     db.child("Data").child("Notifications").child(d.key()).set(x)
+# print(users_by_score)
+
+
+
+# data = db.child("Data").child("Users").get()
+# li = dict()
+# for user in data.each():
+#     if user.val()["Type"] == "Student":
+#       li[user.key()] = ""
+# print(li)
+
+# db.child("Data").child("Notifications").set(li)

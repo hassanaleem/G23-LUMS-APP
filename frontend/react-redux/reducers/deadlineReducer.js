@@ -27,6 +27,33 @@ const deadlineReducer = (state = initialData, action) => {
         message: "Failure",
       };
 
+    case "SEARCH_DEADLINE":
+      let d = data.replace(/&quot;/g, '"');
+      let finalD = JSON.parse(d);
+      return{
+        ...state,
+        data: finalD,
+        message: "Fetched"
+      }
+
+    case "SEARCH_DEADLINE_FAIL":
+      return{
+        ...state,
+        message: "Failure Search",
+      }
+
+    case "UPDATE_DEADLINE":
+      return{
+        ...state,
+        message: "Success Update",
+      }
+
+    case "UPDATE_DEADLINE_FAIL":
+      return{
+        ...state,
+        message: "Failure Update",
+      }
+
     default:
       return state;
   }

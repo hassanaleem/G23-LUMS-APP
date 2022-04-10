@@ -33,7 +33,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Academic_progress"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -53,7 +53,10 @@ export default function App() {
           <Stack.Screen name="AddDeadlines" component={Add_Deadlines} />
           <Stack.Screen name="Student_deadlines" component={Deadlines} />
           <Stack.Screen name="Student_view_menu" component={Menu} />
-          <Stack.Screen name="UpdateCourseTimings"component={Update_course_timings}/>
+          <Stack.Screen
+            name="UpdateCourseTimings"
+            component={Update_course_timings}
+          />
           <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
           <Stack.Screen name="GpaCalculator" component={Gpa_calculator} />
           <Stack.Screen name="Notifications_screen" component={Notifications} />

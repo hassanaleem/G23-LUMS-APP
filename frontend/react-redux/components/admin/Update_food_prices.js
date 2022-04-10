@@ -15,26 +15,116 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { Search_bar } from "../searchBar/Search_bar";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getAllFoodItems } from "../../actions/foodactions";
+import {useFonts} from 'expo-font';
+import { clearState, getAllFoodItems, updateFoodItem } from "../../actions/foodactions";
+import { Picker } from "@react-native-picker/picker";
 
 const { width, height } = Dimensions.get("screen");
 
 export const Update_food_prices = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
   const dispatch = useDispatch();
 
   const [isEditable, setisEditable] = useState(false);
   const [restaurantName, setrestaurantName] = useState("");
   const [foodItemName, setfoodItemName] = useState("");
   const [price, setprice] = useState("");
-  const [searchQuery, setsearchQuery] = useState("");
-  // dispatch(getAllFoodItems());
-  // let data = useSelector((state) => state.fooditemReducer.data);
-  let data = ["Zakir", "Subway", "Chop chop", "frooti"];
+  const [get, setGet] = useState(true);
+  const [foodItems, setfoodItems] = useState([]);
+  const [restaurants, setrestaurants] = useState([]);
+  const [mergedData, setmergedData] = useState([]);
+  const [selectedRestaurant, setselectedRestaurant] = useState("");
+  const [selectedFoodItem, setselectedFoodItem] = useState("");
+  const [selectedId, setselectedId] = useState(0);
+  const [selectedPrice, setselectedPrice] = useState("");
+  const [selectedRestaurantIndex, setselectedRestaurantIndex] = useState(0);
+  const [change, setchange] = useState(false);
+
+  if (get == true) {
+    dispatch(getAllFoodItems());
+    setGet(false);
+  }
+  let dataFetched = useSelector((state) => state.foodItemReducer);
+  let find = dataFetched.find;
+  let queryRun = dataFetched.queryRun;
+  let rest = dataFetched.restaurant;
+  if (rest.length != 0 && mergedData.length == 0) {
+    setmergedData(rest);
+  }
+  if (find == true && queryRun == true) {
+    dispatch(clearState());
+  }
+  if (mergedData.length != 0 && restaurants.length == 0) {
+    for (let i = 0; i < mergedData.length; i++) {
+      let temp = mergedData[i].restaurant;
+      if (!restaurants.includes(temp)) {
+        restaurants.push(temp);
+      }
+    }
+    for (let i = 0; i < restaurants.length; i++) {
+      let temp = {
+        restaurant: restaurants[i],
+        foodItems: [],
+        prices: {},
+        id: {},
+      };
+      for (let j = 0; j < mergedData.length; j++) {
+        if (mergedData[j].restaurant == restaurants[i]) {
+          temp.foodItems.push(mergedData[j].foodItem);
+          temp.prices[mergedData[j].foodItem] = mergedData[j].price;
+          temp.id[mergedData[j].foodItem] = j;
+        }
+      }
+      foodItems.push(temp);
+    }
+  }
+  if (
+    (isEditable == false &&
+      selectedFoodItem != "" &&
+      selectedRestaurant != "") ||
+    (change == true && selectedFoodItem != "")
+  ) {
+    setisEditable(true);
+    setrestaurantName(selectedRestaurant);
+    setfoodItemName(selectedFoodItem);
+    setprice(selectedPrice);
+    setchange(false);
+  }
+
+  const update = () => {
+    let data = {
+      restaurant: restaurantName,
+      foodItem: foodItemName,
+      price: price,
+      id: selectedId,
+    };
+    dispatch(updateFoodItem(data));
+    setrestaurantName("");
+    setfoodItemName("");
+    setprice("");
+    // restore all use states to default
+    dispatch(getAllFoodItems());
+    Alert.alert("Successfully Updated");
+    setisEditable(false);
+    setselectedRestaurant("");
+    setselectedFoodItem("");
+    setselectedPrice("");
+    setselectedRestaurantIndex(0);
+    setrestaurants([]);
+    setfoodItems([]);
+    setmergedData([]);
+    setselectedId(0);
+    restaurants.splice(0, restaurants.length);
+    foodItems.splice(0, foodItems.length);
+    mergedData.splice(0, mergedData.length);
+    setGet(true);
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -67,18 +157,45 @@ export const Update_food_prices = ({ navigation }) => {
         >
           Prices
         </Text>
+        <Picker
+          selectedValue={selectedRestaurant}
+          style={styles.restuarantDropdown}
+          onValueChange={(itemValue, itemIndex) => {
+            setselectedRestaurant(itemValue);
+            setselectedRestaurantIndex(itemIndex);
+            setchange(true);
+            setisEditable(false);
+            setselectedFoodItem("");
+          }}
+        >
+          {restaurants.map((item, index) => (
+            <Picker.Item label={item} value={item} key={index} />
+          ))}
+        </Picker>
 
-        <Search_bar
-          bar_text="Search format:  Restaurant Name, Food Name"
-          font_size={10}
-          onChangeText={(text) => {
-            setsearchQuery(text);
+        <Picker
+          selectedValue={selectedFoodItem}
+          style={styles.foodDropdown}
+          onValueChange={(itemValue, itemIndex) => {
+            setisEditable(false);
+            setselectedFoodItem(itemValue);
+            setselectedPrice(
+              foodItems[selectedRestaurantIndex].prices[itemValue]
+            );
+            setprice(foodItems[selectedRestaurantIndex].prices[itemValue]);
+            setselectedId(foodItems[selectedRestaurantIndex].id[itemValue]);
+            setselectedId(foodItems[selectedRestaurantIndex].id[itemValue]);
+            setchange(true);
           }}
-          value={searchQuery}
-          onPress={() => {
-            console.log(searchQuery);
-          }}
-        />
+        >
+          {foodItems.map((item, index) => {
+            if (item.restaurant === selectedRestaurant) {
+              return item.foodItems.map((item, index) => (
+                <Picker.Item label={item} value={item} key={index} />
+              ));
+            }
+          })}
+        </Picker>
 
         <Text style={styles.id_text1}>Restaurant Name</Text>
 
@@ -90,9 +207,7 @@ export const Update_food_prices = ({ navigation }) => {
             },
           ]}
           placeholder={
-            isEditable
-              ? "Res. name from DB"
-              : "Input Disabled [search for food]"
+            isEditable ? restaurantName : "Input Disabled [search for food]"
           }
           editable={isEditable}
           onChangeText={(text) => {
@@ -111,9 +226,7 @@ export const Update_food_prices = ({ navigation }) => {
             },
           ]}
           placeholder={
-            isEditable
-              ? "Food name from DB"
-              : "Input Disabled [search for food]"
+            isEditable ? foodItemName : "Input Disabled [search for food]"
           }
           editable={isEditable}
           onChangeText={(text) => {
@@ -131,9 +244,7 @@ export const Update_food_prices = ({ navigation }) => {
               backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
             },
           ]}
-          placeholder={
-            isEditable ? "Price from DB" : "Input Disabled [search for food]"
-          }
+          placeholder={isEditable ? price : "Input Disabled [search for food]"}
           editable={isEditable}
           onChangeText={(text) => {
             setprice(text);
@@ -143,7 +254,7 @@ export const Update_food_prices = ({ navigation }) => {
 
         <Main_button
           text="Update Price"
-          onpress=""
+          onPress={update}
           horizontal_padding={0}
           margintop={height / 7}
           marginleft={width / 6}
@@ -174,7 +285,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text2: {
@@ -182,7 +293,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text3: {
@@ -190,7 +301,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   input_fields1: {
@@ -230,5 +341,30 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+  },
+  restuarantDropdown: {
+    position: "absolute",
+    width: 144,
+    height: 37,
+    marginTop: height / 6,
+    marginLeft: width / 10,
+    fontSize: 24,
+    borderRadius: 7,
+    textAlign: "center",
+    backgroundColor: "#EDEDED",
+    // marginTop: 10,
+    // fontWeight: 400,
+  },
+  foodDropdown: {
+    position: "absolute",
+    width: 144,
+    height: 37,
+    marginTop: height / 6,
+    marginLeft: width / 1.9,
+    fontSize: 24,
+    borderRadius: 7,
+    textAlign: "center",
+    backgroundColor: "#EDEDED",
+    // marginTop: 10,
   },
 });

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'deadlines',
     'coursegrades',
     'courses',
+    'notifications',
 ]
 
 MIDDLEWARE = [

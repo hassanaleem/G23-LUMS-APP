@@ -15,10 +15,59 @@ import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
-import { postEvents } from "../../actions/eventsAction";
 import { Search_bar } from '../searchBar/Search_bar';
+import { SearchDeadlines } from '../../actions/deadlineactions';
+import { useSelector } from 'react-redux';
+import { Deadlines } from '../student/Deadlines';
+
+
+
 
 export const Search_Deadlines = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [courseID, setCourseID] = useState('');
+  let instructorID = useSelector((state) => state.loginReducer).user.Id
+  function call() {
+    if (courseID.length > 0) {
+      dispatch(SearchDeadlines(courseID, instructorID));
+      setCourseID("")
+    }
+  }
+
+  let message = useSelector((state) => state.deadlineReducer).message
+  let deadlines = useSelector((state) => state.deadlineReducer).data
+
+
+  let items = []
+
+  if (message == "Fetched" && deadlines.length != 0) {
+    for (let i = 0; i < deadlines.length; i++) {
+      items.push(deadlines[i]["Deadline_Title"])
+    }
+  }
+
+  let itemList = items.map((item, index) => {
+    return <li key={index}>
+      <Pressable style={{ left: 5 }} onPress={() => 
+      {
+        let obj = JSON.stringify(deadlines[index])
+        navigation.navigate("EditDeadline", {data: obj})
+      }
+      }>
+        <Text style={{ left: 5 }}> {item} </Text>
+      </Pressable>
+      
+    </li>
+  })
+
+
+  if (message == "Failure Search") {
+    Alert.alert("Search Failed", "Instructor Does not teach this course")
+  }
+
+  if (message == "Fetched" && deadlines.length == 0) {
+    Alert.alert("Search Failed", "No deadlines found")
+  }
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -66,7 +115,9 @@ export const Search_Deadlines = ({ navigation }) => {
               // paddingVertical: 10,
               // paddingHorizontal: 15,
             }}
-            placeholder={' Enter User ID'}
+            placeholder={' Enter Course ID'}
+            onChangeText={(text) => setCourseID(text)}
+            value={courseID}
           />
 
           <Pressable
@@ -85,7 +136,7 @@ export const Search_Deadlines = ({ navigation }) => {
               // marginTop: 115,
               // marginRight: 15,
             }}
-            onPress={() => { }}>
+            onPress={call}>
             <Text style={styles.text}>Search</Text>
           </Pressable>
         </View>
@@ -96,19 +147,11 @@ export const Search_Deadlines = ({ navigation }) => {
 
 
         <ScrollView style={styles.rectange}>
+          {/* {renderElement()} */}
 
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 1 {'\n'} </Text>
-          </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 2 {'\n'} </Text>
-          </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 3 {'\n'} </Text>
-          </Pressable>
-          <Pressable style={{ left: 5 }} onPress={() => { }}>
-            <Text style={{ left: 5 }}> Deadline 4 {'\n'} </Text>
-          </Pressable>
+          <ol>
+            {itemList}
+          </ol>
 
 
 

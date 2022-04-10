@@ -20,11 +20,14 @@ import { Logout_button } from  "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
 import { postEvents } from "../../actions/eventsAction";
+import { useFonts } from 'expo-font';
 //import { useSelector } from "react-redux";
 
 export const Addenrolmentdate = ({ navigation }) => {
 
-
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
   const dispatch = useDispatch();
   const [enrolmentdate, setenrolmentdate] = useState("");
   const [enrolmenttime, setenrolmenttime] = useState("");
@@ -72,7 +75,7 @@ export const Addenrolmentdate = ({ navigation }) => {
             marginLeft: 25,
             fontSize: 40,
             fontWeight: 'bold',
-            fontFamily: 'sans-serif-thin',
+            fontFamily: 'Outfit',
           }}>
           Enrolment
         </Text> */} 
@@ -85,7 +88,7 @@ export const Addenrolmentdate = ({ navigation }) => {
             marginLeft: 25,
             fontSize: 40,
             fontWeight: 'bold',
-            fontFamily: 'sans-serif-thin',
+            fontFamily: 'Outfit',
           }}>
           Date
         </Text> */}
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     marginLeft: width/11,
     fontSize: 15,
     fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
   
   id_text0: {
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text: {
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
   
   input_fields: {
