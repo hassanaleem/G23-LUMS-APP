@@ -130,9 +130,9 @@ export const Update_food_prices = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Logout_button onpress="" />
+        style={{ width: "100%", height: "100%" }}>
+        
+        <Logout_button nav = {navigation}/>
 
         <Text
           style={{
@@ -342,22 +342,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     alignSelf: "center",
   },
+
   restuarantDropdown: {
     position: "absolute",
-    width: 144,
+    width: width/2.6,
     height: 37,
     marginTop: height / 6,
-    marginLeft: width / 10,
+    marginLeft: width / 11,
     fontSize: 24,
     borderRadius: 7,
     textAlign: "center",
     backgroundColor: "#EDEDED",
-    // marginTop: 10,
-    // fontWeight: 400,
   },
+
   foodDropdown: {
     position: "absolute",
-    width: 144,
+    width: width/2.6,
     height: 37,
     marginTop: height / 6,
     marginLeft: width / 1.9,
@@ -365,6 +365,5 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     textAlign: "center",
     backgroundColor: "#EDEDED",
-    // marginTop: 10,
   },
 });

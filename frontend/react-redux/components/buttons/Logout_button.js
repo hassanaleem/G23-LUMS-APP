@@ -15,9 +15,16 @@ import {
 import { logout } from "../../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useFonts } from "expo-font";
+
 const {width, height} = Dimensions.get("screen");
 
 export function Logout_button(props) {
+
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Regular.ttf"),
+  });
+
   const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
   const navigation = props.nav;
@@ -53,5 +60,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
+    // fontFamily: "Outfit",
   },
 });

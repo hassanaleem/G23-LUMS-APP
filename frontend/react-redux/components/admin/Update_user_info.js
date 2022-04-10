@@ -26,6 +26,7 @@ const { width, height } = Dimensions.get("screen");
 import { findUser } from "../../actions/useractions";
 import { clearState } from "../../actions/useractions";
 import { updateUser } from "../../actions/useractions";
+
 export const Update_user_info = ({ navigation }) => {
   const dispatch = useDispatch();
   const [isEditable, setisEditable] = useState(false);
@@ -84,9 +85,9 @@ export const Update_user_info = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Logout_button onpress="" />
+        style={{ width: "100%", height: "100%" }}>
+        
+        <Logout_button nav = {navigation}/>
 
         <Text
           style={{

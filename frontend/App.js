@@ -32,7 +32,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="admin"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />

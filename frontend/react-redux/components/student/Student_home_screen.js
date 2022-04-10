@@ -16,6 +16,7 @@ import {
 } from "react-native";
 
 import { Main_button } from "../buttons/Main_button";
+import { Logout_button } from "../buttons/Logout_button";
 import { logout } from "../../actions/loginAction";
 
 import { useSelector } from "react-redux";
@@ -37,7 +38,7 @@ export const Student_home_screen = ({ navigation }) => {
         resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             alignItems: "center",
             justifyContent: "center",
@@ -58,7 +59,8 @@ export const Student_home_screen = ({ navigation }) => {
           {loggedOut ? navigation.navigate("Home") : null}
 
           <Text style={styles.logout_text}>Log out</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Logout_button nav = {navigation}/>
 
         <Text style={styles.topheading1}>Welcome</Text>
 
