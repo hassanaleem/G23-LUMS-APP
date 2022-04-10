@@ -30,7 +30,6 @@ export const Academic_progress = () => {
   const [grades, setGrades] = useState([]);
   const [hmm, setHmm] = useState(false);
   const [tempPrev, setTempPrev] = useState(0);
-  const [gpa, setGpa] = useState(0);
   const calcaulateGpa = () => {
     let totalCredits = 0;
     let totalGrades = 0;
@@ -58,7 +57,8 @@ export const Academic_progress = () => {
     }
     let gpa = totalGrades / totalCredits;
     gpa = gpa.toFixed(2);
-    setGpa(gpa);
+    // setGpa(gpa);
+    return gpa;
   };
 
   if (get == false) {
@@ -94,8 +94,8 @@ export const Academic_progress = () => {
   if (gradeslist.length != 0 && gradeslist.length != tempPrev) {
     setGrades(gradeslist);
     setTempPrev(gradeslist.length);
-    calcaulateGpa();
   }
+  let gpa = calcaulateGpa();
 
   return (
     <ImageBackground

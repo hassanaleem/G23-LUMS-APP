@@ -29,8 +29,7 @@ export const Gpa_calculator = ({ navigation }) => {
   const [creditsList, setCreditsList] = useState([0]);
   const [gradesList, setGradesList] = useState(["A+"]);
   const [frontendGpa, setfrontendGpa] = useState(0);
-  const [frontendCredits, setFrontendCredits] = useState(0);
-  const [frontendGrades, setFrontendGrades] = useState(0);
+
   const [calculate, setCalculate] = useState(true);
   ////////////
   const [courses, setCourses] = useState([]);
@@ -42,7 +41,8 @@ export const Gpa_calculator = ({ navigation }) => {
   const [cgpa, setCgpa] = useState(0);
 
   ////////////////////////
-
+  let frontendCredits = 0;
+  let frontendGrades = 0;
   const calcaulateGpa = () => {
     let totalCredits = 0;
     let totalGrades = 0;
@@ -51,8 +51,11 @@ export const Gpa_calculator = ({ navigation }) => {
       totalGrades += parseFloat(gradesList[i]) * parseFloat(creditsList[i]);
     }
     let gpa = totalGrades / totalCredits;
-    setFrontendGrades(totalGrades);
-    setFrontendCredits(totalCredits);
+    frontendCredits = totalCredits;
+    frontendGrades = totalGrades;
+    // setFrontendGrades(totalGrades);
+    // console.log(totalGrades, "UWU");
+    // setFrontendCredits(totalCredits);
     gpa = gpa.toFixed(2);
     setfrontendGpa(gpa);
     // return gpa;
@@ -83,13 +86,14 @@ export const Gpa_calculator = ({ navigation }) => {
       totalGrades +=
         parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
     }
-    if (frontendCredits == 0 && frontendGrades == 0) {
+
+    if (totalCredits != 0 && totalGrades != 0 && frontendCredits == 0) {
       let gpa = totalGrades / totalCredits;
       gpa = gpa.toFixed(2);
-
       setCgpa(gpa);
     } else if (frontendCredits != 0 && frontendGrades != 0) {
-      let gpa = totalGrades + frontendGrades / frontendCredits + totalCredits;
+      let gpa =
+        (totalGrades + frontendGrades) / (totalCredits + frontendCredits);
       gpa = gpa.toFixed(2);
       setCgpa(gpa);
     }
@@ -164,6 +168,7 @@ export const Gpa_calculator = ({ navigation }) => {
                   setCalculate(true);
                 }}
               >
+                <Picker.Item label="-" value="0" />
                 <Picker.Item label="1" value="1" />
                 <Picker.Item label="2" value="2" />
                 <Picker.Item label="3" value="3" />
@@ -180,6 +185,7 @@ export const Gpa_calculator = ({ navigation }) => {
                   setCalculate(true);
                 }}
               >
+                <Picker.Item label="-" value="0" />
                 <Picker.Item label="A+" value="4" />
                 <Picker.Item label="A" value="4.0" />
                 <Picker.Item label="A-" value="3.7" />

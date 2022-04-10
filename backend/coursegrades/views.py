@@ -65,7 +65,7 @@ def coursegrades(request):
 
         try:
             fetchedData = db.child("Data").child("CourseGrades").child(key).get().val()
-            fetchedData["Grade"] = grade
+            fetchedData["grade"] = grade
             db.child("Data").child("CourseGrades").child(key).set(fetchedData)
             return render(request, 'coursegrades.html')
         except:
