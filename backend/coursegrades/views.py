@@ -11,29 +11,26 @@ def coursegrades(request):
         db = database.connect_db()
         req = list(request.GET.items())
         id = req[0][1]
-        print(id)
         if (id == 'all'):
             data = db.child("Data").child("CourseGrades").get().val()
             data = list(data)
             return render(request, 'coursegrades.html', {'data': json.dumps(data)})
         else:
             try:
-                req_data = request.body.decode("utf-8")
-                req_data = json.loads(data)
-                course_id = req_data['courseId']
-                student_id = req_data['studentId']
-                key = course_id + student_id
-                data = (db.child("Data").child("CourseGrades").child(key).get().val())
+                data = db.child("Data").child("CourseGrades").child(id).get().val()
+                data = dict(data)
                 dic = {}
-                dic["Course ID"] = data["Course_ID"]
-                dic["Grade"] = data["Grade"]
-                dic["Credit Hrs"] = data["Credit_Hrs"]
-                data2 = (db.child("Data").child("Courses").child(data["Course_ID"]).get().val())
-                dic["Course Name"] = data2["Course_Name"]
-                return render(request, 'coursegrades.html', {'data': dic})
+                dic["Course_ID"] = data["course_id"]
+                dic["Grade"] = data["grade"]
+                dic["Credit_Hrs"] = data["credit_hrs"]
+                data2 = (db.child("Data").child("Courses").child(data["course_id"]).get().val())
+                dic["Course_Name"] = data2["name"]
+                # print(dic)
+                return render(request, 'coursegrades.html', {'data': json.dumps(dic)})
             except:
+                print("FAILED")
                 pass
-        return render(request, 'coursegrades.html', {'data'})
+        return render(request, 'coursegrades.html')
     elif request.method == "POST":
         db = database.connect_db()
         data = request.body.decode("utf-8")
@@ -68,7 +65,7 @@ def coursegrades(request):
 
         try:
             fetchedData = db.child("Data").child("CourseGrades").child(key).get().val()
-            fetchedData["Grade"] = grade
+            fetchedData["grade"] = grade
             db.child("Data").child("CourseGrades").child(key).set(fetchedData)
             return render(request, 'coursegrades.html')
         except:
