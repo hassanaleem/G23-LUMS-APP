@@ -18,10 +18,15 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Addfood, GetRestaurant } from "../../actions/foodactions";
+import {useFonts} from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Addfooditem = ({ navigation }) => {
+
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
   const [restaurant, setRestaurant] = useState("");
   const [foodItem, setFooditem] = useState("");
   const [price, setPrice] = useState("");
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
     marginLeft: width/11,
     fontSize: 15,
     fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text1: {
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text2: {
@@ -168,7 +173,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text3: {
@@ -176,7 +181,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   

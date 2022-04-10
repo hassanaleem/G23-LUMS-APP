@@ -21,11 +21,15 @@ import { addGrade } from '../../actions/courseGradeActions';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import { useFonts } from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Add_grade = ({navigation}) => {
+
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
 
   const [studentRollNumber, setstudentRollNumber] = useState("");
   const [courseCode, setcourseCode] = useState("");
@@ -143,7 +147,7 @@ id_text0: {
   marginLeft: width/11,
   fontSize: 15,
   fontWeight: '600',
-  fontFamily: 'sans-serif-thin',
+  fontFamily: 'Outfit',
 },
 
   id_text1: {
@@ -151,7 +155,7 @@ id_text0: {
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text2: {
@@ -159,7 +163,7 @@ id_text0: {
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text3: {
@@ -167,7 +171,7 @@ id_text0: {
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text4: {
@@ -175,7 +179,7 @@ id_text0: {
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   input_fields1: {

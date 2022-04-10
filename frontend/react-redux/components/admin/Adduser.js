@@ -22,10 +22,16 @@ import { addUser, findUser, clearState } from "../../actions/useractions";
 import { useDispatch, useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
 import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 export const Adduser = ({navigation}) => {
+
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
+
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
     marginLeft: width/11,
     fontSize: 15,
     fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text0: {
@@ -182,7 +188,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text: {
@@ -190,7 +196,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
   
   input_fields: {

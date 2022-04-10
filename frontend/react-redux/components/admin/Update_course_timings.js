@@ -20,10 +20,14 @@ import { Search_bar } from '../searchBar/Search_bar';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import {useFonts} from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Update_course_timings = ({navigation}) => {
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
 
   const [isEditable, setisEditable] = useState(false);
   const [courseTimings, setcourseTimings] = useState("");
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text2: {
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   input_fields1: {
