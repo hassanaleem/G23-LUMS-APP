@@ -124,10 +124,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    fontFamily: "Outfit",
   },
 
   topheading: {
-    marginTop: 0,
+    marginTop: -120,
     marginRight: 200,
     fontSize: 20,
     fontWeight: "bold",
@@ -145,11 +146,12 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 5,
     borderColor: "gray",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center",
   },
 
   password_text: {
@@ -164,10 +166,11 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 5,
     borderColor: "gray",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center",
   },
 });

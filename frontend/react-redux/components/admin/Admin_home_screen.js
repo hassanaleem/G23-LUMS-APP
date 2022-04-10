@@ -38,7 +38,7 @@ export const Admin_home_screen = ({ navigation }) => {
         source={require('../assets/whiteBackground.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '100%' }}>
-      <Pressable
+      {/* <Pressable
         style={{
           alignItems: "center",
           justifyContent: "center",
@@ -59,7 +59,8 @@ export const Admin_home_screen = ({ navigation }) => {
         {loggedOut ? navigation.navigate("Home") : null}
 
         <Text style={styles.logout_text}>Log out</Text>
-      </Pressable>
+      </Pressable> */}
+      <Logout_button nav = {navigation}/>
 
       <Text style={styles.topheading1}>Welcome</Text>
 

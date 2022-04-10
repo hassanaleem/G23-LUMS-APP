@@ -99,11 +99,11 @@ export const Update_course_timings = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Logout_button onpress="" />
-
-        <Text
+        style={{ width: '100%', height: '100%' }}>
+          
+          <Logout_button nav = {navigation}/>
+          
+          <Text
           style={{
             position: "absolute",
             fontSize: 27,

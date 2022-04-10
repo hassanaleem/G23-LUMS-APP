@@ -30,8 +30,8 @@ import { updateUser } from "../../actions/useractions";
 import { useFonts } from "expo-font";
 export const Update_user_info = ({ navigation }) => {
   const [loaded] = useFonts({
-    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
-  }); 
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
 
   const dispatch = useDispatch();
   const [isEditable, setisEditable] = useState(false);
@@ -92,7 +92,7 @@ export const Update_user_info = ({ navigation }) => {
         resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
-        <Logout_button onpress="" />
+        <Logout_button nav={navigation} />
 
         <Text
           style={{

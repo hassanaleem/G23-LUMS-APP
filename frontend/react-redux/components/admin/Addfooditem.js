@@ -128,18 +128,18 @@ export const Addfooditem = ({ navigation }) => {
           text="Add Food Item"
           onPress={add}
           horizontal_padding={0}
-          margintop={height / 15}
-          marginleft={width / 6}
-          marginright={width / 6}
+          margintop={height/4}
+          marginleft={width/6}
+          marginright={width/6}
         />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
           horizontal_padding={0}
-          margintop={height / 50}
-          marginleft={width / 6}
-          marginright={width / 6}
+          margintop={height/50}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ImageBackground>
     </View>
