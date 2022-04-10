@@ -18,6 +18,19 @@ def fooditems(request):
         except:
             pass
         db.child("Data").child("foodItems").child(ide).set(data)
+
+        # Adding Notifications
+        data = db.child("Data").child("Notifications").get()
+        for d in data.each():
+            notification = "Update in Food Menu"
+            try:
+                x = d.val()
+                x.append(notification)
+                db.child("Data").child("Notifications").child(d.key()).set(x)
+            except:
+                x = [notification]
+                db.child("Data").child("Notifications").child(d.key()).set(x)
+
         return render(request, 'fooditems.html')
     elif request.method == "GET":
         db = database.connect_db()
@@ -28,7 +41,6 @@ def fooditems(request):
         id = id[0]
         if (id == "restaurants"):
             data = db.child("Data").child("foodItems").get().val()
-            print(data)
             # get restaurant from data
             restaurants = []
             for i in data:
@@ -48,7 +60,19 @@ def fooditems(request):
         data = json.loads(data)
         id = data["id"]
         data.pop("id")
-        # print(data,id)
         db.child("Data").child("foodItems").child(id).set(data)
+
+        # Adding Notifications
+        data = db.child("Data").child("Notifications").get()
+        for d in data.each():
+            notification = "Update in Food Menu"
+            try:
+                x = d.val()
+                x.append(notification)
+                db.child("Data").child("Notifications").child(d.key()).set(x)
+            except:
+                x = [notification]
+                db.child("Data").child("Notifications").child(d.key()).set(x)
+                
         return render(request, 'fooditems.html')
         

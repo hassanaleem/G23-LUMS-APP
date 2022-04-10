@@ -1,27 +1,33 @@
 const initialData = {
-    message: "",
-}
+  message: "",
+  data: [],
+};
 
 const courseGradeReducer = (state = initialData, action) => {
-    const data = action.payload
-    switch (action.type) {
-        case 'ADD_GRADE':
-            return {
-                ...state,
-                message: "Success",
-            }
-            
-        case "ADD_GRADE_FAILED":
-            
-            return {
-                ...state,
-                message: "Failure",
-            }
+  const data = action.payload;
+  switch (action.type) {
+    case "ADD_GRADE":
+      return {
+        ...state,
+        message: "Success",
+      };
 
-        default:
-            return state
-    }
+    case "ADD_GRADE_FAILED":
+      return {
+        ...state,
+        message: "Failure",
+      };
+    case "GET_GRADE":
+      const newdata1 = data.replace(/&quot;/g, '"');
+      const finalData1 = JSON.parse(newdata1);
+      return {
+        ...state,
+        message: "Success",
+        data: [...state.data, finalData1],
+      };
+    default:
+      return state;
+  }
+};
 
-}
-
-export default courseGradeReducer
+export default courseGradeReducer;

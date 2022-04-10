@@ -20,12 +20,29 @@ import { Main_button } from "../buttons/Main_button";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { getEnrollments } from "../../actions/coursesactions";
+import { getGrade } from "../../actions/courseGradeActions";
 
 export const Gpa_calculator = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [countArray, setCountarray] = useState([0]);
   const [creditsList, setCreditsList] = useState([0]);
   const [gradesList, setGradesList] = useState(["A+"]);
+  const [frontendGpa, setfrontendGpa] = useState(0);
 
+  const [calculate, setCalculate] = useState(true);
+  ////////////
+  const [courses, setCourses] = useState([]);
+  const [get, setGet] = useState(false);
+  const [enrollments, setEnrollments] = useState([]);
+  const [grades, setGrades] = useState([]);
+  const [hmm, setHmm] = useState(false);
+  const [tempPrev, setTempPrev] = useState(0);
+  const [cgpa, setCgpa] = useState(0);
+
+  ////////////////////////
+  let frontendCredits = 0;
+  let frontendGrades = 0;
   const calcaulateGpa = () => {
     let totalCredits = 0;
     let totalGrades = 0;
@@ -34,15 +51,98 @@ export const Gpa_calculator = ({ navigation }) => {
       totalGrades += parseFloat(gradesList[i]) * parseFloat(creditsList[i]);
     }
     let gpa = totalGrades / totalCredits;
+    frontendCredits = totalCredits;
+    frontendGrades = totalGrades;
+    // setFrontendGrades(totalGrades);
+    // console.log(totalGrades, "UWU");
+    // setFrontendCredits(totalCredits);
     gpa = gpa.toFixed(2);
-    console.log(gpa);
-    return gpa;
+    setfrontendGpa(gpa);
+    // return gpa;
   };
   const calculateCgpa = () => {
     let totalCredits = 0;
     let totalGrades = 0;
+    let gradeToValue = {
+      "A+": 4.0,
+      A: 4.0,
+      "A-": 3.7,
+      "B+": 3.3,
+      B: 3.0,
+      "B-": 2.7,
+      "C+": 2.3,
+      C: 2.0,
+      "C-": 1.7,
+      "D+": 1.3,
+      D: 1.0,
+      "D-": 0.7,
+      F: 0.0,
+      NA: 0.0,
+    };
+
+    for (let i = 0; i < grades.length; i++) {
+      totalCredits += parseFloat(grades[i].Credit_Hrs);
+      let temp = grades[i].Grade;
+      totalGrades +=
+        parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
+    }
+
+    if (totalCredits != 0 && totalGrades != 0 && frontendCredits == 0) {
+      let gpa = totalGrades / totalCredits;
+      gpa = gpa.toFixed(2);
+      setCgpa(gpa);
+    } else if (frontendCredits != 0 && frontendGrades != 0) {
+      let gpa =
+        (totalGrades + frontendGrades) / (totalCredits + frontendCredits);
+      gpa = gpa.toFixed(2);
+      setCgpa(gpa);
+    }
   };
-  let gpa = calcaulateGpa();
+  if (calculate == true) {
+    calcaulateGpa();
+    calculateCgpa();
+    setCalculate(false);
+  }
+  ////////////////////////
+
+  if (get == false) {
+    dispatch(getEnrollments("all"));
+    setGet(true);
+  }
+  let coursesState = useSelector((state) => state.courseReducer);
+  let enrollmentslist = coursesState.data;
+  if (enrollmentslist.length != 0 && enrollments.length == 0) {
+    setEnrollments(enrollmentslist);
+  }
+  let userState = useSelector((state) => state.loginReducer);
+  let user = userState.user.Id;
+  if (courses.length == 0) {
+    let temp2 = [];
+    for (let i = 0; i < enrollments.length; i++) {
+      if (enrollments[i].includes(user)) {
+        temp2.push(enrollments[i]);
+      }
+    }
+    if (temp2.length != 0) {
+      setCourses(temp2);
+    }
+  }
+  if (hmm == false && courses.length != 0 && grades.length == 0) {
+    for (let i = 0; i < courses.length; i++) {
+      dispatch(getGrade(courses[i]));
+    }
+    setHmm(true);
+  }
+  let gradesState = useSelector((state) => state.courseGradeReducer);
+  let gradeslist = gradesState.data;
+  if (gradeslist.length != 0 && gradeslist.length != tempPrev) {
+    setGrades(gradeslist);
+    setTempPrev(gradeslist.length);
+    setCalculate(true);
+  }
+
+  ////////////////////////
+
   return (
     <ImageBackground
       source={require("../assets/background.png")}
@@ -65,8 +165,10 @@ export const Gpa_calculator = ({ navigation }) => {
                   let newArr = [...creditsList];
                   newArr[index] = itemValue;
                   setCreditsList(newArr);
+                  setCalculate(true);
                 }}
               >
+                <Picker.Item label="-" value="0" />
                 <Picker.Item label="1" value="1" />
                 <Picker.Item label="2" value="2" />
                 <Picker.Item label="3" value="3" />
@@ -80,8 +182,10 @@ export const Gpa_calculator = ({ navigation }) => {
                   let newArr = [...gradesList];
                   newArr[index] = itemValue;
                   setGradesList(newArr);
+                  setCalculate(true);
                 }}
               >
+                <Picker.Item label="-" value="0" />
                 <Picker.Item label="A+" value="4" />
                 <Picker.Item label="A" value="4.0" />
                 <Picker.Item label="A-" value="3.7" />
@@ -109,7 +213,7 @@ export const Gpa_calculator = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.gpaBox}>
           <Text style={styles.gpaText}>
-            Predicted GPA: {gpa} Predicted CGPA: {gpa}
+            Predicted GPA: {frontendGpa} Predicted CGPA: {cgpa}
           </Text>
         </View>
         <Main_button

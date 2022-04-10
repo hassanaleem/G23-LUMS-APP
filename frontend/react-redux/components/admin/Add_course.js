@@ -20,10 +20,14 @@ import { addCourse } from "../../actions/coursesactions";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useFonts } from "expo-font";
 
 const { width, height } = Dimensions.get("screen");
 
 export const Add_course = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [courseCode, setcourseCode] = useState("");
   const [courseName, setcourseName] = useState("");
@@ -160,9 +164,9 @@ export const Add_course = ({ navigation }) => {
           text="Add Course"
           onPress={call}
           horizontal_padding={0}
-          margintop={height/45}
-          marginleft={width/6}
-          marginright={width/6}
+          margintop={height / 45}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
 
         <Main_button
@@ -184,52 +188,52 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-id_text0: {
-    marginTop: height/50,
-    marginLeft: width/11,
+  id_text0: {
+    marginTop: height / 50,
+    marginLeft: width / 11,
     fontSize: 15,
     fontWeight: "600",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text1: {
-    marginTop: height/120,
-    marginLeft: width/10,
+    marginTop: height / 120,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text2: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text3: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text4: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text5: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   input_fields1: {

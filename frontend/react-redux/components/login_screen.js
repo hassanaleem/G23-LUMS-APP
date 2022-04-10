@@ -27,13 +27,10 @@ export const Login_screen = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const [isStudent, setIsStudent] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isInstructor, setIsInstructor] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordText, setPasswordText] = useState("");
+  
   let allowed = useSelector((state) => state.loginReducer).allowed;
 
   const hash = async (data) => {
@@ -47,21 +44,22 @@ export const Login_screen = ({ navigation }) => {
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
     let type = data.user.Type;
-    // convert type to upper case
     if (type != undefined) {
-      type = type.toUpperCase();
-      if (type === "STUDENT" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsStudent(true);
-      }
-
-      if (type === "INSTRUCTOR" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsInstructor(true);
-      }
-      if (type === "ADMIN" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsAdmin(true);
+      if (allowed == true)
+      {
+        type = type.toUpperCase();
+        if (type == "STUDENT") 
+        {
+          navigation.navigate("student")
+        }
+        else if (type == "INSTRUCTOR")
+        {
+          navigation.navigate("instructor")
+        }
+        else if (type == "ADMIN")
+        {
+          navigation.navigate("admin")
+        }
       }
     }
   };
@@ -110,14 +108,6 @@ export const Login_screen = ({ navigation }) => {
         secureTextEntry={true}
         placeholder="Enter Password"
       />
-      {allowed && isLoggedIn && isStudent
-        ? navigation.navigate("student")
-        : null}
-      {allowed && isLoggedIn && isInstructor
-        ? navigation.navigate("instructor")
-        : null}
-      {allowed && isLoggedIn && isAdmin ? navigation.navigate("admin") : null}
-
       <Main_button
         text="Log in"
         onPress={onPress}

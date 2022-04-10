@@ -19,16 +19,16 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {
-  clearState,
-  getAllFoodItems,
-  updateFoodItem,
-} from "../../actions/foodactions";
+import {useFonts} from 'expo-font';
+import { clearState, getAllFoodItems, updateFoodItem } from "../../actions/foodactions";
 import { Picker } from "@react-native-picker/picker";
 
 const { width, height } = Dimensions.get("screen");
 
 export const Update_food_prices = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
   const dispatch = useDispatch();
 
   const [isEditable, setisEditable] = useState(false);
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text2: {
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text3: {
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   input_fields1: {

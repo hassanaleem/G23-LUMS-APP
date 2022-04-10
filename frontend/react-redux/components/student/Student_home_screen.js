@@ -108,7 +108,7 @@ export const Student_home_screen = ({ navigation }) => {
         />
         <Main_button
           text="All Resturents Menu"
-          onPress=""
+          onPress={() => navigation.navigate("Student_view_menu")}
           horizontal_padding={0}
           margintop={height / 50}
           marginleft={width / 7}

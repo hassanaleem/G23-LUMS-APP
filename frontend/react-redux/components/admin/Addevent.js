@@ -17,10 +17,14 @@ import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
 import { postEvents } from "../../actions/eventsAction";
+import {useFonts} from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Addevent = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  }); 
   const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [date, setdate] = useState("");
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
     marginLeft: width/11,
     fontSize: 15,
     fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text0: {
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   id_text: {
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
     marginLeft: width/10,
     fontSize: 15,
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
 
   input_fields: {
