@@ -42,14 +42,18 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Fetched" && deadlines.length != 0) {
     for (let i = 0; i < deadlines.length; i++) {
-      console.log(deadlines)
       items.push(deadlines[i]["Deadline_Title"])
     }
   }
 
   let itemList = items.map((item, index) => {
     return <li key={index}>
-      <Pressable style={{ left: 5 }} onPress={() => navigation.navigate("EditDeadline")}>
+      <Pressable style={{ left: 5 }} onPress={() => 
+      {
+        let obj = JSON.stringify(deadlines[index])
+        navigation.navigate("EditDeadline", {data: obj})
+      }
+      }>
         <Text style={{ left: 5 }}> {item} </Text>
       </Pressable>
       

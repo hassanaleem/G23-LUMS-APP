@@ -42,6 +42,18 @@ const deadlineReducer = (state = initialData, action) => {
         message: "Failure Search",
       }
 
+    case "UPDATE_DEADLINE":
+      return{
+        ...state,
+        message: "Success Update",
+      }
+
+    case "UPDATE_DEADLINE_FAIL":
+      return{
+        ...state,
+        message: "Failure Update",
+      }
+
     default:
       return state;
   }
