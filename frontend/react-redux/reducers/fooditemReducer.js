@@ -1,5 +1,7 @@
 const initialData = {
-  restaurant: {},
+  restaurant: [],
+  find: false,
+  queryRun: false,
 };
 const foodItemReducer = (state = initialData, action) => {
   const data = action.payload;
@@ -10,6 +12,8 @@ const foodItemReducer = (state = initialData, action) => {
       const finalData = JSON.parse(newdata);
       return {
         ...state,
+        find: true,
+        queryRun: true,
         restaurant: finalData,
       };
     case "ADD_FOODITEM":
@@ -22,7 +26,16 @@ const foodItemReducer = (state = initialData, action) => {
       const finalData1 = JSON.parse(newdata1);
       return {
         ...state,
-        data: finalData1,
+        find: true,
+        queryRun: true,
+        restaurant: finalData1,
+      };
+
+    case "CLEAR_STATE":
+      return {
+        ...state,
+        find: false,
+        queryRun: false,
       };
 
     default:

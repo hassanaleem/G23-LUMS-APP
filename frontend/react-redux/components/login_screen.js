@@ -16,19 +16,15 @@ import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 
-function font() 
-{
-
-}
+function font() {}
 
 export const Login_screen = ({ navigation }) => {
   const [loaded] = useFonts({
-    Outfit: require('./assets/fonts/static/Outfit-Regular.ttf'),
-  }); 
-  
-  
+    Outfit: require("./assets/fonts/static/Outfit-Regular.ttf"),
+  });
+
   const dispatch = useDispatch();
 
   const [isStudent, setIsStudent] = useState(false);
@@ -78,8 +74,8 @@ export const Login_screen = ({ navigation }) => {
   };
   validate();
 
-  if (!loaded){
-    return null
+  if (!loaded) {
+    return null;
   }
 
   return (
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 
   topheading: {
