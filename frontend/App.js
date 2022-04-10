@@ -33,7 +33,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Notifications_screen"
+          initialRouteName="Academic_progress"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
