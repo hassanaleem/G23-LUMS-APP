@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from 'react-native';
 import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
@@ -21,7 +22,7 @@ import { useSelector } from 'react-redux';
 import { Deadlines } from '../student/Deadlines';
 
 
-
+const { width, height } = Dimensions.get("screen");
 
 export const Search_Deadlines = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -42,20 +43,10 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Fetched" && deadlines.length != 0) {
     for (let i = 0; i < deadlines.length; i++) {
-      console.log(deadlines)
+      //console.log(deadlines)
       items.push(deadlines[i]["Deadline_Title"])
     }
   }
-
-  let itemList = items.map((item, index) => {
-    return <li key={index}>
-      <Pressable style={{ left: 5 }} onPress={() => navigation.navigate("EditDeadline")}>
-        <Text style={{ left: 5 }}> {item} </Text>
-      </Pressable>
-      
-    </li>
-  })
-
 
   if (message == "Failure Search") {
     Alert.alert("Search Failed", "Instructor Does not teach this course")
@@ -74,24 +65,22 @@ export const Search_Deadlines = ({ navigation }) => {
 
         <Text
           style={{
-            position: 'absolute',
-            top: 35,
-            left: 7,
-            marginLeft: 25,
-            fontSize: 29,
-            fontWeight: 'bold',
-            fontFamily: 'sans-serif-thin',
+            position: "absolute",
+            fontSize: 27,
+            fontWeight: "bold",
+            marginTop: height / 24,
+            marginLeft: width / 12,
           }}>
           Search Deadline
         </Text>
 
-        <Text style={styles.id_text}>Search:</Text>
+        <Text style={styles.id_text1}>Search:</Text>
 
         <View
           style={[
             styles.containerrrr,
             {
-              // Try setting `flexDirection` to `"row"`.
+
               flexDirection: 'row',
             },
           ]}>
@@ -100,10 +89,9 @@ export const Search_Deadlines = ({ navigation }) => {
               flex: 3,
               // /position: 'absolute',
               fontSize: 15,
-              marginLeft: 10,
+              //marginLeft: 0,
               height: 40,
               width: 300,
-              // marginTop: 5,
               borderColor: 'gray',
               borderWidth: 0,
               borderRadius: 5,
@@ -119,49 +107,43 @@ export const Search_Deadlines = ({ navigation }) => {
           <Pressable
             style={{
               flex: 1,
-              // position: 'absolute',
               alignItems: 'center',
-              // justifyContent: 'center',
               paddingVertical: 10,
               paddingHorizontal: 15,
               height: 40,
-              // borderBottomRightRadius: 5,
-              // borderTopRightRadius: 5,
+             
               backgroundColor: '#79c4f2',
-              // marginLeft: 260,
-              // marginTop: 115,
-              // marginRight: 15,
             }}
             onPress={call}>
             <Text style={styles.text}>Search</Text>
           </Pressable>
+
         </View>
+
 
 
 
         <Text style={styles.id_text2}>Deadlines:</Text>
 
 
+
         <ScrollView style={styles.rectange}>
-          {/* {renderElement()} */}
-
-          <ol>
-            {itemList}
-          </ol>
-
-
-
-
-
+          {items.map((item, index) => (
+            <View key={index}>
+              <Pressable style={{ left: 5 }} onPress={() => navigation.navigate("EditDeadline")}>
+                <Text style={{ left: 5 }}> {item} </Text>
+              </Pressable>
+            </View>
+          ))}
         </ScrollView>
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("instructor")}
-          horizontal_padding={50}
-          margintop={300}
-          marginleft={47}
-          marginright={47}
+          horizontal_padding={0}
+          margintop={height / 50}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </ImageBackground>
     </View>
@@ -170,37 +152,45 @@ export const Search_Deadlines = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+
     justifyContent: 'center',
     alignItems: 'center',
   },
   containerrrr: {
+    marginTop: height / 10,
+    position: 'absolute',
     flex: 1,
     padding: 20,
-    width: 350,
+
+    width: width / 1.1,
+    marginLeft: width / 18,
   },
-  id_text: {
-    marginTop: 10,
-    marginLeft: 30,
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
-  },
+
   id_text2: {
-    marginTop: 30,
-    marginLeft: 30,
-    fontSize: 20,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-thin',
+
+    marginTop: height / 15,
+    marginLeft: width / 10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
+
   },
   rectange: {
-    height: 150,
-    width: 300,
+    width: width / 1.219,
+    maxHeight: height / 4.05,
+    marginLeft: width / 10,
+    marginTop: height / 80,
     backgroundColor: '#eceded',
-    // position: 'absolute',
-    marginTop: 20,
-    marginLeft: 30,
     zIndex: 99,
     borderRadius: 5,
+  },
+
+  id_text1: {
+    marginTop: height / 120,
+    marginLeft: width / 10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
   },
 
 });
