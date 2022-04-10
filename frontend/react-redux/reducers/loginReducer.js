@@ -1,6 +1,7 @@
 const initialData = {
   allowed: false,
   user: {},
+  message: "",
 };
 
 const loginReducer = (state = initialData, action) => {
@@ -20,11 +21,13 @@ const loginReducer = (state = initialData, action) => {
         ...state,
         user: {},
         allowed: false,
+        message: "",
       };
     case "SIGN_IN_FAILED":
       return {
         user: {},
         allowed: false,
+        message: "Failed"
       };
     default:
       return state;
