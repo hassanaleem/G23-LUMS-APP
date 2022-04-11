@@ -20,17 +20,21 @@ import { Search_bar } from '../searchBar/Search_bar';
 import { SearchDeadlines } from '../../actions/deadlineactions';
 import { useSelector } from 'react-redux';
 import { Deadlines } from '../student/Deadlines';
-
+import { useFonts } from "expo-font";
 
 const { width, height } = Dimensions.get("screen");
 
 export const Search_Deadlines = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [courseID, setCourseID] = useState('');
   let instructorID = useSelector((state) => state.loginReducer).user.Id
   function call() {
     if (courseID.length > 0) {
       dispatch(SearchDeadlines(courseID, instructorID));
+     
       setCourseID("")
     }
   }
@@ -42,6 +46,7 @@ export const Search_Deadlines = ({ navigation }) => {
   let items = []
 
   if (message == "Fetched" && deadlines.length != 0) {
+    items = []
     for (let i = 0; i < deadlines.length; i++) {
       items.push(deadlines[i]["Deadline_Title"])
     }
@@ -59,7 +64,7 @@ export const Search_Deadlines = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: '100%', height: '99%' }}>
+        style={{ width: '100%', height: '100%' }}>
         <Logout_button nav={navigation} />
 
         <Text
@@ -67,6 +72,7 @@ export const Search_Deadlines = ({ navigation }) => {
             position: "absolute",
             fontSize: 27,
             fontWeight: "bold",
+            fontFamily: 'Outfit',
             marginTop: height / 24,
             marginLeft: width / 12,
           }}>
@@ -93,10 +99,12 @@ export const Search_Deadlines = ({ navigation }) => {
               width: 300,
               borderColor: 'gray',
               borderWidth: 0,
-              borderRadius: 5,
+              borderTopLeftRadius: 5,
+              borderBottomLeftRadius: 5,
               backgroundColor: '#eceded',
-              // paddingVertical: 10,
-              // paddingHorizontal: 15,
+              paddingVertical: 10,
+              paddingHorizontal: 15,
+              fontFamily: 'Outfit',
             }}
             placeholder={' Enter Course ID'}
             onChangeText={(text) => setCourseID(text)}
@@ -110,8 +118,10 @@ export const Search_Deadlines = ({ navigation }) => {
               paddingVertical: 10,
               paddingHorizontal: 15,
               height: 40,
-             
+              borderBottomRightRadius: 5,
+              borderTopRightRadius: 5,
               backgroundColor: '#79c4f2',
+              fontFamily: 'Outfit',
             }}
             onPress={call}>
             <Text style={styles.text}>Search</Text>
@@ -132,9 +142,9 @@ export const Search_Deadlines = ({ navigation }) => {
               <Pressable style={{ left: 5 }} onPress={() => {
                 let obj = JSON.stringify(deadlines[index])
                 console.log("obj", obj)
-                navigation.navigate("EditDeadline", {data: obj})
+                navigation.navigate("EditDeadline", { data: obj })
               }}>
-                <Text style={{ left: 5 , fontSize: 18, marginTop: 13}}> {item} </Text>
+                <Text style={{ left: 5, fontSize: 18, marginTop: 13, fontFamily: 'Outfit', }}> {item} </Text>
               </Pressable>
             </View>
           ))}
@@ -144,7 +154,7 @@ export const Search_Deadlines = ({ navigation }) => {
           text="Go Back"
           onPress={() => navigation.navigate("instructor")}
           horizontal_padding={0}
-          margintop={height / 50}
+          margintop={height / 4.35}
           marginleft={width / 6}
           marginright={width / 6}
         />
@@ -160,7 +170,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerrrr: {
-    marginTop: height / 10,
+    marginTop: height / 8,
     position: 'absolute',
     flex: 1,
     padding: 20,
@@ -168,32 +178,38 @@ const styles = StyleSheet.create({
     width: width / 1.1,
     marginLeft: width / 18,
   },
+  text: {
+
+    color: "white",
+    fontFamily: 'Outfit',
+  },
 
   id_text2: {
 
-    marginTop: height / 15,
+    marginTop: height / 13,
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
+
 
   },
   rectange: {
     width: width / 1.219,
     maxHeight: height / 4.05,
     marginLeft: width / 10,
-    marginTop: height / 80,
+    marginTop: height / 110,
     backgroundColor: '#eceded',
     zIndex: 99,
     borderRadius: 5,
   },
 
   id_text1: {
-    marginTop: height / 120,
+    marginTop: height / 28,
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
 
 });

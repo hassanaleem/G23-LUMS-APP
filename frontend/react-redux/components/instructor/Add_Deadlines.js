@@ -19,10 +19,13 @@ import { useDispatch } from "react-redux";
 import { addDeadline } from "../../actions/deadlineactions";
 import { useSelector } from "react-redux";
 import { getDeadline } from "../../actions/deadlineactions";
-
-const {width, height} = Dimensions.get("screen");
+import { useFonts } from 'expo-font';
+const { width, height } = Dimensions.get("screen");
 
 export const Add_Deadlines = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
+  });
   const dispatch = useDispatch();
   const [courseCode, setCourseCode] = useState("");
   const [deadlineTitle, setDeadlineTitle] = useState("");
@@ -97,8 +100,9 @@ export const Add_Deadlines = ({ navigation }) => {
             position: "absolute",
             fontSize: 27,
             fontWeight: 'bold',
-            marginTop: height/24,
-            marginLeft: width/12,
+            marginTop: height / 24,
+            marginLeft: width / 12,
+            fontFamily: 'Outfit',
           }}
         >
           Add Deadline
@@ -143,10 +147,10 @@ export const Add_Deadlines = ({ navigation }) => {
         />
 
         <Main_button
-          text="Add Event"
+          text="Add Deadline"
           onPress={add}
-          horizontal_padding={30}
-          margintop={height/45}
+          horizontal_padding={0}
+          margintop={height/5.3}
           marginleft={width/6}
           marginright={width/6}
         />
@@ -173,61 +177,49 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
   topline: {
-    marginTop: height/40,
-    marginLeft: width/11,
+    marginTop: height / 40,
+    marginLeft: width / 11,
     fontSize: 15,
     fontWeight: '600',
-    fontFamily: 'sans-serif-thin',
+    fontFamily: 'Outfit',
   },
-  userid: {
-    marginLeft: 30,
-    height: 40,
-    width: 300,
-    marginTop: 10,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 20,
-    backgroundColor: "#eceded",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-  },
-  
+ 
   id_text1: {
-    marginTop: height/120,
-    marginLeft: width/10,
+    marginTop: height / 120,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
 
   id_text2: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
 
   id_text3: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
 
   id_text4: {
-    marginTop: height/90,
-    marginLeft: width/10,
+    marginTop: height / 90,
+    marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: 'Outfit',
   },
 
- 
+
 
   input_fields1: {
     height: 40,
@@ -240,6 +232,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
   input_fields2: {
@@ -253,6 +246,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
   input_fields3: {
@@ -266,6 +260,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
   input_fields4: {
@@ -279,7 +274,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
-  
+
 });

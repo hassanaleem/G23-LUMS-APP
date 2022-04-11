@@ -59,7 +59,7 @@ export const Edit_deadline = ({ route, navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "99%" }}
+        style={{ width: "100%", height: "100%" }}
       >
       <Logout_button nav = {navigation} />
       <Text style = {styles.topHeading}>Edit Deadline</Text>
@@ -86,7 +86,7 @@ export const Edit_deadline = ({ route, navigation }) => {
           text="Edit Deadline"
           onPress={onPress}
           horizontal_padding={0}
-          margintop={height/3.3}
+          margintop={height/2.98}
           marginleft={width/6}
           marginright={width/6}
         />

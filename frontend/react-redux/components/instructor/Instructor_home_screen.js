@@ -27,7 +27,7 @@ export const Instructor_home_screen = ({navigation}) => {
       <ImageBackground
         source={require('../assets/background.png')}
         resizeMode="cover"
-        style={{ width: '100%', height: '99%' }}>
+        style={{ width: '100%', height: '100%' }}>
           
         <Logout_button nav = {navigation}/>
 

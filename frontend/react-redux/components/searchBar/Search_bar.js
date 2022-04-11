@@ -49,6 +49,7 @@ export function Search_bar(props) {
           alignItems: "center",
           justifyContent: "center",
           paddingVertical: 8,
+          height: 40,
           paddingHorizontal: width/13,
           borderBottomRightRadius: 5,
           borderTopRightRadius: 5,
