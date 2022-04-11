@@ -37,4 +37,13 @@ def courses(request):
             courses = db.child("Data").child("Courses").get()
             courses = courses.val()
             return render(request, 'courses.html', {'courses': json.dumps(courses)})
+    if request.method == "PUT":
+        db = database.connect_db()
+        data = request.body.decode("utf-8")
+        data = json.loads(data) 	
+        course_id = data['course_id']
+        if(len(course_id)):
+            data.pop('course_id')
+            db.child("Data").child("Courses").child(course_id).set(data)
+            return render(request, 'courses.html')
     return render(request, 'courses.html')

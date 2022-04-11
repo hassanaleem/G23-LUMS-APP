@@ -10,5 +10,6 @@ urlpatterns = [
     path('', include('fooditems.urls')),
     path('' , include('deadlines.urls')),
     path('' , include('coursegrades.urls')),
+    path('' , include('notifications.urls')),
     
 ]

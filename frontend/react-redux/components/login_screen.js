@@ -16,28 +16,21 @@ import { login, logout, loginFailed } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 
-function font() 
-{
-
-}
+function font() {}
 
 export const Login_screen = ({ navigation }) => {
   const [loaded] = useFonts({
-    Outfit: require('./assets/fonts/static/Outfit-Regular.ttf'),
-  }); 
-  
-  
+    Outfit: require("./assets/fonts/static/Outfit-Regular.ttf"),
+  });
+
   const dispatch = useDispatch();
 
-  const [isStudent, setIsStudent] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isInstructor, setIsInstructor] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordText, setPasswordText] = useState("");
+  
   let allowed = useSelector((state) => state.loginReducer).allowed;
 
   const hash = async (data) => {
@@ -51,21 +44,22 @@ export const Login_screen = ({ navigation }) => {
   const validate = () => {
     let data = useSelector((state) => state.loginReducer);
     let type = data.user.Type;
-    // convert type to upper case
     if (type != undefined) {
-      type = type.toUpperCase();
-      if (type === "STUDENT" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsStudent(true);
-      }
-
-      if (type === "INSTRUCTOR" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsInstructor(true);
-      }
-      if (type === "ADMIN" && isLoggedIn == false) {
-        setIsLoggedIn(true);
-        setIsAdmin(true);
+      if (allowed == true)
+      {
+        type = type.toUpperCase();
+        if (type == "STUDENT") 
+        {
+          navigation.navigate("student")
+        }
+        else if (type == "INSTRUCTOR")
+        {
+          navigation.navigate("instructor")
+        }
+        else if (type == "ADMIN")
+        {
+          navigation.navigate("admin")
+        }
       }
     }
   };
@@ -78,8 +72,8 @@ export const Login_screen = ({ navigation }) => {
   };
   validate();
 
-  if (!loaded){
-    return null
+  if (!loaded) {
+    return null;
   }
 
   return (
@@ -114,14 +108,6 @@ export const Login_screen = ({ navigation }) => {
         secureTextEntry={true}
         placeholder="Enter Password"
       />
-      {allowed && isLoggedIn && isStudent
-        ? navigation.navigate("student")
-        : null}
-      {allowed && isLoggedIn && isInstructor
-        ? navigation.navigate("instructor")
-        : null}
-      {allowed && isLoggedIn && isAdmin ? navigation.navigate("admin") : null}
-
       <Main_button
         text="Log in"
         onPress={onPress}
@@ -137,11 +123,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    fontFamily: "Outfit",
   },
 
   topheading: {
-    marginTop: 0,
+    marginTop: -120,
     marginRight: 200,
     fontSize: 20,
     fontWeight: "bold",
@@ -159,11 +146,12 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 5,
     borderColor: "gray",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center",
   },
 
   password_text: {
@@ -178,10 +166,11 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 5,
     borderColor: "gray",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     backgroundColor: "#eceded",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    alignSelf: "center",
   },
 });

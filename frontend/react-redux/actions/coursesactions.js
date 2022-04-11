@@ -2,18 +2,6 @@ import React from "react";
 import axios from "axios";
 import { address } from "./server";
 
-export const getGrade = (id) => {
-  const request = address + "/grades?" + `id=${id}`;
-  return (dispatch) => {
-    axios.get(request).then((response) => {
-      dispatch({
-        type: "GET_GRADE",
-        payload: response.data,
-      });
-    });
-  };
-};
-
 export const addGrade = (
   courseId,
   name,
@@ -142,7 +130,6 @@ export const enrollCourse = (courseId, studentId) => {
 
 export const getEnrollments = (id) => {
   const request = address + "/coursegrades?" + `id=${id}`;
-  console.log(request);
   return (dispatch) => {
     axios
       .get(request)
@@ -155,6 +142,45 @@ export const getEnrollments = (id) => {
       .catch((err) => {
         dispatch({
           type: "GET_ENROLLMENTS_FAILED",
+          payload: "Failed",
+        });
+      });
+  };
+};
+
+export const updateCourse = (
+  course_id,
+  name,
+  timings,
+  day,
+  instructorId,
+  creditHours
+) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({
+    course_id,
+    name,
+    timings,
+    day,
+    instructorId,
+    creditHours,
+  });
+  return (dispatch) => {
+    axios
+      .put(`${address}/courses`, body, config)
+      .then((response) => {
+        dispatch({
+          type: "UPDATE_COURSE",
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "UPDATE_COURSE_FAILED",
           payload: "Failed",
         });
       });

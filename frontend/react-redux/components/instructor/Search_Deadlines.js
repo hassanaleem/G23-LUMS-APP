@@ -43,7 +43,6 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Fetched" && deadlines.length != 0) {
     for (let i = 0; i < deadlines.length; i++) {
-      //console.log(deadlines)
       items.push(deadlines[i]["Deadline_Title"])
     }
   }
@@ -130,8 +129,12 @@ export const Search_Deadlines = ({ navigation }) => {
         <ScrollView style={styles.rectange}>
           {items.map((item, index) => (
             <View key={index}>
-              <Pressable style={{ left: 5 }} onPress={() => navigation.navigate("EditDeadline")}>
-                <Text style={{ left: 5 }}> {item} </Text>
+              <Pressable style={{ left: 5 }} onPress={() => {
+                let obj = JSON.stringify(deadlines[index])
+                console.log("obj", obj)
+                navigation.navigate("EditDeadline", {data: obj})
+              }}>
+                <Text style={{ left: 5 , fontSize: 18, marginTop: 13}}> {item} </Text>
               </Pressable>
             </View>
           ))}

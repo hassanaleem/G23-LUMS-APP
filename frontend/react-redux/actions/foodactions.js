@@ -38,3 +38,21 @@ export const getAllFoodItems = () => {
     });
   };
 };
+
+export const clearState = () => {
+  return {
+    type: "CLEAR_STATE",
+  };
+};
+
+export const updateFoodItem = (data) => {
+  const request = address + "/fooditems";
+  return (dispatch) => {
+    axios.put(request, data).then((response) => {
+      dispatch({
+        type: "UPDATE_FOOD_ITEM",
+        payload: response.data,
+      });
+    });
+  };
+};

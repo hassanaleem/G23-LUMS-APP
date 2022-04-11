@@ -11,8 +11,14 @@ import {
   Pressable,
   TouchableHighlight,
 } from "react-native";
+import { useFonts } from "expo-font";
 
 export function Main_button(props) {
+  
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Regular.ttf"),
+  });
+
   return (
     <TouchableHighlight
       activeOpacity={0.6}
@@ -37,10 +43,11 @@ export function Main_button(props) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
+    // fontFamily: "Outfit",
   },
 });

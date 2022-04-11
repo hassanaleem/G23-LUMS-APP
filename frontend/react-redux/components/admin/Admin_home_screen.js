@@ -21,10 +21,15 @@ import { useDispatch } from "react-redux";
 
 import { logout } from "../../actions/loginAction";
 import { Adduser } from "./Adduser";
+import { useFonts} from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Admin_home_screen = ({ navigation }) => {
+
+  const [loaded] = useFonts({
+    Outfit: require('../assets/fonts/static/Outfit-ExtraBold.ttf'),
+  }); 
   const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
   return (
@@ -33,7 +38,7 @@ export const Admin_home_screen = ({ navigation }) => {
         source={require('../assets/whiteBackground.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '100%' }}>
-      <Pressable
+      {/* <Pressable
         style={{
           alignItems: "center",
           justifyContent: "center",
@@ -54,7 +59,8 @@ export const Admin_home_screen = ({ navigation }) => {
         {loggedOut ? navigation.navigate("Home") : null}
 
         <Text style={styles.logout_text}>Log out</Text>
-      </Pressable>
+      </Pressable> */}
+      <Logout_button nav = {navigation}/>
 
       <Text style={styles.topheading1}>Welcome</Text>
 
@@ -146,15 +152,17 @@ const styles = StyleSheet.create({
   topheading1: {
     marginTop: 10,
     fontSize: 30,
-    fontWeight: "bold",
-    alignSelf: "center"
+    // fontWeight: "bold",
+    alignSelf: "center",
+    fontFamily: "Outfit"
   },
 
   topheading2: {
     marginTop: 0,
     fontSize: 30,
-    fontWeight: "bold",
-    alignSelf: "center"
+    // fontWeight: "bold",
+    alignSelf: "center",
+    fontFamily: "Outfit"
   },
 
   logout_text: {

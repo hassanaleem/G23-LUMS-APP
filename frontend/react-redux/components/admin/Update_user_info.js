@@ -26,7 +26,13 @@ const { width, height } = Dimensions.get("screen");
 import { findUser } from "../../actions/useractions";
 import { clearState } from "../../actions/useractions";
 import { updateUser } from "../../actions/useractions";
+
+import { useFonts } from "expo-font";
 export const Update_user_info = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
+
   const dispatch = useDispatch();
   const [isEditable, setisEditable] = useState(false);
   const [userName, setuserName] = useState("");
@@ -86,7 +92,7 @@ export const Update_user_info = ({ navigation }) => {
         resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
-        <Logout_button onpress="" />
+        <Logout_button nav={navigation} />
 
         <Text
           style={{
@@ -202,7 +208,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text2: {
@@ -210,7 +216,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   id_text3: {
@@ -218,7 +224,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 10,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   input_fields1: {

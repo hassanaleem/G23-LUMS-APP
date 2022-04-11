@@ -71,9 +71,13 @@ def deadlines(request):
         existingData = db.child("Data").child("Deadlines").get().val()
         length = len(existingData)
 
+        
         for i in range(length):
-            # DOUBLE CHECK THIS AFTER FRONTEND CODE COMES
-            if existingData[i]["Course_ID"] == data["Course_ID"] and existingData[i]["Deadline_Title"] == data["Deadline_Title"]:
-                db.child("Data").child("Deadlines").child(i+1).set(data)
+            if existingData[i]["Course_ID"] == data["Course_ID"] and existingData[i]["Deadline_Title"] == data["Deadline_Title"] and existingData[i]["Deadline_Date"] == data["Deadline_Date"] and existingData[i]["Deadline_Time"] == data["Deadline_Time"] and existingData[i]["Instructor_Id"] == data["Instructor_Id"]:
+
+                existingData[i]["Deadline_Date"] = data["newDate"]
+                existingData[i]["Deadline_Time"] = data["newTime"]
+                db.child("Data").child("Deadlines").child(i).set(existingData[i])
                 return render(request, 'deadlines.html')
+
 

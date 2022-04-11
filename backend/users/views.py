@@ -13,8 +13,8 @@ def users(request):
         data = json.loads(data) 	
         id = data["id"]
         data.pop("id")
-        print(data,id)
         db.child("Data").child("Users").child(id).set(data)
+        db.child("Data").child("Notifications").child(id).set("")
         return render(request, 'users.html')
     if request.method == "GET":
         db = database.connect_db()
