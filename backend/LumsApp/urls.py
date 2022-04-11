@@ -11,5 +11,6 @@ urlpatterns = [
     path('' , include('deadlines.urls')),
     path('' , include('coursegrades.urls')),
     path('' , include('notifications.urls')),
+    path('' , include('posts.urls')),
     
 ]

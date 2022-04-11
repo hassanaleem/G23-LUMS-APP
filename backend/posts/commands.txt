@@ -1,0 +1,5 @@
+http://192.168.100.11:8000/posts?action=like&postuser=23100321&postid=0 to like
+http://192.168.100.11:8000/posts?action=unlike&postuser=23100321&postid=0
+{
+    "liker_id":"23100199"
+} this is the body you'll have to pass
