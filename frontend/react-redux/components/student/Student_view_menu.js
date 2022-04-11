@@ -32,6 +32,7 @@ export const Menu = ({ navigation }) => {
   let dataFetched = useSelector((state) => state.foodItemReducer);
   let rest = dataFetched.restaurant;
   if (rest.length != 0 && menu.length == 0) {
+    rest = rest.filter((item) => item != null);
     setMenu(rest);
   }
 
@@ -52,7 +53,7 @@ export const Menu = ({ navigation }) => {
           {menu.map((data, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
-                {data.restaurant} : {data.foodItem} : {data.price}
+                {data.restaurant} : {data.foodItem} : Rs {data.price}
               </Text>
             </View>
           ))}
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     fontSize: 27,
     fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     marginTop: height / 24,
     marginLeft: width / 12,
   },
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     marginTop: height / 9,
     marginLeft: width / 10,
     fontSize: 15,
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     //top: height / 9,
     //left: width / 20,
   },
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     lineHeight: 37.8,
     //fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
   },
 
   rectangle2: {
@@ -124,13 +125,10 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: "#EDEDED",
   },
-  textstyle:{
-
+  textstyle: {
     fontSize: 18,
     lineHeight: 35,
     marginLeft: width / 30,
-    fontFamily: 'Outfit',
-
-  }
-  
+    fontFamily: "Outfit",
+  },
 });
