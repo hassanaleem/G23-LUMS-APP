@@ -159,7 +159,7 @@ export const Enroll_course = ({ navigation }) => {
           text="Enroll"
           onPress={enroll}
           horizontal_padding={0}
-          margintop={height / 7}
+          margintop={height / 6.4}
           marginleft={width / 6}
           marginright={width / 6}
         />

@@ -120,7 +120,7 @@ export const Addenrolmentdate = ({ navigation }) => {
           text="Add Enrolment Date"
           onPress={onPress}
           horizontal_padding={0}
-          margintop={height/3.3}
+          margintop={height/3.2}
           marginleft={width/6}
           marginright={width/6}
         />

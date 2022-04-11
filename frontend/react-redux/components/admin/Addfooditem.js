@@ -128,7 +128,7 @@ export const Addfooditem = ({ navigation }) => {
           text="Add Food Item"
           onPress={add}
           horizontal_padding={0}
-          margintop={height/4}
+          margintop={height/3.9}
           marginleft={width/6}
           marginright={width/6}
         />
