@@ -48,7 +48,7 @@ export const Menu = ({ navigation }) => {
           {menu.map((data, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
-                {data.restaurant} : {data.foodItem} : {data.price}
+                {data.restaurant} : {data.foodItem} : Rs {data.price}
               </Text>
             </View>
           ))}

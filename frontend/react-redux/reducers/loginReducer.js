@@ -2,6 +2,7 @@ const initialData = {
   allowed: false,
   user: {},
   message: "",
+  queryRun: false,
 };
 
 const loginReducer = (state = initialData, action) => {
@@ -14,6 +15,7 @@ const loginReducer = (state = initialData, action) => {
         ...state,
         user: finalData,
         allowed: true,
+        queryRun: true,
       };
 
     case "SIGN_OUT":
@@ -22,12 +24,21 @@ const loginReducer = (state = initialData, action) => {
         user: {},
         allowed: false,
         message: "",
+        queryRun: false,
       };
     case "SIGN_IN_FAILED":
       return {
         user: {},
         allowed: false,
-        message: "Failed"
+        message: "Failed",
+        queryRun: true,
+      };
+    case "CLEAR_STATE":
+      return {
+        user: {},
+        allowed: false,
+        message: "",
+        queryRun: false,
       };
     default:
       return state;

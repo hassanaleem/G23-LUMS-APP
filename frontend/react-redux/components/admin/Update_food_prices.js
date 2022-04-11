@@ -19,16 +19,20 @@ import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {useFonts} from 'expo-font';
-import { clearState, getAllFoodItems, updateFoodItem } from "../../actions/foodactions";
+import { useFonts } from "expo-font";
+import {
+  clearState,
+  getAllFoodItems,
+  updateFoodItem,
+} from "../../actions/foodactions";
 import { Picker } from "@react-native-picker/picker";
 
 const { width, height } = Dimensions.get("screen");
 
 export const Update_food_prices = ({ navigation }) => {
   const [loaded] = useFonts({
-    Outfit: require('../assets/fonts/static/Outfit-Bold.ttf'),
-  }); 
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
 
   const [isEditable, setisEditable] = useState(false);
@@ -39,10 +43,10 @@ export const Update_food_prices = ({ navigation }) => {
   const [foodItems, setfoodItems] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
   const [mergedData, setmergedData] = useState([]);
-  const [selectedRestaurant, setselectedRestaurant] = useState("");
-  const [selectedFoodItem, setselectedFoodItem] = useState("");
+  const [selectedRestaurant, setselectedRestaurant] = useState("-");
+  const [selectedFoodItem, setselectedFoodItem] = useState("-");
   const [selectedId, setselectedId] = useState(0);
-  const [selectedPrice, setselectedPrice] = useState("");
+  const [selectedPrice, setselectedPrice] = useState("-");
   const [selectedRestaurantIndex, setselectedRestaurantIndex] = useState(0);
   const [change, setchange] = useState(false);
 
@@ -55,11 +59,13 @@ export const Update_food_prices = ({ navigation }) => {
   let queryRun = dataFetched.queryRun;
   let rest = dataFetched.restaurant;
   if (rest.length != 0 && mergedData.length == 0) {
+    rest = rest.filter((item) => item != null);
     setmergedData(rest);
   }
   if (find == true && queryRun == true) {
     dispatch(clearState());
   }
+
   if (mergedData.length != 0 && restaurants.length == 0) {
     for (let i = 0; i < mergedData.length; i++) {
       let temp = mergedData[i].restaurant;
@@ -123,6 +129,8 @@ export const Update_food_prices = ({ navigation }) => {
     restaurants.splice(0, restaurants.length);
     foodItems.splice(0, foodItems.length);
     mergedData.splice(0, mergedData.length);
+    setprice("");
+
     setGet(true);
   };
   return (
@@ -130,9 +138,9 @@ export const Update_food_prices = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: "100%", height: "100%" }}>
-        
-        <Logout_button nav = {navigation}/>
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Logout_button nav={navigation} />
 
         <Text
           style={{
@@ -165,7 +173,12 @@ export const Update_food_prices = ({ navigation }) => {
             setselectedRestaurantIndex(itemIndex);
             setchange(true);
             setisEditable(false);
-            setselectedFoodItem("");
+            // set selectedfooitem to first food item in selected restaurant
+            setselectedFoodItem(foodItems[itemIndex].foodItems[0]);
+            // set selected price to first price in selected food item
+            setselectedPrice(
+              foodItems[itemIndex].prices[foodItems[itemIndex].foodItems[0]]
+            );
           }}
         >
           {restaurants.map((item, index) => (
@@ -345,7 +358,7 @@ const styles = StyleSheet.create({
 
   restuarantDropdown: {
     position: "absolute",
-    width: width/2.6,
+    width: width / 2.6,
     height: 37,
     marginTop: height / 6,
     marginLeft: width / 11,
@@ -357,7 +370,7 @@ const styles = StyleSheet.create({
 
   foodDropdown: {
     position: "absolute",
-    width: width/2.6,
+    width: width / 2.6,
     height: 37,
     marginTop: height / 6,
     marginLeft: width / 1.9,

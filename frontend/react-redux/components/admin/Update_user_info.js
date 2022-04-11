@@ -28,6 +28,8 @@ import { clearState } from "../../actions/useractions";
 import { updateUser } from "../../actions/useractions";
 
 import { useFonts } from "expo-font";
+import * as Crypto from "expo-crypto";
+
 export const Update_user_info = ({ navigation }) => {
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
@@ -40,7 +42,14 @@ export const Update_user_info = ({ navigation }) => {
   const [password, setpassword] = useState("");
   const [type, setType] = useState("");
   const [searchQuery, setsearchQuery] = useState("");
-
+  const [pwdHash, setPwdHash] = useState("");
+  const digest = async (data) => {
+    const hash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      data
+    );
+    setPwdHash(hash);
+  };
   const makeSearch = () => {
     if (searchQuery === "") {
       Alert.alert("Please enter a search query");
@@ -59,7 +68,6 @@ export const Update_user_info = ({ navigation }) => {
       setType(userState.user.Type);
       setsearchQuery("");
       setisEditable(true);
-
       dispatch(clearState());
     }
   };
@@ -72,7 +80,7 @@ export const Update_user_info = ({ navigation }) => {
         let data = {
           Name: userName,
           id: userID,
-          Password: password,
+          Password: pwdHash,
           Type: type,
         };
         dispatch(updateUser(data));
@@ -81,6 +89,7 @@ export const Update_user_info = ({ navigation }) => {
         setuserID("");
         setpassword("");
         setsearchQuery("");
+        setPwdHash("");
         setisEditable(false);
       }
     }
@@ -113,7 +122,6 @@ export const Update_user_info = ({ navigation }) => {
             setsearchQuery(text);
           }}
           onPress={() => {
-            console.log(searchQuery);
             makeSearch();
           }}
         />
@@ -170,6 +178,7 @@ export const Update_user_info = ({ navigation }) => {
           }
           editable={isEditable}
           onChangeText={(text) => {
+            digest(text);
             setpassword(text);
           }}
           value={password}

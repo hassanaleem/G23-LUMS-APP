@@ -58,10 +58,23 @@ def fooditems(request):
         db = database.connect_db()
         data = request.body.decode("utf-8")
         data = json.loads(data)
-        id = data["id"]
-        data.pop("id")
+        bkData = db.child("Data").child("foodItems").get().val()
+        #remove none from bkData
+        for i in bkData:
+            if i == None:
+                bkData.remove(i)
+        foodItem = None
+        restaurant = None
+        id = 0
+        price = None
+        for i in bkData:
+            foodItem = i["foodItem"]
+            restaurant = i["restaurant"]
+            id +=1
+            if (foodItem == data["foodItem"] and restaurant == data["restaurant"]):
+                break
+        data["id"] = id
         db.child("Data").child("foodItems").child(id).set(data)
-
         # Adding Notifications
         data = db.child("Data").child("Notifications").get()
         for d in data.each():
