@@ -17,10 +17,9 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useFonts } from "expo-font";
 
-const {width, height} = Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 
 export function Logout_button(props) {
-
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Regular.ttf"),
   });
@@ -37,9 +36,9 @@ export function Logout_button(props) {
         paddingHorizontal: 15,
         borderRadius: 30,
         backgroundColor: "#79c4f2",
-        marginTop: height/24,
-        marginLeft: width/1.5,
-        marginRight: width/12,
+        marginTop: height / 24,
+        marginLeft: width / 1.5,
+        marginRight: width / 12,
       }}
       onPress={() => {
         dispatch(logout());

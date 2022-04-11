@@ -24,9 +24,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const { width, height } = Dimensions.get("screen");
-
+import { Icon } from "react-native-elements";
 export const Student_home_screen = ({ navigation }) => {
   const [loggedOut, setLoggedOut] = useState(false);
+  const [noNotifications, setnoNotifications] = useState(true); // set this to true if no notifications
+  const [notificationsCount, setnotificationsCount] = useState(0);
   let name = useSelector((state) => state.loginReducer).user.Name;
 
   const dispatch = useDispatch();
@@ -38,29 +40,41 @@ export const Student_home_screen = ({ navigation }) => {
         resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
-        {/* <TouchableOpacity
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            paddingVertical: 5,
-            paddingHorizontal: 20,
-            borderRadius: 30,
-            backgroundColor: "#79c4f2",
-            marginLeft: 270,
-            marginTop: 40,
-            marginRight: 20,
+        <Icon
+          name="bell"
+          type="font-awesome"
+          color="#79c4f2"
+          containerStyle={{
+            position: "absolute",
+            top: height / 24,
+            left: width / 15,
+            marginRight: width / 12,
           }}
+          size={width / 10}
+          Component={TouchableOpacity}
           onPress={() => {
-            dispatch(logout());
-            Alert.alert("Logout Successful");
-            setLoggedOut(true);
+            navigation.navigate("Notifications_screen");
+          }}
+          disabled={noNotifications}
+          disabledStyle={{
+            backgroundColor: "transparent",
+          }}
+        />
+        <Text
+          style={{
+            position: "absolute",
+            top: height / 13.2,
+            left: width / 6.2,
+            marginRight: width / 12,
+            fontSize: 14,
+            lineHeight: 17.64,
+            fontWeight: "medium",
+            color: "#FC0101",
           }}
         >
-          {loggedOut ? navigation.navigate("Home") : null}
-
-          <Text style={styles.logout_text}>Log out</Text>
-        </TouchableOpacity> */}
-        <Logout_button nav = {navigation}/>
+          {noNotifications ? null : notificationsCount}
+        </Text>
+        <Logout_button nav={navigation} />
 
         <Text style={styles.topheading1}>Welcome</Text>
 
@@ -84,7 +98,7 @@ export const Student_home_screen = ({ navigation }) => {
         />
         <Main_button
           text="Discussion Forum"
-          onPress=""
+          onPress={() => navigation.navigate("DiscussionForum")}
           horizontal_padding={0}
           margintop={height / 50}
           marginleft={width / 7}
@@ -153,5 +167,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
+  },
+  bell: {
+    width: 40,
+    height: 40,
+    top: 150,
+    left: 20,
+    position: "absolute",
   },
 });
