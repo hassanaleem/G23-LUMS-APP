@@ -20,8 +20,11 @@ import { useState } from "react";
 import { getEnrollments } from "../../actions/coursesactions";
 import { getGrade } from "../../actions/courseGradeActions";
 const { width, height } = Dimensions.get("screen");
-
-export const Academic_progress = () => {
+import { useFonts } from "expo-font";
+export const Academic_progress = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   // var gpa = 3.8; // Here we just need to fetch the GPA thing and we are good to go
   const dispatch = useDispatch();
   const [courses, setCourses] = useState([]);
@@ -104,7 +107,8 @@ export const Academic_progress = () => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button />
+        <Logout_button nav={navigation}/>
+        
         <Text style={styles.topheading}> Acamedic </Text>
         <Text style={styles.topheading2}> Progress </Text>
 
@@ -131,7 +135,7 @@ export const Academic_progress = () => {
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.2}
+          margintop={height / 1.58}
           marginleft={50}
           marginright={47}
         />
@@ -156,19 +160,19 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: height / 30,
-    left: width / 30,
-    fontSize: 30,
-    lineHeight: 37.8,
+    fontSize: 27,
     fontWeight: "bold",
+    fontFamily: 'Outfit',
+    marginTop: height / 24,
+    marginLeft: width / 12, 
   },
   topheading2: {
     position: "absolute",
-    top: height / 15,
-    left: width / 30,
-    fontSize: 30,
-    lineHeight: 37.8,
+    fontSize: 27,
     fontWeight: "bold",
+    fontFamily: 'Outfit',
+    marginTop: height / 13,
+    marginLeft: width / 12, 
   },
   CGPAview: {
     position: "absolute",
@@ -176,9 +180,14 @@ const styles = StyleSheet.create({
     left: width / 30,
   },
   CGPAtext: {
-    fontSize: 25,
-    lineHeight: 30,
-    fontWeight: "bold",
+    // fontSize: 25,
+    // lineHeight: 30,
+    // fontWeight: "bold",
+    marginTop: height / 700,
+    marginLeft: width / 20,
+    fontSize: 20,
+    //fontWeight: "bold",
+    fontFamily: 'Outfit',
   },
   Gradesview: {
     position: "absolute",
@@ -186,9 +195,11 @@ const styles = StyleSheet.create({
     left: width / 30,
   },
   Gradestext: {
-    fontSize: 25,
-    lineHeight: 30,
-    fontWeight: "bold",
+    marginTop: height / 700,
+    marginLeft: width / 20,
+    fontSize: 20,
+    
+    fontFamily: 'Outfit',
   },
 
   logoutbuttonview: {
@@ -199,12 +210,19 @@ const styles = StyleSheet.create({
 
   rectangle2: {
     position: "absolute",
-    width: width / 1.1,
-    height: height / 3.8,
+    // width: width / 1.1,
+    height: height / 2.8,
     top: height / 3.8,
-    left: width / 30,
-    borderRadius: 7,
-    backgroundColor: "#EDEDED",
+    // left: width / 30,
+    // borderRadius: 7,
+    // backgroundColor: "#EDEDED"
+    width: width / 1.219,
+    //maxHeight: height / 4.05,
+    marginLeft: width / 10,
+    marginTop: height / 1000,
+    backgroundColor: '#eceded',
+    zIndex: 99,
+    borderRadius: 5,
   },
   logoutbutton: {
     backgroundColor: "#87CEFA",

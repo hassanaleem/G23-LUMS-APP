@@ -13,224 +13,48 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
+import { useFonts } from 'expo-font';
 import { useState } from "react";
-const { width, height } = Dimensions.get("screen");
 import { useDispatch } from "react-redux";
-import { getDeadline } from "../../actions/deadlineactions";
-export const Deadlines = ({ navigation }) => {
-  const [get, setGet] = useState(false);
-  const dispatch = useDispatch();
-  if (get == false) {
-    dispatch(getDeadline("CS-100"));
-    setGet(true);
-  }
+import { useSelector } from 'react-redux';
+import { getDeadline } from '../../actions/deadlineactions';
 
-  var dict = [
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 100",
-      Title: "Intro to CS",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-    {
-      Course_code: "Cs 200",
-      Title: "Intro to Programming",
-      Date: "10/12/2021",
-      Time: "11 55 am",
-    },
-  ];
+const { width, height } = Dimensions.get("screen");
+
+export const Deadlines = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const [fetched, setFetched] = useState(false);
+  // const [deadlines, setDeadlines] = useState([]);
+  // const [studentId, setStudentID] = useState("");
+  // const [stored, setStored] = useState(false);
+  
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
+
+  
+
+  // const check = () => 
+  // {
+  //   let id =  useSelector((state) => state.loginReducer).user.Id
+  //   dispatch(getDeadline(0));
+  //   setFetched(true);
+  //   console.log("yes")
+  // }
+
+  // let dict = useSelector((state) => state.deadlineReducer).data;
+  // // if (data.length > 0 && stored === false) {
+  
+  // console.log(dict)
+    
+  //   // if (new_events.length > 0) {
+  //   //   setEvents(new_events);
+  //   //   setEnrollment(enrollment_list);
+  //     setStored(true);
+    
+  // }
+  
   return (
     <ImageBackground
       source={require("../assets/background.png")}
@@ -239,22 +63,23 @@ export const Deadlines = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Logout_button />
+        {/* {fetched ? null: check()} */}
         <Text style={styles.topheading}> Deadlines </Text>
 
         <ScrollView style={styles.rectangle2}>
-          {dict.map((data, index) => (
+          {/* {dict.length ? dict.map((data, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
-                {data.Course_code} : {data.Title} : {data.Date} : {data.Time}
+                {data["Course ID"]} : {data["Deadline Title"]} : {data["Deadline Date"]} : {data["Deadline Time"]} 
               </Text>
             </View>
-          ))}
+          )): null} */}
         </ScrollView>
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.73}
+          margintop={height / 1.59}
           marginleft={50}
           marginright={47}
         />
@@ -279,32 +104,27 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: height / 27,
-    left: width / 30,
-    fontSize: 30,
-    lineHeight: 37.8,
+    //top: height / 27,
+    //left: width / 30,
+    // fontSize: 30,
+    // lineHeight: 37.8,
+    // fontWeight: "bold",
+    // position: "absolute",
+    fontFamily: "Outfit",
+    fontSize: 27,
     fontWeight: "bold",
+    marginTop: height / 24,
+    marginLeft: width / 12,
   },
-  topheading2: {
-    position: "absolute",
-    top: height / 15,
-    left: width / 30,
-    fontSize: 30,
-    lineHeight: 37.8,
-    fontWeight: "bold",
-  },
-  logoutbuttonview: {
-    position: "absolute",
-    top: 50,
-    right: 10,
-  },
+ 
+  
 
   rectangle2: {
     position: "absolute",
-    width: width / 1.2,
+    width: width / 1.289,
     height: height / 2,
     top: height / 9.5,
-    left: width / 14,
+    marginLeft: width / 9,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
   },
