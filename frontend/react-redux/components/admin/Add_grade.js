@@ -12,6 +12,7 @@ import {
   Pressable,
   Dimensions,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
@@ -32,16 +33,16 @@ export const Add_grade = ({ navigation }) => {
 
   const [studentRollNumber, setstudentRollNumber] = useState("");
   const [courseCode, setcourseCode] = useState("");
-  const [grade, setgrade] = useState("");
+  const [grade, setgrade] = useState("-");
 
   const dispatch = useDispatch();
   function call() {
-    if (studentRollNumber == "" || courseCode == "" || grade == "") {
+    if (studentRollNumber == "" || courseCode == "" || grade == "-") {
       Alert.alert("Oops, You missed a field");
     } else {
       dispatch(addGrade(courseCode.toUpperCase(), grade, studentRollNumber));
       setcourseCode("");
-      setgrade("");
+      setgrade("-");
       setstudentRollNumber("");
     }
   }
@@ -57,10 +58,10 @@ export const Add_grade = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: '100%', height: '100%' }}>
-          <Logout_button nav = {navigation}/>
-          
-          <Text
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Logout_button nav={navigation} />
+        <Text
           style={{
             position: "absolute",
             fontSize: 27,
@@ -71,11 +72,8 @@ export const Add_grade = ({ navigation }) => {
         >
           Add Grade
         </Text>
-
         <Text style={styles.id_text0}>All fields are required</Text>
-
         <Text style={styles.id_text1}>Student Roll Number</Text>
-
         <TextInput
           style={styles.input_fields1}
           placeholder="Enter student roll number"
@@ -84,9 +82,7 @@ export const Add_grade = ({ navigation }) => {
           }}
           value={studentRollNumber}
         />
-
         <Text style={styles.id_text2}>Course Code</Text>
-
         <TextInput
           style={styles.input_fields2}
           placeholder="Enter course code"
@@ -95,18 +91,31 @@ export const Add_grade = ({ navigation }) => {
           }}
           value={courseCode}
         />
-
         <Text style={styles.id_text3}>Grade</Text>
-
-        <TextInput
-          style={styles.input_fields3}
-          placeholder="Enter grade (i.e., A+, A, B)"
-          onChangeText={(text) => {
-            setgrade(text);
-          }}
-          value={grade}
-        />
-
+        <View style={styles.gradesContainer}>
+          <Picker
+            selectedValue={grade}
+            style={styles.gradesDropdown}
+            onValueChange={(itemValue, itemIndex) => {
+              setgrade(itemValue);
+            }}
+          >
+            <Picker.Item label="-" value="-" />
+            <Picker.Item label="A+" value="A+" />
+            <Picker.Item label="A" value="A" />
+            <Picker.Item label="A-" value="A-" />
+            <Picker.Item label="B+" value="B+" />
+            <Picker.Item label="B" value="B" />
+            <Picker.Item label="B-" value="B-" />
+            <Picker.Item label="C+" value="C+" />
+            <Picker.Item label="C" value="C" />
+            <Picker.Item label="C-" value="C-" />
+            <Picker.Item label="D+" value="D+" />
+            <Picker.Item label="D" value="D" />
+            <Picker.Item label="D-" value="D-" />
+            <Picker.Item label="F" value="F" />
+          </Picker>
+        </View>
         <Main_button
           text="Add Grade"
           onPress={call}
@@ -115,7 +124,6 @@ export const Add_grade = ({ navigation }) => {
           marginleft={width / 6}
           marginright={width / 6}
         />
-
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("admin")}
@@ -226,4 +234,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     alignSelf: "center",
   },
+  gradesContainer: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: height / 50,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  gradesDropdown: { width: width / 1.2 },
 });
