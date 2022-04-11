@@ -78,10 +78,10 @@ export const Login_screen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.topheading}>Login Account</Text>
+      {/* <Text style={styles.topheading}>Login Account</Text> */}
 
       <Image
-        style={{ height: 180, width: 180, marginTop: 50, marginBottom: 40 }}
+        style={{ height: 180, width: 180, marginTop: -45, marginBottom: 40 }}
         source={require("./assets/LOGO.png")}
       />
 
@@ -127,12 +127,12 @@ const styles = StyleSheet.create({
     fontFamily: "Outfit",
   },
 
-  topheading: {
-    marginTop: -120,
-    marginRight: 200,
-    fontSize: 20,
-    fontWeight: "bold",
-  },
+  // topheading: {
+  //   marginTop: -50,
+  //   marginRight: 200,
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  // },
 
   id_text: {
     marginTop: 20,
