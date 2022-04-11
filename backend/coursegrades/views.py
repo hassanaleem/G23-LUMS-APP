@@ -13,7 +13,12 @@ def coursegrades(request):
         id = req[0][1]
         if (id == 'all'):
             data = db.child("Data").child("CourseGrades").get().val()
+            print(data)
             data = list(data)
+            print(data)
+            return render(request, 'coursegrades.html', {'data': json.dumps(data)})
+        elif (id =='all_json'):
+            data = db.child("Data").child("CourseGrades").get().val()
             return render(request, 'coursegrades.html', {'data': json.dumps(data)})
         else:
             try:

@@ -6,12 +6,14 @@ const deadlineReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
     case "GET_DEADLINE":
-      const newdata = data.replace(/&quot;/g, '"');
-      const finalData = JSON.parse(newdata);
-      return {
-        ...state,
-        data: finalData,
-      };
+      if (typeof data === "string") {
+        const newdata = data.replace(/&quot;/g, '"');
+        const finalData = JSON.parse(newdata);
+        return {
+          ...state,
+          data: finalData,
+        };
+      }
 
     case "ADD_DEADLINE":
       return {

@@ -13,48 +13,73 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from 'react-redux';
-import { getDeadline } from '../../actions/deadlineactions';
-
+import { useSelector } from "react-redux";
+import { getDeadline } from "../../actions/deadlineactions";
+import { getEnrollments } from "../../actions/coursesactions";
 const { width, height } = Dimensions.get("screen");
 
 export const Deadlines = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [fetched, setFetched] = useState(false);
-  // const [deadlines, setDeadlines] = useState([]);
-  // const [studentId, setStudentID] = useState("");
-  // const [stored, setStored] = useState(false);
-  
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
 
-  
+  const [fetched, setFetched] = useState(false);
+  const [deadlines, setDeadlines] = useState([]);
+  const [studentId, setStudentID] = useState("");
+  const [stored, setStored] = useState(false);
+  const [enrollments, setEnrollments] = useState([]);
+  const [get, setGet] = useState(false);
+  const [tempPrev, setTempPrev] = useState(0);
+  const [courses, setCourses] = useState([]);
 
-  // const check = () => 
-  // {
-  //   let id =  useSelector((state) => state.loginReducer).user.Id
-  //   dispatch(getDeadline(0));
-  //   setFetched(true);
-  //   console.log("yes")
-  // }
+  if (get == false) {
+    dispatch(getEnrollments("all_json"));
+    setGet(true);
+  }
+  let coursesState = useSelector((state) => state.courseReducer);
+  let enrollmentslist = coursesState.data;
+  if (enrollmentslist.length != 0 && enrollments.length == 0) {
+    setEnrollments(enrollmentslist);
+  }
+  let userState = useSelector((state) => state.loginReducer);
+  let user = userState.user.Id;
+  if (courses.length == 0) {
+    let temp2 = [];
+    // get length of enrollments object
+    const keys = Object.keys(enrollments);
+    // loop through each key
+    for (let i = 0; i < keys.length; i++) {
+      // get the value of the key
+      const key = keys[i];
+      // get the value of the key
+      const value = enrollments[key];
+      if (value.student_id == user) {
+        temp2.push(value);
+      }
+    }
 
-  // let dict = useSelector((state) => state.deadlineReducer).data;
-  // // if (data.length > 0 && stored === false) {
-  
-  // console.log(dict)
-    
-  //   // if (new_events.length > 0) {
-  //   //   setEvents(new_events);
-  //   //   setEnrollment(enrollment_list);
-  //     setStored(true);
-    
-  // }
-  
+    if (temp2.length != 0) {
+      setCourses(temp2);
+    }
+  }
+  if (courses.length != 0 && stored == false && deadlines.length == 0) {
+    for (let i = 0; i < courses.length; i++) {
+      dispatch(getDeadline(courses[i].course_id));
+    }
+    setStored(true);
+  }
+  let deadlinesState = useSelector((state) => state.deadlineReducer);
+  let deadlineslist = deadlinesState.data;
+  if (deadlineslist.length != 0 && deadlineslist.length != tempPrev) {
+    setDeadlines(deadlineslist);
+    setTempPrev(deadlineslist.length);
+  }
+
   return (
     <ImageBackground
       source={require("../assets/background.png")}
@@ -63,17 +88,17 @@ export const Deadlines = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Logout_button />
-        {/* {fetched ? null: check()} */}
         <Text style={styles.topheading}> Deadlines </Text>
 
         <ScrollView style={styles.rectangle2}>
-          {/* {dict.length ? dict.map((data, index) => (
+          {deadlines.map((deadline, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
-                {data["Course ID"]} : {data["Deadline Title"]} : {data["Deadline Date"]} : {data["Deadline Time"]} 
+                {deadline.Course_ID} : {deadline.Deadline_Title} :{" "}
+                {deadline.Deadline_Date} : {deadline.Deadline_Time}
               </Text>
             </View>
-          )): null} */}
+          ))}
         </ScrollView>
         <Main_button
           text="Go Back"
@@ -116,8 +141,6 @@ const styles = StyleSheet.create({
     marginTop: height / 24,
     marginLeft: width / 12,
   },
- 
-  
 
   rectangle2: {
     position: "absolute",
