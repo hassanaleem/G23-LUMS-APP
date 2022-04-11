@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'coursegrades',
     'courses',
     'notifications',
+    'posts',
 ]
 
 MIDDLEWARE = [
