@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   Pressable,
+  Dimensions,
 } from "react-native";
 import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
@@ -18,6 +19,9 @@ import { useDispatch } from "react-redux";
 import { addDeadline } from "../../actions/deadlineactions";
 import { useSelector } from "react-redux";
 import { getDeadline } from "../../actions/deadlineactions";
+
+const {width, height} = Dimensions.get("screen");
+
 export const Add_Deadlines = ({ navigation }) => {
   const dispatch = useDispatch();
   const [courseCode, setCourseCode] = useState("");
@@ -91,12 +95,10 @@ export const Add_Deadlines = ({ navigation }) => {
         <Text
           style={{
             position: "absolute",
-            top: 32,
-            left: 10,
-            marginLeft: 25,
-            fontSize: 35,
-            fontWeight: "bold",
-            fontFamily: "sans-serif-thin",
+            fontSize: 27,
+            fontWeight: 'bold',
+            marginTop: height/24,
+            marginLeft: width/12,
           }}
         >
           Add Deadline
@@ -104,37 +106,37 @@ export const Add_Deadlines = ({ navigation }) => {
 
         <Text style={styles.topline}>All fields are required</Text>
 
-        <Text style={styles.id_text}>Course Code</Text>
+        <Text style={styles.id_text1}>Course Code</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields1}
           placeholder="Enter Course Code"
           value={courseCode}
           onChangeText={(text) => setCourseCode(text)}
         />
 
-        <Text style={styles.id_text}>Deadline Title</Text>
+        <Text style={styles.id_text2}>Deadline Title</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields2}
           placeholder="Enter Deadline Title"
           value={deadlineTitle}
           onChangeText={(text) => setDeadlineTitle(text)}
         />
 
-        <Text style={styles.id_text}>Deadline Time</Text>
+        <Text style={styles.id_text3}>Deadline Time</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields3}
           placeholder="Enter Deadline Time hh:mm"
           value={deadlineTime}
           onChangeText={(text) => setDeadlineTime(text)}
         />
 
-        <Text style={styles.id_text}>Deadline Date</Text>
+        <Text style={styles.id_text4}>Deadline Date</Text>
 
         <TextInput
-          style={styles.userid}
+          style={styles.input_fields4}
           placeholder="Enter Deadline Date dd:mm:yy"
           value={deadlineDate}
           onChangeText={(text) => setDeadlineDate(text)}
@@ -144,17 +146,17 @@ export const Add_Deadlines = ({ navigation }) => {
           text="Add Event"
           onPress={add}
           horizontal_padding={30}
-          margintop={90}
-          marginleft={65}
-          marginright={65}
+          margintop={height/45}
+          marginleft={width/6}
+          marginright={width/6}
         />
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("instructor")}
           horizontal_padding={50}
-          margintop={15}
-          marginleft={65}
-          marginright={65}
+          margintop={height / 50}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </ImageBackground>
     </View>
@@ -174,10 +176,11 @@ const styles = StyleSheet.create({
     fontFamily: "sans-serif-thin",
   },
   topline: {
-    marginTop: 15,
-    marginLeft: 35,
+    marginTop: height/40,
+    marginLeft: width/11,
     fontSize: 15,
-    fontFamily: "sans-serif-thin",
+    fontWeight: '600',
+    fontFamily: 'sans-serif-thin',
   },
   userid: {
     marginLeft: 30,
@@ -191,4 +194,92 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
+  
+  id_text1: {
+    marginTop: height/120,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
+  },
+
+  id_text2: {
+    marginTop: height/90,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
+  },
+
+  id_text3: {
+    marginTop: height/90,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
+  },
+
+  id_text4: {
+    marginTop: height/90,
+    marginLeft: width/10,
+    fontSize: 15,
+    fontWeight: "bold",
+    fontFamily: "sans-serif-thin",
+  },
+
+ 
+
+  input_fields1: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: "gray",
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center",
+  },
+
+  input_fields2: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: "gray",
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center",
+  },
+
+  input_fields3: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: "gray",
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center",
+  },
+
+  input_fields4: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: 3,
+    borderColor: "gray",
+    borderWidth: 0,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignSelf: "center",
+  },
+
+  
 });
