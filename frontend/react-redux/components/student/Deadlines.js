@@ -13,10 +13,18 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-
+import { useState } from "react";
 const { width, height } = Dimensions.get("screen");
-
+import { useDispatch } from "react-redux";
+import { getDeadline } from "../../actions/deadlineactions";
 export const Deadlines = ({ navigation }) => {
+  const [get, setGet] = useState(false);
+  const dispatch = useDispatch();
+  if (get == false) {
+    dispatch(getDeadline("CS-100"));
+    setGet(true);
+  }
+
   var dict = [
     {
       Course_code: "Cs 100",

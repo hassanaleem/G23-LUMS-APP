@@ -35,16 +35,13 @@ def deadlines(request):
                     data = db.child("Data").child("Deadlines").get().val()
                     return render(request, 'deadlines.html', {'data': json.dumps(data)})
                 else:
-                    data = (db.child("Data").child("Deadlines").child(id).get().val())
-                    dic = {}
-                    dic["Course ID"] = data["Course_ID"]
-                    dic["Deadline Title"] = data["Deadline_Title"]
-                    dic["Deadline Date"] = data["Deadline_Date"]
-                    dic["Deadline Time"] = data["Deadline_Time"]
-                    dic["Instructor Id"] = data["Instructor_Id"]
-                    # print(dic)
-                    return render(request, 'deadlines.html', {'data': json.dumps(dic)})
-
+                    print("HERE",id)
+                    data = db.child("Data").child("Deadlines").get().val()
+                    temp = list()
+                    for d in data:
+                        if d['Course_ID'] == id:
+                            temp.append(d)
+                    return render(request, 'deadlines.html', {'data': json.dumps(temp)})
         except:
             print("except main a rha hai")
             pass

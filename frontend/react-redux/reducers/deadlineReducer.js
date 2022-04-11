@@ -6,10 +6,8 @@ const deadlineReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
     case "GET_DEADLINE":
-      console.log(data)
       const newdata = data.replace(/&quot;/g, '"');
       const finalData = JSON.parse(newdata);
-      console.log("finalData", finalData);
       return {
         ...state,
         data: finalData,
@@ -30,29 +28,29 @@ const deadlineReducer = (state = initialData, action) => {
     case "SEARCH_DEADLINE":
       let d = data.replace(/&quot;/g, '"');
       let finalD = JSON.parse(d);
-      return{
+      return {
         ...state,
         data: finalD,
-        message: "Fetched"
-      }
+        message: "Fetched",
+      };
 
     case "SEARCH_DEADLINE_FAIL":
-      return{
+      return {
         ...state,
         message: "Failure Search",
-      }
+      };
 
     case "UPDATE_DEADLINE":
-      return{
+      return {
         ...state,
         message: "Success Update",
-      }
+      };
 
     case "UPDATE_DEADLINE_FAIL":
-      return{
+      return {
         ...state,
         message: "Failure Update",
-      }
+      };
 
     default:
       return state;

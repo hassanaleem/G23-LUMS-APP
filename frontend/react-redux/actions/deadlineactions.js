@@ -6,7 +6,6 @@ export const getDeadline = (id) => {
   const request = address + "/deadlines?" + `id=${id}`;
   return (dispatch) => {
     axios.get(request).then((response) => {
-      console.log(response.data);
       dispatch({
         type: "GET_DEADLINE",
         payload: response.data,
@@ -27,7 +26,15 @@ export const addDeadline = (data) => {
   };
 };
 
-export const updateDeadline = (newTime, newDate, Course_ID, Instructor_Id, Deadline_Title, Deadline_Time, Deadline_Date) => {
+export const updateDeadline = (
+  newTime,
+  newDate,
+  Course_ID,
+  Instructor_Id,
+  Deadline_Title,
+  Deadline_Time,
+  Deadline_Date
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -44,25 +51,30 @@ export const updateDeadline = (newTime, newDate, Course_ID, Instructor_Id, Deadl
     Deadline_Date,
   });
   return (dispatch) => {
-    axios.put(`${address}/deadlines`,body, config).then((response) => {
-      dispatch({
-        type: "UPDATE_DEADLINE",
-        payload: response.data,
-      });
-    })
-    .catch((error) => {
-      dispatch(
-        {
+    axios
+      .put(`${address}/deadlines`, body, config)
+      .then((response) => {
+        dispatch({
+          type: "UPDATE_DEADLINE",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
           type: "UPDATE_DEADLINE_FAIL",
           payload: "",
-        }
-      )
-    })
+        });
+      });
   };
 };
 
 export const SearchDeadlines = (courseID, instructorID) => {
-  const request = address + "/deadlines?" + `type=2` + `&courseID=${courseID}` + `&instructorID=${instructorID}`;
+  const request =
+    address +
+    "/deadlines?" +
+    `type=2` +
+    `&courseID=${courseID}` +
+    `&instructorID=${instructorID}`;
   return (dispatch) => {
     axios
       .get(request)
