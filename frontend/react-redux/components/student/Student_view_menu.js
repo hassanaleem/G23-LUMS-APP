@@ -17,7 +17,11 @@ import { getAllFoodItems } from "../../actions/foodactions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useFonts } from "expo-font";
 export const Menu = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [get, setGet] = useState(true);
   const [menu, setMenu] = useState([]);
@@ -48,7 +52,7 @@ export const Menu = ({ navigation }) => {
           {menu.map((data, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
-                {data.restaurant} : {data.foodItem} : Rs {data.price}
+                {data.restaurant} : {data.foodItem} : {data.price}
               </Text>
             </View>
           ))}
@@ -57,7 +61,7 @@ export const Menu = ({ navigation }) => {
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.73}
+          margintop={height / 1.57}
           marginleft={50}
           marginright={47}
         />
@@ -81,44 +85,52 @@ const styles = StyleSheet.create({
   },
 
   topheading: {
+    // position: "absolute",
+    // top: height / 27,
+    // left: width / 30,
+    // fontSize: 30,
+    // lineHeight: 37.8,
+    // fontWeight: "bold",
     position: "absolute",
-    top: height / 27,
-    left: width / 30,
-    fontSize: 30,
-    lineHeight: 37.8,
+    fontSize: 27,
     fontWeight: "bold",
+    fontFamily: 'Outfit',
+    marginTop: height / 24,
+    marginLeft: width / 12,
   },
   topheading2: {
     position: "absolute",
-    top: height / 9,
-    left: width / 20,
+    marginTop: height / 9,
+    marginLeft: width / 10,
+    fontSize: 15,
+    fontFamily: 'Outfit',
+    //top: height / 9,
+    //left: width / 20,
   },
   FoodItems: {
     fontSize: 25,
     lineHeight: 37.8,
-    fontWeight: "bold",
+    //fontWeight: "bold",
+    fontFamily: 'Outfit',
   },
 
   rectangle2: {
     position: "absolute",
-    width: width / 1.2,
-    height: height / 2.3,
-    top: height / 6,
-    left: width / 14,
+    width: width / 1.219,
+    height: height / 2,
+    //top: height / 6,
+    marginTop: height / 5.8,
+    marginLeft: width / 10,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
   },
-  logoutbutton: {
-    backgroundColor: "#87CEFA",
-    padding: 5,
-    borderRadius: 180,
-  },
-  event: {
-    color: "black",
-    position: "absolute",
-    left: 10,
-    top: 50,
-    fontSize: 15,
-    fontWeight: "bold",
-  },
+  textstyle:{
+
+    fontSize: 18,
+    lineHeight: 35,
+    marginLeft: width / 30,
+    fontFamily: 'Outfit',
+
+  }
+  
 });
