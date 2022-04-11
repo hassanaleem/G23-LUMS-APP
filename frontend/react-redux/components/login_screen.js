@@ -8,11 +8,12 @@ import {
   TextInput,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useState } from "react";
 import axios from "axios";
 import { Main_button } from "./buttons/Main_button";
-import { login, logout, loginFailed } from "../actions/loginAction";
+import { login, logout, clearState } from "../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
@@ -30,9 +31,10 @@ export const Login_screen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordText, setPasswordText] = useState("");
-  
-  let allowed = useSelector((state) => state.loginReducer).allowed;
+  const [loading, setLoading] = useState(false);
 
+  let allowed = useSelector((state) => state.loginReducer).allowed;
+  let queryRun = useSelector((state) => state.loginReducer).queryRun;
   const hash = async (data) => {
     const hash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
@@ -45,30 +47,31 @@ export const Login_screen = ({ navigation }) => {
     let data = useSelector((state) => state.loginReducer);
     let type = data.user.Type;
     if (type != undefined) {
-      if (allowed == true)
-      {
+      if (allowed == true) {
         type = type.toUpperCase();
-        if (type == "STUDENT") 
-        {
-          navigation.navigate("student")
-        }
-        else if (type == "INSTRUCTOR")
-        {
-          navigation.navigate("instructor")
-        }
-        else if (type == "ADMIN")
-        {
-          navigation.navigate("admin")
+        if (type == "STUDENT") {
+          navigation.navigate("student");
+        } else if (type == "INSTRUCTOR") {
+          navigation.navigate("instructor");
+        } else if (type == "ADMIN") {
+          navigation.navigate("admin");
         }
       }
     }
   };
-
+  if (allowed == false && queryRun == true) {
+    Alert.alert("Login Failed", "Invalid Username or Password");
+    dispatch(clearState());
+  }
+  if (queryRun == true && loading == true) {
+    setLoading(false);
+  }
   const onPress = () => {
     dispatch(login(userName, password));
     setUserName("");
     setPassword("");
     setPasswordText("");
+    setLoading(true);
   };
   validate();
 
@@ -108,6 +111,17 @@ export const Login_screen = ({ navigation }) => {
         secureTextEntry={true}
         placeholder="Enter Password"
       />
+      {loading ? (
+        <ActivityIndicator
+          size="large"
+          color="#609cc1"
+          style={{
+            position: "relative",
+            marginTop: 20,
+          }}
+        />
+      ) : null}
+
       <Main_button
         text="Log in"
         onPress={onPress}
