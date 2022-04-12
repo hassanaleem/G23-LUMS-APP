@@ -56,6 +56,25 @@ def deadlines(request):
             pass
         db.child("Data").child("Deadlines").child(ide).set(data)
 
+        try:
+            students = db.child("Data").child("CourseStudents").child(data['Course_ID']).get().val()
+            for s in students:
+                try:            
+                    dataDB = db.child("Data").child("Notifications").child(s).get().val()
+                    notification = "New Assignment for " + data["Course_ID"]
+
+                    try:
+                        dataDB.append(notification)
+                        db.child("Data").child("Notifications").child(s).set(dataDB)
+                    except:
+                        dataDB = []
+                        dataDB.append(notification)
+                        db.child("Data").child("Notifications").child(s).set(dataDB)
+                except:
+                    pass
+        except:
+            pass
+
         return render(request, 'deadlines.html')
 
     elif request.method == 'PUT':
@@ -73,6 +92,26 @@ def deadlines(request):
                 existingData[i]["Deadline_Date"] = data["newDate"]
                 existingData[i]["Deadline_Time"] = data["newTime"]
                 db.child("Data").child("Deadlines").child(i).set(existingData[i])
+
+                try:
+                    students = db.child("Data").child("CourseStudents").child(data['Course_ID']).get().val()
+                    for s in students:
+                        try:            
+                            dataDB = db.child("Data").child("Notifications").child(s).get().val()
+                            notification = "Update in deadline Assignment Title: " + data["Deadline_Title"] + " Course: " + data["Course_ID"]
+
+                            try:
+                                dataDB.append(notification)
+                                db.child("Data").child("Notifications").child(s).set(dataDB)
+                            except:
+                                dataDB = []
+                                dataDB.append(notification)
+                                db.child("Data").child("Notifications").child(s).set(dataDB)
+                        except:
+                            pass
+                except:
+                    pass
+
                 return render(request, 'deadlines.html')
 
 
