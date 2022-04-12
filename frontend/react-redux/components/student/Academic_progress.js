@@ -109,7 +109,7 @@ export const Academic_progress = ({ navigation }) => {
       <View style={styles.container}>
         <Logout_button nav={navigation}/>
         
-        <Text style={styles.topheading}> Acamedic </Text>
+        <Text style={styles.topheading}> Academic </Text>
         <Text style={styles.topheading2}> Progress </Text>
 
         <View style={styles.CGPAview}>
@@ -136,8 +136,8 @@ export const Academic_progress = ({ navigation }) => {
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
           margintop={height / 1.58}
-          marginleft={50}
-          marginright={47}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </View>
     </ImageBackground>

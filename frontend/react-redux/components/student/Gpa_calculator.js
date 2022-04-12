@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   TouchableHighlight,
+  Dimensions,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Logout_button } from "../buttons/Logout_button";
@@ -22,8 +23,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getEnrollments } from "../../actions/coursesactions";
 import { getGrade } from "../../actions/courseGradeActions";
+import { useFonts } from "expo-font";
+
+const { width, height } = Dimensions.get("screen");
 
 export const Gpa_calculator = ({ navigation }) => {
+
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [countArray, setCountarray] = useState([0]);
   const [creditsList, setCreditsList] = useState([0]);
@@ -145,7 +153,7 @@ export const Gpa_calculator = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require("../assets/background.png")}
+      source={require("../assets/whiteBackground.png")}
       resizeMode="cover"
       style={styles.backgroundImage}
     >
@@ -219,10 +227,10 @@ export const Gpa_calculator = ({ navigation }) => {
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
-          horizontal_padding={50}
-          margintop={400}
-          marginleft={65}
-          marginright={65}
+          horizontal_padding={0}
+          margintop={90}
+          marginleft={width/6}
+          marginright={width/6}
         />
       </ScrollView>
     </ImageBackground>
@@ -245,18 +253,21 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: 35,
-    marginLeft: 25,
+    top: height/25,
+    marginLeft: width/12,
     fontSize: 27,
     fontWeight: "bold",
+    fontFamily: 'Outfit',
   },
   unitsheading: {
     position: "absolute",
-    width: 70,
-    height: 30,
+    width: width/5,
+    height: height/5,
     top: 110,
     left: 75,
+    //fontFamily: 'Outfit',
     fontSize: 24,
+    
     // fontWeight: 400,
   },
   picker: {
@@ -269,11 +280,12 @@ const styles = StyleSheet.create({
 
   gradeheading: {
     position: "absolute",
-    width: 80,
-    height: 30,
+    width: width/5,
+    height: height/5,
     top: 110,
     left: 253,
     fontSize: 24,
+    //fontFamily: 'Outfit',
     // fontWeight: 400,
   },
   unitsDropdown: {
@@ -306,8 +318,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
-    width: 235,
-    height: 31,
+    width: width / 1.75,
+    height: height/28,
     top: 50,
     left: 81,
     borderRadius: 40,
@@ -316,7 +328,7 @@ const styles = StyleSheet.create({
   },
   moreText: {
     // position: "absolute",
-
+    fontFamily: 'Outfit',
     fontSize: 14,
     lineHeight: 24,
     fontWeight: "bold",
@@ -325,9 +337,9 @@ const styles = StyleSheet.create({
   },
   gpaBox: {
     position: "relative",
-    width: 150,
-    height: 40,
-    top: 350,
+    width: width/2.69,
+    height: height/23,
+    top: 70,
     left: 120,
     borderRadius: 7,
     backgroundColor: "#BEBEBE",
@@ -335,6 +347,7 @@ const styles = StyleSheet.create({
   gpaText: {
     textAlign: "center",
     fontWeight: "bold",
+    fontFamily: 'Outfit',
     fontSize: 14,
     lineHeight: 17.64,
   },
