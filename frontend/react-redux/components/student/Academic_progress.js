@@ -66,6 +66,8 @@ export const Academic_progress = ({ navigation }) => {
 
   if (get == false) {
     dispatch(getEnrollments("all"));
+    dispatch(getEnrollments("all"));
+
     setGet(true);
   }
   let coursesState = useSelector((state) => state.courseReducer);
@@ -107,8 +109,8 @@ export const Academic_progress = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button nav={navigation}/>
-        
+        <Logout_button nav={navigation} />
+
         <Text style={styles.topheading}> Academic </Text>
         <Text style={styles.topheading2}> Progress </Text>
 
@@ -162,17 +164,17 @@ const styles = StyleSheet.create({
     position: "absolute",
     fontSize: 27,
     fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     marginTop: height / 24,
-    marginLeft: width / 12, 
+    marginLeft: width / 12,
   },
   topheading2: {
     position: "absolute",
     fontSize: 27,
     fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     marginTop: height / 13,
-    marginLeft: width / 12, 
+    marginLeft: width / 12,
   },
   CGPAview: {
     position: "absolute",
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 20,
     fontSize: 20,
     //fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
   },
   Gradesview: {
     position: "absolute",
@@ -198,8 +200,8 @@ const styles = StyleSheet.create({
     marginTop: height / 700,
     marginLeft: width / 20,
     fontSize: 20,
-    
-    fontFamily: 'Outfit',
+
+    fontFamily: "Outfit",
   },
 
   logoutbuttonview: {
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
     //maxHeight: height / 4.05,
     marginLeft: width / 10,
     marginTop: height / 1000,
-    backgroundColor: '#eceded',
+    backgroundColor: "#eceded",
     zIndex: 99,
     borderRadius: 5,
   },

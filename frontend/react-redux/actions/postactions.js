@@ -96,7 +96,12 @@ export const unlikePost = (user_id, post_id, post_owner) => {
       });
   };
 };
-export const commentPost = (post_owner, post_id, comment_toadd) => {
+export const commentPost = (
+  post_owner,
+  post_id,
+  comment_toadd,
+  commenter_id
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -104,6 +109,7 @@ export const commentPost = (post_owner, post_id, comment_toadd) => {
   };
   const body = JSON.stringify({
     comment: comment_toadd,
+    commenter: commenter_id,
   });
   return (dispatch) => {
     axios
