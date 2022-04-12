@@ -7,6 +7,7 @@ import usersReducer from "./usersReducer";
 import deadlineReducer from "./deadlineReducer";
 import courseReducer from "./courseReducer";
 import courseGradeReducer from "./courseGradeReducer";
+import notificationReducer from "./notificationReducer";
 export default combineReducers({
   countReducer,
   loginReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   deadlineReducer,
   courseReducer,
   courseGradeReducer,
+  notificationReducer,
 });

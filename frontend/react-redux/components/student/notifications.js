@@ -1,56 +1,20 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,Dimensions} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
+import { clearNotifications } from '../../actions/notificationAction';
 const { width, height } = Dimensions.get("screen");
 
 export const Notifications = ({navigation}) => {
-  var dict = [
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
-    {notifications : "Notify" },
 
- 
-  ]
+  const dispatch = useDispatch()
+
+  let id = useSelector((state)=> state.loginReducer).user.Id
+
+  let dict = useSelector((state)=> state.notificationReducer).data
     return(
       <ImageBackground source={require('../assets/background.png')} 
       resizeMode="cover" 
@@ -63,16 +27,26 @@ export const Notifications = ({navigation}) => {
         {dict.map((data, index) => (
               <View key={index}>
                 <Text style={styles.textstyle}>
-                  {data.notifications}
+                  {data}
                 </Text>
               </View>
             ))}
         </ScrollView>
+
+        <Main_button
+          text="Clear Notifications"
+          onPress={() => dispatch(clearNotifications(id))}
+          horizontal_padding={50}
+          margintop={height / 1.73}
+          marginleft={50}
+          marginright={47}
+        />
+
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.73}
+          margintop={height / 50}
           marginleft={50}
           marginright={47}
         />
