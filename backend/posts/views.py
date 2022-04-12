@@ -13,8 +13,9 @@ def posts(request):
         id = req[0][1]
         if id == "all": #working 
             db = database.connect_db()
-            data = db.child("Data").child("Posts").get()
-            return render(request, "posts.html", {"data": data.val()})
+            data = db.child("Data").child("Posts").get().val()
+            data = dict(data)
+            return render(request, "posts.html", {"data": json.dumps(data)})
     elif request.method == "POST": # this will post a new post
         db = database.connect_db()
         data = request.body.decode("utf-8")
