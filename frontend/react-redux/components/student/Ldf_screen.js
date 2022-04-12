@@ -1,7 +1,6 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,Dimensions} from "react-native";
-
-
+import SwipeableViews from "react-swipeable-views/lib/SwipeableViews";
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { Post_bar } from "../Post_bar/Post_bar";
@@ -10,14 +9,22 @@ const { width, height } = Dimensions.get("screen");
 
 export const Ldf = ({navigation}) => {
 
-  var comm = [
-    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
-    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
-    {c : "Comment 3"},
-    {c : "Comment 4"},
-    {c : "Comment 5"},
-    {c : "Comment 6"},
-  ]
+
+  const temp = {
+    0 : {comments: 'Comment 1,Comment 2 ,Comment 3 ,Comment 4,Comment 5,Comment 6,Comment 7',liker_id : "23100193,23100186,23100199",post : "Post 1"},
+    1 : {comments: 'Hello 1,Hello 2 ,Hello 3 ,Hello 4,Hello 5,Hello 6,Hello 7',liker_id : "23100193,23100186,23100199",post : "Post 2"},
+    2 : {comments: 'Hi 1,Hi 2 ,Hi 3 ,Hi 4,Hi 5,Hi 6,Hi 7',liker_id : "23100193,23100186,23100199",post : "Post 3"}
+  }
+  var CommentsArray = []
+  var liker_id = []
+  var post = []
+    {Object.entries(temp).map(([key, value]) => (
+      CommentsArray.push(value.comments.split(',')) , liker_id.push(value.liker_id.split(',')), post.push(value.post)
+    ))}
+
+
+
+  
  
     return(
       <ImageBackground source={require('../assets/background.png')} 
@@ -34,10 +41,11 @@ export const Ldf = ({navigation}) => {
         <View style = {styles.Postview}>
             <Text style = {styles.Posttext}>Post:</Text>
         </View>
+ 
         <View style = {styles.rectangle2}>
 
               <ScrollView style = {styles.PostTextRec}>
-                <Text> To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec </Text>
+                <Text> {post[0]} </Text>
               </ScrollView>
 
               <View style = {styles.CommentBar}>
@@ -45,19 +53,17 @@ export const Ldf = ({navigation}) => {
               </View>
 
               <ScrollView style = {styles.CommentBox}>
-                {comm.map((data, index) => (
+                {CommentsArray[0].map((data, index) => (
                 <View key={index}>
                   <Text style={styles.CommentText}>
-                    {data.c}
+                    {data}
                   </Text>
                 </View>
                 ))}
               </ScrollView>
-
-
-            
-
         </View>
+          
+
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
@@ -67,6 +73,8 @@ export const Ldf = ({navigation}) => {
           marginright={47}
         />
         </View>
+
+
       </ImageBackground>
       
 
