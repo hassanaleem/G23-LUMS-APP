@@ -1,7 +1,5 @@
-import React from "react";
-import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,Dimensions} from "react-native";
-
-
+import React, { useState } from 'react';
+import { ImageBackground, StyleSheet, Text, View ,Alert,Pressable,ScrollView,Dimensions} from "react-native";
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { Post_bar } from "../Post_bar/Post_bar";
@@ -9,16 +7,23 @@ import { Comment_bar } from "../CommentBar/Commentbar";
 const { width, height } = Dimensions.get("screen");
 
 export const Ldf = ({navigation}) => {
+  const temp = {
+    0 : {comments: 'Comment 1,Comment 2 ,Comment 3 ,Comment 4,Comment 5,Comment 6,Comment 7',liker_id : "23100193,23100186,23100199",post : "Post 1"},
+    1 : {comments: 'Hello 1,Hello 2 ,Hello 3 ,Hello 4,Hello 5,Hello 6,Hello 7',liker_id : "23100193,23100186,23100199",post : "Post 2"},
+    2 : {comments: 'Hi 1,Hi 2 ,Hi 3 ,Hi 4,Hi 5,Hi 6,Hi 7',liker_id : "23100193,23100186,23100199",post : "Post 3"}
+  }
+  var CommentsArray = []
+  var liker_id = []
+  var post = []
+    {Object.entries(temp).map(([key, value]) => (
+      CommentsArray.push(value.comments.split(',')) , liker_id.push(value.liker_id.split(',')), post.push(value.post)
+    ))}
+  const [buttonPressed , setButtonPress] = useState(0);
+  if(buttonPressed == CommentsArray.length){
+    Alert.alert("hello")
+    setButtonPress(0)
+  }
 
-  var comm = [
-    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
-    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
-    {c : "Comment 3"},
-    {c : "Comment 4"},
-    {c : "Comment 5"},
-    {c : "Comment 6"},
-  ]
- 
     return(
       <ImageBackground source={require('../assets/background.png')} 
       resizeMode="cover" 
@@ -34,10 +39,11 @@ export const Ldf = ({navigation}) => {
         <View style = {styles.Postview}>
             <Text style = {styles.Posttext}>Post:</Text>
         </View>
+      
         <View style = {styles.rectangle2}>
 
               <ScrollView style = {styles.PostTextRec}>
-                <Text> To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec </Text>
+                <Text style = {{left :5, top : 4 , fontSize:15, lineHeight : 20}}> {post[buttonPressed]} </Text>
               </ScrollView>
 
               <View style = {styles.CommentBar}>
@@ -45,19 +51,21 @@ export const Ldf = ({navigation}) => {
               </View>
 
               <ScrollView style = {styles.CommentBox}>
-                {comm.map((data, index) => (
+                {CommentsArray[buttonPressed].map((data, index) => (
                 <View key={index}>
                   <Text style={styles.CommentText}>
-                    {data.c}
+                    {data}
                   </Text>
                 </View>
                 ))}
               </ScrollView>
-
-
-            
-
+              
         </View>
+        <Pressable style = {styles.likeButton} onPress = {() => setButtonPress(buttonPressed+1)}>
+        <Text style = {styles.likeText}> Next </Text>
+        </Pressable>
+          
+        
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
@@ -67,6 +75,8 @@ export const Ldf = ({navigation}) => {
           marginright={47}
         />
         </View>
+
+
       </ImageBackground>
       
 
@@ -149,7 +159,23 @@ export const Ldf = ({navigation}) => {
         borderRadius: 7,
         backgroundColor: "#bebebe",
 
-      }
+      },
+      likeButton : {
+        position : "absolute",
+        paddingVertical: 8,
+        paddingHorizontal: 80,
+        borderRadius: 30,
+        backgroundColor: "#79c4f2",
+        marginTop: height/1.52,
+        marginLeft: width/4.5,
+        marginRight: width / 12,
+  },
+  likeText : {
+      color : "white",
+      fontSize : 20,
+      fontWeight: "bold"
+      
+  }
 
 
     });
