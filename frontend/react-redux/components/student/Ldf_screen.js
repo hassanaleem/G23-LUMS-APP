@@ -91,9 +91,16 @@ export const Ldf = ({ navigation }) => {
     }
     // //console.log(pp, "UWU");
     setCurrentPost(pp[userIndex][postIndex].post);
-
+    // console.log(pp[userIndex][postIndex].comments,"HE");
+    if (pp[userIndex][postIndex].comments != "") {
+      setComment(pp[userIndex][postIndex].comments.split(","));
+    }
     //console.log("HERE");
   }
+  const makeComments = () => {
+    //split pp[userIndex][postIndex].comments on ,
+    //split pp[userIndex][postIndex].liker_id on ,
+  };
   const [loop, setLoop] = useState(false);
   const changePost = () => {
     // make a set again bool to make it circular
@@ -106,15 +113,29 @@ export const Ldf = ({ navigation }) => {
       setPostIndex(0);
       setPostIndex(0);
       setCurrentPost(pp[0][0].post);
+      setComment([]);
+      if (pp[0][0].comments != "") {
+        setComment(pp[0][0].comments.split(","));
+      }
     } else if (postIndex < pp[userIndex].length - 1) {
       setCurrentPost(pp[userIndex][postIndex + 1].post);
+      setComment([]);
+
+      if (pp[userIndex][postIndex + 1].comments != "") {
+        setComment(pp[userIndex][postIndex + 1].comments.split(","));
+      }
       setPostIndex(postIndex + 1);
     } else {
       setCurrentPost(pp[userIndex + 1][0].post);
+      setComment([]);
+
+      if (pp[userIndex + 1][0].comments != "") {
+        setComment(pp[userIndex + 1][0].comments.split(","));
+      }
       setPostIndex(0);
       setPostIndex(0);
       setUserIndex(userIndex + 1);
-      setCurrentPost(pp[userIndex + 1][0].post);
+      // setCurrentPost(pp[userIndex + 1][0].post);
     }
   };
   // console.log(userIndex, postIndex, currentPost, pp.length);
@@ -163,7 +184,7 @@ export const Ldf = ({ navigation }) => {
           </View>
 
           <ScrollView style={styles.CommentBox}>
-            {CommentsArray[buttonPressed].map((data, index) => (
+            {comment.map((data, index) => (
               <View key={index}>
                 <Text style={styles.CommentText}>{data}</Text>
               </View>
