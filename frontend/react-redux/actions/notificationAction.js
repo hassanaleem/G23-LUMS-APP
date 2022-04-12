@@ -37,4 +37,12 @@ export const getNotifications = (id) => {
       }).catch((error) => {})
     };
   };
+
+  export const clearMsg = () => {
+    return (dispatch) => {
+        dispatch({
+          type: "CLEAR_NOTIFICATION_MESSAGE",
+          payload: response.data,
+        });
+  }};
   
