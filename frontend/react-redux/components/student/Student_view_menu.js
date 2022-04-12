@@ -43,7 +43,7 @@ export const Menu = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button />
+        <Logout_button nav={navigation}/>
         <Text style={styles.topheading}> Menu </Text>
         <View style={styles.topheading2}>
           <Text style={styles.FoodItems}>Food Items</Text>
@@ -63,8 +63,8 @@ export const Menu = ({ navigation }) => {
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
           margintop={height / 1.57}
-          marginleft={50}
-          marginright={47}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </View>
     </ImageBackground>

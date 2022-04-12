@@ -18,7 +18,7 @@ import {
 import { Main_button } from "../buttons/Main_button";
 import { Logout_button } from "../buttons/Logout_button";
 import { Search_bar } from "../searchBar/Search_bar";
-
+import { useFonts } from "expo-font";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -31,6 +31,9 @@ import {
 const { width, height } = Dimensions.get("screen");
 
 export const Enroll_course = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [code, setcode] = useState("");
   const [title, settitle] = useState("");

@@ -18,16 +18,20 @@ import {
 import { Main_button } from "../buttons/Main_button";
 import { Logout_button } from "../buttons/Logout_button";
 import { logout } from "../../actions/loginAction";
-
+import { useFonts } from "expo-font";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Icon } from "react-native-elements";
 
 const { width, height } = Dimensions.get("screen");
-import { Icon } from "react-native-elements";
+
 export const Student_home_screen = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const [loggedOut, setLoggedOut] = useState(false);
-  const [noNotifications, setnoNotifications] = useState(true); // set this to true if no notifications
+  const [noNotifications, setnoNotifications] = useState(false); // set this to true if no notifications
   const [notificationsCount, setnotificationsCount] = useState(0);
   let name = useSelector((state) => state.loginReducer).user.Name;
 
@@ -152,6 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
   topheading2: {
@@ -159,6 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
+    fontFamily: 'Outfit',
   },
 
   logout_text: {

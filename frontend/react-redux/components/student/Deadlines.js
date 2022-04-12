@@ -87,7 +87,7 @@ export const Deadlines = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button />
+        <Logout_button nav={navigation} />
         <Text style={styles.topheading}> Deadlines </Text>
 
         <ScrollView style={styles.rectangle2}>
@@ -105,8 +105,8 @@ export const Deadlines = ({ navigation }) => {
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
           margintop={height / 1.59}
-          marginleft={50}
-          marginright={47}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </View>
     </ImageBackground>

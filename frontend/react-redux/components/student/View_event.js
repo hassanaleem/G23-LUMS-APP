@@ -17,9 +17,13 @@ import { getEvents } from "../../actions/eventsAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useFonts } from "expo-font";
 const { width, height } = Dimensions.get("screen");
 
 export const View_event = ({ navigation }) => {
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
   const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
   const [fetched, setFetched] = useState(false);
@@ -84,9 +88,9 @@ export const View_event = ({ navigation }) => {
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.5}
-          marginleft={50}
-          marginright={47}
+          margintop={height / 1.59}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </View>
     </ImageBackground>
@@ -114,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 37.8,
     fontWeight: "bold",
+    fontFamily: 'Outfit',
   },
   subheading1: {
     width: width / 3.38,
@@ -122,15 +127,17 @@ const styles = StyleSheet.create({
     top: height / 8,
     left: 38,
     fontSize: 24,
+    fontFamily: 'Outfit',
     lineHeight: 30.24,
   },
   subheading2: {
     width: width / 3.38,
     height: height / 13.33,
     position: "absolute",
-    top: height / 2.5,
+    top: height / 2.7,
     left: 38,
     fontSize: 24,
+    fontFamily: 'Outfit',
     lineHeight: 30.24,
   },
 
@@ -138,7 +145,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: width / 1.219,
     height: height / 5.05,
-    top: height / 6,
+    top: height / 6.3,
     left: 38,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
@@ -147,9 +154,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: width / 1.219,
     height: height / 3.8,
-    top: height / 2.3,
+    top: height / 2.5,
     left: 38,
-    borderRadius: 7,
+    borderRadius: 5,
     backgroundColor: "#EDEDED",
   },
   textstyle: {
@@ -157,6 +164,8 @@ const styles = StyleSheet.create({
     top: height / 150,
     left: width / 30,
     fontSize: 14,
+    paddingBottom : 8,
+    fontFamily: 'Outfit',
     lineHeight: 21,
   },
   logoutbutton: {
