@@ -20,9 +20,9 @@ def fooditems(request):
         db.child("Data").child("foodItems").child(ide).set(data)
 
         # Adding Notifications
-        data = db.child("Data").child("Notifications").get()
-        for d in data.each():
-            notification = "Update in Food Menu"
+        dataDB = db.child("Data").child("Notifications").get()
+        for d in dataDB.each():
+            notification = "New Addition in Food Menu restaurant:" + data["restaurant"] + " item:" + data["foodItem"] + " price:" + data["price"]
             try:
                 x = d.val()
                 x.append(notification)
@@ -76,16 +76,15 @@ def fooditems(request):
         data["id"] = id
         db.child("Data").child("foodItems").child(id).set(data)
         # Adding Notifications
-        data = db.child("Data").child("Notifications").get()
-        for d in data.each():
-            notification = "Update in Food Menu"
+        dataDB = db.child("Data").child("Notifications").get()
+        for d in dataDB.each():
+            notification = "Update in Food Menu " + data["restaurant"] + " " + data["foodItem"] + " " + data["price"]
             try:
                 x = d.val()
                 x.append(notification)
                 db.child("Data").child("Notifications").child(d.key()).set(x)
             except:
                 x = [notification]
-                db.child("Data").child("Notifications").child(d.key()).set(x)
                 
         return render(request, 'fooditems.html')
         

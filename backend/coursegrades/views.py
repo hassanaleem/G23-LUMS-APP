@@ -52,6 +52,21 @@ def coursegrades(request):
             dic["grade"] = grade
             dic["credit_hrs"] = credithrs
             db.child("Data").child("CourseGrades").child(key).set(dic)
+
+            # adding students to course new table
+
+            try:
+                dataDB = db.child("Data").child("CourseStudents").child(course_id).get().val()
+                try:
+                    dataDB.append(student_id)
+                    db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
+                except:
+                    dataDB = []
+                    dataDB.append(student_id)
+                    db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
+            except:
+                pass
+
             return render(request, 'coursegrades.html')
         except:
             pass
@@ -72,6 +87,21 @@ def coursegrades(request):
             fetchedData = db.child("Data").child("CourseGrades").child(key).get().val()
             fetchedData["grade"] = grade
             db.child("Data").child("CourseGrades").child(key).set(fetchedData)
+
+            try:            
+                dataDB = db.child("Data").child("Notifications").child(studentID).get().val()
+                notification = "Grade Added for " + courseID
+
+                try:
+                    dataDB.append(notification)
+                    db.child("Data").child("Notifications").child(studentID).set(dataDB)
+                except:
+                    dataDB = []
+                    dataDB.append(notification)
+                    db.child("Data").child("Notifications").child(studentID).set(dataDB)
+            except:
+                pass
+
             return render(request, 'coursegrades.html')
         except:
             pass

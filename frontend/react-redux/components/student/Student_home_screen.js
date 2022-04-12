@@ -23,6 +23,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Icon } from "react-native-elements";
+import { getNotifications } from "../../actions/notificationAction";
+import { clearMsg } from "../../actions/notificationAction";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -32,10 +34,22 @@ export const Student_home_screen = ({ navigation }) => {
   });
   const [loggedOut, setLoggedOut] = useState(false);
   const [noNotifications, setnoNotifications] = useState(false); // set this to true if no notifications
-  const [notificationsCount, setnotificationsCount] = useState(0);
+  // const [notificationsCount, setnotificationsCount] = useState(0);
   let name = useSelector((state) => state.loginReducer).user.Name;
-
+  let notificationsCount = 0;
   const dispatch = useDispatch();
+
+  let msg = useSelector((state) => state.notificationReducer).message;
+  if (msg == "") {
+    let id = useSelector((state) => state.loginReducer).user.Id;
+    dispatch(getNotifications(id));
+  }
+
+  if (msg == "fetched") {
+    notificationsCount = useSelector((state) => state.notificationReducer).data
+      .length;
+    clearMsg();
+  }
 
   return (
     <View style={styles.container}>
@@ -59,7 +73,7 @@ export const Student_home_screen = ({ navigation }) => {
           onPress={() => {
             navigation.navigate("Notifications_screen");
           }}
-          disabled={noNotifications}
+          disabled={notificationsCount == 0 ? true : false}
           disabledStyle={{
             backgroundColor: "transparent",
           }}
@@ -76,7 +90,7 @@ export const Student_home_screen = ({ navigation }) => {
             color: "#FC0101",
           }}
         >
-          {noNotifications ? null : notificationsCount}
+          {notificationsCount > 0 ? notificationsCount : null}
         </Text>
         <Logout_button nav={navigation} />
 
@@ -156,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
   },
 
   topheading2: {
@@ -164,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
   },
 
   logout_text: {

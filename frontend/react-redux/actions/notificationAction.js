@@ -13,4 +13,36 @@ export const getNotifications = (id) => {
       });
     };
   };
+
+  export const clearNotifications = (id) => {
+    const request = address + `/notifications`;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    // Request body
+    const body = JSON.stringify({
+      id
+    });
+
+
+    return (dispatch) => {
+      axios.post(request, body, config).then((response) => {
+        dispatch({
+          type: "CLEAR_NOTIFICATIONS",
+          payload: "",
+        });
+      }).catch((error) => {})
+    };
+  };
+
+  export const clearMsg = () => {
+    return (dispatch) => {
+        dispatch({
+          type: "CLEAR_NOTIFICATION_MESSAGE",
+          payload: response.data,
+        });
+  }};
   

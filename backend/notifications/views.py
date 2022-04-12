@@ -14,6 +14,16 @@ def notifications(request):
         notifications = db.child("Data").child("Notifications").child(req).get().val()
         return render(request, 'notifications.html', {'notifications': json.dumps(notifications)})
 
+    elif request.method == "POST":
+        data = request.body.decode("utf-8")
+        data = json.loads(data)
+        try:
+            db.child("Data").child("Notifications").child(data["id"]).set("")
+        except:
+            pass
+        
+        return render(request, 'notifications.html')
+
 
 
 

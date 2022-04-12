@@ -45,11 +45,7 @@ export const Addfooditem = ({ navigation }) => {
     if (restaurant == "" || foodItem == "" || price == "") {
       Alert.alert("Please fill all the fields");
     } else {
-      // dispatch(GetRestaurant());
-      // setRestaurantList(getState.restaurant);
-      // get the list of restaurants
-      //console.log(restaurantList);
-      // if (restaurantList.includes(restaurant)) {
+
       let data = {
         restaurant: restaurant,
         foodItem: foodItem,
@@ -60,12 +56,7 @@ export const Addfooditem = ({ navigation }) => {
       setRestaurant("");
       setFooditem("");
       setPrice("");
-      // } else {
-      //   Alert.alert("Please enter a valid restaurant");
-      //   setRestaurant("");
-      //   setFooditem("");
-      //   setPrice("");
-      // }
+
     }
   };
   return (
