@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View,Alert,Dimensions } from 'react-native
 const { width, height } = Dimensions.get("screen");
 
 
-const App = () => {
+export const Next = () => {
   const [buttonPressed , setButtonPress] = useState(0);
   if(buttonPressed == 3){
     Alert.alert("hello")
@@ -11,14 +11,10 @@ const App = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text> {buttonPressed} </Text>
       <Pressable style = {styles.likeButton} onPress = {() => setButtonPress(buttonPressed+1)}>
-        <Text> Press Me </Text>
+        <Text style = {styles.likeText}> Next </Text>
       </Pressable>
-      
-    </View>
-  );
+      );
 };
 
 const styles = StyleSheet.create({
@@ -28,15 +24,20 @@ const styles = StyleSheet.create({
   },
   likeButton : {
         position : "absolute",
-        paddingVertical: 5,
-        paddingHorizontal: 15,
+        paddingVertical: 8,
+        paddingHorizontal: 80,
         borderRadius: 30,
         backgroundColor: "#79c4f2",
-        marginTop: height / 24,
-        marginLeft: width / 1.5,
+        marginTop: height/1.52,
+        marginLeft: width/4.5,
         marginRight: width / 12,
+  },
+  likeText : {
+      color : "white",
+      fontSize : 20,
+      fontWeight: "bold"
+      
   }
 
 });
 
-export default App;
