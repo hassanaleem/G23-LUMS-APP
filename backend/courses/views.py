@@ -45,5 +45,18 @@ def courses(request):
         if(len(course_id)):
             data.pop('course_id')
             db.child("Data").child("Courses").child(course_id).set(data)
+
+            # Adding Notifications
+            dataDB = db.child("Data").child("Notifications").get()
+            for d in dataDB.each():
+                notification = "Updated timings for :" + course_id
+                try:
+                    x = d.val()
+                    x.append(notification)
+                    db.child("Data").child("Notifications").child(d.key()).set(x)
+                except:
+                    x = [notification]
+                    db.child("Data").child("Notifications").child(d.key()).set(x)
+
             return render(request, 'courses.html')
-    return render(request, 'courses.html')
+    # return render(request, 'courses.html')
