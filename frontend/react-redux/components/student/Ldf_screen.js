@@ -5,21 +5,19 @@ import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollV
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { Post_bar } from "../Post_bar/Post_bar";
-import { useDispatch, } from "react-redux";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { getAllPosts } from "../../actions/postactions";
+import { Comment_bar } from "../CommentBar/Commentbar";
 const { width, height } = Dimensions.get("screen");
 
 export const Ldf = ({navigation}) => {
-  const [get,setGet] = useState(true)
-  const dispatch = useDispatch()
-  if (get == false){
-    dispatch(getAllPosts());
-    setGet(false)
-  }
 
-
+  var comm = [
+    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
+    {c : "To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec"},
+    {c : "Comment 3"},
+    {c : "Comment 4"},
+    {c : "Comment 5"},
+    {c : "Comment 6"},
+  ]
  
     return(
       <ImageBackground source={require('../assets/background.png')} 
@@ -27,22 +25,38 @@ export const Ldf = ({navigation}) => {
       style={styles.backgroundImage}>
         <View style={styles.container}>
           <Logout_button/>
+          
           <Text style = {styles.topheading}> DISCUSSION FORM </Text>
         <View>
             <Post_bar bar_text="What's on your mind?" />
+            
         </View>
         <View style = {styles.Postview}>
             <Text style = {styles.Posttext}>Post:</Text>
         </View>
         <View style = {styles.rectangle2}>
-            
-        {dict.map((data, index) => (
-              <View key={index}>
-                <Text style={styles.textstyle}>
-                  {data.Course_code} : {data.Title} :  {data.Date} : {data.Time}
-                </Text>
+
+              <ScrollView style = {styles.PostTextRec}>
+                <Text> To the 2 boys having shakes who left student lounge around 10 min ago, it's a shame that you left without paying your bill (token 7). Understand that bills are punched  at waiter's names and they have to pay all the bill amounts anyway even if you don't. I have paid your bill but if it was not intentional and you forgot or smth then do go and apologize to mudassar bhai and pay him the amount in tip or  something. He looked for you guys all over zakir, student lounge, and rec </Text>
+              </ScrollView>
+
+              <View style = {styles.CommentBar}>
+              <Comment_bar bar_text= "Follow up discussion"/>
               </View>
-            ))}
+
+              <ScrollView style = {styles.CommentBox}>
+                {comm.map((data, index) => (
+                <View key={index}>
+                  <Text style={styles.CommentText}>
+                    {data.c}
+                  </Text>
+                </View>
+                ))}
+              </ScrollView>
+
+
+            
+
         </View>
         <Main_button
           text="Go Back"
@@ -108,25 +122,35 @@ export const Ldf = ({navigation}) => {
       },
       PostTextRec: {
         position: "absolute",
-        width: width / 1.2,
-        height: height / 3,
-        top: height / 3.2,
-        left: width/11,
+        width: width / 1.3,
+        height: height / 10,
+        top: ( height / 3.2)/30,
+        left: (width/11)/3,
         borderRadius: 7,
-        backgroundColor: "#EDEDED",
+        backgroundColor: "#bebebe",
       },
-      logoutbutton: {
-        backgroundColor : '#87CEFA',
-        padding : 5,
-        borderRadius : 180
+      CommentBar : {
+        top : height / 25
       },
-      event: {
-        color: "black",
-        position : "absolute",
-        left : 10,
-        top : 50,
-        fontSize: 15,
-        fontWeight: "bold",
+      CommentText : {
+        lineHeight : 20,
+        fontSize : 15,
+        left : (width /width)+2,
+        marginTop : 4,
+        marginRight : 4
+      },
+
+      CommentBox : {
+        position: "absolute",
+        width: width / 1.3,
+        height: height / 7.4,
+        top: ( height / 3.2)/1.7,
+        left: (width/11)/3,
+        borderRadius: 7,
+        backgroundColor: "#bebebe",
+
       }
+
+
     });
     
