@@ -1,6 +1,5 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View ,Button,Alert,Pressable,ScrollView,Dimensions} from "react-native";
-import SwipeableViews from "react-swipeable-views/lib/SwipeableViews";
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { Post_bar } from "../Post_bar/Post_bar";
@@ -41,7 +40,7 @@ export const Ldf = ({navigation}) => {
         <View style = {styles.Postview}>
             <Text style = {styles.Posttext}>Post:</Text>
         </View>
- 
+      
         <View style = {styles.rectangle2}>
 
               <ScrollView style = {styles.PostTextRec}>
