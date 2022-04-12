@@ -35,7 +35,6 @@ def deadlines(request):
                     data = db.child("Data").child("Deadlines").get().val()
                     return render(request, 'deadlines.html', {'data': json.dumps(data)})
                 else:
-                    print("HERE",id)
                     data = db.child("Data").child("Deadlines").get().val()
                     temp = list()
                     for d in data:
@@ -43,7 +42,6 @@ def deadlines(request):
                             temp.append(d)
                     return render(request, 'deadlines.html', {'data': json.dumps(temp)})
         except:
-            print("except main a rha hai")
             pass
     elif request.method == 'POST':
         db = database.connect_db()
@@ -56,8 +54,8 @@ def deadlines(request):
             ide = len(id) 
         except:
             pass
-        # print("HERE", data, ide)
         db.child("Data").child("Deadlines").child(ide).set(data)
+
         return render(request, 'deadlines.html')
 
     elif request.method == 'PUT':
