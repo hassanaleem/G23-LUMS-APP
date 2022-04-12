@@ -72,6 +72,18 @@ def coursegrades(request):
             fetchedData = db.child("Data").child("CourseGrades").child(key).get().val()
             fetchedData["grade"] = grade
             db.child("Data").child("CourseGrades").child(key).set(fetchedData)
+
+            dataDB = db.child("Data").child("Notifications").child(studentID).get().val()
+            notification = "Grade Added for " + courseID
+
+            try:
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(studentID).set(dataDB)
+            except:
+                dataDB = []
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(studentID).set(dataDB)
+                
             return render(request, 'coursegrades.html')
         except:
             pass
