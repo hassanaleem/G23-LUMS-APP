@@ -11,6 +11,12 @@ const initialState = {
           ...state,
           data: finalData,
         };
+
+      case "CLEAR_NOTIFICATIONS":
+        return {
+          ...state,
+          data: [],
+        };
       default:
         return state;
     }
