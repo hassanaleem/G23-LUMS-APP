@@ -26,6 +26,7 @@ import { Academic_progress } from "./react-redux/components/student/Academic_pro
 import { View_event } from "./react-redux/components/student/View_event";
 import { Menu } from "./react-redux/components/student/Student_view_menu";
 import { Notifications } from "./react-redux/components/student/notifications";
+import { Ldf } from "./react-redux/components/student/Ldf_screen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="LdfScreen"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="Home" component={Login_screen} />
@@ -60,11 +61,13 @@ export default function App() {
           <Stack.Screen name="UpdateUserInfo" component={Update_user_info} />
           <Stack.Screen name="GpaCalculator" component={Gpa_calculator} />
           <Stack.Screen name="Notifications_screen" component={Notifications} />
+
           <Stack.Screen
             name="Academic_progress"
             component={Academic_progress}
           />
           <Stack.Screen name="ViewEvent" component={View_event} />
+          <Stack.Screen name="LdfScreen" component={Ldf} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
