@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2smr(4i^&94=0nuqb*lo$$vcc7*(%4#8bb7=gt)t@zcu8w9r8l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["10.130.39.207", "10.130.159.171", "10.130.161.57", "10.130.28.73","192.168.100.11"]
+ALLOWED_HOSTS = ["10.130.39.207", "10.130.159.171", "10.130.161.57", "10.130.28.73","192.168.100.11", 'lumsapp.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -49,10 +51,13 @@ INSTALLED_APPS = [
     'courses',
     'notifications',
     'posts',
+    'whitenoise.runserver_nostatic',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,3 +140,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())
