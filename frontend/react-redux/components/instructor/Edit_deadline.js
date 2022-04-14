@@ -44,13 +44,13 @@ export const Edit_deadline = ({ route, navigation }) => {
   if (message == "Success Update")
   {
     Alert.alert("Successfully Updated")
-    clearMessage()
+    dispatch(clearMessage())
   }
 
   if (message == "Failed Update")
   {
     Alert.alert("Failed to Update")
-    clearMessage()
+    dispatch(clearMessage())
   }
   if (!loaded)
   {

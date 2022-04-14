@@ -17,7 +17,7 @@ import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Addfood, GetRestaurant } from "../../actions/foodactions";
+import { Addfood, GetRestaurant, clearMessage } from "../../actions/foodactions";
 import {useFonts} from 'expo-font';
 
 const { width, height } = Dimensions.get("screen");
@@ -59,6 +59,17 @@ export const Addfooditem = ({ navigation }) => {
 
     }
   };
+
+  let message = useSelector((state) => state.foodItemReducer).message;
+  if (message == "Success") {
+    Alert.alert("Food Item Added Successfully");
+    dispatch(clearMessage())
+  }
+
+  if (message == "Failure") {
+    Alert.alert("Food Item Addition Failed. Please try again");
+    dispatch(clearMessage())
+  }
   return (
     <View style={styles.container}>
       <ImageBackground

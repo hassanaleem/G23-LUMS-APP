@@ -52,12 +52,12 @@ export const Add_grade = ({ navigation }) => {
     if (check === "Success")
     {
       Alert.alert("Grade Added Successfully");
-      clearMessage()
+      dispatch(clearMessage())
     } 
     if (check === "Failure")
     {
       Alert.alert("Grade Addition Failed");
-      clearMessage()
+      dispatch(clearMessage())
     } 
   }
 

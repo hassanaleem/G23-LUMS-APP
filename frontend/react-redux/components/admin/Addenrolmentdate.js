@@ -18,8 +18,8 @@ const {width, height} = Dimensions.get("screen");
 import { useState } from "react";
 import { Logout_button } from  "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { useDispatch } from "react-redux";
-import { postEvents } from "../../actions/eventsAction";
+import { useDispatch, useSelector } from "react-redux";
+import { clearMessage, postEvents } from "../../actions/eventsAction";
 import { useFonts } from 'expo-font';
 //import { useSelector } from "react-redux";
 
@@ -42,8 +42,20 @@ export const Addenrolmentdate = ({ navigation }) => {
       setenrolmenttime("");
     }
   
-    
   };
+
+  let message = useSelector((state) => state.eventsReducer).message;
+  if (message == "Success") {
+    Alert.alert("Enrollment Date Added Successfully");
+    disptch(clearMessage())
+  }
+
+  if(message == "Failure")
+  {
+    Alert.alert("Enrollment Date Addition Failed. Please try again");
+    dispatch(clearMessage())
+  }
+  
   return (
     <View style={styles.container}>
       <ImageBackground

@@ -70,13 +70,13 @@ export const Add_course = ({ navigation }) => {
     if (check === "Success") 
     {
       Alert.alert("Course Added Successfully");
-      clearMessage()
+      dispatch(clearMessage())
       
     }
     if (check === "Failure")
     {
       Alert.alert("Course Addition Failed");
-      clearMessage()
+      dispatch(clearMessage())
     } 
   }
 

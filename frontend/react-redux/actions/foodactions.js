@@ -10,6 +10,11 @@ export const Addfood = (data) => {
         type: "ADD_FOOD_ITEM",
         payload: response.data,
       });
+    }).catch((err) => {
+      dispatch({
+        type: "ADD_FOOD_ITEM_FAIL",
+        payload: "Failure",
+      });
     });
   };
 };
@@ -18,7 +23,6 @@ export const GetRestaurant = () => {
   const request = address + "/fooditems?&restaurants";
   return (dispatch) => {
     axios.get(request).then((response) => {
-      //console.log(response.data);
       dispatch({
         type: "GET_RESTAURANT",
         payload: response.data,
@@ -56,3 +60,9 @@ export const updateFoodItem = (data) => {
     });
   };
 };
+
+export const clearMessage = () => {
+  return {
+    type: "CLEAR_FOOD_MESSAGE",
+  };
+}
