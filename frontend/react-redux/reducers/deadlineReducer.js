@@ -12,7 +12,8 @@ const deadlineReducer = (state = initialData, action) => {
         const finalData = JSON.parse(newdata);
         return {
           ...state,
-          data: finalData,
+          data: [...finalData],
+          message: "GET DEADLINE FETCHED"
         };
       }
 

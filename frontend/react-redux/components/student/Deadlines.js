@@ -28,57 +28,18 @@ export const Deadlines = ({ navigation }) => {
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
 
-  const [fetched, setFetched] = useState(false);
-  const [deadlines, setDeadlines] = useState([]);
-  const [studentId, setStudentID] = useState("");
-  const [stored, setStored] = useState(false);
-  const [enrollments, setEnrollments] = useState([]);
-  const [get, setGet] = useState(false);
-  const [tempPrev, setTempPrev] = useState(0);
-  const [courses, setCourses] = useState([]);
-
-  if (get == false) {
-    dispatch(getEnrollments("all_json"));
-    setGet(true);
-  }
-  let coursesState = useSelector((state) => state.courseReducer);
-  let enrollmentslist = coursesState.data;
-  if (enrollmentslist.length != 0 && enrollments.length == 0) {
-    setEnrollments(enrollmentslist);
-  }
   let userState = useSelector((state) => state.loginReducer);
   let user = userState.user.Id;
-  if (courses.length == 0) {
-    let temp2 = [];
-    // get length of enrollments object
-    const keys = Object.keys(enrollments);
-    // loop through each key
-    for (let i = 0; i < keys.length; i++) {
-      // get the value of the key
-      const key = keys[i];
-      // get the value of the key
-      const value = enrollments[key];
-      if (value.student_id == user) {
-        temp2.push(value);
-      }
-    }
-
-    if (temp2.length != 0) {
-      setCourses(temp2);
-    }
-  }
-  if (courses.length != 0 && stored == false && deadlines.length == 0) {
-    for (let i = 0; i < courses.length; i++) {
-      dispatch(getDeadline(courses[i].course_id));
-    }
-    setStored(true);
-  }
   let deadlinesState = useSelector((state) => state.deadlineReducer);
-  let deadlineslist = deadlinesState.data;
-  if (deadlineslist.length != 0 && deadlineslist.length != tempPrev) {
-    setDeadlines(deadlineslist);
-    setTempPrev(deadlineslist.length);
-  }
+  let message = deadlinesState.message
+  let deadlines = deadlinesState.data;
+
+
+  if (message == "")
+  {
+    dispatch(getDeadline(user))
+  } 
+
 
   return (
     <ImageBackground

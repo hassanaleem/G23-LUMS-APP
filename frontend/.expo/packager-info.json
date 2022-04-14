@@ -1,5 +1,5 @@
 {
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "packagerPort": 19000,
   "packagerPid": null,
   "expoServerNgrokUrl": "https://xu-wwn.anonymous.frontend.exp.direct",
