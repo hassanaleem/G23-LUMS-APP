@@ -2,11 +2,25 @@ const initialData = {
   find: false,
   user: {},
   queryRun: false,
+  message: "",
 };
 
 const usersReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
+
+    case "ADD_USER":
+      return {
+        ...state,
+        message: "Success",
+      };
+
+    case "ADD_USER_FAIL":
+      return {
+        ...state,
+        message: "Failure",
+      };
+    
     case "FIND_USER":
       const newdata = data.replace(/&quot;/g, '"');
       const finalData = JSON.parse(newdata);
@@ -29,6 +43,12 @@ const usersReducer = (state = initialData, action) => {
         find: false,
         queryRun: false,
         user: {},
+      };
+
+     case "CLEAR_USER_MESSAGE":
+      return {
+        ...state,
+        message: "",
       };
     default:
       return state;

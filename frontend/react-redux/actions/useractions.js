@@ -67,3 +67,9 @@ export const clearState = () => {
     type: "CLEAR_STATE",
   };
 };
+
+export const clearUserMessage = () => {
+  return {
+    type: "CLEAR_USER_MESSAGE",
+  };
+};

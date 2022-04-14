@@ -28,6 +28,12 @@ const eventsReducer = (state = initialData, action) => {
                 message: "Failure",
             }
 
+        case "CLEAR_EVENTS_MESSAGE":
+            return {
+                ...state,
+                message: "",
+            }
+
         default:
             return state
     }
