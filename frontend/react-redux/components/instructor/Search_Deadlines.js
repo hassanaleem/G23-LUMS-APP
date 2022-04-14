@@ -40,7 +40,7 @@ export const Search_Deadlines = ({ navigation }) => {
   }
 
   let message = useSelector((state) => state.deadlineReducer).message
-  let deadlines = useSelector((state) => state.deadlineReducer).data
+  let deadlines = useSelector((state) => state.deadlineReducer).dataSearch
 
 
   let items = []

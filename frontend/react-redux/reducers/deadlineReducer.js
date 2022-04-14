@@ -1,5 +1,6 @@
 const initialData = {
   data: [],
+  dataSearch: [],
   message: "",
 };
 const deadlineReducer = (state = initialData, action) => {
@@ -32,7 +33,7 @@ const deadlineReducer = (state = initialData, action) => {
       let finalD = JSON.parse(d);
       return {
         ...state,
-        data: finalD,
+        dataSearch: finalD,
         message: "Fetched",
       };
 
