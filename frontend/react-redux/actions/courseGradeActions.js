@@ -41,3 +41,11 @@ export const getGrade = (id) => {
     });
   };
 };
+
+export const clearMessage = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_COURSEGRADE_MESSAGE",
+    });
+  };
+};

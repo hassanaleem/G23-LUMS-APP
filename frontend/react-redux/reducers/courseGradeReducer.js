@@ -25,6 +25,12 @@ const courseGradeReducer = (state = initialData, action) => {
         message: "Success",
         data: [...state.data, finalData1],
       };
+
+    case "CLEAR_COURSEGRADE_MESSAGE":
+      return {
+        ...state,
+        message: "",
+      };
     default:
       return state;
   }

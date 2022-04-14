@@ -9,9 +9,9 @@ while(True):
   timenow = datetime.now(pytz.timezone('Asia/Karachi')).strftime('%H:%M:%S')
   print(timenow)
   timmelist = timenow.split(':')
-  hour = 24 - int(timmelist[0])
-  minutes = 60 - int(timmelist[1])
-  seconds = 60 - int(timmelist[2])
+  hour = 23 - int(timmelist[0])
+  minutes = 59 - int(timmelist[1])
+  seconds = 59 - int(timmelist[2])
   remaining = hour*3600 + minutes*60 + seconds
   print(remaining)
   time.sleep(remaining)
@@ -19,6 +19,7 @@ while(True):
 
 
 while(True):
+  print("Started ", datetime.now(pytz.timezone("Asia/Karachi")))
   data = db.child("Data").child("Deadlines").get().val()
 
   new_list = []
@@ -30,7 +31,6 @@ while(True):
       date_now  = [int(i) for i in date_now]
 
       if (date_now[0] > old_date[0] and date_now[1] >= old_date[1] and date_now[2] >= old_date[2]):
-        print("Deadline passed")
         pass
       else:
         new_list.append(d)

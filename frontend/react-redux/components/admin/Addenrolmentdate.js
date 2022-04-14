@@ -33,9 +33,16 @@ export const Addenrolmentdate = ({ navigation }) => {
   const [enrolmenttime, setenrolmenttime] = useState("");
 
   const onPress = () => {
-    dispatch(postEvents("Enrolment", enrolmentdate, enrolmenttime, "Enrolment"));
-    setenrolmentdate("");
-    setenrolmenttime("");
+    if (enrolmentdate == "" || enrolmenttime == "") {
+      Alert.alert("Oops, You missed a field");
+    }
+    else{
+      dispatch(postEvents("Enrolment", enrolmentdate, enrolmenttime, "Enrolment"));
+      setenrolmentdate("");
+      setenrolmenttime("");
+    }
+  
+    
   };
   return (
     <View style={styles.container}>

@@ -15,7 +15,7 @@ import {
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { addCourse } from "../../actions/coursesactions";
+import { addCourse, clearMessage } from "../../actions/coursesactions";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -67,8 +67,17 @@ export const Add_course = ({ navigation }) => {
   }
   let check = useSelector((state) => state.courseReducer).message;
   if (check.length) {
-    if (check === "Success") Alert.alert("Course Added Successfully");
-    if (check === "Failure") Alert.alert("Course Addition Failed");
+    if (check === "Success") 
+    {
+      Alert.alert("Course Added Successfully");
+      clearMessage()
+      
+    }
+    if (check === "Failure")
+    {
+      Alert.alert("Course Addition Failed");
+      clearMessage()
+    } 
   }
 
   return (

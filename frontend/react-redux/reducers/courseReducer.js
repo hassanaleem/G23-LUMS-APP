@@ -59,6 +59,12 @@ const courseReducer = (state = initialData, action) => {
         queryRun: false,
       };
 
+    case "CLEAR_COURSE_MESSAGE":
+      return {
+        ...state,
+        message: "",
+      };
+
     default:
       return state;
   }

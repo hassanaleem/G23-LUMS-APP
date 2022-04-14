@@ -17,7 +17,7 @@ import { Picker } from "@react-native-picker/picker";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { Search_bar } from "../searchBar/Search_bar";
-import { addGrade } from "../../actions/courseGradeActions";
+import { addGrade, clearMessage } from "../../actions/courseGradeActions";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -49,8 +49,16 @@ export const Add_grade = ({ navigation }) => {
 
   let check = useSelector((state) => state.courseGradeReducer).message;
   if (check.length) {
-    if (check === "Success") Alert.alert("Grade Added Successfully");
-    if (check === "Failure") Alert.alert("Grade Addition Failed");
+    if (check === "Success")
+    {
+      Alert.alert("Grade Added Successfully");
+      clearMessage()
+    } 
+    if (check === "Failure")
+    {
+      Alert.alert("Grade Addition Failed");
+      clearMessage()
+    } 
   }
 
   return (

@@ -186,3 +186,11 @@ export const updateCourse = (
       });
   };
 };
+
+export const clearMessage = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_MESSAGE",
+    });
+  };
+};

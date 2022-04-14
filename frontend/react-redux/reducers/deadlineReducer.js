@@ -54,6 +54,12 @@ const deadlineReducer = (state = initialData, action) => {
         message: "Failure Update",
       };
 
+      case "CLEAR_DEADLINE_MESSAGE":
+      return {
+        ...state,
+        message: "",
+      };
+
     default:
       return state;
   }

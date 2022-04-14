@@ -17,7 +17,7 @@ import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateDeadline } from "../../actions/deadlineactions";
+import { clearMessage, updateDeadline } from "../../actions/deadlineactions";
 import { useFonts } from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
@@ -44,11 +44,13 @@ export const Edit_deadline = ({ route, navigation }) => {
   if (message == "Success Update")
   {
     Alert.alert("Successfully Updated")
+    clearMessage()
   }
 
   if (message == "Failed Update")
   {
     Alert.alert("Failed to Update")
+    clearMessage()
   }
   if (!loaded)
   {
