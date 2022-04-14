@@ -148,7 +148,7 @@ export const Add_Deadlines = ({ navigation }) => {
 
         <Main_button
           text="Add Deadline"
-          onPress={add}
+          onPress={() => add()}
           horizontal_padding={0}
           margintop={height/5.3}
           marginleft={width/6}
