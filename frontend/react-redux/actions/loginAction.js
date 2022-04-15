@@ -33,7 +33,7 @@ export const login = (user, password) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({
-      type: "SIGN_OUT",
+      type: "CLEAR_ALL_STATE",
     });
   };
 };

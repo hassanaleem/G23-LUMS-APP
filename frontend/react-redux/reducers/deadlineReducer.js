@@ -62,6 +62,14 @@ const deadlineReducer = (state = initialData, action) => {
         message: "",
       };
 
+      case "CLEAR_ALL_STATE":
+      return{
+        ...state,
+        data: [],
+        dataSearch: [],
+        message: "",
+      };
+
     default:
       return state;
   }

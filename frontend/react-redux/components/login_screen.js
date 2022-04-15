@@ -58,7 +58,9 @@ export const Login_screen = ({ navigation }) => {
         }
       }
     }
+    
   };
+  
   if (allowed == false && queryRun == true) {
     Alert.alert("Login Failed", "Invalid Username or Password");
     dispatch(clearState());

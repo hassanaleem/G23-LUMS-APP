@@ -31,6 +31,14 @@ const courseGradeReducer = (state = initialData, action) => {
         ...state,
         message: "",
       };
+
+    case "CLEAR_ALL_STATE":
+      return{
+        ...state,
+        message: "",
+        data: [],
+      };
+
     default:
       return state;
   }

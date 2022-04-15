@@ -50,6 +50,16 @@ const usersReducer = (state = initialData, action) => {
         ...state,
         message: "",
       };
+
+    case "CLEAR_ALL_STATE":
+      return {
+        ...state,
+        find: false,
+        queryRun: false,
+        user: {},
+        message: "",
+      };
+
     default:
       return state;
   }

@@ -46,6 +46,15 @@ const foodItemReducer = (state = initialData, action) => {
         queryRun: false,
       };
 
+    case "CLEAR_ALL_STATE":
+      return{
+        ...state,
+        restaurant: [],
+        find: false,
+        queryRun: false,
+        message: "",
+      };
+
     default:
       return state;
   }

@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { logout } from "../../actions/loginAction";
+import { clearState, logout } from "../../actions/loginAction";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useFonts } from "expo-font";
