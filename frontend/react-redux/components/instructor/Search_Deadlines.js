@@ -54,13 +54,13 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Failure Search") {
     Alert.alert("Search Failed", "Instructor Does not teach this course")
-    clearMessage()
+    dispatch(clearMessage())
 
   }
 
   if (message == "Fetched" && deadlines.length == 0) {
     Alert.alert("Search Failed", "No deadlines found")
-    clearMessage()
+    dispatch(clearMessage())
   }
   return (
     <View style={styles.container}>

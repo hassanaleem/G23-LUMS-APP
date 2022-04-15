@@ -34,9 +34,16 @@ export const Edit_deadline = ({ route, navigation }) => {
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   function onPress() {
-    dispatch(updateDeadline(time, date, data.Course_ID, data.Instructor_Id, data.Deadline_Title, data.Deadline_Time, data.Deadline_Date))
-    setDate("")
-    setTime("")
+    if (time == "" || date == "")
+    {
+      Alert.alert("Oops, you missed a field")
+    }
+    else
+    {
+      dispatch(updateDeadline(time, date, data.Course_ID, data.Instructor_Id, data.Deadline_Title, data.Deadline_Time, data.Deadline_Date))
+      setDate("")
+      setTime("")
+    }
   }
 
   let message = useSelector((state) => state.deadlineReducer).message

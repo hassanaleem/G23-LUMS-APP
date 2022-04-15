@@ -1,1 +1,2 @@
 web: gunicorn --pythonpath LumsApp LumsApp.wsgi --log-file -
+worker: python script.py
