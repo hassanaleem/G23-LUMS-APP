@@ -33,7 +33,7 @@ export const login = (user, password) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({
-      type: "SIGN_OUT",
+      type: "CLEAR_ALL_STATE",
     });
   };
 };
@@ -41,7 +41,7 @@ export const logout = () => {
 export const clearState = () => {
   return (dispatch) => {
     dispatch({
-      type: "CLEAR_STATE",
+      type: "CLEAR_ALL_STATE",
     });
   };
 };

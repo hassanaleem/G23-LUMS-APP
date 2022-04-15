@@ -2,6 +2,7 @@ const initialState = {
     data: [],
     message: "",
   };
+
   const notificationReducer = (state = initialState, action) => {
     const data = action.payload;
     switch (action.type) {
@@ -25,6 +26,14 @@ const initialState = {
           ...state,
           message: "checked",
         };
+
+      case "CLEAR_ALL_STATE":
+        return{
+          ...state,
+          data: [],
+          message: "",
+        };
+
       default:
         return state;
     }

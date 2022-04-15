@@ -31,16 +31,22 @@ def deadlines(request):
 
             else:
                 id = req[0][1]
-                if (id == 'all'):
-                    data = db.child("Data").child("Deadlines").get().val()
-                    return render(request, 'deadlines.html', {'data': json.dumps(data)})
-                else:
-                    data = db.child("Data").child("Deadlines").get().val()
-                    temp = list()
-                    for d in data:
-                        if d['Course_ID'] == id:
-                            temp.append(d)
-                    return render(request, 'deadlines.html', {'data': json.dumps(temp)})
+                courseList = list()
+                courseStudent = db.child("Data").child("CourseStudents").get()
+                for item in courseStudent:
+                    if id in item.val():
+                        courseList.append(item.key())
+
+                print(courseList)
+                studentDeadlines = list()
+                deadlines = db.child("Data").child("Deadlines").get().val()
+                for d in deadlines:
+                    if d["Course_ID"] in courseList:
+                        studentDeadlines.append(d)
+
+                return render(request, 'deadlines.html', {'data': json.dumps(studentDeadlines)})
+
+
         except:
             pass
     elif request.method == 'POST':

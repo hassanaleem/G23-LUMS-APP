@@ -28,13 +28,15 @@ const loginReducer = (state = initialData, action) => {
       };
     case "SIGN_IN_FAILED":
       return {
+        ...state,
         user: {},
         allowed: false,
         message: "Failed",
         queryRun: true,
       };
-    case "CLEAR_STATE":
+    case "CLEAR_ALL_STATE":
       return {
+        ...state,
         user: {},
         allowed: false,
         message: "",

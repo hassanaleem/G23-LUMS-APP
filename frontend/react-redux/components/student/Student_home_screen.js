@@ -32,9 +32,7 @@ export const Student_home_screen = ({ navigation }) => {
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
-  const [loggedOut, setLoggedOut] = useState(false);
-  const [noNotifications, setnoNotifications] = useState(false); // set this to true if no notifications
-  // const [notificationsCount, setnotificationsCount] = useState(0);
+
   let name = useSelector((state) => state.loginReducer).user.Name;
   let notificationsCount = 0;
   const dispatch = useDispatch();
@@ -42,7 +40,8 @@ export const Student_home_screen = ({ navigation }) => {
   let msg = useSelector((state) => state.notificationReducer).message;
   if (msg == "") {
     let id = useSelector((state) => state.loginReducer).user.Id;
-    dispatch(getNotifications(id));
+    if (id !== undefined)
+    {dispatch(getNotifications(id));}
   }
 
   if (msg == "fetched") {
