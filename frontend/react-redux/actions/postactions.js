@@ -11,7 +11,7 @@ export const addPost = (user_id, post) => {
   const body = JSON.stringify({
     post,
     user_id,
-    Comments: "",
+    comments: "",
     liker_id: "",
   });
   return (dispatch) => {
@@ -59,7 +59,7 @@ export const likePost = (user_id, post_id, post_owner) => {
   });
   return (dispatch) => {
     axios
-      .post(
+      .put(
         `${address}/posts?action=like&postuser=${post_owner}&postid=${post_id}`,
         body,
         config
@@ -83,7 +83,7 @@ export const unlikePost = (user_id, post_id, post_owner) => {
   });
   return (dispatch) => {
     axios
-      .post(
+      .put(
         `${address}/posts?action=unlike&postuser=${post_owner}&postid=${post_id}`,
         body,
         config
@@ -100,7 +100,8 @@ export const commentPost = (
   post_owner,
   post_id,
   comment_toadd,
-  commenter_id
+  commenter_id,
+  commenter_name
 ) => {
   const config = {
     headers: {
@@ -108,12 +109,12 @@ export const commentPost = (
     },
   };
   const body = JSON.stringify({
-    comment: comment_toadd,
+    comment: commenter_name + ": " + comment_toadd,
     commenter: commenter_id,
   });
   return (dispatch) => {
     axios
-      .post(
+      .put(
         `${address}/posts?action=comment&postuser=${post_owner}&postid=${post_id}`,
         body,
         config
@@ -137,7 +138,7 @@ export const deleteComment = (post_owner, post_id, comment_todelete) => {
   });
   return (dispatch) => {
     axios
-      .post(
+      .put(
         `${address}/posts?action=deletecomment&postuser=${post_owner}&postid=${post_id}`,
         body,
         config

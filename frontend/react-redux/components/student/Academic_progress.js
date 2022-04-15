@@ -51,12 +51,20 @@ export const Academic_progress = ({ navigation }) => {
       "D-": 0.7,
       F: 0.0,
       NA: 0.0,
+      NA: 0.0,
     };
     for (let i = 0; i < grades.length; i++) {
+      let temp1 = totalCredits;
       totalCredits += parseFloat(grades[i].Credit_Hrs);
+
       let temp = grades[i].Grade;
-      totalGrades +=
-        parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
+      console.log(gradeToValue[temp], "HER");
+      if (temp == "NA") {
+        totalCredits = temp1;
+      } else {
+        totalGrades +=
+          parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
+      }
     }
     let gpa = totalGrades / totalCredits;
     gpa = gpa.toFixed(2);

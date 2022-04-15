@@ -67,7 +67,7 @@ export default function App() {
             component={Academic_progress}
           />
           <Stack.Screen name="ViewEvent" component={View_event} />
-          <Stack.Screen name="LdfScreen" component={Ldf} />
+          <Stack.Screen name="DiscussionForum" component={Ldf} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
