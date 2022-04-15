@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useFonts } from "expo-font";
+
 export const Menu = ({ navigation }) => {
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
@@ -86,32 +87,25 @@ const styles = StyleSheet.create({
   },
 
   topheading: {
-    // position: "absolute",
-    // top: height / 27,
-    // left: width / 30,
-    // fontSize: 30,
-    // lineHeight: 37.8,
-    // fontWeight: "bold",
     position: "absolute",
+    fontFamily: "Outfit",
     fontSize: 27,
     fontWeight: "bold",
-    fontFamily: "Outfit",
     marginTop: height / 24,
     marginLeft: width / 12,
   },
+  
   topheading2: {
     position: "absolute",
     marginTop: height / 9,
     marginLeft: width / 10,
     fontSize: 15,
     fontFamily: "Outfit",
-    //top: height / 9,
-    //left: width / 20,
   },
+
   FoodItems: {
     fontSize: 25,
     lineHeight: 37.8,
-    //fontWeight: "bold",
     fontFamily: "Outfit",
   },
 
@@ -119,12 +113,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: width / 1.219,
     height: height / 2,
-    //top: height / 6,
     marginTop: height / 5.8,
     marginLeft: width / 10,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
   },
+
   textstyle: {
     fontSize: 18,
     lineHeight: 35,

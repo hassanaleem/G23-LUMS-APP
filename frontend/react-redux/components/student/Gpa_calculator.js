@@ -176,11 +176,11 @@ export const Gpa_calculator = ({ navigation }) => {
                   setCalculate(true);
                 }}
               >
-                <Picker.Item label="-" value="0" />
-                <Picker.Item label="1" value="1" />
-                <Picker.Item label="2" value="2" />
-                <Picker.Item label="3" value="3" />
-                <Picker.Item label="4" value="4" />
+                <Picker.Item label="  -" value="0" />
+                <Picker.Item label="  1" value="1" />
+                <Picker.Item label="  2" value="2" />
+                <Picker.Item label="  3" value="3" />
+                <Picker.Item label="  4" value="4" />
               </Picker>
 
               <Picker
@@ -193,19 +193,19 @@ export const Gpa_calculator = ({ navigation }) => {
                   setCalculate(true);
                 }}
               >
-                <Picker.Item label="-" value="0" />
-                <Picker.Item label="A+" value="4" />
-                <Picker.Item label="A" value="4.0" />
-                <Picker.Item label="A-" value="3.7" />
-                <Picker.Item label="B+" value="3.3" />
-                <Picker.Item label="B" value="3.0" />
-                <Picker.Item label="B-" value="2.7" />
-                <Picker.Item label="C+" value="2.3" />
-                <Picker.Item label="C" value="2" />
-                <Picker.Item label="C-" value="1.7" />
-                <Picker.Item label="D+" value="1.3" />
-                <Picker.Item label="D" value="1" />
-                <Picker.Item label="F" value="0" />
+                <Picker.Item label="  -" value="0" />
+                <Picker.Item label="  A+" value="4" />
+                <Picker.Item label="  A" value="4.0" />
+                <Picker.Item label="  A-" value="3.7" />
+                <Picker.Item label="  B+" value="3.3" />
+                <Picker.Item label="  B" value="3.0" />
+                <Picker.Item label="  B-" value="2.7" />
+                <Picker.Item label="  C+" value="2.3" />
+                <Picker.Item label="  C" value="2" />
+                <Picker.Item label="  C-" value="1.7" />
+                <Picker.Item label="  D+" value="1.3" />
+                <Picker.Item label="  D" value="1" />
+                <Picker.Item label="  F" value="0" />
               </Picker>
             </View>
           );
@@ -253,25 +253,23 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: height/25,
-    marginLeft: width/12,
+    fontFamily: "Outfit",
     fontSize: 27,
     fontWeight: "bold",
-    fontFamily: 'Outfit',
+    marginTop: height / 24,
+    marginLeft: width / 12,
   },
+
   unitsheading: {
     position: "absolute",
-    width: width/5,
-    height: height/5,
-    top: 110,
-    left: 75,
-    //fontFamily: 'Outfit',
+    top: height/8,
+    left: width/5.3,
+    fontFamily: 'Outfit',
     fontSize: 24,
-    
-    // fontWeight: 400,
   },
+
   picker: {
-    top: -75,
+    top: -100,
     left: 0,
     width: 200,
     height: 50,
@@ -280,14 +278,12 @@ const styles = StyleSheet.create({
 
   gradeheading: {
     position: "absolute",
-    width: width/5,
-    height: height/5,
-    top: 110,
-    left: 253,
+    top: height/8,
+    left: width/1.55,
+    fontFamily: 'Outfit',
     fontSize: 24,
-    //fontFamily: 'Outfit',
-    // fontWeight: 400,
   },
+
   unitsDropdown: {
     position: "absolute",
     width: 144,
@@ -298,9 +294,8 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     textAlign: "center",
     backgroundColor: "#EDEDED",
-    // marginTop: 10,
-    // fontWeight: 400,
   },
+
   gradesDropdown: {
     position: "absolute",
     width: 144,
@@ -311,44 +306,48 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     textAlign: "center",
     backgroundColor: "#EDEDED",
-    // marginTop: 10,
   },
 
   moreButton: {
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
     position: "relative",
-    width: width / 1.75,
+    width: width / 1.55,
     height: height/28,
     top: 50,
-    left: 81,
     borderRadius: 40,
     backgroundColor: "#79c4f2",
     marginTop: 75,
   },
+
   moreText: {
     // position: "absolute",
     fontFamily: 'Outfit',
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 24,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
   },
+
   gpaBox: {
     position: "relative",
-    width: width/2.69,
-    height: height/23,
-    top: 70,
-    left: 120,
+    alignSelf: "center",
+    width: width/2.59,
+    height: height/21,
+    top: height/12.2,
     borderRadius: 7,
     backgroundColor: "#BEBEBE",
   },
+  
   gpaText: {
     textAlign: "center",
+    alignSelf: "center",
     fontWeight: "bold",
     fontFamily: 'Outfit',
     fontSize: 14,
     lineHeight: 17.64,
+    top: 3,
   },
 });
