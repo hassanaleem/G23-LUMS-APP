@@ -18,7 +18,7 @@ const {width, height} = Dimensions.get("screen");
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useState } from "react";
-import { addUser, findUser, clearState } from "../../actions/useractions";
+import { addUser, findUser, clearState, clearUserMessage } from "../../actions/useractions";
 import { useDispatch, useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
 import { NavigationContainer } from "@react-navigation/native";
@@ -83,6 +83,14 @@ export const Adduser = ({navigation}) => {
   };
   validate(find, query, data);
 
+  let message = useSelector((state) => state.usersReducer).message;
+  if (message == "Success") {
+    Alert.alert("User added");
+    dispatch(clearUserMessage());
+  } else if (message == "Failure") {
+    Alert.alert("User Addition Failed");
+    dispatch(clearUserMessage());
+  }
   return (
     <View style={styles.container}>
       <ImageBackground

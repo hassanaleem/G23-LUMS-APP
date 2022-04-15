@@ -17,7 +17,7 @@ import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
 import { Search_bar } from '../searchBar/Search_bar';
-import { SearchDeadlines } from '../../actions/deadlineactions';
+import { clearMessage, SearchDeadlines } from '../../actions/deadlineactions';
 import { useSelector } from 'react-redux';
 import { Deadlines } from '../student/Deadlines';
 import { useFonts } from "expo-font";
@@ -40,7 +40,7 @@ export const Search_Deadlines = ({ navigation }) => {
   }
 
   let message = useSelector((state) => state.deadlineReducer).message
-  let deadlines = useSelector((state) => state.deadlineReducer).data
+  let deadlines = useSelector((state) => state.deadlineReducer).dataSearch
 
 
   let items = []
@@ -54,10 +54,13 @@ export const Search_Deadlines = ({ navigation }) => {
 
   if (message == "Failure Search") {
     Alert.alert("Search Failed", "Instructor Does not teach this course")
+    clearMessage()
+
   }
 
   if (message == "Fetched" && deadlines.length == 0) {
     Alert.alert("Search Failed", "No deadlines found")
+    clearMessage()
   }
   return (
     <View style={styles.container}>

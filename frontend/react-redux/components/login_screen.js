@@ -19,8 +19,6 @@ import { useSelector } from "react-redux";
 import * as Crypto from "expo-crypto";
 import { useFonts } from "expo-font";
 
-function font() {}
-
 export const Login_screen = ({ navigation }) => {
   const [loaded] = useFonts({
     Outfit: require("./assets/fonts/static/Outfit-Regular.ttf"),
@@ -58,7 +56,9 @@ export const Login_screen = ({ navigation }) => {
         }
       }
     }
+    
   };
+  
   if (allowed == false && queryRun == true) {
     Alert.alert("Login Failed", "Invalid Username or Password");
     dispatch(clearState());

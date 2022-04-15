@@ -9,6 +9,8 @@ import {
   Pressable,
   ScrollView,
   Dimensions,
+  ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -19,6 +21,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDeadline } from "../../actions/deadlineactions";
 import { getEnrollments } from "../../actions/coursesactions";
+import { Icon } from "react-native-elements";
+
 const { width, height } = Dimensions.get("screen");
 
 export const Deadlines = ({ navigation }) => {
@@ -28,58 +32,18 @@ export const Deadlines = ({ navigation }) => {
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
 
-  const [fetched, setFetched] = useState(false);
-  const [deadlines, setDeadlines] = useState([]);
-  const [studentId, setStudentID] = useState("");
-  const [stored, setStored] = useState(false);
-  const [enrollments, setEnrollments] = useState([]);
-  const [get, setGet] = useState(false);
-  const [tempPrev, setTempPrev] = useState(0);
-  const [courses, setCourses] = useState([]);
-
-  if (get == false) {
-    dispatch(getEnrollments("all_json"));
-    setGet(true);
-  }
-  let coursesState = useSelector((state) => state.courseReducer);
-  let enrollmentslist = coursesState.data;
-  if (enrollmentslist.length != 0 && enrollments.length == 0) {
-    setEnrollments(enrollmentslist);
-  }
   let userState = useSelector((state) => state.loginReducer);
   let user = userState.user.Id;
-  if (courses.length == 0) {
-    let temp2 = [];
-    // get length of enrollments object
-    const keys = Object.keys(enrollments);
-    // loop through each key
-    for (let i = 0; i < keys.length; i++) {
-      // get the value of the key
-      const key = keys[i];
-      // get the value of the key
-      const value = enrollments[key];
-      if (value.student_id == user) {
-        temp2.push(value);
-      }
-    }
-
-    if (temp2.length != 0) {
-      setCourses(temp2);
-    }
-  }
-  if (courses.length != 0 && stored == false && deadlines.length == 0) {
-    for (let i = 0; i < courses.length; i++) {
-      dispatch(getDeadline(courses[i].course_id));
-    }
-    setStored(true);
-  }
   let deadlinesState = useSelector((state) => state.deadlineReducer);
-  let deadlineslist = deadlinesState.data;
-  if (deadlineslist.length != 0 && deadlineslist.length != tempPrev) {
-    // add to previous state
-    setDeadlines(deadlineslist);
-    setTempPrev(deadlineslist.length);
-  }
+  let message = deadlinesState.message
+  let deadlines = deadlinesState.data;
+
+
+  if (message == "")
+  {
+    dispatch(getDeadline(user))
+  } 
+
 
   return (
     <ImageBackground
@@ -92,6 +56,22 @@ export const Deadlines = ({ navigation }) => {
         <Text style={styles.topheading}> Deadlines </Text>
 
         <ScrollView style={styles.rectangle2}>
+       <Icon
+        name="refresh"
+        type="font-awesome"
+        color="#79c4f2"
+        containerStyle={{
+          marginTop: height/100,
+          marginLeft: width/1.6,
+        }}
+        Component = {TouchableOpacity}
+        onPress = {() => {
+          dispatch(getDeadline(user))
+        }}
+        size={width / 11}
+
+      />
+        
           {deadlines.map((deadline, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>

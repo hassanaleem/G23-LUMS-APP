@@ -26,7 +26,20 @@ const eventsReducer = (state = initialData, action) => {
             return {
                 ...state, 
                 message: "Failure",
-            }
+            };
+
+        case "CLEAR_EVENTS_MESSAGE":
+            return {
+                ...state,
+                message: "",
+            };
+
+        case "CLEAR_ALL_STATE":
+            return{
+                ...state,
+                data: [],
+                message: "",
+            };
 
         default:
             return state

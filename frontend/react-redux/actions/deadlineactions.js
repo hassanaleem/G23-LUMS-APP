@@ -92,3 +92,13 @@ export const SearchDeadlines = (courseID, instructorID) => {
       });
   };
 };
+
+export const clearMessage = () =>
+{
+  return (dispatch) => {
+    dispatch({
+      type: "CLEAR_DEADLINE_MESSAGE",
+      payload: "",
+    });
+  }
+}

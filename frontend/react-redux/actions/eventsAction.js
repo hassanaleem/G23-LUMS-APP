@@ -45,3 +45,9 @@ export const getEvents = () => {
     });
   };
 };
+
+export const clearMessage = () => {
+  return {
+    type: "CLEAR_EVENTS_MESSAGE",
+  };
+};

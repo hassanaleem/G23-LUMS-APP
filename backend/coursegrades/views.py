@@ -55,17 +55,15 @@ def coursegrades(request):
 
             # adding students to course new table
 
+            dataDB = db.child("Data").child("CourseStudents").child(course_id).get().val()
             try:
-                dataDB = db.child("Data").child("CourseStudents").child(course_id).get().val()
-                try:
-                    dataDB.append(student_id)
-                    db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
-                except:
-                    dataDB = []
-                    dataDB.append(student_id)
-                    db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
+                dataDB.append(student_id)
+                db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
             except:
-                pass
+                dataDB = []
+                dataDB.append(student_id)
+                db.child("Data").child("CourseStudents").child(course_id).set(dataDB)
+
 
             return render(request, 'coursegrades.html')
         except:

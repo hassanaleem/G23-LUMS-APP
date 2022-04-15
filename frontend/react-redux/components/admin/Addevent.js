@@ -15,8 +15,8 @@ import {
 import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
-import { useDispatch } from "react-redux";
-import { postEvents } from "../../actions/eventsAction";
+import { useDispatch, useSelector } from "react-redux";
+import { postEvents, clearMessage } from "../../actions/eventsAction";
 import {useFonts} from 'expo-font';
 
 const {width, height} = Dimensions.get("screen");
@@ -32,13 +32,29 @@ export const Addevent = ({ navigation }) => {
   const [type, settype] = useState("");
 
   const onPress = () => {
-    dispatch(postEvents(name, date, time, type));
-    setname("");
-    setdate("");
-    settime("");
-    settype("");
-
+    if (name == "" || date == "" || time == "" || type == "") {
+      Alert.alert("Oops, You missed a field");
+    }
+    else{
+      dispatch(postEvents(name, date, time, type));
+      setname("");
+      setdate("");
+      settime("");
+      settype("");
+    } 
   };
+
+  let message = useSelector((state) => state.eventsReducer).message;
+  if (message == "Success") {
+    Alert.alert("Event Added Successfully");
+    dispatch(clearMessage())
+  }
+
+  if (message == "Failure") {
+    Alert.alert("Event Addition Failed. Please try again");
+    dispatch(clearMessage())
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground

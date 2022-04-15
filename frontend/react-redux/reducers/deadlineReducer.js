@@ -1,5 +1,6 @@
 const initialData = {
   data: [],
+  dataSearch: [],
   message: "",
 };
 const deadlineReducer = (state = initialData, action) => {
@@ -11,7 +12,8 @@ const deadlineReducer = (state = initialData, action) => {
         const finalData = JSON.parse(newdata);
         return {
           ...state,
-          data: finalData,
+          data: [...finalData],
+          message: "GET DEADLINE FETCHED"
         };
       }
 
@@ -32,7 +34,7 @@ const deadlineReducer = (state = initialData, action) => {
       let finalD = JSON.parse(d);
       return {
         ...state,
-        data: finalD,
+        dataSearch: finalD,
         message: "Fetched",
       };
 
@@ -52,6 +54,20 @@ const deadlineReducer = (state = initialData, action) => {
       return {
         ...state,
         message: "Failure Update",
+      };
+
+      case "CLEAR_DEADLINE_MESSAGE":
+      return {
+        ...state,
+        message: "",
+      };
+
+      case "CLEAR_ALL_STATE":
+      return{
+        ...state,
+        data: [],
+        dataSearch: [],
+        message: "",
       };
 
     default:
