@@ -41,7 +41,7 @@ export const logout = () => {
 export const clearState = () => {
   return (dispatch) => {
     dispatch({
-      type: "CLEAR_STATE",
+      type: "CLEAR_ALL_STATE",
     });
   };
 };
