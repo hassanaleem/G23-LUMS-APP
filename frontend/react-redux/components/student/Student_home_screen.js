@@ -13,6 +13,7 @@ import {
   Touchable,
   TouchableOpacity,
   Dimensions,
+  BackHandler,
 } from "react-native";
 
 import { Main_button } from "../buttons/Main_button";
@@ -25,17 +26,47 @@ import { useDispatch } from "react-redux";
 import { Icon } from "react-native-elements";
 import { getNotifications } from "../../actions/notificationAction";
 import { clearMsg } from "../../actions/notificationAction";
+import { useEffect } from "react";
 
 const { width, height } = Dimensions.get("screen");
-
 export const Student_home_screen = ({ navigation }) => {
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
+  const dispatch = useDispatch();
+
+
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to quit the app?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => {
+          dispatch(logout())
+          BackHandler.exitApp() 
+        }}
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   let name = useSelector((state) => state.loginReducer).user.Name;
+  if (name === undefined)
+  {
+    navigation.navigate("Home");
+  }
   let notificationsCount = 0;
-  const dispatch = useDispatch();
 
   let msg = useSelector((state) => state.notificationReducer).message;
   if (msg == "") {

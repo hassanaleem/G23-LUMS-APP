@@ -11,16 +11,46 @@ import {
   ImageBackground,
   Pressable,
   Dimensions,
+  BackHandler,
 } from 'react-native';
 
 import { Logout_button } from '../buttons/Logout_button';
 import { Main_button } from '../buttons/Main_button';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const {width, height} = Dimensions.get("screen");
 
 export const Instructor_home_screen = ({navigation}) => {
   let name = useSelector((state) => state.loginReducer).user.Name
+  if (name === undefined)
+  {
+    navigation.navigate("Home");
+  }
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to quit the app?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => {
+          dispatch(logout())
+          BackHandler.exitApp() 
+        }}
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <View style={styles.container}>

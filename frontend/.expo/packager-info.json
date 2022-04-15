@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://xu-wwn.hassanaleem.frontend.exp.direct",
+  "packagerNgrokUrl": "https://xu-wwn.hassanaleem.frontend.exp.direct",
+  "ngrokPid": 11132,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

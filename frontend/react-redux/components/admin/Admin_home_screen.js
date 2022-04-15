@@ -11,6 +11,7 @@ import {
   Alert,
   Pressable,
   Dimensions,
+  BackHandler,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -22,44 +23,55 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../actions/loginAction";
 import { Adduser } from "./Adduser";
 import { useFonts} from 'expo-font';
+import { useEffect } from "react";
 
 const {width, height} = Dimensions.get("screen");
 
 export const Admin_home_screen = ({ navigation }) => {
 
+  let name = useSelector((state) => state.loginReducer).user.Name;
+  if (name === undefined)
+  {
+    navigation.navigate("Home");
+  }
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to quit the app?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => {
+          dispatch(logout())
+          BackHandler.exitApp() 
+        }}
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   const [loaded] = useFonts({
     Outfit: require('../assets/fonts/static/Outfit-ExtraBold.ttf'),
   }); 
   const [loggedOut, setLoggedOut] = useState(false);
-  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/whiteBackground.png')}
         resizeMode="cover"
         style={{ width: '100%', height: '100%' }}>
-      {/* <Pressable
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          paddingVertical: 5,
-          paddingHorizontal: 20,
-          borderRadius: 30,
-          backgroundColor: "#79c4f2",
-          marginLeft: 270,
-          marginTop: 40,
-          marginRight: 20,
-        }}
-        onPress={() => {
-          dispatch(logout());
-          Alert.alert("Logout Successful");
-          setLoggedOut(true);
-        }}
-      >
-        {loggedOut ? navigation.navigate("Home") : null}
 
-        <Text style={styles.logout_text}>Log out</Text>
-      </Pressable> */}
       <Logout_button nav = {navigation}/>
 
       <Text style={styles.topheading1}>Welcome</Text>
