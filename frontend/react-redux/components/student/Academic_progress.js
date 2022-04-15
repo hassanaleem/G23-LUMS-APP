@@ -176,39 +176,39 @@ const styles = StyleSheet.create({
     marginTop: height / 24,
     marginLeft: width / 12,
   },
+
   topheading2: {
     position: "absolute",
     fontSize: 27,
     fontWeight: "bold",
     fontFamily: "Outfit",
-    marginTop: height / 13,
+    marginTop: height / 12.5,
     marginLeft: width / 12,
   },
+
   CGPAview: {
     position: "absolute",
     top: height / 6.5,
     left: width / 30,
   },
+
   CGPAtext: {
-    // fontSize: 25,
-    // lineHeight: 30,
-    // fontWeight: "bold",
     marginTop: height / 700,
     marginLeft: width / 20,
     fontSize: 20,
-    //fontWeight: "bold",
     fontFamily: "Outfit",
   },
+
   Gradesview: {
     position: "absolute",
     top: height / 4.8,
     left: width / 30,
   },
+
   Gradestext: {
     marginTop: height / 700,
     marginLeft: width / 20,
     fontSize: 20,
-
     fontFamily: "Outfit",
   },
 
@@ -220,25 +220,22 @@ const styles = StyleSheet.create({
 
   rectangle2: {
     position: "absolute",
-    // width: width / 1.1,
     height: height / 2.8,
     top: height / 3.8,
-    // left: width / 30,
-    // borderRadius: 7,
-    // backgroundColor: "#EDEDED"
     width: width / 1.219,
-    //maxHeight: height / 4.05,
     marginLeft: width / 10,
     marginTop: height / 1000,
     backgroundColor: "#eceded",
     zIndex: 99,
     borderRadius: 5,
   },
+
   logoutbutton: {
     backgroundColor: "#87CEFA",
     padding: 5,
     borderRadius: 180,
   },
+
   event: {
     color: "black",
     position: "absolute",
@@ -246,5 +243,12 @@ const styles = StyleSheet.create({
     top: 50,
     fontSize: 15,
     fontWeight: "bold",
+  },
+  
+  textstyle: {
+    marginLeft: 10,
+    marginTop: 10,
+    fontFamily: "Outfit",
+    fontSize: 13
   },
 });

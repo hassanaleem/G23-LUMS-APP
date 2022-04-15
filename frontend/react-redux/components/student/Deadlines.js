@@ -110,12 +110,6 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    //top: height / 27,
-    //left: width / 30,
-    // fontSize: 30,
-    // lineHeight: 37.8,
-    // fontWeight: "bold",
-    // position: "absolute",
     fontFamily: "Outfit",
     fontSize: 27,
     fontWeight: "bold",
@@ -144,5 +138,11 @@ const styles = StyleSheet.create({
     top: 50,
     fontSize: 15,
     fontWeight: "bold",
+  },
+  textstyle: {
+    marginLeft: 10,
+    marginTop: 10,
+    fontFamily: "Outfit",
+    fontSize: 13
   },
 });

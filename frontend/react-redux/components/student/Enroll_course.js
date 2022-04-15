@@ -133,6 +133,7 @@ export const Enroll_course = ({ navigation }) => {
             fontWeight: "bold",
             marginTop: height / 24,
             marginLeft: width / 12,
+            fontFamily: "Outfit",
           }}
         >
           Enroll Course
@@ -162,7 +163,7 @@ export const Enroll_course = ({ navigation }) => {
           text="Enroll"
           onPress={enroll}
           horizontal_padding={0}
-          margintop={height / 6.4}
+          margintop={height / 6.1}
           marginleft={width / 6}
           marginright={width / 6}
         />
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 9,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   test2: {
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 9,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   test3: {
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 9,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   test4: {
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     marginLeft: width / 9,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 
   test5: {
@@ -223,6 +224,6 @@ const styles = StyleSheet.create({
     marginLeft: width / 9,
     fontSize: 15,
     fontWeight: "bold",
-    fontFamily: "sans-serif-thin",
+    fontFamily: "Outfit",
   },
 });
