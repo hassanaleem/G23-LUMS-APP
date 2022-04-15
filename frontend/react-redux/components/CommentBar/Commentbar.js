@@ -29,7 +29,7 @@ import {
             alignSelf: "center",
             height: 40,
             width: width / 1.3,
-            marginTop: 65,
+            marginTop: height/13,
             borderRadius: 5,
             backgroundColor: "#bebebe",
             paddingVertical: 10,
@@ -53,8 +53,9 @@ import {
             borderBottomRightRadius: 5,
             borderTopRightRadius: 5,
             backgroundColor: "#79c4f2",
-            marginTop: 66,
-            marginLeft: width/1.74,
+            marginTop: height/13,
+            marginLeft: width/1.77,
+            height: 40,
           }}
           onPress={props.onPress}
         >

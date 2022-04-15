@@ -15,21 +15,28 @@ import {
   import React, { useState } from "react";
   import { useDispatch } from "react-redux";
   import { useSelector } from "react-redux";
+  import { useFonts } from "expo-font";
   
   const {width, height} = Dimensions.get("screen");
   
   export function Post_bar(props) {
+
+    const [loaded] = useFonts({
+      Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+    });
+
     const [text, setText] = useState("");
     return (
       <View>
         <TextInput
           style={{
+            fontFamily: "Outfit",
             position: "absolute",
             fontSize: props.font_size,
             alignSelf: "center",
             height: 40,
             width: width / 1.2,
-            marginTop: 65,
+            marginTop: height/14,
             borderRadius: 5,
             backgroundColor: "#eceded",
             paddingVertical: 10,
@@ -45,15 +52,17 @@ import {
   
         <TouchableOpacity
           style={{
+            fontFamily: "Outfit",
             position: "absolute",
             alignItems: "center",
             justifyContent: "center",
             paddingVertical: 8,
+            height: 40,
             paddingHorizontal: width/12,
             borderBottomRightRadius: 5,
             borderTopRightRadius: 5,
             backgroundColor: "#79c4f2",
-            marginTop: 66.5,
+            marginTop: height/14,
             marginLeft: width/1.49,
           }}
           onPress={props.onPress}
@@ -71,6 +80,7 @@ import {
       fontWeight: "bold",
       letterSpacing: 0.25,
       color: "white",
+      fontFamily: "Outfit",
     },
   });
   

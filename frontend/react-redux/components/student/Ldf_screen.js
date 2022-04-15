@@ -16,6 +16,7 @@ import { Post_bar } from "../Post_bar/Post_bar";
 import { Comment_bar } from "../CommentBar/Commentbar";
 const { width, height } = Dimensions.get("screen");
 import { Button, Icon } from "react-native-elements";
+import { useFonts } from "expo-font";
 
 import {
   getAllPosts,
@@ -28,6 +29,11 @@ import {
 } from "../../actions/postactions";
 import { useDispatch, useSelector } from "react-redux";
 export const Ldf = ({ navigation }) => {
+
+  const [loaded] = useFonts({
+    Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
+  });
+
   const dispatch = useDispatch();
   const [fetch, setFetch] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -238,9 +244,10 @@ export const Ldf = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button />
+        <Logout_button nav={navigation} />
 
-        <Text style={styles.topheading}> DISCUSSION FORM </Text>
+        <Text style={styles.topheading}>Discussion Forum </Text>
+        
         <View>
           <Post_bar
             bar_text="What's on your mind?"
@@ -255,7 +262,7 @@ export const Ldf = ({ navigation }) => {
 
         <View style={styles.rectangle2}>
           <ScrollView style={styles.PostTextRec}>
-            <Text style={{ left: 5, top: 4, fontSize: 15, lineHeight: 20 }}>
+            <Text style={{ left: 6, top: 2, fontSize: 15, lineHeight: 20 }}>
               {" "}
               {currentPost}{" "}
             </Text>
@@ -265,11 +272,11 @@ export const Ldf = ({ navigation }) => {
               style={styles.likeButton}
               onPress={unlikePostFunc}
             >
-              <Text style={styles.likeButtonText}> Unlike </Text>
+              <Text style={styles.likeButtonText}>Unlike</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={styles.likeButton} onPress={likePostFunc}>
-              <Text style={styles.likeButtonText}> Like </Text>
+              <Text style={styles.likeButtonText}>Like</Text>
             </TouchableOpacity>
           )}
 
@@ -278,11 +285,11 @@ export const Ldf = ({ navigation }) => {
               style={styles.deleteButton}
               onPress={deletePostFunc}
             >
-              <Text style={styles.likeButtonText}> Delete </Text>
+              <Text style={styles.likeButtonText}>Delete</Text>
             </TouchableOpacity>
           ) : null}
 
-          <Text style={styles.like}> LIKE: {likes}</Text>
+          <Text style={styles.like}> Like: {likes}</Text>
 
           <View style={styles.CommentBar}>
             <Comment_bar
@@ -306,7 +313,7 @@ export const Ldf = ({ navigation }) => {
                       style={{
                         position: "relative",
                         color: "red",
-                        marginTop: 3,
+                        marginTop: -2,
                         marginLeft: width / 1.4,
                         fontStyle: "Bold",
                       }}
@@ -320,16 +327,16 @@ export const Ldf = ({ navigation }) => {
           </ScrollView>
         </View>
         <TouchableOpacity style={styles.nextButton} onPress={changePost}>
-          <Text style={styles.nextText}> Next </Text>
+          <Text style={styles.nextText}>Next</Text>
         </TouchableOpacity>
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
           horizontal_padding={50}
-          margintop={height / 1.5}
-          marginleft={50}
-          marginright={47}
+          margintop={height / 1.59}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </View>
     </ImageBackground>
@@ -352,20 +359,25 @@ const styles = StyleSheet.create({
 
   topheading: {
     position: "absolute",
-    top: height / 24,
-    left: width / 30,
-    fontSize: 27,
-    lineHeight: 37.8,
+    fontFamily: "Outfit",
+    fontSize: 25,
     fontWeight: "bold",
+    marginTop: height / 24,
+    marginLeft: width / 13,
   },
+
   Postview: {
     position: "absolute",
-    top: height / 3.8,
+    top: height / 4,
     left: width / 14,
   },
+  
   Posttext: {
     fontSize: 28,
+    marginLeft: width/25,
+    fontFamily: "Outfit",
   },
+
   logoutbuttonview: {
     position: "absolute",
     top: 50,
@@ -376,7 +388,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: width / 1.2,
     height: height / 3,
-    top: height / 3.2,
+    top: height / 3.4,
     left: width / 11,
     borderRadius: 7,
     backgroundColor: "#EDEDED",
@@ -389,6 +401,7 @@ const styles = StyleSheet.create({
     left: width / 11 / 3,
     borderRadius: 7,
     backgroundColor: "#bebebe",
+    fontFamily: "Outfit",
   },
   CommentBar: {
     top: height / 25,
@@ -397,8 +410,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontSize: 15,
     left: width / width + 2,
-    marginTop: 4,
-    marginRight: 4,
+    marginTop: 2,
+    marginRight: 6,
   },
 
   CommentBox: {
@@ -413,17 +426,21 @@ const styles = StyleSheet.create({
   nextButton: {
     position: "absolute",
     paddingVertical: 8,
-    paddingHorizontal: 80,
+    paddingHorizontal: 105,
     borderRadius: 30,
     backgroundColor: "#79c4f2",
     marginTop: height / 1.52,
-    marginLeft: width / 4.5,
-    marginRight: width / 12,
+    marginLeft: width/6,
+    marginRight:width/6,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center"
   },
   nextText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "Outfit",
   },
   likeButton: {
     position: "absolute",
@@ -437,15 +454,18 @@ const styles = StyleSheet.create({
   },
   likeButtonText: {
     color: "white",
-    fontSize: 10,
+    fontSize: 11,
     textAlign: "center",
+    fontFamily: "Outfit",
   },
   like: {
     position: "absolute",
-    top: height / 12.15,
+    top: height / 11.8,
     left: width / 5.5,
-    fontSize: 10,
+    fontSize: 11,
     textAlign: "center",
+    fontFamily: "Outfit",
+    marginLeft: 5,
   },
   deleteButton: {
     position: "absolute",
