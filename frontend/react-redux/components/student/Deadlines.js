@@ -76,6 +76,7 @@ export const Deadlines = ({ navigation }) => {
   let deadlinesState = useSelector((state) => state.deadlineReducer);
   let deadlineslist = deadlinesState.data;
   if (deadlineslist.length != 0 && deadlineslist.length != tempPrev) {
+    // add to previous state
     setDeadlines(deadlineslist);
     setTempPrev(deadlineslist.length);
   }

@@ -15,7 +15,17 @@ import { Main_button } from "../buttons/Main_button";
 import { Post_bar } from "../Post_bar/Post_bar";
 import { Comment_bar } from "../CommentBar/Commentbar";
 const { width, height } = Dimensions.get("screen");
-import { getAllPosts } from "../../actions/postactions";
+import { Button, Icon } from "react-native-elements";
+
+import {
+  getAllPosts,
+  addPost,
+  likePost,
+  unlikePost,
+  commentPost,
+  deleteComment,
+  deletePost,
+} from "../../actions/postactions";
 import { useDispatch, useSelector } from "react-redux";
 export const Ldf = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -30,9 +40,15 @@ export const Ldf = ({ navigation }) => {
   const [currentPost, setCurrentPost] = useState("");
   const [userIndex, setUserIndex] = useState(0);
   const [postIndex, setPostIndex] = useState(0);
-  const [postOwner, setPostOwner] = useState("");
+  const [postOwner, setPostOwner] = useState(false);
   const [pp, setPp] = useState([]);
+  const [newPost, setNewPost] = useState("");
   const [comment, setComment] = useState([]);
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [inputComment, setInputComment] = useState("");
+  let userState = useSelector((state) => state.loginReducer);
+  let user = userState.user.Id;
   if (fetch == false) {
     dispatch(getAllPosts());
     setFetch(true);
@@ -50,109 +66,170 @@ export const Ldf = ({ navigation }) => {
     setSet2(true);
   }
   if (set2 == true) {
-    //console.log(postData[1]);
-    //console.log(postKeys[1]);
     for (let i = 0; i < postData.length; i++) {
-      //console.log(postData[i], postKeys[i]);
-      // push postData[i] to finalPost
-      //console.log(i);
       setFinalPost((finalPost) => [...finalPost, postData[i]]);
     }
     setSet2(false);
   }
-  // //console.log(finalPost);
 
-  const temp = {
-    0: {
-      comments:
-        "Comment 1,Comment 2 ,Comment 3 ,Comment 4,Comment 5,Comment 6,Comment 7",
-      liker_id: "23100193,23100186,23100199",
-      post: "Post 1",
-    },
-    1: {
-      comments: "Hello 1,Hello 2 ,Hello 3 ,Hello 4,Hello 5,Hello 6,Hello 7",
-      liker_id: "23100193,23100186,23100199",
-      post: "Post 2",
-    },
-    2: {
-      comments: "Hi 1,Hi 2 ,Hi 3 ,Hi 4,Hi 5,Hi 6,Hi 7",
-      liker_id: "23100193,23100186,23100199",
-      post: "Post 3",
-    },
-  };
-  var CommentsArray = [];
-  var liker_id = [];
-  var post = [];
-  // let pp = [];
-  //console.log(finalPost.length, pp.length);
   if (finalPost.length != 0 && pp.length == 0) {
     for (let i = 0; i < finalPost.length; i++) {
       pp.push(finalPost[i]);
     }
-    // //console.log(pp, "UWU");
     setCurrentPost(pp[userIndex][postIndex].post);
-    // console.log(pp[userIndex][postIndex].comments,"HE");
-    if (pp[userIndex][postIndex].comments != "") {
-      setComment(pp[userIndex][postIndex].comments.split(","));
+    if (postKeys[postIndex] == user) {
+      setPostOwner(true);
     }
-    //console.log("HERE");
+    if (pp[userIndex][postIndex].comments != "") {
+      let temp = pp[userIndex][postIndex].comments.split(",");
+      setComment(temp);
+    }
+    if (pp[userIndex][postIndex].liker_id != "") {
+      let lk = pp[userIndex][postIndex].liker_id.split(",");
+      setLikes(lk.length);
+      for (let i = 0; i < lk.length; i++) {
+        if (lk[i] == user) {
+          setLiked(true);
+          break;
+        }
+      }
+    }
   }
-  const makeComments = () => {
-    //split pp[userIndex][postIndex].comments on ,
-    //split pp[userIndex][postIndex].liker_id on ,
-  };
-  const [loop, setLoop] = useState(false);
+
   const changePost = () => {
-    // make a set again bool to make it circular
     if (
       userIndex + 1 >= pp.length &&
       postIndex + 1 > pp[userIndex].length - 1
     ) {
-      // //console.log("here");
       setUserIndex(0);
       setPostIndex(0);
       setPostIndex(0);
       setCurrentPost(pp[0][0].post);
       setComment([]);
+      setLikes(0);
+      setLiked(false);
       if (pp[0][0].comments != "") {
         setComment(pp[0][0].comments.split(","));
+      }
+      if (pp[0][0].liker_id != "") {
+        let lk = pp[0][0].liker_id.split(",");
+        setLikes(lk.length);
+        for (let i = 0; i < lk.length; i++) {
+          if (lk[i] == user) {
+            setLiked(true);
+            break;
+          }
+        }
+      }
+      if (postKeys[0] == user) {
+        setPostOwner(true);
+      } else {
+        setPostOwner(false);
       }
     } else if (postIndex < pp[userIndex].length - 1) {
       setCurrentPost(pp[userIndex][postIndex + 1].post);
       setComment([]);
+      setLikes(0);
+      setLiked(false);
 
       if (pp[userIndex][postIndex + 1].comments != "") {
         setComment(pp[userIndex][postIndex + 1].comments.split(","));
+      }
+      if (pp[userIndex][postIndex + 1].liker_id != "") {
+        let lk = pp[userIndex][postIndex + 1].liker_id.split(",");
+        setLikes(lk.length);
+        for (let i = 0; i < lk.length; i++) {
+          if (lk[i] == user) {
+            setLiked(true);
+            break;
+          }
+        }
+      }
+      if (postKeys[postIndex + 1] == user) {
+        setPostOwner(true);
+      } else {
+        setPostOwner(false);
       }
       setPostIndex(postIndex + 1);
     } else {
       setCurrentPost(pp[userIndex + 1][0].post);
       setComment([]);
+      setLikes(0);
+      setLiked(false);
 
       if (pp[userIndex + 1][0].comments != "") {
-        setComment(pp[userIndex + 1][0].comments.split(","));
+        let temp = pp[userIndex + 1][0].comments.split(",");
+        setComment(temp);
       }
+      if (pp[userIndex + 1][0].liker_id != "") {
+        let lk = pp[userIndex + 1][0].liker_id.split(",");
+        setLikes(lk.length);
+        for (let i = 0; i < lk.length; i++) {
+          if (lk[i] == user) {
+            setLiked(true);
+            break;
+          }
+        }
+      }
+      if (postKeys[0] == user) {
+        setPostOwner(true);
+      } else {
+        setPostOwner(false);
+      }
+
       setPostIndex(0);
       setPostIndex(0);
       setUserIndex(userIndex + 1);
-      // setCurrentPost(pp[userIndex + 1][0].post);
     }
   };
-  // console.log(userIndex, postIndex, currentPost, pp.length);
-  {
-    Object.entries(temp).map(
-      ([key, value]) => (
-        CommentsArray.push(value.comments.split(",")),
-        liker_id.push(value.liker_id.split(",")),
-        post.push(value.post)
-      )
+
+  const makePost = () => {
+    if (newPost != "") {
+      dispatch(addPost(user, newPost));
+      setNewPost("");
+      pp[userIndex].push({ post: newPost, comments: "", liker_id: "" }); /////////////////////////////////
+      setPostKeys(postKeys.concat(user));
+    }
+  };
+  const likePostFunc = () => {
+    let postOwner = postKeys[userIndex];
+    dispatch(likePost(user, postIndex, postOwner));
+    setLikes(likes + 1);
+    setLiked(true);
+  };
+  const unlikePostFunc = () => {
+    let postOwner = postKeys[userIndex];
+    dispatch(unlikePost(user, postIndex, postOwner));
+    setLikes(likes - 1);
+    setLiked(false);
+  };
+  const postComment = () => {
+    let postOwner = postKeys[userIndex];
+    let postOnwerName = userState.user.Name;
+    let newcomment = inputComment;
+    dispatch(
+      commentPost(postOwner, postIndex, newcomment, user, postOnwerName)
     );
-  }
-  const [buttonPressed, setButtonPress] = useState(0);
-  if (buttonPressed == CommentsArray.length) {
-    Alert.alert("hello");
-    setButtonPress(0);
-  }
+    setComment((comment) => [...comment, newcomment]);
+  };
+  const removeComment = (del_comment) => {
+    let postOwner = postKeys[userIndex];
+
+    dispatch(deleteComment(postOwner, postIndex, del_comment));
+
+    pp[userIndex][postIndex].comments = pp[userIndex][
+      postIndex
+    ].comments.replace(del_comment, "");
+    setComment(pp[userIndex][postIndex].comments.split(","));
+  };
+  const deletePostFunc = () => {
+    let owner = postKeys[userIndex];
+    dispatch(deletePost(owner, postIndex));
+    pp[userIndex].splice(postIndex, 1);
+    setPostIndex(0);
+    setUserIndex(0);
+  };
+  console.log(userIndex, postKeys[userIndex]);
 
   return (
     <ImageBackground
@@ -165,7 +242,12 @@ export const Ldf = ({ navigation }) => {
 
         <Text style={styles.topheading}> DISCUSSION FORM </Text>
         <View>
-          <Post_bar bar_text="What's on your mind?" />
+          <Post_bar
+            bar_text="What's on your mind?"
+            value={newPost}
+            onChangeText={(text) => setNewPost(text)}
+            onPress={makePost}
+          />
         </View>
         <View style={styles.Postview}>
           <Text style={styles.Posttext}>Post:</Text>
@@ -178,21 +260,67 @@ export const Ldf = ({ navigation }) => {
               {currentPost}{" "}
             </Text>
           </ScrollView>
+          {liked ? (
+            <TouchableOpacity
+              style={styles.likeButton}
+              onPress={unlikePostFunc}
+            >
+              <Text style={styles.likeButtonText}> Unlike </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.likeButton} onPress={likePostFunc}>
+              <Text style={styles.likeButtonText}> Like </Text>
+            </TouchableOpacity>
+          )}
+
+          {postKeys[userIndex] == user ? (
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={deletePostFunc}
+            >
+              <Text style={styles.likeButtonText}> Delete </Text>
+            </TouchableOpacity>
+          ) : null}
+
+          <Text style={styles.like}> LIKE: {likes}</Text>
 
           <View style={styles.CommentBar}>
-            <Comment_bar bar_text="Follow up discussion" />
+            <Comment_bar
+              bar_text="Follow up discussion"
+              value={inputComment}
+              onChangeText={(text) => setInputComment(text)}
+              onPress={postComment}
+            />
           </View>
 
           <ScrollView style={styles.CommentBox}>
             {comment.map((data, index) => (
               <View key={index}>
-                <Text style={styles.CommentText}>{data}</Text>
+                <Text style={styles.CommentText}>{data} </Text>
+                {data.includes(userState.user.Name) ? (
+                  <TouchableOpacity
+                    style={styles.CommentDelete}
+                    onPress={() => removeComment(data)}
+                  >
+                    <Text
+                      style={{
+                        position: "relative",
+                        color: "red",
+                        marginTop: 3,
+                        marginLeft: width / 1.4,
+                        fontStyle: "Bold",
+                      }}
+                    >
+                      X
+                    </Text>
+                  </TouchableOpacity>
+                ) : null}
               </View>
             ))}
           </ScrollView>
         </View>
-        <TouchableOpacity style={styles.likeButton} onPress={changePost}>
-          <Text style={styles.likeText}> Next </Text>
+        <TouchableOpacity style={styles.nextButton} onPress={changePost}>
+          <Text style={styles.nextText}> Next </Text>
         </TouchableOpacity>
 
         <Main_button
@@ -282,7 +410,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: "#bebebe",
   },
-  likeButton: {
+  nextButton: {
     position: "absolute",
     paddingVertical: 8,
     paddingHorizontal: 80,
@@ -292,9 +420,41 @@ const styles = StyleSheet.create({
     marginLeft: width / 4.5,
     marginRight: width / 12,
   },
-  likeText: {
+  nextText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  likeButton: {
+    position: "absolute",
+    marginTop: height / 12.5,
+    left: width / 10 / 2,
+    width: 52,
+    height: 21,
+    borderRadius: 5,
+    backgroundColor: "#55A9E8",
+    justifyContent: "center",
+  },
+  likeButtonText: {
+    color: "white",
+    fontSize: 10,
+    textAlign: "center",
+  },
+  like: {
+    position: "absolute",
+    top: height / 12.15,
+    left: width / 5.5,
+    fontSize: 10,
+    textAlign: "center",
+  },
+  deleteButton: {
+    position: "absolute",
+    marginTop: height / 12.5,
+    left: width / 1.53,
+    width: 52,
+    height: 21,
+    borderRadius: 5,
+    backgroundColor: "#55A9E8",
+    justifyContent: "center",
   },
 });
