@@ -9,6 +9,8 @@ import {
   Pressable,
   ScrollView,
   Dimensions,
+  ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 
 import { Logout_button } from "../buttons/Logout_button";
@@ -19,6 +21,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDeadline } from "../../actions/deadlineactions";
 import { getEnrollments } from "../../actions/coursesactions";
+import { Icon } from "react-native-elements";
+
 const { width, height } = Dimensions.get("screen");
 
 export const Deadlines = ({ navigation }) => {
@@ -52,6 +56,22 @@ export const Deadlines = ({ navigation }) => {
         <Text style={styles.topheading}> Deadlines </Text>
 
         <ScrollView style={styles.rectangle2}>
+       <Icon
+        name="refresh"
+        type="font-awesome"
+        color="#79c4f2"
+        containerStyle={{
+          marginTop: height/100,
+          marginLeft: width/1.6,
+        }}
+        Component = {TouchableOpacity}
+        onPress = {() => {
+          dispatch(getDeadline(user))
+        }}
+        size={width / 11}
+
+      />
+        
           {deadlines.map((deadline, index) => (
             <View key={index}>
               <Text style={styles.textstyle}>
