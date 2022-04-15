@@ -33,9 +33,13 @@ export const Search_Deadlines = ({ navigation }) => {
   let instructorID = useSelector((state) => state.loginReducer).user.Id
   function call() {
     if (courseID.length > 0) {
+      courseID = courseID.toUpperCase();
       dispatch(SearchDeadlines(courseID, instructorID));
-     
       setCourseID("")
+    }
+    else
+    {
+      Alert.alert("Please enter a course ID")
     }
   }
 
