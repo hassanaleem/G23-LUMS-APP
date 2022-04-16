@@ -42,8 +42,8 @@ export const Addfooditem = ({ navigation }) => {
 
   let getState = useSelector((state) => state.foodItemReducer.restaurant);
   const add = () => {
-    if (isNaN(parseInt(price)) == true || restaurant == "" || foodItem == "" || price == "") {
-      if (isNaN(parseInt(price)) == true)
+    if (isNaN(price) == true  == true || restaurant == "" || foodItem == "" || price == "") {
+      if (isNaN(price) == true)
       {
         Alert.alert("Please enter a valid price");
       }

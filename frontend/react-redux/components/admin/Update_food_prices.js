@@ -105,9 +105,9 @@ export const Update_food_prices = ({ navigation }) => {
 
   const update = () => {
 
-    if (isNaN(parseInt(price)) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
+    if (isNaN(price) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
     {
-      if (isNaN(parseInt(price)) == true)
+      if (isNaN(price) == true)
       {
         Alert.alert("Please enter a valid price");
       }
