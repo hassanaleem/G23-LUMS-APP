@@ -39,7 +39,8 @@ export const Add_grade = ({ navigation }) => {
   function call() {
     if (studentRollNumber == "" || courseCode == "" || grade == "-") {
       Alert.alert("Please fill all the fields");
-    } else {
+    } else 
+    {
       dispatch(addGrade(courseCode.toUpperCase(), grade, studentRollNumber));
       setcourseCode("");
       setgrade("-");
@@ -108,20 +109,20 @@ export const Add_grade = ({ navigation }) => {
               setgrade(itemValue);
             }}
           >
-            <Picker.Item label="-" value="-" />
-            <Picker.Item label="A+" value="A+" />
-            <Picker.Item label="A" value="A" />
-            <Picker.Item label="A-" value="A-" />
-            <Picker.Item label="B+" value="B+" />
-            <Picker.Item label="B" value="B" />
-            <Picker.Item label="B-" value="B-" />
-            <Picker.Item label="C+" value="C+" />
-            <Picker.Item label="C" value="C" />
-            <Picker.Item label="C-" value="C-" />
-            <Picker.Item label="D+" value="D+" />
-            <Picker.Item label="D" value="D" />
-            <Picker.Item label="D-" value="D-" />
-            <Picker.Item label="F" value="F" />
+            <Picker.Item label=" -" value="-" />
+            <Picker.Item label=" A+" value="A+" />
+            <Picker.Item label=" A" value="A" />
+            <Picker.Item label=" A-" value="A-" />
+            <Picker.Item label=" B+" value="B+" />
+            <Picker.Item label=" B" value="B" />
+            <Picker.Item label=" B-" value="B-" />
+            <Picker.Item label=" C+" value="C+" />
+            <Picker.Item label=" C" value="C" />
+            <Picker.Item label=" C-" value="C-" />
+            <Picker.Item label=" D+" value="D+" />
+            <Picker.Item label=" D" value="D" />
+            <Picker.Item label=" D-" value="D-" />
+            <Picker.Item label=" F" value="F" />
           </Picker>
         </View>
         <Main_button
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
   gradesContainer: {
     height: 40,
     width: width / 1.2,
-    marginTop: height / 50,
+    marginTop: height / 200,
     borderRadius: 20,
     backgroundColor: "#eceded",
     alignSelf: "center",
