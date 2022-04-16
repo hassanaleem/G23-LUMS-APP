@@ -104,34 +104,47 @@ export const Update_food_prices = ({ navigation }) => {
   }
 
   const update = () => {
-    let data = {
-      restaurant: restaurantName,
-      foodItem: foodItemName,
-      price: price,
-      id: selectedId,
-    };
-    dispatch(updateFoodItem(data));
-    setrestaurantName("");
-    setfoodItemName("");
-    setprice("");
-    // restore all use states to default
-    dispatch(getAllFoodItems());
-    Alert.alert("Successfully Updated");
-    setisEditable(false);
-    setselectedRestaurant("");
-    setselectedFoodItem("");
-    setselectedPrice("");
-    setselectedRestaurantIndex(0);
-    setrestaurants([]);
-    setfoodItems([]);
-    setmergedData([]);
-    setselectedId(0);
-    restaurants.splice(0, restaurants.length);
-    foodItems.splice(0, foodItems.length);
-    mergedData.splice(0, mergedData.length);
-    setprice("");
+    
+    var num_price = parseFloat(price);
+    console.log(num_price);
 
-    setGet(true);
+    if(restaurantName == "" || foodItemName == "" || price == "") {
+      Alert.alert("Please fill all the fields");
+    }
+    else if(Number.isNaN(num_price)) {
+      Alert.alert("Enter Price in Digits");
+    }
+    else
+    {
+      let data = {
+        restaurant: restaurantName,
+        foodItem: foodItemName,
+        price: price,
+        id: selectedId,
+      };
+      dispatch(updateFoodItem(data));
+      setrestaurantName("");
+      setfoodItemName("");
+      setprice("");
+      // restore all use states to default
+      dispatch(getAllFoodItems());
+      Alert.alert("Successfully Updated");
+      setisEditable(false);
+      setselectedRestaurant("");
+      setselectedFoodItem("");
+      setselectedPrice("");
+      setselectedRestaurantIndex(0);
+      setrestaurants([]);
+      setfoodItems([]);
+      setmergedData([]);
+      setselectedId(0);
+      restaurants.splice(0, restaurants.length);
+      foodItems.splice(0, foodItems.length);
+      mergedData.splice(0, mergedData.length);
+      setprice("");
+  
+      setGet(true);
+    } 
   };
   return (
     <View style={styles.container}>

@@ -42,10 +42,18 @@ export const Addfooditem = ({ navigation }) => {
 
   let getState = useSelector((state) => state.foodItemReducer.restaurant);
   const add = () => {
-    if (restaurant == "" || foodItem == "" || price == "") {
-      Alert.alert("Please fill all the fields");
-    } else {
+    
+    var num_price = parseFloat(price);
+    console.log(num_price);
 
+    if(restaurant == "" || foodItem == "" || price == "") {
+      Alert.alert("Please fill all the fields");
+    }
+    else if(Number.isNaN(num_price)) {
+      Alert.alert("Enter Price in Digits");
+    } 
+    else 
+    {
       let data = {
         restaurant: restaurant,
         foodItem: foodItem,

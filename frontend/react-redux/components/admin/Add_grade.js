@@ -38,7 +38,7 @@ export const Add_grade = ({ navigation }) => {
   const dispatch = useDispatch();
   function call() {
     if (studentRollNumber == "" || courseCode == "" || grade == "-") {
-      Alert.alert("Oops, You missed a field");
+      Alert.alert("Please fill all the fields");
     } else {
       dispatch(addGrade(courseCode.toUpperCase(), grade, studentRollNumber));
       setcourseCode("");
