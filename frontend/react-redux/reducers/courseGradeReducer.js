@@ -23,7 +23,7 @@ const courseGradeReducer = (state = initialData, action) => {
       return {
         ...state,
         message: "Success",
-        data: [...state.data, finalData1],
+        data: finalData1,
       };
 
     case "CLEAR_COURSEGRADE_MESSAGE":

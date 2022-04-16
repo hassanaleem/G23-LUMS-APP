@@ -47,7 +47,7 @@ export const Addenrolmentdate = ({ navigation }) => {
   let message = useSelector((state) => state.eventsReducer).message;
   if (message == "Success") {
     Alert.alert("Enrollment Date Added Successfully");
-    disptch(clearMessage())
+    dispatch(clearMessage())
   }
 
   if(message == "Failure")

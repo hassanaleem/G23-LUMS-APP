@@ -42,9 +42,17 @@ export const Addfooditem = ({ navigation }) => {
 
   let getState = useSelector((state) => state.foodItemReducer.restaurant);
   const add = () => {
-    if (restaurant == "" || foodItem == "" || price == "") {
-      Alert.alert("Please fill all the fields");
-    } else {
+    if (isNaN(price) == true  == true || restaurant == "" || foodItem == "" || price == "") {
+      if (isNaN(price) == true)
+      {
+        Alert.alert("Please enter a valid price");
+      }
+      else
+      {
+        Alert.alert("Please fill all the fields");
+      }
+    } 
+    else {
 
       let data = {
         restaurant: restaurant,

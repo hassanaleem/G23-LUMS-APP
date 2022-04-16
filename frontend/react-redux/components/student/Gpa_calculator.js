@@ -36,17 +36,8 @@ export const Gpa_calculator = ({ navigation }) => {
   const [countArray, setCountarray] = useState([0]);
   const [creditsList, setCreditsList] = useState([0]);
   const [gradesList, setGradesList] = useState(["A+"]);
-  const [frontendGpa, setfrontendGpa] = useState(0);
-
-  const [calculate, setCalculate] = useState(true);
-  ////////////
-  const [courses, setCourses] = useState([]);
   const [get, setGet] = useState(false);
-  const [enrollments, setEnrollments] = useState([]);
-  const [grades, setGrades] = useState([]);
-  const [hmm, setHmm] = useState(false);
-  const [tempPrev, setTempPrev] = useState(0);
-  const [cgpa, setCgpa] = useState(0);
+
 
   ////////////////////////
   let frontendCredits = 0;
@@ -61,12 +52,8 @@ export const Gpa_calculator = ({ navigation }) => {
     let gpa = totalGrades / totalCredits;
     frontendCredits = totalCredits;
     frontendGrades = totalGrades;
-    // setFrontendGrades(totalGrades);
-    // console.log(totalGrades, "UWU");
-    // setFrontendCredits(totalCredits);
     gpa = gpa.toFixed(2);
-    setfrontendGpa(gpa);
-    // return gpa;
+    return gpa;
   };
   const calculateCgpa = () => {
     let totalCredits = 0;
@@ -89,65 +76,44 @@ export const Gpa_calculator = ({ navigation }) => {
     };
 
     for (let i = 0; i < grades.length; i++) {
-      totalCredits += parseFloat(grades[i].Credit_Hrs);
-      let temp = grades[i].Grade;
+
+      let temp1 = totalCredits
+      totalCredits += parseFloat(grades[i].credit_hrs);
+      let temp = grades[i].grade;
+      if (temp == "NA") {
+        totalCredits = temp1;
+      } else {
       totalGrades +=
-        parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
+        parseFloat(gradeToValue[temp]) * parseFloat(grades[i].credit_hrs);
+      }
     }
 
     if (totalCredits != 0 && totalGrades != 0 && frontendCredits == 0) {
       let gpa = totalGrades / totalCredits;
       gpa = gpa.toFixed(2);
-      setCgpa(gpa);
+      return gpa;
     } else if (frontendCredits != 0 && frontendGrades != 0) {
       let gpa =
         (totalGrades + frontendGrades) / (totalCredits + frontendCredits);
       gpa = gpa.toFixed(2);
-      setCgpa(gpa);
+      return gpa
     }
   };
-  if (calculate == true) {
-    calcaulateGpa();
-    calculateCgpa();
-    setCalculate(false);
-  }
-  ////////////////////////
 
-  if (get == false) {
-    dispatch(getEnrollments("all"));
-    setGet(true);
-  }
-  let coursesState = useSelector((state) => state.courseReducer);
-  let enrollmentslist = coursesState.data;
-  if (enrollmentslist.length != 0 && enrollments.length == 0) {
-    setEnrollments(enrollmentslist);
-  }
+  /////////////////////////
+
   let userState = useSelector((state) => state.loginReducer);
   let user = userState.user.Id;
-  if (courses.length == 0) {
-    let temp2 = [];
-    for (let i = 0; i < enrollments.length; i++) {
-      if (enrollments[i].includes(user)) {
-        temp2.push(enrollments[i]);
-      }
-    }
-    if (temp2.length != 0) {
-      setCourses(temp2);
-    }
+  if (get == false) {
+    dispatch(getEnrollments(user));
+    setGet(true);
   }
-  if (hmm == false && courses.length != 0 && grades.length == 0) {
-    for (let i = 0; i < courses.length; i++) {
-      dispatch(getGrade(courses[i]));
-    }
-    setHmm(true);
-  }
+
   let gradesState = useSelector((state) => state.courseGradeReducer);
-  let gradeslist = gradesState.data;
-  if (gradeslist.length != 0 && gradeslist.length != tempPrev) {
-    setGrades(gradeslist);
-    setTempPrev(gradeslist.length);
-    setCalculate(true);
-  }
+  let grades = gradesState.data;
+
+  let gpa = calcaulateGpa();
+  let cgpa = calculateCgpa()
 
   ////////////////////////
 
@@ -173,7 +139,6 @@ export const Gpa_calculator = ({ navigation }) => {
                   let newArr = [...creditsList];
                   newArr[index] = itemValue;
                   setCreditsList(newArr);
-                  setCalculate(true);
                 }}
               >
                 <Picker.Item label="  -" value="0" />
@@ -190,7 +155,6 @@ export const Gpa_calculator = ({ navigation }) => {
                   let newArr = [...gradesList];
                   newArr[index] = itemValue;
                   setGradesList(newArr);
-                  setCalculate(true);
                 }}
               >
                 <Picker.Item label="  -" value="0" />
@@ -221,7 +185,7 @@ export const Gpa_calculator = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.gpaBox}>
           <Text style={styles.gpaText}>
-            Predicted GPA: {frontendGpa} Predicted CGPA: {cgpa}
+            Predicted GPA: {gpa} Predicted CGPA: {cgpa}
           </Text>
         </View>
         <Main_button
