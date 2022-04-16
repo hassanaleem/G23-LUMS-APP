@@ -104,9 +104,17 @@ export const Update_food_prices = ({ navigation }) => {
   }
 
   const update = () => {
-    if (restaurantName == "" || foodItemName == "" || price == "" || price <= 0)
+
+    if (isNaN(parseInt(price)) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
     {
-      Alert.alert("Please fill all the fields");
+      if (isNaN(parseInt(price)) == true)
+      {
+        Alert.alert("Please enter a valid price");
+      }
+      else
+      {
+        Alert.alert("Please fill all the fields");
+      }
     }
     else
     {
