@@ -43,6 +43,7 @@ export const Update_user_info = ({ navigation }) => {
   const [type, setType] = useState("");
   const [searchQuery, setsearchQuery] = useState("");
   const [pwdHash, setPwdHash] = useState("");
+  const [searched, setSearched] = useState("");
   const digest = async (data) => {
     const hash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
@@ -55,6 +56,7 @@ export const Update_user_info = ({ navigation }) => {
       Alert.alert("Please enter a search query");
     } else {
       dispatch(findUser(searchQuery));
+      setsearchQuery("");
     }
   };
   let userState = useSelector((state) => state.usersReducer);
@@ -64,7 +66,7 @@ export const Update_user_info = ({ navigation }) => {
   const validate = (find, query) => {
     if (query == true && find == true) {
       setuserName(userState.user.Name);
-      setuserID(searchQuery);
+      setuserID(searched);
       setType(userState.user.Type);
       setsearchQuery("");
       setisEditable(true);
@@ -92,6 +94,7 @@ export const Update_user_info = ({ navigation }) => {
         setsearchQuery("");
         setPwdHash("");
         setisEditable(false);
+        setSearched("");
       }
     }
   };
@@ -121,7 +124,9 @@ export const Update_user_info = ({ navigation }) => {
           font_size={15}
           onChangeText={(text) => {
             setsearchQuery(text);
+            setSearched(text);
           }}
+          bar_value={searchQuery}
           onPress={() => {
             makeSearch();
           }}
