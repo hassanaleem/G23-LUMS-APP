@@ -53,6 +53,7 @@ export const Enroll_course = ({ navigation }) => {
       Alert.alert("Please enter a search query");
     } else {
       dispatch(getCourse(searchQuery.toUpperCase()));
+      setsearchQuery("");
     }
   };
   let userState = useSelector((state) => state.courseReducer);
@@ -147,7 +148,7 @@ export const Enroll_course = ({ navigation }) => {
           onChangeText={(text) => {
             setsearchQuery(text);
           }}
-          value={searchQuery}
+          bar_value={searchQuery}
           onPress={() => {
             makeSearch();
           }}

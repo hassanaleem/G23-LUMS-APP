@@ -16,10 +16,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const {width, height} = Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 
 export function Search_bar(props) {
-  const [text, setText] = useState("");
   return (
     <View>
       <TextInput
@@ -37,7 +36,6 @@ export function Search_bar(props) {
         }}
         placeholder={props.bar_text}
         onChangeText={(text) => {
-          setText(text);
           props.onChangeText(text);
         }}
         value={props.bar_value}
@@ -50,12 +48,12 @@ export function Search_bar(props) {
           justifyContent: "center",
           paddingVertical: 8,
           height: 40,
-          paddingHorizontal: width/13,
+          paddingHorizontal: width / 13,
           borderBottomRightRadius: 5,
           borderTopRightRadius: 5,
           backgroundColor: "#79c4f2",
           marginTop: 65,
-          marginLeft: width/1.55,
+          marginLeft: width / 1.55,
         }}
         onPress={props.onPress}
       >

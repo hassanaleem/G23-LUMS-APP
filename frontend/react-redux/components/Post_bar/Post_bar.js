@@ -25,7 +25,7 @@ import {
       Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
     });
 
-    const [text, setText] = useState("");
+    // const [text, setText] = useState("");
     return (
       <View>
         <TextInput
@@ -44,7 +44,7 @@ import {
           }}
           placeholder={props.bar_text}
           onChangeText={(text) => {
-            setText(text);
+            // setText(text);
             props.onChangeText(text);
           }}
           value={props.bar_value}

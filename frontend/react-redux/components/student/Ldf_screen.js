@@ -29,7 +29,6 @@ import {
 } from "../../actions/postactions";
 import { useDispatch, useSelector } from "react-redux";
 export const Ldf = ({ navigation }) => {
-
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
@@ -247,11 +246,11 @@ export const Ldf = ({ navigation }) => {
         <Logout_button nav={navigation} />
 
         <Text style={styles.topheading}>Discussion Forum </Text>
-        
+
         <View>
           <Post_bar
             bar_text="What's on your mind?"
-            value={newPost}
+            bar_value={newPost}
             onChangeText={(text) => setNewPost(text)}
             onPress={makePost}
           />
@@ -371,10 +370,10 @@ const styles = StyleSheet.create({
     top: height / 4,
     left: width / 14,
   },
-  
+
   Posttext: {
     fontSize: 28,
-    marginLeft: width/25,
+    marginLeft: width / 25,
     fontFamily: "Outfit",
   },
 
@@ -430,11 +429,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "#79c4f2",
     marginTop: height / 1.52,
-    marginLeft: width/6,
-    marginRight:width/6,
+    marginLeft: width / 6,
+    marginRight: width / 6,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   nextText: {
     color: "white",
