@@ -67,7 +67,7 @@ export const Addevent = ({ navigation }) => {
     else if (entered_month <= mm && entered_date < dd) {
       Alert.alert("Entered Date Has Already Passed");
     }
-    else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0) {
+    else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
       Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
     }
     else if(time[2] != ':' || time[5] != '-' || time[8] != ':') {

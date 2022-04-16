@@ -160,9 +160,9 @@ export const Adduser = ({navigation}) => {
               setType(itemValue);
           }}>
             
-            <Picker.Item label="-" value="-"/>
-            <Picker.Item label="Instructor" value="Instructor"/>
-            <Picker.Item label="Student" value="Student"/>
+            <Picker.Item label=" -" value="-"/>
+            <Picker.Item label=" Instructor" value="Instructor"/>
+            <Picker.Item label=" Student" value="Student"/>
 
           </Picker>
         </View>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   typeContainer: {
     height: 40,
     width: width / 1.2,
-    marginTop: height / 50,
+    marginTop: height / 200,
     borderRadius: 20,
     backgroundColor: "#eceded",
     alignSelf: "center",

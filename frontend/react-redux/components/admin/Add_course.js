@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useFonts } from "expo-font";
+import { Picker } from "@react-native-picker/picker";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -56,7 +57,7 @@ export const Add_course = ({ navigation }) => {
         courseTimings == "" ||
         courseDay == "" ||
         courseInstructorID == "" ||
-        creditHours == "") {
+        creditHours == "-") {
       
         Alert.alert("Please fill all the fields");
     }
@@ -192,14 +193,22 @@ export const Add_course = ({ navigation }) => {
 
         <Text style={styles.id_text5}>Credit Hours</Text>
 
-        <TextInput
-          style={styles.input_fields5}
-          placeholder="Enter Credit Hours"
-          onChangeText={(text) => {
-            setCreditHours(text);
-          }}
-          value={creditHours}
-        />
+        <View style={styles.typeContainer}>
+          <Picker
+            selectedValue={creditHours}
+            style={styles.gradesDropdown}
+            onValueChange={(itemValue, itemIndex) => {
+              setCreditHours(itemValue);
+          }}>
+            
+            <Picker.Item label=" -" value="-"/>
+            <Picker.Item label=" 1" value="1"/>
+            <Picker.Item label=" 2" value="2"/>
+            <Picker.Item label=" 3" value="3"/>
+            <Picker.Item label=" 4" value="4"/>
+
+          </Picker>
+        </View>
 
         <Main_button
           text="Add Course"
@@ -340,5 +349,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center",
+  },
+
+  typeContainer: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: height / 200,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });
