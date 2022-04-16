@@ -27,12 +27,8 @@ export const Academic_progress = ({ navigation }) => {
   });
   // var gpa = 3.8; // Here we just need to fetch the GPA thing and we are good to go
   const dispatch = useDispatch();
-  const [courses, setCourses] = useState([]);
   const [get, setGet] = useState(false);
-  const [enrollments, setEnrollments] = useState([]);
-  // const [grades, setGrades] = useState([]);
-  const [hmm, setHmm] = useState(false);
-  const [tempPrev, setTempPrev] = useState(0);
+
   const calcaulateGpa = () => {
     let totalCredits = 0;
     let totalGrades = 0;
@@ -55,20 +51,18 @@ export const Academic_progress = ({ navigation }) => {
     };
     for (let i = 0; i < grades.length; i++) {
       let temp1 = totalCredits;
-      totalCredits += parseFloat(grades[i].Credit_Hrs);
+      totalCredits += parseFloat(grades[i].credit_hrs);
 
-      let temp = grades[i].Grade;
-      console.log(gradeToValue[temp], "HER");
+      let temp = grades[i].grade;
       if (temp == "NA") {
         totalCredits = temp1;
       } else {
         totalGrades +=
-          parseFloat(gradeToValue[temp]) * parseFloat(grades[i].Credit_Hrs);
+          parseFloat(gradeToValue[temp]) * parseFloat(grades[i].credit_hrs);
       }
     }
     let gpa = totalGrades / totalCredits;
     gpa = gpa.toFixed(2);
-    // setGpa(gpa);
     return gpa;
   };
 
@@ -80,39 +74,10 @@ export const Academic_progress = ({ navigation }) => {
     dispatch(getGrade(user));
     setGet(true);
   }
-  // let coursesState = useSelector((state) => state.courseReducer);
-  // let enrollmentslist = coursesState.data;
-  // if (enrollmentslist.length != 0 && enrollments.length == 0) {
-  //   setEnrollments(enrollmentslist);
-  // }
-  // let userState = useSelector((state) => state.loginReducer);
-  // let user = userState.user.Id;
-  // if (courses.length == 0) {
-  //   let temp2 = [];
-  //   for (let i = 0; i < enrollments.length; i++) {
-  //     if (enrollments[i].includes(user)) {
-  //       temp2.push(enrollments[i]);
-  //     }
-  //   }
-  //   if (temp2.length != 0) {
-  //     setCourses(temp2);
-  //   }
-  // }
-  // if (hmm == false && courses.length != 0 && grades.length == 0) {
-  //   for (let i = 0; i < courses.length; i++) {
-  //     dispatch(getGrade(courses[i]));
-  //   }
-  //   setHmm(true);
-  // }
+
   let gradesState = useSelector((state) => state.courseGradeReducer);
   let grades = gradesState.data;
-  // if (gradeslist.length != 0) {
-  //   setGrades(gradeslist);
-  // }
-  // if (gradeslist.length != 0 && gradeslist.length != tempPrev) {
-  //   setGrades(gradeslist);
-  //   setTempPrev(gradeslist.length);
-  // }
+
   let gpa = calcaulateGpa();
 
   return (
