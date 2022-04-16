@@ -32,10 +32,49 @@ export const Addevent = ({ navigation }) => {
   const [type, settype] = useState("");
 
   const onPress = () => {
+    // console.log(time[2])
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    
+    var entered_date = parseInt(date.substring(0,2));
+    var entered_month = parseInt(date.substring(3,5));
+    var entered_year = parseInt(date.substring(6,10));
+    
+    var h1 = parseInt(time.substring(0,2));
+    var m1 = parseInt(time.substring(3,5));
+    var h2 = parseInt(time.substring(6,8));
+    var m2 = parseInt(time.substring(9,11));
+    
+    console.log(h1, m1, h2, m2);
+
     if (name == "" || date == "" || time == "" || type == "") {
-      Alert.alert("Oops, You missed a field");
+      Alert.alert("Please fill all the fields");
     }
-    else{
+    else if(date[2] != '/' || date[5] != '/' || date.substring(6,10).length != 4) {
+      Alert.alert("Incorrect Date Format\nFormat: day/month/year\ni.e. 06/08/2022");
+    }
+    else if(entered_date < 0 || entered_date > 31) {
+      Alert.alert("Incorrect Date Entered");
+    }
+    else if(entered_month < 0 || entered_month > 12) {
+      Alert.alert("Incorrect Month Entered");
+    }
+    else if(parseInt(date.substring(6,10)) < yyyy) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if (entered_month <= mm && entered_date < dd) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0) {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else if(time[2] != ':' || time[5] != '-' || time[8] != ':') {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else
+    {
       dispatch(postEvents(name, date, time, type));
       setname("");
       setdate("");
@@ -98,7 +137,7 @@ export const Addevent = ({ navigation }) => {
           settime(text);
         }}
           value={time}
-          style={styles.input_fields} placeholder="Enter time in format: hh/mm-hh/mm" />
+          style={styles.input_fields} placeholder="Enter time in format: hh:mm-hh:mm" />
 
         <Text style={styles.id_text}>Event Type</Text>
 

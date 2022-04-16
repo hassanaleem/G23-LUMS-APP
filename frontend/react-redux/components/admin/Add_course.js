@@ -37,22 +37,55 @@ export const Add_course = ({ navigation }) => {
   const [creditHours, setCreditHours] = useState("");
 
   function call() {
-    if (
-      courseCode == "" ||
-      courseName == "" ||
-      courseTimings == "" ||
-      courseDay == "" ||
-      courseInstructorID == "" ||
-      creditHours == ""
-    ) {
-      Alert.alert("Oops, You missed a field");
-    } else {
+    
+    var h1 = parseInt(courseTimings.substring(0,2));
+    var m1 = parseInt(courseTimings.substring(3,5));
+    var h2 = parseInt(courseTimings.substring(6,8));
+    var m2 = parseInt(courseTimings.substring(9,11));
+
+    var TempDay = courseDay.toUpperCase();
+    
+    var d1 = TempDay.substring(0,3);
+    var d2 = TempDay.substring(4,7);
+
+    // console.log(h1, m1, h2, m2);
+    // console.log(d1,d2)
+
+    if (courseCode == "" ||
+        courseName == "" ||
+        courseTimings == "" ||
+        courseDay == "" ||
+        courseInstructorID == "" ||
+        creditHours == "") {
+      
+        Alert.alert("Please fill all the fields");
+    }
+    else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else if(courseTimings[2] != ':' || courseTimings[5] != '-' || courseTimings[8] != ':') {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else if(d1 != "MON" && d1 != "TUE" && d1 != "WED" && d1 != "THU" && d1 != "FRI" && d1 != "SAT" && d1 != "SUN")
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else if(d2 != "MON" && d2 != "TUE" && d2 != "WED" && d2 != "THU" && d2 != "FRI" && d2 != "SAT" && d2 != "SUN")
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else if(TempDay[3] != '/')
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else 
+    {
       dispatch(
         addCourse(
           courseCode.toUpperCase(),
           courseName,
           courseTimings,
-          courseDay,
+          courseDay.toUpperCase(),
           courseInstructorID,
           creditHours
         )
@@ -71,7 +104,6 @@ export const Add_course = ({ navigation }) => {
     {
       Alert.alert("Course Added Successfully");
       dispatch(clearMessage())
-      
     }
     if (check === "Failure")
     {

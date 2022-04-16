@@ -29,9 +29,11 @@ import {
 const { width, height } = Dimensions.get("screen");
 
 export const Update_course_timings = ({ navigation }) => {
+  
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
+
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const [isEditable, setisEditable] = useState(false);
@@ -41,6 +43,7 @@ export const Update_course_timings = ({ navigation }) => {
   const [courseName, setcourseName] = useState("");
   const [courseInstructorID, setcourseInstructorID] = useState("");
   const [creditHours, setCreditHours] = useState("");
+  
   const makeSearch = () => {
     if (searchQuery === "") {
       Alert.alert("Please enter a search query");
@@ -48,6 +51,7 @@ export const Update_course_timings = ({ navigation }) => {
       dispatch(getCourse(searchQuery.toUpperCase()));
     }
   };
+  
   let userState = useSelector((state) => state.courseReducer);
   let find = userState.find;
   let query = userState.queryRun;
@@ -70,26 +74,53 @@ export const Update_course_timings = ({ navigation }) => {
   validate(find, query);
 
   const update = () => {
-    if (
-      courseTimings === "" ||
-      courseDay === "" ||
-      courseCode === "" ||
-      courseName === "" ||
-      courseInstructorID === "" ||
-      creditHours === ""
-    ) {
-      Alert.alert("No course searched");
-    } else {
-      dispatch(
-        updateCourse(
-          courseCode,
-          courseName,
-          courseTimings,
-          courseDay,
-          courseInstructorID,
-          creditHours
-        )
-      );
+
+    var h1 = parseInt(courseTimings.substring(0,2));
+    var m1 = parseInt(courseTimings.substring(3,5));
+    var h2 = parseInt(courseTimings.substring(6,8));
+    var m2 = parseInt(courseTimings.substring(9,11));
+
+    var TempDay = courseDay.toUpperCase();
+
+    var d1 = TempDay.substring(0,3);
+    var d2 = TempDay.substring(4,7);
+    
+    if (courseTimings === "" ||
+        courseDay === "" ||
+        courseCode === "" ||
+        courseName === "" ||
+        courseInstructorID === "" ||
+        creditHours === "") 
+    {
+      Alert.alert("Please fill all the fields");
+    }
+    else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else if(courseTimings[2] != ':' || courseTimings[5] != '-' || courseTimings[8] != ':') {
+      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+    }
+    else if(d1 != "MON" && d1 != "TUE" && d1 != "WED" && d1 != "THU" && d1 != "FRI" && d1 != "SAT" && d1 != "SUN")
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else if(d2 != "MON" && d2 != "TUE" && d2 != "WED" && d2 != "THU" && d2 != "FRI" && d2 != "SAT" && d2 != "SUN")
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else if(TempDay[3] != '/')
+    {
+      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+    }
+    else {
+      dispatch(updateCourse(courseCode,courseName,courseTimings,courseDay,courseInstructorID,creditHours));
+      setcourseCode("");
+      setcourseName("");
+      setcourseTimings("");
+      setcourseDay("");
+      setcourseInstructorID("");
+      setCreditHours("");
+      setSearchQuery("");
       Alert.alert("Course updated");
       setisEditable(false);
     }

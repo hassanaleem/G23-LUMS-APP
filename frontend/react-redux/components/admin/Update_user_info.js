@@ -75,7 +75,8 @@ export const Update_user_info = ({ navigation }) => {
   const update = () => {
     if (userName === "" || userID === "" || password === "") {
       Alert.alert("Please fill all the fields");
-    } else {
+    } 
+    else {
       if (isEditable === true) {
         let data = {
           Name: userName,

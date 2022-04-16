@@ -107,7 +107,7 @@ export const Update_food_prices = ({ navigation }) => {
 
     if (isNaN(price) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
     {
-      if (isNaN(price) == true)
+      if (isNaN(price) == true || price <= 0)
       {
         Alert.alert("Please enter a valid price");
       }

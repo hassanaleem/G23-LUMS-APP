@@ -17,6 +17,7 @@ const {width, height} = Dimensions.get("screen");
 
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
+import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
 import { addUser, findUser, clearState, clearUserMessage } from "../../actions/useractions";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,11 +63,15 @@ export const Adduser = ({navigation}) => {
   let query = userState.queryRun;
   
   const add = () => {
+    
     if (username === "" || password === "" || userId === "" || type === "") {
       Alert.alert("Please fill all the fields");
     } else {
       dispatch(findUser(userId));
     }
+
+
+
     let data = {
       Name: username,
       Password: pwdHash,
@@ -80,6 +85,7 @@ export const Adduser = ({navigation}) => {
     setType("");
     setPwdHash("");
   };
+
   validate(find, query, data);
 
   let message = useSelector((state) => state.usersReducer).message;
@@ -139,12 +145,27 @@ export const Adduser = ({navigation}) => {
 
         <Text style={styles.id_text}>User Type</Text>
 
-        <TextInput
+        {/* <TextInput
           style={styles.input_fields}
           placeholder="Student/Instructor"
           onChangeText={(text) => setType(text)}
           value={type}
-        />
+        /> */}
+
+        <View style={styles.typeContainer}>
+          <Picker
+            selectedValue={type}
+            style={styles.gradesDropdown}
+            onValueChange={(itemValue, itemIndex) => {
+              setType(itemValue);
+          }}>
+            
+            <Picker.Item label="-" value="-"/>
+            <Picker.Item label="Instructor" value="Instructor"/>
+            <Picker.Item label="Student" value="Student"/>
+
+          </Picker>
+        </View>
 
         <Main_button
           text="Add User"
@@ -217,5 +238,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignSelf: "center"
+  },
+
+  typeContainer: {
+    height: 40,
+    width: width / 1.2,
+    marginTop: height / 50,
+    borderRadius: 20,
+    backgroundColor: "#eceded",
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });
