@@ -55,7 +55,6 @@ export const Adduser = ({navigation}) => {
     } else if (query == true && find == false && isEmpty(data) != true) {
       dispatch(addUser(data));
       setData({});
-      Alert.alert("User added");
       dispatch(clearState());
     }
   };

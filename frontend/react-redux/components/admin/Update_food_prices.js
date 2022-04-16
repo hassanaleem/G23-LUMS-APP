@@ -104,15 +104,17 @@ export const Update_food_prices = ({ navigation }) => {
   }
 
   const update = () => {
-    
-    var num_price = parseFloat(price);
-    console.log(num_price);
 
-    if(restaurantName == "" || foodItemName == "" || price == "") {
-      Alert.alert("Please fill all the fields");
-    }
-    else if(Number.isNaN(num_price)) {
-      Alert.alert("Enter Price in Digits");
+    if (isNaN(price) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
+    {
+      if (isNaN(price) == true || price <= 0)
+      {
+        Alert.alert("Please enter a valid price");
+      }
+      else
+      {
+        Alert.alert("Please fill all the fields");
+      }
     }
     else
     {
@@ -142,9 +144,9 @@ export const Update_food_prices = ({ navigation }) => {
       foodItems.splice(0, foodItems.length);
       mergedData.splice(0, mergedData.length);
       setprice("");
-  
       setGet(true);
-    } 
+    }
+    
   };
   return (
     <View style={styles.container}>

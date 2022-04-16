@@ -31,7 +31,7 @@ export const addGrade = (Course_ID, Grade, Student_ID) => {
   };
 };
 export const getGrade = (id) => {
-  const request = address + "/coursegrades?" + `id=${id}`;
+  const request = address + "/coursegrades?type=1&" + `id=${id}`;
   return (dispatch) => {
     axios.get(request).then((response) => {
       dispatch({

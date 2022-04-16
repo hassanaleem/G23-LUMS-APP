@@ -11,12 +11,23 @@ def coursegrades(request):
         db = database.connect_db()
         req = list(request.GET.items())
         id = req[0][1]
-        if (id == 'all'):
-            data = db.child("Data").child("CourseGrades").get().val()
-            print(data)
-            data = list(data)
-            print(data)
-            return render(request, 'coursegrades.html', {'data': json.dumps(data)})
+        if (req[0][0] == 'type'):
+            gradeList = list()
+            id = req[1][1]
+            lenId= len(id)
+            data = db.child("Data").child("CourseGrades").get()
+            for grade in data.each():
+                lenKey = len(grade.key())
+                if (grade.key()[lenKey-lenId:] == id):
+                    gradeList.append(grade.val())
+
+            courses = db.child("Data").child("Courses").get()
+            for course in courses.each():
+                for grade in gradeList:
+                    if (course.key() == grade['course_id']):
+                        grade['course_name'] = course.val()["name"]
+
+            return render(request, 'coursegrades.html', {'data': json.dumps(gradeList)})
         elif (id =='all_json'):
             data = db.child("Data").child("CourseGrades").get().val()
             return render(request, 'coursegrades.html', {'data': json.dumps(data)})
