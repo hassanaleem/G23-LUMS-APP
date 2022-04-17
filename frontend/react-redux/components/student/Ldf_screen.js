@@ -200,31 +200,82 @@ export const Ldf = ({ navigation }) => {
     let postOwner = postKeys[userIndex];
     dispatch(likePost(user, postIndex, postOwner));
     setLikes(likes + 1);
+    // update pp
+    let temp = pp[userIndex][postIndex].liker_id;
+    if (temp == "") {
+      temp = user;
+    } else {
+      temp = temp + "," + user;
+    }
+    pp[userIndex][postIndex].liker_id = temp;
     setLiked(true);
   };
   const unlikePostFunc = () => {
     let postOwner = postKeys[userIndex];
     dispatch(unlikePost(user, postIndex, postOwner));
     setLikes(likes - 1);
+    // update pp
+    let temp = pp[userIndex][postIndex].liker_id;
+    let temp2 = temp.split(",");
+    let temp3 = "";
+    for (let i = 0; i < temp2.length; i++) {
+      if (temp2[i] != user) {
+        temp3 = temp3 + temp2[i] + ",";
+      }
+    }
+    temp3 = temp3.substring(0, temp3.length - 1);
+    pp[userIndex][postIndex].liker_id = temp3;
+
     setLiked(false);
   };
   const postComment = () => {
     let postOwner = postKeys[userIndex];
-    let postOnwerName = userState.user.Name;
+    let commenterName = userState.user.Name;
     let newcomment = inputComment;
     dispatch(
-      commentPost(postOwner, postIndex, newcomment, user, postOnwerName)
+      commentPost(postOwner, postIndex, newcomment, user, commenterName)
     );
-    setComment((comment) => [...comment, newcomment]);
+    let update = commenterName + ": " + newcomment;
+    setComment((comment) => [...comment, update]);
+    let temp = pp[userIndex][postIndex].comments;
+    if (temp == "") {
+      temp = update;
+    } else {
+      temp = temp + "," + update;
+    }
+    pp[userIndex][postIndex].comments = temp;
+    setInputComment("");
   };
   const removeComment = (del_comment) => {
     let postOwner = postKeys[userIndex];
 
     dispatch(deleteComment(postOwner, postIndex, del_comment));
+    let index = 0;
+    for (let i = 0; i < comment.length; i++) {
+      if (comment[i] == del_comment) {
+        index = i;
+        break;
+      }
+    }
+    let temp = pp[userIndex][postIndex].comments.split(",");
+    let last = false;
+    if (temp[temp.length - 1] == del_comment) {
+      last = true;
+    }
+    if (last == true && temp[0] != del_comment) {
+      pp[userIndex][postIndex].comments = pp[userIndex][
+        postIndex
+      ].comments.replace("," + del_comment, "");
+    } else if (temp[0] == del_comment) {
+      pp[userIndex][postIndex].comments = pp[userIndex][
+        postIndex
+      ].comments.replace(del_comment, "");
+    } else {
+      pp[userIndex][postIndex].comments = pp[userIndex][
+        postIndex
+      ].comments.replace(del_comment + ",", "");
+    }
 
-    pp[userIndex][postIndex].comments = pp[userIndex][
-      postIndex
-    ].comments.replace(del_comment, "");
     setComment(pp[userIndex][postIndex].comments.split(","));
   };
   const deletePostFunc = () => {
@@ -234,7 +285,6 @@ export const Ldf = ({ navigation }) => {
     setPostIndex(0);
     setUserIndex(0);
   };
-  console.log(userIndex, postKeys[userIndex]);
 
   return (
     <ImageBackground
@@ -293,7 +343,7 @@ export const Ldf = ({ navigation }) => {
           <View style={styles.CommentBar}>
             <Comment_bar
               bar_text="Follow up discussion"
-              value={inputComment}
+              bar_value={inputComment}
               onChangeText={(text) => setInputComment(text)}
               onPress={postComment}
             />
@@ -302,7 +352,9 @@ export const Ldf = ({ navigation }) => {
           <ScrollView style={styles.CommentBox}>
             {comment.map((data, index) => (
               <View key={index}>
-                <Text style={styles.CommentText}>{data} </Text>
+                {data != "" ? (
+                  <Text style={styles.CommentText}>{data} </Text>
+                ) : null}
                 {data.includes(userState.user.Name) ? (
                   <TouchableOpacity
                     style={styles.CommentDelete}

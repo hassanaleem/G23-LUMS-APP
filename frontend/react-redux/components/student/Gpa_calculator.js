@@ -28,7 +28,6 @@ import { useFonts } from "expo-font";
 const { width, height } = Dimensions.get("screen");
 
 export const Gpa_calculator = ({ navigation }) => {
-
   const [loaded] = useFonts({
     Outfit: require("../assets/fonts/static/Outfit-Bold.ttf"),
   });
@@ -37,7 +36,16 @@ export const Gpa_calculator = ({ navigation }) => {
   const [creditsList, setCreditsList] = useState([0]);
   const [gradesList, setGradesList] = useState(["A+"]);
   const [get, setGet] = useState(false);
+  let userState = useSelector((state) => state.loginReducer);
+  let user = userState.user.Id;
+  if (get == false) {
+    dispatch(getGrade(user));
+    setGet(true);
+  }
 
+  let gradesState = useSelector((state) => state.courseGradeReducer);
+  let grades = gradesState.data;
+  console.log(grades);
 
   ////////////////////////
   let frontendCredits = 0;
@@ -76,15 +84,14 @@ export const Gpa_calculator = ({ navigation }) => {
     };
 
     for (let i = 0; i < grades.length; i++) {
-
-      let temp1 = totalCredits
+      let temp1 = totalCredits;
       totalCredits += parseFloat(grades[i].credit_hrs);
       let temp = grades[i].grade;
       if (temp == "NA") {
         totalCredits = temp1;
       } else {
-      totalGrades +=
-        parseFloat(gradeToValue[temp]) * parseFloat(grades[i].credit_hrs);
+        totalGrades +=
+          parseFloat(gradeToValue[temp]) * parseFloat(grades[i].credit_hrs);
       }
     }
 
@@ -96,24 +103,14 @@ export const Gpa_calculator = ({ navigation }) => {
       let gpa =
         (totalGrades + frontendGrades) / (totalCredits + frontendCredits);
       gpa = gpa.toFixed(2);
-      return gpa
+      return gpa;
     }
   };
 
   /////////////////////////
 
-  let userState = useSelector((state) => state.loginReducer);
-  let user = userState.user.Id;
-  if (get == false) {
-    dispatch(getEnrollments(user));
-    setGet(true);
-  }
-
-  let gradesState = useSelector((state) => state.courseGradeReducer);
-  let grades = gradesState.data;
-
   let gpa = calcaulateGpa();
-  let cgpa = calculateCgpa()
+  let cgpa = calculateCgpa();
 
   ////////////////////////
 
@@ -193,8 +190,8 @@ export const Gpa_calculator = ({ navigation }) => {
           onPress={() => navigation.navigate("student")}
           horizontal_padding={0}
           margintop={90}
-          marginleft={width/6}
-          marginright={width/6}
+          marginleft={width / 6}
+          marginright={width / 6}
         />
       </ScrollView>
     </ImageBackground>
@@ -226,9 +223,9 @@ const styles = StyleSheet.create({
 
   unitsheading: {
     position: "absolute",
-    top: height/8,
-    left: width/5.3,
-    fontFamily: 'Outfit',
+    top: height / 8,
+    left: width / 5.3,
+    fontFamily: "Outfit",
     fontSize: 24,
   },
 
@@ -242,9 +239,9 @@ const styles = StyleSheet.create({
 
   gradeheading: {
     position: "absolute",
-    top: height/8,
-    left: width/1.55,
-    fontFamily: 'Outfit',
+    top: height / 8,
+    left: width / 1.55,
+    fontFamily: "Outfit",
     fontSize: 24,
   },
 
@@ -278,7 +275,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
     width: width / 1.55,
-    height: height/28,
+    height: height / 28,
     top: 50,
     borderRadius: 40,
     backgroundColor: "#79c4f2",
@@ -287,7 +284,7 @@ const styles = StyleSheet.create({
 
   moreText: {
     // position: "absolute",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     fontSize: 13,
     lineHeight: 24,
     fontWeight: "bold",
@@ -298,18 +295,18 @@ const styles = StyleSheet.create({
   gpaBox: {
     position: "relative",
     alignSelf: "center",
-    width: width/2.59,
-    height: height/21,
-    top: height/12.2,
+    width: width / 2.59,
+    height: height / 21,
+    top: height / 12.2,
     borderRadius: 7,
     backgroundColor: "#BEBEBE",
   },
-  
+
   gpaText: {
     textAlign: "center",
     alignSelf: "center",
     fontWeight: "bold",
-    fontFamily: 'Outfit',
+    fontFamily: "Outfit",
     fontSize: 14,
     lineHeight: 17.64,
     top: 3,

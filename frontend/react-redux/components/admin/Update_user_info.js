@@ -44,6 +44,7 @@ export const Update_user_info = ({ navigation }) => {
   const [searchQuery, setsearchQuery] = useState("");
   const [pwdHash, setPwdHash] = useState("");
   const [searched, setSearched] = useState("");
+  const [wait, setWait] = useState(false);
   const digest = async (data) => {
     const hash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
@@ -62,6 +63,7 @@ export const Update_user_info = ({ navigation }) => {
   let userState = useSelector((state) => state.usersReducer);
   let find = userState.find;
   let query = userState.queryRun;
+  let msg = userState.message;
 
   const validate = (find, query) => {
     if (query == true && find == true) {
@@ -77,8 +79,7 @@ export const Update_user_info = ({ navigation }) => {
   const update = () => {
     if (userName === "" || userID === "" || password === "") {
       Alert.alert("Please fill all the fields");
-    } 
-    else {
+    } else {
       if (isEditable === true) {
         let data = {
           Name: userName,
@@ -95,9 +96,19 @@ export const Update_user_info = ({ navigation }) => {
         setPwdHash("");
         setisEditable(false);
         setSearched("");
+        setWait(true);
       }
     }
   };
+  if (wait === true) {
+    if (msg === "Success") {
+      Alert.alert("Successfully updated");
+      setWait(false);
+    } else if (msg === "Failure") {
+      Alert.alert("Failed to update");
+      setWait(false);
+    }
+  }
   return (
     <View style={styles.container}>
       <ImageBackground

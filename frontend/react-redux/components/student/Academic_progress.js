@@ -66,7 +66,6 @@ export const Academic_progress = ({ navigation }) => {
     return gpa;
   };
 
-
   let userState = useSelector((state) => state.loginReducer);
   let user = userState.user.Id;
 
@@ -214,11 +213,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
   },
-  
+
   textstyle: {
     marginLeft: 10,
     marginTop: 10,
     fontFamily: "Outfit",
-    fontSize: 13
+    fontSize: 18,
   },
 });
