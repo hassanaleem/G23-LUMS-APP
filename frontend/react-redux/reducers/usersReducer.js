@@ -8,7 +8,6 @@ const initialData = {
 const usersReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
-
     case "ADD_USER":
       return {
         ...state,
@@ -20,7 +19,7 @@ const usersReducer = (state = initialData, action) => {
         ...state,
         message: "Failure",
       };
-    
+
     case "FIND_USER":
       const newdata = data.replace(/&quot;/g, '"');
       const finalData = JSON.parse(newdata);
@@ -29,6 +28,7 @@ const usersReducer = (state = initialData, action) => {
         find: true,
         queryRun: true,
         user: finalData,
+        message: "Success",
       };
     case "FIND_USER_FAILED":
       return {
@@ -36,6 +36,7 @@ const usersReducer = (state = initialData, action) => {
         find: false,
         queryRun: true,
         user: {},
+        message: "Failure",
       };
     case "CLEAR_STATE":
       return {
@@ -45,7 +46,7 @@ const usersReducer = (state = initialData, action) => {
         user: {},
       };
 
-     case "CLEAR_USER_MESSAGE":
+    case "CLEAR_USER_MESSAGE":
       return {
         ...state,
         message: "",
@@ -58,6 +59,16 @@ const usersReducer = (state = initialData, action) => {
         queryRun: false,
         user: {},
         message: "",
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        message: "Success Updated",
+      };
+    case "UPDATE_USER_FAILED":
+      return {
+        ...state,
+        message: "Failure",
       };
 
     default:

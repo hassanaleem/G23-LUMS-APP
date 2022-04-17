@@ -36,7 +36,10 @@ export const Menu = ({ navigation }) => {
     rest = rest.filter((item) => item != null);
     setMenu(rest);
   }
-
+  if (menu.length != 0) {
+    // sort menu on menu.restaurant
+    menu.sort((a, b) => (a.restaurant > b.restaurant ? 1 : -1));
+  }
   return (
     <ImageBackground
       source={require("../assets/background.png")}
@@ -44,7 +47,7 @@ export const Menu = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-        <Logout_button nav={navigation}/>
+        <Logout_button nav={navigation} />
         <Text style={styles.topheading}> Menu </Text>
         <View style={styles.topheading2}>
           <Text style={styles.FoodItems}>Food Items</Text>
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: height / 24,
     marginLeft: width / 12,
   },
-  
+
   topheading2: {
     position: "absolute",
     marginTop: height / 9,
@@ -120,9 +123,12 @@ const styles = StyleSheet.create({
   },
 
   textstyle: {
+    position: "relative",
+    top: height / 150,
+    left: width / 30,
     fontSize: 18,
-    lineHeight: 35,
-    marginLeft: width / 30,
+    paddingBottom: 8,
     fontFamily: "Outfit",
+    lineHeight: 21,
   },
 });
