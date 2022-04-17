@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 10,
     fontFamily: "Outfit",
-    fontSize: 18
+    fontSize: 14,
+    paddingRight: 4,
   },
 });
