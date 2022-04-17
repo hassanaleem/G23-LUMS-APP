@@ -33,10 +33,45 @@ export const Edit_deadline = ({ route, navigation }) => {
   const dispatch = useDispatch()
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
+  
   function onPress() {
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var entered_date = parseInt(date.substring(0,2));
+    var entered_month = parseInt(date.substring(3,5));
+    var entered_year = parseInt(date.substring(6,10));
+
+    var h1 = parseInt(time.substring(0,2));
+    var m1 = parseInt(time.substring(3,5));
+
     if (time == "" || date == "")
     {
-      Alert.alert("Oops, you missed a field")
+      Alert.alert("Please fill all the fields")
+    }
+    else if(date[2] != '/' || date[5] != '/' || date.substring(6,10).length != 4) {
+      Alert.alert("Incorrect Date Format","Format: dd/mm/yyyy\n\ni.e. 26/09/2022");
+    }
+    else if(entered_date < 0 || entered_date > 31) {
+      Alert.alert("Incorrect Date Entered");
+    }
+    else if(entered_month < 0 || entered_month > 12) {
+      Alert.alert("Incorrect Month Entered");
+    }
+    else if(parseInt(date.substring(6,10)) < yyyy) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if (entered_month <= mm && entered_date < dd) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if(h1 > 24 || h1 < 0 || m1 > 59 || m1 < 0) {
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
+    }
+    else if(time[2] != ':') {
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
     }
     else
     {
@@ -75,20 +110,20 @@ export const Edit_deadline = ({ route, navigation }) => {
 
       <Text style={styles.topline}>All fields are required</Text>
 
-      <Text style={styles.textfirst}>Deadline Time</Text>
-      <TextInput 
-      style = {styles.box}
-      placeholder="Enter time in format: hour/minute"
-      value = {time}
-      onChangeText={(text) => {setTime(text)}}
-      />
-
       <Text style={styles.text}>Deadline Date</Text>
       <TextInput 
       style = {styles.box} 
       placeholder="Enter date in format: dd/mm/yyyy" 
       value = {date}
       onChangeText={(text) => {setDate(text)}}
+      />      
+      
+      <Text style={styles.textfirst}>Deadline Time</Text>
+      <TextInput 
+      style = {styles.box}
+      placeholder="Enter time in format: hour/minute"
+      value = {time}
+      onChangeText={(text) => {setTime(text)}}
       />
 
       <Main_button

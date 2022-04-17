@@ -31,10 +31,11 @@ export const Search_Deadlines = ({ navigation }) => {
   const dispatch = useDispatch();
   const [courseID, setCourseID] = useState('');
   let instructorID = useSelector((state) => state.loginReducer).user.Id
+  
   function call() {
     if (courseID.length > 0) {
-      setCourseID(courseID.toUpperCase());
-      dispatch(SearchDeadlines(courseID, instructorID));
+      // setCourseID(courseID.toUpperCase());
+      dispatch(SearchDeadlines(courseID.toUpperCase(), instructorID));
       setCourseID("")
     }
     else

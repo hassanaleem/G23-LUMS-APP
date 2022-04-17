@@ -45,15 +45,44 @@ export const Add_Deadlines = ({ navigation }) => {
   let deadlines = useSelector((state) => state.deadlineReducer.data);
 
   const add = () => {
-    console.log("Add main agya")
-    if (
-      courseCode === "" ||
-      deadlineTitle === "" ||
-      deadlineDate === "" ||
-      deadlineTime === ""
-    ) {
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var entered_date = parseInt(deadlineDate.substring(0,2));
+    var entered_month = parseInt(deadlineDate.substring(3,5));
+    var entered_year = parseInt(deadlineDate.substring(6,10));
+
+    var h1 = parseInt(deadlineTime.substring(0,2));
+    var m1 = parseInt(deadlineTime.substring(3,5));
+
+    if (courseCode === "" || deadlineTitle === "" || deadlineDate === "" || deadlineTime === "") {
       Alert.alert("Please fill all the fields");
-    } else {
+    }
+    else if(deadlineDate[2] != '/' || deadlineDate[5] != '/' || deadlineDate.substring(6,10).length != 4) {
+      Alert.alert("Incorrect Date Format","Format: dd/mm/yyyy\n\ni.e. 26/09/2022");
+    }
+    else if(entered_date < 0 || entered_date > 31) {
+      Alert.alert("Incorrect Date Entered");
+    }
+    else if(entered_month < 0 || entered_month > 12) {
+      Alert.alert("Incorrect Month Entered");
+    }
+    else if(parseInt(deadlineDate.substring(6,10)) < yyyy) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if (entered_month <= mm && entered_date < dd) {
+      Alert.alert("Entered Date Has Already Passed");
+    }
+    else if(h1 > 24 || h1 < 0 || m1 > 59 || m1 < 0) {
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
+    }
+    else if(deadlineTime[2] != ':') {
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
+    } 
+    else {
       let data = {
         Course_ID: courseCode.toUpperCase(),
         Deadline_Date: deadlineDate,
@@ -142,15 +171,6 @@ export const Add_Deadlines = ({ navigation }) => {
           onChangeText={(text) => setDeadlineTitle(text)}
         />
 
-        <Text style={styles.id_text3}>Deadline Time</Text>
-
-        <TextInput
-          style={styles.input_fields3}
-          placeholder="Enter Deadline Time hh:mm"
-          value={deadlineTime}
-          onChangeText={(text) => setDeadlineTime(text)}
-        />
-
         <Text style={styles.id_text4}>Deadline Date</Text>
 
         <TextInput
@@ -158,6 +178,15 @@ export const Add_Deadlines = ({ navigation }) => {
           placeholder="Enter Deadline Date dd:mm:yy"
           value={deadlineDate}
           onChangeText={(text) => setDeadlineDate(text)}
+        />
+
+        <Text style={styles.id_text3}>Deadline Time</Text>
+
+        <TextInput
+          style={styles.input_fields3}
+          placeholder="Enter Deadline Time hh:mm"
+          value={deadlineTime}
+          onChangeText={(text) => setDeadlineTime(text)}
         />
 
         <Main_button

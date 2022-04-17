@@ -169,7 +169,7 @@ export const Student_home_screen = ({ navigation }) => {
           marginright={width / 7}
         />
         <Main_button
-          text="All Resturents Menu"
+          text="All Restaurants Menu"
           onPress={() => navigation.navigate("Student_view_menu")}
           horizontal_padding={0}
           margintop={height / 50}
