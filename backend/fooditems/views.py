@@ -70,10 +70,11 @@ def fooditems(request):
         for i in bkData:
             foodItem = i["foodItem"]
             restaurant = i["restaurant"]
-            id +=1
             if (foodItem == data["foodItem"] and restaurant == data["restaurant"]):
                 break
-        data["id"] = id
+            id +=1
+
+        data.pop("id")
         db.child("Data").child("foodItems").child(id).set(data)
         # Adding Notifications
         dataDB = db.child("Data").child("Notifications").get()
