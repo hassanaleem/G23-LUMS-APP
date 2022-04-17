@@ -17,14 +17,14 @@ const foodItemReducer = (state = initialData, action) => {
         queryRun: true,
         restaurant: finalData,
       };
-    case "ADD_FOODITEM":
+    case "ADD_FOOD_ITEM":
       return {
         ...state,
         restaurant: data,
         message: "Success"
       };
 
-    case "ADD_FOODITEM_FAIL":
+    case "ADD_FOOD_ITEM_FAIL":
       return {
         ...state,
         message: "Failure",
@@ -52,6 +52,12 @@ const foodItemReducer = (state = initialData, action) => {
         restaurant: [],
         find: false,
         queryRun: false,
+        message: "",
+      };
+
+    case "CLEAR_FOOD_MESSAGE":
+      return {
+        ...state,
         message: "",
       };
 

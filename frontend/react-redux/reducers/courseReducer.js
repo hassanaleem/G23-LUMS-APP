@@ -14,7 +14,7 @@ const courseReducer = (state = initialData, action) => {
         message: "Success",
       };
 
-    case "ADD_COURSE_FAIL":
+    case "ADD_COURSE_FAILED":
       return {
         ...state,
         message: "Failure",

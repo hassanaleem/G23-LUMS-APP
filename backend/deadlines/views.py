@@ -31,6 +31,10 @@ def deadlines(request):
 
             else:
                 id = req[0][1]
+                if (id == 'all'):
+                    data = db.child("Data").child("Deadlines").get().val()
+                    return render(request, 'deadlines.html', {'data': json.dumps(data)})
+                
                 courseList = list()
                 courseStudent = db.child("Data").child("CourseStudents").get()
                 for item in courseStudent:
@@ -52,9 +56,17 @@ def deadlines(request):
     elif request.method == 'POST':
         db = database.connect_db()
         data = request.body.decode("utf-8")
-        data = json.loads(data) 	
+        data = json.loads(data)
         # get last id from db
         ide = 0
+        print(data)
+
+        course = db.child("Data").child("Course").child(data["Course_ID"]).get()
+        if (course.val() == None):
+            return
+        if (course.val()["InstructorId"] != data["Instructor_Id"]):
+            return
+        
         try:
             id = db.child("Data").child("Deadlines").get().val()
             ide = len(id) 
