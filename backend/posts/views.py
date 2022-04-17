@@ -33,6 +33,8 @@ def posts(request):
         username = db.child("Data").child("Users").child(userID).get().val()["Name"]
         dataDB = db.child("Data").child("Notifications").get()
         for d in dataDB.each():
+            if d.key() == userID:
+                continue
             notification = "New Post in your wall by " + username
             try:
                 x = d.val()
@@ -62,19 +64,22 @@ def posts(request):
             data["liker_id"] = like_str
             db.child("Data").child("Posts").child(userId).child(postId).set(data)
 
+            
+            # try:
+            if userId == new_id:
+                return render(request, 'posts.html')
+
+            dataDB = db.child("Data").child("Notifications").child(userId).get().val()
+            likername = db.child("Data").child("Users").child(new_id).get().val()["Name"]
+            notification = "New like by " + likername
             try:
-                dataDB = db.child("Data").child("Notifications").child(userID).get().val()
-                likername = db.child("Data").child("Users").child(new_id).get().val()["Name"]
-                notification = "New like by " + likername
-                try:
-                    dataDB.append(notification)
-                    db.child("Data").child("Notifications").child(userID).set(dataDB)
-                except:
-                    dataDB = []
-                    dataDB.append(notification)
-                    db.child("Data").child("Notifications").child(userID).set(dataDB)
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(userId).set(dataDB)
             except:
-                pass
+                dataDB = []
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(userId).set(dataDB)
+
             return render(request, 'posts.html')
         elif action == "unlike":
             msg = request.body.decode("utf-8")
@@ -103,19 +108,19 @@ def posts(request):
             data["comments"] = comment_str
             db.child("Data").child("Posts").child(userId).child(postId).set(data)
 
+            if userId == msg["commenter"]:
+                return render(request, 'posts.html')
+
+            dataDB = db.child("Data").child("Notifications").child(userId).get().val()
+            likername = db.child("Data").child("Users").child(msg["commenter"]).get().val()["Name"]
+            notification = "New comment by " + likername
             try:
-                dataDB = db.child("Data").child("Notifications").child(userID).get().val()
-                likername = db.child("Data").child("Users").child(msg["commenter_id"]).get().val()["Name"]
-                notification = "New comment by " + likername
-                try:
-                    dataDB.append(notification)
-                    db.child("Data").child("Notifications").child(userID).set(dataDB)
-                except:
-                    dataDB = []
-                    dataDB.append(notification)
-                    db.child("Data").child("Notifications").child(userID).set(dataDB)
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(userId).set(dataDB)
             except:
-                pass
+                dataDB = []
+                dataDB.append(notification)
+                db.child("Data").child("Notifications").child(userId).set(dataDB)
 
             return render(request, 'posts.html')
         elif action == "deletecomment":
