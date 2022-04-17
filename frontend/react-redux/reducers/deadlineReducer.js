@@ -7,20 +7,24 @@ const deadlineReducer = (state = initialData, action) => {
   const data = action.payload;
   switch (action.type) {
     case "GET_DEADLINE":
-      if (typeof data === "string") {
-        const newdata = data.replace(/&quot;/g, '"');
-        const finalData = JSON.parse(newdata);
-        return {
-          ...state,
-          data: [...finalData],
-          message: "GET DEADLINE FETCHED"
-        };
-      }
+      const newdata = data.replace(/&quot;/g, '"');
+      const finalData = JSON.parse(newdata);
+      return {
+        ...state,
+        data: finalData,
+        message: "GET DEADLINE FETCHED"
+      };
 
     case "ADD_DEADLINE":
       return {
         ...state,
-        message: "Success",
+        message: "Success Add Deadline",
+      };
+
+    case "ADD_DEADLINE_FAILED":
+      return {
+        ...state,
+        message: "Failure Add Deadline",
       };
 
     case "POST_DEADLINE_FAIL":
