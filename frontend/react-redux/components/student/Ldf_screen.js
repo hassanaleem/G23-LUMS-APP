@@ -283,9 +283,19 @@ export const Ldf = ({ navigation }) => {
   const deletePostFunc = () => {
     let owner = postKeys[userIndex];
     dispatch(deletePost(owner, postIndex));
+    if (pp[userIndex].length === 1)
+    {
+      pp.splice(userIndex, 1);
+      setPostKeys(postKeys.slice(0, userIndex));
+      setUserIndex(userIndex - 1);
+      setPostIndex(0);
+      
+    }
+    else{
     pp[userIndex].splice(postIndex, 1);
     setPostIndex(0);
     setUserIndex(0);
+    }
   };
 
   return (
