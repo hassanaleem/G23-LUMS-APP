@@ -175,7 +175,7 @@ export const Add_Deadlines = ({ navigation }) => {
 
         <TextInput
           style={styles.input_fields4}
-          placeholder="Enter Deadline Date dd:mm:yy"
+          placeholder="Enter Deadline Date dd/mm/yy"
           value={deadlineDate}
           onChangeText={(text) => setDeadlineDate(text)}
         />

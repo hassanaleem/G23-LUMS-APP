@@ -128,7 +128,7 @@ export const Admin_home_screen = ({ navigation }) => {
         marginright={width/7}
       />
       <Main_button
-        text="Update Food Price"
+        text="Update Food Item"
         onPress={() => navigation.navigate("UpdateFoodPrice")}
         horizontal_padding={0}
         margintop={height/50}

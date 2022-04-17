@@ -62,10 +62,10 @@ export const Add_course = ({ navigation }) => {
         Alert.alert("Please fill all the fields");
     }
     else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
-      Alert.alert("Incorrect Day Format","Format: day/day\n\ni.e. MON/WED, TUE/THU");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else if(courseTimings[2] != ':' || courseTimings[5] != '-' || courseTimings[8] != ':') {
-      Alert.alert("Incorrect Day Format","Format: day/day\n\ni.e. MON/WED, TUE/THU");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else if(d1 != "MON" && d1 != "TUE" && d1 != "WED" && d1 != "THU" && d1 != "FRI" && d1 != "SAT" && d1 != "SUN")
     {
