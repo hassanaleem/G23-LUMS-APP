@@ -245,7 +245,7 @@ export const Ldf = ({ navigation }) => {
       <View style={styles.container}>
         <Logout_button nav={navigation} />
 
-        <Text style={styles.topheading}>Discussion Forum </Text>
+        <Text style={styles.topheading}>Discussion Forum</Text>
 
         <View>
           <Post_bar
@@ -255,6 +255,7 @@ export const Ldf = ({ navigation }) => {
             onPress={makePost}
           />
         </View>
+
         <View style={styles.Postview}>
           <Text style={styles.Posttext}>Post:</Text>
         </View>
@@ -266,17 +267,19 @@ export const Ldf = ({ navigation }) => {
               {currentPost}{" "}
             </Text>
           </ScrollView>
+          
           {liked ? (
-            <TouchableOpacity
-              style={styles.likeButton}
-              onPress={unlikePostFunc}
-            >
+            
+            <TouchableOpacity style={styles.likeButton} onPress={unlikePostFunc}>
               <Text style={styles.likeButtonText}>Unlike</Text>
             </TouchableOpacity>
+          
           ) : (
+          
             <TouchableOpacity style={styles.likeButton} onPress={likePostFunc}>
               <Text style={styles.likeButtonText}>Like</Text>
             </TouchableOpacity>
+          
           )}
 
           {postKeys[userIndex] == user ? (
@@ -314,7 +317,7 @@ export const Ldf = ({ navigation }) => {
                         color: "red",
                         marginTop: -2,
                         marginLeft: width / 1.4,
-                        fontStyle: "Bold",
+                        fontStyle: "normal",
                       }}
                     >
                       X
@@ -325,18 +328,29 @@ export const Ldf = ({ navigation }) => {
             ))}
           </ScrollView>
         </View>
-        <TouchableOpacity style={styles.nextButton} onPress={changePost}>
+
+        {/* <TouchableOpacity style={styles.nextButton} onPress={changePost}>
           <Text style={styles.nextText}>Next</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        
+        <Main_button
+          text="Next"
+          onPress={changePost}
+          horizontal_padding={0}
+          margintop={height / 1.78}
+          marginleft={width / 6}
+          marginright={width / 6}
+        />
 
         <Main_button
           text="Go Back"
           onPress={() => navigation.navigate("student")}
-          horizontal_padding={50}
-          margintop={height / 1.59}
+          horizontal_padding={0}
+          margintop={height / 50}
           marginleft={width / 6}
           marginright={width / 6}
         />
+
       </View>
     </ImageBackground>
   );
@@ -395,29 +409,29 @@ const styles = StyleSheet.create({
   PostTextRec: {
     position: "absolute",
     width: width / 1.3,
-    height: height / 10,
-    top: height / 3.2 / 30,
+    height: height / 11,
+    top: height / 2.1 / 30,
     left: width / 11 / 3,
     borderRadius: 7,
     backgroundColor: "#bebebe",
     fontFamily: "Outfit",
   },
   CommentBar: {
-    top: height / 25,
+    top: height / 15,
   },
   CommentText: {
     lineHeight: 20,
     fontSize: 15,
-    left: width / width + 2,
-    marginTop: 2,
+    left: width / width + 10,
+    marginTop: 6,
     marginRight: 6,
   },
 
   CommentBox: {
     position: "absolute",
     width: width / 1.3,
-    height: height / 7.4,
-    top: height / 3.2 / 1.7,
+    height: height / 8.4,
+    top: height / 2.96 / 1.7,
     left: width / 11 / 3,
     borderRadius: 7,
     backgroundColor: "#bebebe",
@@ -443,8 +457,8 @@ const styles = StyleSheet.create({
   },
   likeButton: {
     position: "absolute",
-    marginTop: height / 12.5,
-    left: width / 10 / 2,
+    marginTop: height / 8.9,
+    left: width / 10 / 3,
     width: 52,
     height: 21,
     borderRadius: 5,
@@ -459,7 +473,7 @@ const styles = StyleSheet.create({
   },
   like: {
     position: "absolute",
-    top: height / 11.8,
+    top: height / 8.6,
     left: width / 5.5,
     fontSize: 11,
     textAlign: "center",
@@ -468,8 +482,8 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     position: "absolute",
-    marginTop: height / 12.5,
-    left: width / 1.53,
+    marginTop: height / 8.9,
+    left: width / 1.51,
     width: 52,
     height: 21,
     borderRadius: 5,
