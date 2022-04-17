@@ -96,22 +96,22 @@ export const Update_course_timings = ({ navigation }) => {
       Alert.alert("Please fill all the fields");
     }
     else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else if(courseTimings[2] != ':' || courseTimings[5] != '-' || courseTimings[8] != ':') {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else if(d1 != "MON" && d1 != "TUE" && d1 != "WED" && d1 != "THU" && d1 != "FRI" && d1 != "SAT" && d1 != "SUN")
     {
-      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+      Alert.alert("Incorrect Day Format","Format: day/day\n\ni.e. MON/WED, TUE/THU");
     }
     else if(d2 != "MON" && d2 != "TUE" && d2 != "WED" && d2 != "THU" && d2 != "FRI" && d2 != "SAT" && d2 != "SUN")
     {
-      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+      Alert.alert("Incorrect Day Format","Format: day/day\n\ni.e. MON/WED, TUE/THU");
     }
     else if(TempDay[3] != '/')
     {
-      Alert.alert("Incorrect Day Format\nFormat: day/day\ni.e. MON/WED, TUE/THU");
+      Alert.alert("Incorrect Day Format","Format: day/day\n\ni.e. MON/WED, TUE/THU");
     }
     else {
       dispatch(updateCourse(courseCode,courseName,courseTimings,courseDay,courseInstructorID,creditHours));
