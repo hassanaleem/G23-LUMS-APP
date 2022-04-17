@@ -21,7 +21,7 @@ const foodItemReducer = (state = initialData, action) => {
       return {
         ...state,
         restaurant: data,
-        message: "Success"
+        message: "Success",
       };
 
     case "ADD_FOOD_ITEM_FAIL":
@@ -47,7 +47,7 @@ const foodItemReducer = (state = initialData, action) => {
       };
 
     case "CLEAR_ALL_STATE":
-      return{
+      return {
         ...state,
         restaurant: [],
         find: false,
@@ -59,6 +59,11 @@ const foodItemReducer = (state = initialData, action) => {
       return {
         ...state,
         message: "",
+      };
+    case "UPDATE_FOOD_ITEM":
+      return {
+        ...state,
+        message: "Success updating",
       };
 
     default:
