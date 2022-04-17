@@ -41,7 +41,6 @@ def deadlines(request):
                     if id in item.val():
                         courseList.append(item.key())
 
-                print(courseList)
                 studentDeadlines = list()
                 deadlines = db.child("Data").child("Deadlines").get().val()
                 for d in deadlines:
@@ -59,14 +58,13 @@ def deadlines(request):
         data = json.loads(data)
         # get last id from db
         ide = 0
-        print(data)
 
-        course = db.child("Data").child("Course").child(data["Course_ID"]).get()
+        course = db.child("Data").child("Courses").child(data["Course_ID"]).get()
         if (course.val() == None):
             return
-        if (course.val()["InstructorId"] != data["Instructor_Id"]):
+        if (course.val()["instructorId"] != data["Instructor_Id"]):
             return
-        
+            
         try:
             id = db.child("Data").child("Deadlines").get().val()
             ide = len(id) 
