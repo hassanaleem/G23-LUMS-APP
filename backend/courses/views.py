@@ -14,11 +14,12 @@ def courses(request):
         print(data)
         course_id = data['course_id']
         instructor_id = data['instructorId']
+        print("instructor Id", instructor_id)
         if(len(course_id)):
             data.pop('course_id')
             users = db.child("Data").child("Users").get()
             for u in users.each():
-                if u.key() == instructor_id and u.val("Type") == "Instructor":
+                if u.key() == instructor_id and u.val()["Type"] == "Instructor":
                     db.child("Data").child("Courses").child(course_id).set(data)
                     return render(request, 'courses.html')
     if request.method == "GET":
