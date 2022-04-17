@@ -162,7 +162,7 @@ export const Add_course = ({ navigation }) => {
 
         <TextInput
           style={styles.input_fields3}
-          placeholder="Enter time in format: hh/mm - hh/mm"
+          placeholder="Enter time in format: hh:mm-hh:mm"
           onChangeText={(text) => {
             setcourseTimings(text);
           }}

@@ -229,6 +229,8 @@ export const Ldf = ({ navigation }) => {
     setLiked(false);
   };
   const postComment = () => {
+    if(inputComment != "")
+    {
     let postOwner = postKeys[userIndex];
     let commenterName = userState.user.Name;
     let newcomment = inputComment;
@@ -245,7 +247,7 @@ export const Ldf = ({ navigation }) => {
     }
     pp[userIndex][postIndex].comments = temp;
     setInputComment("");
-  };
+  }};
   const removeComment = (del_comment) => {
     let postOwner = postKeys[userIndex];
 
@@ -312,7 +314,7 @@ export const Ldf = ({ navigation }) => {
 
         <View style={styles.rectangle2}>
           <ScrollView style={styles.PostTextRec}>
-            <Text style={{ left: 6, top: 2, fontSize: 15, lineHeight: 20 }}>
+            <Text style={{ left: 2,right: 0, paddingRight:3, top: 2, fontSize: 15, lineHeight: 20 }}>
               {" "}
               {currentPost}{" "}
             </Text>
@@ -474,9 +476,11 @@ const styles = StyleSheet.create({
   CommentText: {
     lineHeight: 20,
     fontSize: 15,
-    left: width / width + 10,
+    left: 4,
+    right: 4,
     marginTop: 6,
-    marginRight: 6,
+    marginLeft: 2,
+    
   },
 
   CommentBox: {
