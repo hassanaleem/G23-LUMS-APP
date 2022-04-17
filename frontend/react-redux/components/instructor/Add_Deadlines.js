@@ -34,7 +34,7 @@ export const Add_Deadlines = ({ navigation }) => {
   const [instructorId, setInstructorId] = useState("");
   const [deadlinesFetched, setDeadlinesFetched] = useState(false);
 
-  let user = useSelector((state) => state.loginReducer.user.Name);
+  let user = useSelector((state) => state.loginReducer.user.Id);
   if (instructorId == "") {
     setInstructorId(user);
   }
