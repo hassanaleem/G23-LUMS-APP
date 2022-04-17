@@ -36,7 +36,7 @@ const usersReducer = (state = initialData, action) => {
         find: false,
         queryRun: true,
         user: {},
-        message: "Failure",
+        message: "Failure in finding",
       };
     case "CLEAR_STATE":
       return {
