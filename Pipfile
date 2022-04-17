@@ -36,6 +36,7 @@ six = "==1.16.0"
 urllib3 = "==1.26.9"
 wrapt = "==1.14.0"
 Deprecated = "==1.2.13"
+django-heroku = "*"
 
 [dev-packages]
 

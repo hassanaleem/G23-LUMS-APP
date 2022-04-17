@@ -24,6 +24,7 @@ import {
   clearState,
   getAllFoodItems,
   updateFoodItem,
+  clearMessage,
 } from "../../actions/foodactions";
 import { Picker } from "@react-native-picker/picker";
 
@@ -43,12 +44,14 @@ export const Update_food_prices = ({ navigation }) => {
   const [foodItems, setfoodItems] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
   const [mergedData, setmergedData] = useState([]);
-  const [selectedRestaurant, setselectedRestaurant] = useState("-");
-  const [selectedFoodItem, setselectedFoodItem] = useState("-");
+  const [selectedRestaurant, setselectedRestaurant] = useState("");
+  const [selectedFoodItem, setselectedFoodItem] = useState("");
   const [selectedId, setselectedId] = useState(0);
-  const [selectedPrice, setselectedPrice] = useState("-");
+  const [selectedPrice, setselectedPrice] = useState("");
   const [selectedRestaurantIndex, setselectedRestaurantIndex] = useState(0);
   const [change, setchange] = useState(false);
+  const [restIndex, setrestIndex] = useState(0);
+  const [foodIndex, setfoodIndex] = useState(0);
 
   if (get == true) {
     dispatch(getAllFoodItems());
@@ -58,6 +61,7 @@ export const Update_food_prices = ({ navigation }) => {
   let find = dataFetched.find;
   let queryRun = dataFetched.queryRun;
   let rest = dataFetched.restaurant;
+  let message = dataFetched.message;
   if (rest.length != 0 && mergedData.length == 0) {
     rest = rest.filter((item) => item != null);
     setmergedData(rest);
@@ -67,6 +71,7 @@ export const Update_food_prices = ({ navigation }) => {
   }
 
   if (mergedData.length != 0 && restaurants.length == 0) {
+    restaurants.push("Select Restaurant");
     for (let i = 0; i < mergedData.length; i++) {
       let temp = mergedData[i].restaurant;
       if (!restaurants.includes(temp)) {
@@ -76,7 +81,7 @@ export const Update_food_prices = ({ navigation }) => {
     for (let i = 0; i < restaurants.length; i++) {
       let temp = {
         restaurant: restaurants[i],
-        foodItems: [],
+        foodItems: ["Select Food Item"],
         prices: {},
         id: {},
       };
@@ -92,9 +97,9 @@ export const Update_food_prices = ({ navigation }) => {
   }
   if (
     (isEditable == false &&
-      selectedFoodItem != "-" &&
-      selectedRestaurant != "-") ||
-    (change == true && selectedFoodItem != "")
+      selectedFoodItem != "Select Food Item" &&
+      selectedRestaurant != "Select Restaurant") ||
+    (change == true && selectedFoodItem != "Select Food Item")
   ) {
     setisEditable(true);
     setrestaurantName(selectedRestaurant);
@@ -124,29 +129,26 @@ export const Update_food_prices = ({ navigation }) => {
         id: selectedId,
       };
       dispatch(updateFoodItem(data));
-      setrestaurantName("");
-      setfoodItemName("");
-      setprice("");
-      // restore all use states to default
-      dispatch(getAllFoodItems());
-      Alert.alert("Successfully Updated");
+      foodItems[restIndex]["prices"][foodItemName] = price;
+
       setisEditable(false);
-      setselectedRestaurant("-");
-      setselectedFoodItem("-");
-      setselectedPrice("-");
+      setselectedRestaurant("");
+      setselectedFoodItem("");
+      setselectedPrice("");
       setselectedRestaurantIndex(0);
-      setrestaurants([]);
-      setfoodItems([]);
-      setmergedData([]);
+
       setselectedId(0);
-      restaurants.splice(0, restaurants.length);
-      foodItems.splice(0, foodItems.length);
-      mergedData.splice(0, mergedData.length);
+
       setprice("");
       setGet(true);
     }
   };
-  console.log(restaurants, foodItems);
+  if (message == "Success updating") {
+    Alert.alert("Success", "Food item updated successfully");
+    // dispatch(getAllFoodItems());
+    dispatch(clearState());
+    dispatch(clearMessage());
+  }
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -193,6 +195,7 @@ export const Update_food_prices = ({ navigation }) => {
             setselectedPrice(
               foodItems[itemIndex].prices[foodItems[itemIndex].foodItems[0]]
             );
+            setrestIndex(itemIndex);
           }}
         >
           {restaurants.map((item, index) => (
@@ -212,6 +215,7 @@ export const Update_food_prices = ({ navigation }) => {
             setprice(foodItems[selectedRestaurantIndex].prices[itemValue]);
             setselectedId(foodItems[selectedRestaurantIndex].id[itemValue]);
             setselectedId(foodItems[selectedRestaurantIndex].id[itemValue]);
+            setfoodIndex(itemIndex);
             setchange(true);
           }}
         >
@@ -226,41 +230,29 @@ export const Update_food_prices = ({ navigation }) => {
 
         <Text style={styles.id_text1}>Restaurant Name</Text>
 
-        <TextInput
+        <Text
           style={[
             styles.input_fields1,
             {
-              backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
+              backgroundColor: "#C8C8C8",
             },
           ]}
-          placeholder={
-            isEditable ? restaurantName : "Input Disabled [search for food]"
-          }
-          editable={isEditable}
-          onChangeText={(text) => {
-            setrestaurantName(text);
-          }}
-          value={restaurantName}
-        />
+        >
+          {isEditable ? restaurantName : "[search for food]"}
+        </Text>
 
         <Text style={styles.id_text2}>Food Item Name</Text>
 
-        <TextInput
+        <Text
           style={[
             styles.input_fields2,
             {
-              backgroundColor: isEditable ? "#eceded" : "#C8C8C8",
+              backgroundColor: "#C8C8C8",
             },
           ]}
-          placeholder={
-            isEditable ? foodItemName : "Input Disabled [search for food]"
-          }
-          editable={isEditable}
-          onChangeText={(text) => {
-            setfoodItemName(text);
-          }}
-          value={foodItemName}
-        />
+        >
+          {isEditable ? foodItemName : "[search for food]"}
+        </Text>
 
         <Text style={styles.id_text3}>New Price</Text>
 
