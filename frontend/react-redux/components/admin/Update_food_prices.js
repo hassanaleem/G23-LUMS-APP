@@ -92,8 +92,8 @@ export const Update_food_prices = ({ navigation }) => {
   }
   if (
     (isEditable == false &&
-      selectedFoodItem != "" &&
-      selectedRestaurant != "") ||
+      selectedFoodItem != "-" &&
+      selectedRestaurant != "-") ||
     (change == true && selectedFoodItem != "")
   ) {
     setisEditable(true);
@@ -104,20 +104,19 @@ export const Update_food_prices = ({ navigation }) => {
   }
 
   const update = () => {
-
-    if (isNaN(price) == true || restaurantName == "" || foodItemName == "" || price <= 0 || price == "")
-    {
-      if (isNaN(price) == true || price <= 0)
-      {
+    if (
+      isNaN(price) == true ||
+      restaurantName == "" ||
+      foodItemName == "" ||
+      price <= 0 ||
+      price == ""
+    ) {
+      if (isNaN(price) == true || price <= 0) {
         Alert.alert("Please enter a valid price");
-      }
-      else
-      {
+      } else {
         Alert.alert("Please fill all the fields");
       }
-    }
-    else
-    {
+    } else {
       let data = {
         restaurant: restaurantName,
         foodItem: foodItemName,
@@ -132,9 +131,9 @@ export const Update_food_prices = ({ navigation }) => {
       dispatch(getAllFoodItems());
       Alert.alert("Successfully Updated");
       setisEditable(false);
-      setselectedRestaurant("");
-      setselectedFoodItem("");
-      setselectedPrice("");
+      setselectedRestaurant("-");
+      setselectedFoodItem("-");
+      setselectedPrice("-");
       setselectedRestaurantIndex(0);
       setrestaurants([]);
       setfoodItems([]);
@@ -146,8 +145,8 @@ export const Update_food_prices = ({ navigation }) => {
       setprice("");
       setGet(true);
     }
-    
   };
+  console.log(restaurants, foodItems);
   return (
     <View style={styles.container}>
       <ImageBackground

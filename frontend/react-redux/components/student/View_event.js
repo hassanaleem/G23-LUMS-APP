@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     position: "relative",
     top: height / 150,
     left: width / 30,
-    fontSize: 14,
+    fontSize: 18,
     paddingBottom : 8,
     fontFamily: 'Outfit',
     lineHeight: 21,
