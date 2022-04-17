@@ -107,7 +107,7 @@ export const Add_course = ({ navigation }) => {
     }
     if (check === "Failure")
     {
-      Alert.alert("Course Addition Failed");
+      Alert.alert("Course Addition Failed", "No Such instructor exists");
       dispatch(clearMessage())
     } 
   }
