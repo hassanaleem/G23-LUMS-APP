@@ -50,7 +50,7 @@ export const Addenrolmentdate = ({ navigation }) => {
       Alert.alert("Please fill all the fields");
     }
     else if(enrolmentdate[2] != '/' || enrolmentdate[5] != '/' || enrolmentdate.substring(6,10).length != 4) {
-      Alert.alert("Incorrect Date Format\nFormat: dd/mm/yyyy");
+      Alert.alert("Incorrect Date Format","Format: dd/mm/yyyy\n\ni.e. 26/09/2022");
     }
     else if(entered_date < 0 || entered_date > 31) {
       Alert.alert("Incorrect Date Entered");
@@ -65,10 +65,10 @@ export const Addenrolmentdate = ({ navigation }) => {
       Alert.alert("Entered Date Has Already Passed");
     }
     else if(h1 > 24 || h1 < 0 || m1 > 59 || m1 < 0) {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm");
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
     }
     else if(enrolmenttime[2] != ':') {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm");
+      Alert.alert("Incorrect Time Format","Format: hh:mm\n\ni.e.11:00, 23:00");
     }
     else
     {

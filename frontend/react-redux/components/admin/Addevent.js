@@ -53,7 +53,7 @@ export const Addevent = ({ navigation }) => {
       Alert.alert("Please fill all the fields");
     }
     else if(date[2] != '/' || date[5] != '/' || date.substring(6,10).length != 4) {
-      Alert.alert("Incorrect Date Format\nFormat: day/month/year\ni.e. 06/08/2022");
+      Alert.alert("Incorrect Date Format","Format: day/month/year\n\ni.e. 06/08/2022");
     }
     else if(entered_date < 0 || entered_date > 31) {
       Alert.alert("Incorrect Date Entered");
@@ -68,10 +68,10 @@ export const Addevent = ({ navigation }) => {
       Alert.alert("Entered Date Has Already Passed");
     }
     else if(h1 > 24 || h2 > 24 || h1 < 0 || h2 < 0 || m1 > 59 || m2 > 59 || m1 < 0 || m2 < 0 || h1 > h2) {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else if(time[2] != ':' || time[5] != '-' || time[8] != ':') {
-      Alert.alert("Incorrect Time Format\nFormat: hh:mm-hh:mm\ni.e. 13:00-15:00");
+      Alert.alert("Incorrect Time Format","Format: hh:mm-hh:mm\n\ni.e. 13:00-15:00");
     }
     else
     {
