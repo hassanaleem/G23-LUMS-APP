@@ -49,6 +49,7 @@ export const Update_course_timings = ({ navigation }) => {
       Alert.alert("Please enter a search query");
     } else {
       dispatch(getCourse(searchQuery.toUpperCase()));
+      setSearchQuery("");
     }
   };
   
@@ -130,11 +131,11 @@ export const Update_course_timings = ({ navigation }) => {
       <ImageBackground
         source={require("../assets/background.png")}
         resizeMode="cover"
-        style={{ width: '100%', height: '100%' }}>
-          
-          <Logout_button nav = {navigation}/>
-          
-          <Text
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Logout_button nav={navigation} />
+
+        <Text
           style={{
             position: "absolute",
             fontSize: 27,
@@ -166,6 +167,7 @@ export const Update_course_timings = ({ navigation }) => {
             setSearchQuery(text);
           }}
           onPress={makeSearch}
+          bar_value={searchQuery}
         />
 
         <Text style={styles.id_text1}>Course Timings</Text>

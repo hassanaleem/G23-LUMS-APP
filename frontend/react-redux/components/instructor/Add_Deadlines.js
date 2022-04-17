@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Logout_button } from "../buttons/Logout_button";
 import { Main_button } from "../buttons/Main_button";
 import { useDispatch } from "react-redux";
-import { addDeadline } from "../../actions/deadlineactions";
+import { addDeadline, clearMessage } from "../../actions/deadlineactions";
 import { useSelector } from "react-redux";
 import { getDeadline } from "../../actions/deadlineactions";
 import { useFonts } from 'expo-font';
@@ -112,10 +112,23 @@ export const Add_Deadlines = ({ navigation }) => {
         setDeadlineDate("");
         setDeadlineTime("");
         dispatch(getDeadline("all"));
-        Alert.alert("Deadline added successfully");
       }
     }
   };
+
+  let message = useSelector((state) => state.deadlineReducer).message;
+  console.log("message", message)
+
+  if (message == "Success Add Deadline")
+  {
+    Alert.alert("Successfully Added Deadline");
+    dispatch(clearMessage());
+  }
+  if (message == "Failure Add Deadline") {
+    Alert.alert("You do not have access to this course");
+    dispatch(clearMessage());
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -178,7 +191,7 @@ export const Add_Deadlines = ({ navigation }) => {
 
         <Main_button
           text="Add Deadline"
-          onPress={() => add()}
+          onPress={add}
           horizontal_padding={0}
           margintop={height/5.3}
           marginleft={width/6}

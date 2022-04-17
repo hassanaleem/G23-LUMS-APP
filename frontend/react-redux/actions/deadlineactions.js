@@ -22,6 +22,11 @@ export const addDeadline = (data) => {
         type: "ADD_DEADLINE",
         payload: response.data,
       });
+    }).catch((error) => {
+      console.log(error)
+      dispatch({
+        type: "ADD_DEADLINE_FAILED",
+      });
     });
   };
 };

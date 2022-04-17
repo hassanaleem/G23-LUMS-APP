@@ -10,12 +10,17 @@ def courses(request):
     if request.method == 'POST':
         db = database.connect_db()
         data = request.body.decode("utf-8")
-        data = json.loads(data) 	
+        data = json.loads(data)
+        print(data)
         course_id = data['course_id']
+        instructor_id = data['instructorId']
         if(len(course_id)):
             data.pop('course_id')
-            db.child("Data").child("Courses").child(course_id).set(data)
-            return render(request, 'courses.html')
+            users = db.child("Data").child("Users").get()
+            for u in users.each():
+                if u.key() == instructor_id and u.val("Type") == "Instructor":
+                    db.child("Data").child("Courses").child(course_id).set(data)
+                    return render(request, 'courses.html')
     if request.method == "GET":
         #find course with course id specified
         db = database.connect_db()

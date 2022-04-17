@@ -11,6 +11,10 @@ def coursegrades(request):
         db = database.connect_db()
         req = list(request.GET.items())
         id = req[0][1]
+        if (id == 'all'):
+            data = db.child("Data").child("CourseGrades").get().val()
+            data = list(data)
+            return render(request, 'coursegrades.html', {'data': json.dumps(data)})
         if (req[0][0] == 'type'):
             gradeList = list()
             id = req[1][1]
